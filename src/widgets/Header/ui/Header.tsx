@@ -1,15 +1,17 @@
 'use client';
-import {
-	Button,
-	Navbar,
-	NavbarBrand,
-	NavbarContent,
-	NavbarItem,
-	Tooltip,
-} from '@heroui/react';
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@heroui/navbar';
+import { Button, Tooltip, useDisclosure } from '@heroui/react';
 import Link from 'next/link';
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { LanguageSwitcher, ThemeSwitcher } from '@/features';
+import {
+	LanguageSwitcher,
+	LoginModal,
+	SignUpModal,
+	ThemeSwitcher,
+} from '@/features';
+import type { HeaderProps } from '../model/types';
+import { HeaderNavItems } from './HeaderNavItems';
 
 export const AcmeLogo = () => {
 	return (
@@ -25,38 +27,19 @@ export const AcmeLogo = () => {
 	);
 };
 
-export const Header = () => {
+export const Header: FC<HeaderProps> = ({ height }) => {
 	const { t } = useTranslation('common');
 	return (
-		<Navbar height="100px">
+		<Navbar style={{ height }}>
 			<NavbarBrand>
-				<Tooltip content={t('appName')} delay={0} showArrow radius="sm">
+				<Tooltip content={t('app_name')} delay={0} showArrow radius="sm">
 					<Link href="/" className="flex items-center gap-3 text-base">
 						<AcmeLogo />
 					</Link>
 				</Tooltip>
 			</NavbarBrand>
 			<NavbarContent className="sm:flex gap-4" justify="center">
-				<NavbarItem>
-					<Link color="foreground" href="#">
-						{t('header.recipes')}
-					</Link>
-				</NavbarItem>
-				<NavbarItem isActive>
-					<Link aria-current="page" href="#">
-						{t('header.ingredients')}
-					</Link>
-				</NavbarItem>
-				<NavbarItem>
-					<Link color="foreground" href="#">
-						{t('header.add_recipe')}
-					</Link>
-				</NavbarItem>
-				<NavbarItem>
-					<Link color="foreground" href="#">
-						{t('header.settings')}
-					</Link>
-				</NavbarItem>
+				<HeaderNavItems />
 			</NavbarContent>
 			<NavbarContent justify="center">
 				<NavbarItem>
@@ -66,14 +49,10 @@ export const Header = () => {
 					<LanguageSwitcher />
 				</NavbarItem>
 				<NavbarItem>
-					<Button as={Link} color="primary" href="/login" variant="bordered">
-						{t('login')}
-					</Button>
+					<LoginModal />
 				</NavbarItem>
 				<NavbarItem>
-					<Button as={Link} color="primary" href="/registration" variant="flat">
-						{t('signUp')}
-					</Button>
+					<SignUpModal />
 				</NavbarItem>
 			</NavbarContent>
 		</Navbar>

@@ -2,9 +2,11 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
+import { layoutConfig } from '@/configs';
 import { HeroUIProvider, I18nProvider } from '@/shared';
 import { Header } from '@/widgets';
-import styles from './layout.module.scss';
+
+// removed unused scss import
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -35,8 +37,16 @@ export default function RootLayout({
 				<I18nProvider>
 					<HeroUIProvider>
 						<ThemeProvider attribute="class" defaultTheme="dark">
-							<Header />
-							<div className={styles.page}>{children}</div>
+							<Header height={layoutConfig.headerHeight} />
+							<main
+								className={'flex flex-col justify-start items-center'}
+								style={{ height: layoutConfig.mainHeight }}
+							>
+								{children}
+							</main>
+							<footer style={{ height: layoutConfig.footerHeight }}>
+								Footer
+							</footer>
 						</ThemeProvider>
 					</HeroUIProvider>
 				</I18nProvider>

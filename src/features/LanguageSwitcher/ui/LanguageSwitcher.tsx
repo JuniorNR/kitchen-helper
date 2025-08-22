@@ -7,6 +7,7 @@ import {
 	DropdownMenu,
 	DropdownTrigger,
 } from '@heroui/react';
+import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
 
 export const LanguageSwitcher = () => {
@@ -17,7 +18,7 @@ export const LanguageSwitcher = () => {
 		<Dropdown>
 			<DropdownTrigger>
 				<Button className="capitalize" variant="bordered">
-					{current.toUpperCase()}
+					{t(`language.${current}`)}
 				</Button>
 			</DropdownTrigger>
 			<DropdownMenu
@@ -29,10 +30,10 @@ export const LanguageSwitcher = () => {
 				onSelectionChange={() => i18n.changeLanguage('en')}
 			>
 				<DropdownItem key="ru" onPress={() => i18n.changeLanguage('ru')}>
-					RU
+					{t('language.ru')}
 				</DropdownItem>
 				<DropdownItem key="en" onPress={() => i18n.changeLanguage('en')}>
-					EN
+					{t('language.en')}
 				</DropdownItem>
 			</DropdownMenu>
 		</Dropdown>

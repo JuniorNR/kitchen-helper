@@ -2,14 +2,20 @@
 	"header": {
 		"recipes": "Recipes",
 		"ingredients": "Ingredients",
-		"add_recipe": "Add recipe",
 		"settings": "Settings",
 		"theme": {
 			"light": "Light",
 			"dark": "Dark"
 		}
 	},
-	"appName": "Kitchen helper",
+	"language": {
+		"ru": "Russian",
+		"en": "English"
+	},
+	"app_name": "Kitchen helper",
 	"login": "Login",
-	"signUp": "Sign Up"
+	"sign_up": "Sign Up",
+	"close": "Close",
+	"accept": "Accept",
+	"reject": "Reject"
 }
