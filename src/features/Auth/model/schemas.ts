@@ -12,3 +12,9 @@ export const createSignUpSchema = (t: TFunction<'validation'>) =>
 			message: t('passwords_mismatch'),
 			path: ['confirmPassword'],
 		});
+
+export const createLoginSchema = (t: TFunction<'validation'>) =>
+	z.object({
+		email: z.string().nonempty(t('email_required')).email(t('email_invalid')),
+		password: z.string().min(8, t('password_min')),
+	});

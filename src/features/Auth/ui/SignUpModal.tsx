@@ -10,6 +10,7 @@ import { Button } from '@heroui/react';
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { SignUpFormData } from '../model/types';
+import { signUp } from '../server/signUp.action';
 import { SignUpForm } from './SignUpForm';
 
 export const SignUpModal = () => {
@@ -17,9 +18,10 @@ export const SignUpModal = () => {
 	const { t: tCommon } = useTranslation('common');
 	const formId = useId();
 
-	const handleSignUp = (data: SignUpFormData) => {
-		console.debug(data);
+	const handleSubmit = async (data: SignUpFormData) => {
 		onOpenChange();
+		const result = await signUp(data);
+		console.debug(result);
 	};
 	return (
 		<>
@@ -32,7 +34,7 @@ export const SignUpModal = () => {
 						<h2 className="text-2xl font-bold">{tCommon('sign_up')}</h2>
 					</ModalHeader>
 					<ModalBody>
-						<SignUpForm formId={formId} onSubmit={handleSignUp} />
+						<SignUpForm formId={formId} onSubmit={handleSubmit} />
 					</ModalBody>
 					<ModalFooter>
 						<Button onPress={onOpenChange}>{tCommon('close')}</Button>

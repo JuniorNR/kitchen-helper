@@ -10,6 +10,7 @@ import {
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { LoginFormData } from '../model/types';
+import { login } from '../server/login.action';
 import { LoginForm } from './LoginForm';
 
 export const LoginModal = () => {
@@ -17,8 +18,10 @@ export const LoginModal = () => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	const { t: tCommon } = useTranslation('common');
 
-	const handleLogin = (data: LoginFormData) => {
-		console.debug(data);
+	const handleLogin = async (data: LoginFormData) => {
+		const result = await login(data);
+		console.debug(result);
+		onOpenChange();
 	};
 
 	return (
