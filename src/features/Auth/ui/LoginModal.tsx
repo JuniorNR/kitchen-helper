@@ -1,3 +1,4 @@
+'use client';
 import { Button } from '@heroui/button';
 import {
 	Modal,
@@ -10,7 +11,6 @@ import {
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { LoginFormData } from '../model/types';
-import { login } from '../server/login.action';
 import { LoginForm } from './LoginForm';
 
 export const LoginModal = () => {
@@ -19,8 +19,7 @@ export const LoginModal = () => {
 	const { t: tCommon } = useTranslation('common');
 
 	const handleLogin = async (data: LoginFormData) => {
-		const result = await login(data);
-		console.debug(result);
+		console.debug('login', data);
 		onOpenChange();
 	};
 

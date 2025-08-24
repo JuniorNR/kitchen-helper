@@ -1,6 +1,6 @@
 'use client';
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@heroui/navbar';
-import { Button, Tooltip, useDisclosure } from '@heroui/react';
+import { Button, Tooltip } from '@heroui/react';
 import Link from 'next/link';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -25,6 +25,10 @@ export const AcmeLogo = () => {
 			/>
 		</svg>
 	);
+};
+
+const logout = async () => {
+	console.debug('logout');
 };
 
 export const Header: FC<HeaderProps> = ({ height }) => {
@@ -53,6 +57,9 @@ export const Header: FC<HeaderProps> = ({ height }) => {
 				</NavbarItem>
 				<NavbarItem>
 					<SignUpModal />
+				</NavbarItem>
+				<NavbarItem>
+					<Button onPress={logout}>{t('logout')}</Button>
 				</NavbarItem>
 			</NavbarContent>
 		</Navbar>

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 		'An assistant in the kitchen, helps to write down recipes for dishes',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;

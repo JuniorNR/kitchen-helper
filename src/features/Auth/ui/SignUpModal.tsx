@@ -1,3 +1,4 @@
+'use client';
 import {
 	Modal,
 	ModalBody,
@@ -10,7 +11,6 @@ import { Button } from '@heroui/react';
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { SignUpFormData } from '../model/types';
-import { signUp } from '../server/signUp.action';
 import { SignUpForm } from './SignUpForm';
 
 export const SignUpModal = () => {
@@ -20,8 +20,7 @@ export const SignUpModal = () => {
 
 	const handleSubmit = async (data: SignUpFormData) => {
 		onOpenChange();
-		const result = await signUp(data);
-		console.debug(result);
+		console.debug('sign up', data);
 	};
 	return (
 		<>
