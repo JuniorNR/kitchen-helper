@@ -19,6 +19,7 @@
 		"@heroui/system": "^2.4.20",
 		"@heroui/theme": "^2.4.20",
 		"@hookform/resolvers": "^5.2.1",
+		"@reduxjs/toolkit": "^2.8.2",
 		"bcryptjs": "^3.0.2",
 		"framer-motion": "^12.23.12",
 		"i18next": "^25.3.6",
@@ -30,6 +31,7 @@
 		"react-dom": "19.1.1",
 		"react-hook-form": "^7.62.0",
 		"react-i18next": "^15.6.1",
+		"react-redux": "^9.2.0",
 		"zod": "^4.0.17"
 	},
 	"devDependencies": {
