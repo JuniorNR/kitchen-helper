@@ -2,9 +2,9 @@
 
 import { ThemeProvider } from 'next-themes';
 import { Provider as ReduxProvider } from 'react-redux';
+import { store } from '@/shared/lib/store/store';
 import { HeroUIProvider } from '../../HeroUIProvider';
 import { I18nProvider } from '../../I18nProvider';
-import { store } from '@/shared/lib/store/store';
 
 type Props = {
 	children: React.ReactNode;

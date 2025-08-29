@@ -1,4 +1,6 @@
 {
+	"name": "Name",
+	"name_placeholder": "Enter your name",
 	"email": "Email",
 	"email_placeholder": "Enter your email",
 	"password": "Password",

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { layoutConfig } from '@/configs';
+import { AuthBoundary } from '@/features';
 import { AppProviders } from '@/shared/lib/providers/AppProviders';
 import { store } from '@/shared/lib/store/store';
 import { Header } from '@/widgets';
@@ -38,7 +39,7 @@ export default async function RootLayout({
 						className={'flex flex-col justify-start items-center'}
 						style={{ height: layoutConfig.mainHeight }}
 					>
-						{children}
+						<AuthBoundary>{children}</AuthBoundary>
 					</main>
 					<footer style={{ height: layoutConfig.footerHeight }}>Footer</footer>
 				</AppProviders>

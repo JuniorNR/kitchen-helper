@@ -1,2 +1,2 @@
-export * from './baseQuery';
+export { baseQuery } from './baseQuery';
 export * from './store';

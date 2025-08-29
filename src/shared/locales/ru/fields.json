@@ -1,4 +1,6 @@
 {
+	"name": "Имя",
+	"name_placeholder": "Введите ваше имя",
 	"email": "Электронная почта",
 	"email_placeholder": "Введите электронную почту",
 	"password": "Пароль",

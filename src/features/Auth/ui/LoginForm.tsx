@@ -6,8 +6,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import type { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { createLoginSchema } from '../model/schemas';
-import type { LoginFormData, LoginFormProps } from '../model/types';
+import { createLoginSchema } from '../model/auth.schemas';
+import type { LoginFormData, LoginFormProps } from '../model/auth.types';
 
 export const LoginForm: FC<LoginFormProps> = ({ onSubmit, formId }) => {
 	const { t: tFields } = useTranslation('fields');

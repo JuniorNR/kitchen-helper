@@ -2,14 +2,18 @@ export const dto = <T extends object | object[], U extends object>(
 	type: 'toServer' | 'toClient',
 	data: T,
 ): U => {
+	if (data === null || data === undefined) {
+		return data as unknown as U;
+	}
+
 	const isArray = Array.isArray(data);
 
 	if (!isArray) {
 		const dataEntries = Object.entries(data);
-
 		if (type === 'toClient') {
 			const dataToClient = dataEntries.map((item) => {
 				const [key, value] = item;
+
 				const keyToClient = key
 					.split('_')
 					.map((item, index) => {
@@ -19,6 +23,11 @@ export const dto = <T extends object | object[], U extends object>(
 						return item;
 					})
 					.join('');
+
+				if (typeof value === 'object') {
+					return [keyToClient, dto(type, value)];
+				}
+
 				return [keyToClient, value];
 			});
 			return Object.fromEntries(dataToClient) as U;
@@ -31,6 +40,10 @@ export const dto = <T extends object | object[], U extends object>(
 					.split(/(?<=[a-z])(?=[A-Z])/)
 					.join('_')
 					.toLowerCase();
+
+				if (typeof value === 'object') {
+					return [keyToServer, dto(type, value)];
+				}
 
 				return [keyToServer, value];
 			});

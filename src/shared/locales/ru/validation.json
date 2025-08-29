@@ -1,4 +1,5 @@
 {
+	"name_required": "Имя обязательно",
 	"email_required": "Email обязателен",
 	"email_invalid": "Некорректный email",
 	"password_min": "Пароль должен быть не менее 8 символов",

@@ -1,5 +1,38 @@
-import { fetchBaseQuery } from '@reduxjs/toolkit/query';
+import {
+	type BaseQueryFn,
+	type FetchArgs,
+	type FetchBaseQueryError,
+	fetchBaseQuery,
+} from '@reduxjs/toolkit/query';
+import Cookies from 'js-cookie';
+import { setIsAuthenticated } from '@/features/Auth/model/auth.slice';
 
-export const baseQuery = fetchBaseQuery({
-	baseUrl: process.env.NEXT_PUBLIC_API_URL ?? '',
+const rawBaseQuery = fetchBaseQuery({
+	baseUrl: process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8000/api',
+	prepareHeaders: (headers) => {
+		const token = localStorage.getItem('auth_token');
+		if (token) {
+			headers.set('Authorization', `Bearer ${token}`);
+		}
+		headers.set('Content-Type', 'application/json');
+		headers.set('Accept', 'application/json');
+		return headers;
+	},
 });
+
+export const baseQuery: BaseQueryFn<
+	string | FetchArgs,
+	unknown,
+	FetchBaseQueryError
+> = async (args, api, extraOptions) => {
+	const result = await rawBaseQuery(args, api, extraOptions);
+
+	const error = (result as { error?: FetchBaseQueryError }).error;
+	if (error?.status === 401) {
+		api.dispatch(setIsAuthenticated(false));
+		localStorage.removeItem('auth_token');
+		Cookies.remove('auth_token', { path: '/' });
+	}
+
+	return result;
+};

@@ -3,7 +3,7 @@ import { NavbarItem } from '@heroui/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
-import { classNames } from '@/shared';
+import { classNames } from '@/shared/lib/helpers';
 import { NAV_ITEMS } from '../model/constants';
 
 export const HeaderNavItems = () => {

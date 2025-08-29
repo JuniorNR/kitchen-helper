@@ -10,17 +10,19 @@ import {
 import { Button } from '@heroui/react';
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { SignUpFormData } from '../model/types';
+import { useAuth } from '@/features';
+import type { SignUpFormData } from '../model/auth.types';
 import { SignUpForm } from './SignUpForm';
 
 export const SignUpModal = () => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	const { t: tCommon } = useTranslation('common');
 	const formId = useId();
+	const { signUpData } = useAuth();
 
 	const handleSubmit = async (data: SignUpFormData) => {
+		await signUpData(data);
 		onOpenChange();
-		console.debug('sign up', data);
 	};
 	return (
 		<>

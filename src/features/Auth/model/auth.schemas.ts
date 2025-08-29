@@ -4,6 +4,7 @@ import { z } from 'zod';
 export const createSignUpSchema = (t?: TFunction<'validation'>) =>
 	z
 		.object({
+			name: z.string().nonempty(t ? t('name_required') : 'Name required'),
 			email: z
 				.string()
 				.nonempty(t ? t('email_required') : 'Email required')
@@ -14,16 +15,16 @@ export const createSignUpSchema = (t?: TFunction<'validation'>) =>
 					8,
 					t ? t('password_min') : 'Password must be at least 8 characters',
 				),
-			confirmPassword: z
+			passwordConfirmation: z
 				.string()
 				.min(
 					8,
 					t ? t('password_min') : 'Password must be at least 8 characters',
 				),
 		})
-		.refine((data) => data.password === data.confirmPassword, {
+		.refine((data) => data.password === data.passwordConfirmation, {
 			message: t ? t('passwords_mismatch') : 'Passwords do not match',
-			path: ['confirmPassword'],
+			path: ['passwordConfirmation'],
 		});
 
 export const createLoginSchema = (t?: TFunction<'validation'>) =>

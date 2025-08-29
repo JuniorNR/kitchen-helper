@@ -10,16 +10,18 @@ import {
 } from '@heroui/modal';
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { LoginFormData } from '../model/types';
+import type { LoginFormData } from '../model/auth.types';
+import { useAuth } from '../model/useAuth';
 import { LoginForm } from './LoginForm';
 
 export const LoginModal = () => {
 	const formId = useId();
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	const { t: tCommon } = useTranslation('common');
+	const { loginData } = useAuth();
 
 	const handleLogin = async (data: LoginFormData) => {
-		console.debug('login', data);
+		await loginData(data);
 		onOpenChange();
 	};
 
