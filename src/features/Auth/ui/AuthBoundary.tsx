@@ -1,11 +1,13 @@
 'use client';
 
 import type { PropsWithChildren } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useUser } from '@/entities';
 import type { RootState } from '@/shared/lib/store/store';
 
 export const AuthBoundary = ({ children }: PropsWithChildren) => {
+	const { t: tCommon } = useTranslation('common');
 	const { isUserLoading } = useUser();
 	const isAuthenticated = useSelector(
 		(state: RootState) => state.auth.isAuthenticated,
@@ -19,7 +21,7 @@ export const AuthBoundary = ({ children }: PropsWithChildren) => {
 				}}
 				className="w-full transition-all duration-300 h-full flex items-center justify-center p-6 text-danger text-xl"
 			>
-				{!isUserLoading && 'Пользователь не авторизован'}
+				{!isUserLoading && tCommon('user_not_authorized')}
 			</div>
 		);
 	}

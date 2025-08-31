@@ -12,3 +12,4 @@ export {
 export * from './Counter';
 export * from './LanguageSwitcher';
 export * from './ThemeSwitcher';
+export { UserSettings } from './UserSettings';

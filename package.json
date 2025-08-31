@@ -17,6 +17,7 @@
 		"@heroui/navbar": "^2.2.22",
 		"@heroui/react": "^2.8.2",
 		"@heroui/system": "^2.4.20",
+		"@heroui/tabs": "^2.2.21",
 		"@heroui/theme": "^2.4.20",
 		"@hookform/resolvers": "^5.2.1",
 		"@reduxjs/toolkit": "^2.8.2",

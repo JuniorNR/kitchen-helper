@@ -36,7 +36,9 @@ export default async function RootLayout({
 				<AppProviders>
 					<Header height={layoutConfig.headerHeight} />
 					<main
-						className={'flex flex-col justify-start items-center'}
+						className={
+							'flex flex-col justify-start items-center w-full h-full p-5'
+						}
 						style={{ height: layoutConfig.mainHeight }}
 					>
 						<AuthBoundary>{children}</AuthBoundary>

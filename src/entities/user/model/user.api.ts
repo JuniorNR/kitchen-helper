@@ -12,8 +12,8 @@ export const userApi = createApi({
 	endpoints: (builder) => ({
 		getUser: builder.query<User, void>({
 			query: () => '/user',
-			transformResponse: (response: ApiResponse<UserDTO>) => {
-				return dto<UserDTO, User>('toClient', response.data);
+			transformResponse: (response: ApiResponse<{ user: UserDTO }>) => {
+				return dto<UserDTO, User>('toClient', response.data.user);
 			},
 			providesTags: ['User'],
 			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {

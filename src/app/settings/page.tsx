@@ -1,11 +1,27 @@
 'use client';
 
-import { Counter } from '@/features';
+import { Tab, Tabs } from '@heroui/tabs';
+import { type Key, useState } from 'react';
+import { UserSettings } from '@/features';
 
 export default function SettingsPage() {
+	// const pathname = usePathname();
+	const [selectedKey, setSelectedKey] = useState<Key>('/user');
+	const tabStyles = 'w-[50%] h-full flex items-center justify-center';
 	return (
-		<h1 className="text-2xl font-bold">
-			Settings <Counter />
-		</h1>
+		<Tabs
+			variant="bordered"
+			color="primary"
+			aria-label="Options"
+			selectedKey={String(selectedKey)}
+			onSelectionChange={(key) => setSelectedKey(key)}
+		>
+			<Tab key="/user" title="User" className={tabStyles}>
+				<UserSettings />
+			</Tab>
+			<Tab key="/music" title="Music" className={tabStyles}>
+				music
+			</Tab>
+		</Tabs>
 	);
 }
