@@ -1,0 +1,22 @@
+{
+	"titles": {
+		"success": "Успешно",
+		"error": "Ошибка",
+		"warning": "Предупреждение",
+		"info": "Информация"
+	},
+	"codes": {
+		"INVALID_CREDENTIALS": "Неверные учетные данные",
+		"USER_REGISTERED": "Пользователь зарегистрирован",
+		"USER_LOGGED_IN": "Пользователь авторизован",
+		"USER_RETURNED": "Пользователь возвращен",
+		"USER_LOGGED_OUT": "Пользователь вышел",
+		"USER_LOGOUT_ALL": "Пользователь вышел из всех устройств",
+		"USER_UPDATED": "Пользователь обновлен",
+		"INGREDIENT_CREATED": "Ингредиент создан",
+		"INGREDIENT_RETURNED": "Ингредиент возвращен",
+		"INGREDIENT_UPDATED": "Ингредиент обновлен",
+		"INGREDIENT_DELETED": "Ингредиент удален",
+		"INGREDIENTS_RETURNED": "Ингредиенты возвращены"
+	}
+}

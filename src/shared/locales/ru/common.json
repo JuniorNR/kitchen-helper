@@ -13,10 +13,16 @@
 		"en": "Английский"
 	},
 	"app_name": "Помощник на кухне",
+	"logout": "Выйти",
 	"sign_up": "Регистрация",
 	"login": "Войти",
 	"close": "Закрыть",
 	"accept": "Принять",
 	"reject": "Отклонить",
-	"user_not_authorized": "Пользователь не авторизован"
+	"user_not_authorized": "Пользователь не авторизован",
+	"create": "Создать",
+	"page_titles": {
+		"ingredient_create": "Создать ингредиент",
+		"ingredient_list": "Список ингредиентов"
+	}
 }

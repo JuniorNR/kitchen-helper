@@ -4,16 +4,36 @@ import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { useEffect, useState } from 'react';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
+import alertsEn from '@/shared/locales/en/alerts.json';
 import commonEn from '@/shared/locales/en/common.json';
 import fieldsEn from '@/shared/locales/en/fields.json';
+import ingredientsEn from '@/shared/locales/en/ingredients.json';
+import unitsEn from '@/shared/locales/en/units.json';
 import validationEn from '@/shared/locales/en/validation.json';
+import alertsRu from '@/shared/locales/ru/alerts.json';
 import commonRu from '@/shared/locales/ru/common.json';
 import fieldsRu from '@/shared/locales/ru/fields.json';
+import ingredientsRu from '@/shared/locales/ru/ingredients.json';
+import unitsRu from '@/shared/locales/ru/units.json';
 import validationRu from '@/shared/locales/ru/validation.json';
 
 const resources = {
-	en: { common: commonEn, fields: fieldsEn, validation: validationEn },
-	ru: { common: commonRu, fields: fieldsRu, validation: validationRu },
+	en: {
+		common: commonEn,
+		fields: fieldsEn,
+		ingredients: ingredientsEn,
+		validation: validationEn,
+		units: unitsEn,
+		alerts: alertsEn,
+	},
+	ru: {
+		common: commonRu,
+		fields: fieldsRu,
+		ingredients: ingredientsRu,
+		validation: validationRu,
+		units: unitsRu,
+		alerts: alertsRu,
+	},
 };
 
 let isInitialized = false;
@@ -29,7 +49,14 @@ export const I18nProvider = ({ children }: { children: React.ReactNode }) => {
 				fallbackLng: 'en',
 				supportedLngs: ['en', 'ru'],
 				defaultNS: 'common',
-				ns: ['common', 'fields', 'validation'],
+				ns: [
+					'common',
+					'fields',
+					'validation',
+					'units',
+					'ingredients',
+					'alerts',
+				],
 				interpolation: { escapeValue: false },
 				load: 'languageOnly' as const,
 				lowerCaseLng: true,
@@ -43,7 +70,6 @@ export const I18nProvider = ({ children }: { children: React.ReactNode }) => {
 				if (!i18n.isInitialized) {
 					await i18n.use(LanguageDetector).use(initReactI18next).init(options);
 				} else {
-					// Обновляем/добавляем бандлы, если уже инициализировано (HMR)
 					Object.entries(resources).forEach(([lng, nsMap]) => {
 						Object.entries(nsMap as Record<string, unknown>).forEach(
 							([ns, data]) => {

@@ -5,7 +5,6 @@ import { type Key, useState } from 'react';
 import { UserSettings } from '@/features';
 
 export default function SettingsPage() {
-	// const pathname = usePathname();
 	const [selectedKey, setSelectedKey] = useState<Key>('/user');
 	const tabStyles = 'w-[50%] h-full flex items-center justify-center';
 	return (

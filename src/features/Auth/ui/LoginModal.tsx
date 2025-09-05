@@ -22,7 +22,6 @@ export const LoginModal = () => {
 
 	const handleLogin = async (data: LoginFormData) => {
 		await loginData(data);
-		onOpenChange();
 	};
 
 	return (

@@ -1,0 +1,34 @@
+{
+	"groups": {
+		"mass": "Mass",
+		"liquid": "Liquid",
+		"culinary_measures": "Culinary measures",
+		"pieces": "Pieces",
+		"on_the_eye": "On the eye",
+		"package": "Package"
+	},
+	"labels": {
+		"mg": "mg",
+		"gr": "gr",
+		"kg": "kg",
+		"ml": "ml",
+		"l": "l",
+		"tsp": "tsp",
+		"tbsp": "tbsp",
+		"cup50": "cup 50 ml",
+		"cup100": "cup 100 ml",
+		"cup150": "cup 150 ml",
+		"cup200": "cup 200 ml",
+		"cup250": "cup 250 ml",
+		"piece": "piece",
+		"clove": "clove",
+		"slice": "slice",
+		"leaf": "leaf",
+		"pinch": "pinch",
+		"handful": "handful",
+		"bunch": "bunch",
+		"pack": "pack",
+		"can": "can",
+		"bottle": "bottle"
+	}
+}

@@ -3,5 +3,12 @@
 	"email_required": "Email обязателен",
 	"email_invalid": "Некорректный email",
 	"password_min": "Пароль должен быть не менее 8 символов",
-	"passwords_mismatch": "Пароли не совпадают"
+	"passwords_mismatch": "Пароли не совпадают",
+	"title_required": "Название обязательно",
+	"description_required": "Описание обязательно",
+	"price_required": "Цена обязательна",
+	"currency_required": "Валюта обязательна",
+	"count_unit_required": "Количество обязательно",
+	"unit_required": "Единица измерения обязательна",
+	"category_required": "Категория обязательна"
 }

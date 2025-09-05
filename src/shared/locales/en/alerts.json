@@ -1,0 +1,22 @@
+{
+	"titles": {
+		"success": "Success",
+		"error": "Error",
+		"warning": "Warning",
+		"info": "Info"
+	},
+	"codes": {
+		"INVALID_CREDENTIALS": "Invalid credentials",
+		"USER_REGISTERED": "User registered",
+		"USER_LOGGED_IN": "User logged in",
+		"USER_RETURNED": "User returned",
+		"USER_LOGGED_OUT": "User logged out",
+		"USER_LOGOUT_ALL": "User logged out from all devices",
+		"USER_UPDATED": "User updated",
+		"INGREDIENT_CREATED": "Ingredient created",
+		"INGREDIENT_RETURNED": "Ingredient returned",
+		"INGREDIENT_UPDATED": "Ingredient updated",
+		"INGREDIENT_DELETED": "Ingredient deleted",
+		"INGREDIENTS_RETURNED": "Ingredients returned"
+	}
+}

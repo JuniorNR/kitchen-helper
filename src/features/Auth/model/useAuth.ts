@@ -2,13 +2,18 @@
 import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import { userApi } from '@/entities/user/model/user.api';
+import { addAlert } from '@/features/Alert';
 import {
 	useLoginMutation,
 	useLogoutMutation,
 	useSignUpMutation,
 } from './auth.api';
 import { setIsAuthenticated } from './auth.slice';
-import type { LoginFormData, SignUpFormData } from './auth.types';
+import type {
+	AuthResponseError,
+	LoginFormData,
+	SignUpFormData,
+} from './auth.types';
 
 export const useAuth = () => {
 	const dispatch = useDispatch();
@@ -46,9 +51,28 @@ export const useAuth = () => {
 				});
 			}
 			dispatch(setIsAuthenticated(true));
-			return data.user;
-		} catch (_) {
-			return null;
+			dispatch(
+				addAlert({
+					id: crypto.randomUUID(),
+					status: 'success',
+					title: 'Success',
+					description: code,
+				}),
+			);
+			return {
+				user: data.user,
+				code,
+			};
+		} catch (error) {
+			const { data } = error as AuthResponseError;
+			dispatch(
+				addAlert({
+					id: crypto.randomUUID(),
+					status: 'danger',
+					title: 'Error',
+					description: data.code,
+				}),
+			);
 		}
 	};
 

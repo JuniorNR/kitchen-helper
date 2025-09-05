@@ -14,9 +14,17 @@
 	},
 	"app_name": "Kitchen helper",
 	"login": "Login",
+	"logout": "Logout",
 	"sign_up": "Sign Up",
 	"close": "Close",
 	"accept": "Accept",
 	"reject": "Reject",
-	"user_not_authorized": "User not authorized"
+	"user_not_authorized": "User not authorized",
+	"create": "Create",
+	"ingredient_list": "Ingredient List",
+	"ingredient_create": "Create Ingredient",
+	"page_titles": {
+		"ingredient_create": "Create Ingredient",
+		"ingredient_list": "Ingredient List"
+	}
 }

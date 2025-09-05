@@ -5,5 +5,12 @@
 	"email_placeholder": "Enter your email",
 	"password": "Password",
 	"password_placeholder": "Enter your password",
-	"confirm_password": "Confirm password"
+	"confirm_password": "Confirm password",
+	"price": "Price",
+	"price_unit": "Currency",
+	"title": "Title",
+	"description": "Description",
+	"category": "Category",
+	"unit": "Unit",
+	"count_unit": "Count"
 }

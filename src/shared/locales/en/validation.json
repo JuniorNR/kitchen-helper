@@ -3,5 +3,12 @@
 	"email_required": "Email is required",
 	"email_invalid": "Invalid email address",
 	"password_min": "Password must be at least 8 characters long",
-	"passwords_mismatch": "Passwords do not match"
+	"passwords_mismatch": "Passwords do not match",
+	"title_required": "Title is required",
+	"description_required": "Description is required",
+	"price_required": "Price is required",
+	"currency_required": "Currency is required",
+	"count_unit_required": "Quantity is required",
+	"unit_required": "Unit is required",
+	"category_required": "Category is required"
 }

@@ -32,7 +32,7 @@ export const AcmeLogo = () => {
 };
 
 export const Header: FC<HeaderProps> = ({ height }) => {
-	const { t } = useTranslation('common');
+	const { t: tCommon } = useTranslation('common');
 	const { logoutData } = useAuth();
 	const isAuthenticated = useSelector(
 		(state: RootState) => state.auth.isAuthenticated,
@@ -60,7 +60,7 @@ export const Header: FC<HeaderProps> = ({ height }) => {
 				</NavbarItem>
 				{isAuthenticated ? (
 					<NavbarItem>
-						<Button onPress={handleLogout}>{t('logout')}</Button>
+						<Button onPress={handleLogout}>{tCommon('logout')}</Button>
 					</NavbarItem>
 				) : (
 					<>
@@ -79,7 +79,7 @@ export const Header: FC<HeaderProps> = ({ height }) => {
 	return (
 		<Navbar style={{ height }}>
 			<NavbarBrand>
-				<Tooltip content={t('app_name')} delay={0} showArrow radius="sm">
+				<Tooltip content={tCommon('app_name')} delay={0} showArrow radius="sm">
 					<Link href="/" className="flex items-center gap-3 text-base">
 						<AcmeLogo />
 					</Link>

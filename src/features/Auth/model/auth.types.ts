@@ -38,3 +38,12 @@ export interface AuthResponseDTO {
 	user: UserDTO;
 	token: string;
 }
+
+export interface AuthResponseError {
+	data: {
+		user: null;
+		token: null;
+		code: string;
+	};
+	status: number;
+}

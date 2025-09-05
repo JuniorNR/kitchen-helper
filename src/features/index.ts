@@ -10,6 +10,8 @@ export {
 	useAuth,
 } from './Auth';
 export * from './Counter';
+export { IngredientsTable } from './IngredientsTable';
+export { IngredientCreate } from './ingredientCreate';
 export * from './LanguageSwitcher';
 export * from './ThemeSwitcher';
 export { UserSettings } from './UserSettings';

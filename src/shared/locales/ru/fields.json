@@ -5,5 +5,12 @@
 	"email_placeholder": "Введите электронную почту",
 	"password": "Пароль",
 	"password_placeholder": "Введите пароль",
-	"confirm_password": "Подтвердите пароль"
+	"confirm_password": "Подтвердите пароль",
+	"price": "Цена",
+	"price_unit": "Валюта",
+	"title": "Заголовок",
+	"description": "Описание",
+	"category": "Категория",
+	"unit": "Единица",
+	"count_unit": "Количество"
 }

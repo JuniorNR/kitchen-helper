@@ -1,7 +1,5 @@
-import { useDispatch } from 'react-redux';
 import type { UserSettingsFormData } from '@/features/UserSettings';
 import { useGetUserQuery, useUpdateUserMutation } from './user.api';
-import type { User } from './user.types';
 
 export const useUser = () => {
 	const { data: user, isLoading: isUserLoading } = useGetUserQuery();
