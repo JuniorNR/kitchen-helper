@@ -7,7 +7,6 @@ export const getIngredientCreateSchema = (t: TFunction<'validation'>) => {
 		description: z.string().min(25, t('description_required')),
 		price: z.number().min(1, t('price_required')),
 		currency: z.string().nonempty(t('currency_required')),
-		countUnit: z.number().min(1, t('count_unit_required')),
 		unit: z.string().nonempty(t('unit_required')),
 		category: z.string().nonempty(t('category_required')),
 	});

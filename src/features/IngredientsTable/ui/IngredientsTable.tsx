@@ -31,7 +31,6 @@ export const IngredientsTable = () => {
 				description: ingredient.description,
 				category: ingredient.category,
 				unit: ingredient.unit,
-				count: ingredient.countUnit,
 				price: ingredient.price,
 				currency: ingredient.currency,
 				createdAt: ingredient.createdAt,
@@ -81,27 +80,13 @@ export const IngredientsTable = () => {
 				color="primary"
 			>
 				<TableHeader>
-					<TableColumn className="text-center">
-						{tIngredients('table.title')}
-					</TableColumn>
-					<TableColumn className="text-center">
-						{tIngredients('table.description')}
-					</TableColumn>
-					<TableColumn className="text-center">
-						{tIngredients('table.category')}
-					</TableColumn>
-					<TableColumn className="text-center">
-						{tIngredients('table.count')}
-					</TableColumn>
-					<TableColumn className="text-center">
-						{tIngredients('table.price')}
-					</TableColumn>
-					<TableColumn className="text-center">
-						{tIngredients('table.createdAt')}
-					</TableColumn>
-					<TableColumn className="text-center">
-						{tIngredients('table.actions')}
-					</TableColumn>
+					<TableColumn>{tIngredients('table.title')}</TableColumn>
+					<TableColumn>{tIngredients('table.description')}</TableColumn>
+					<TableColumn>{tIngredients('table.category')}</TableColumn>
+					<TableColumn>{tIngredients('table.unit')}</TableColumn>
+					<TableColumn>{tIngredients('table.price')}</TableColumn>
+					<TableColumn>{tIngredients('table.createdAt')}</TableColumn>
+					<TableColumn>{tIngredients('table.actions')}</TableColumn>
 				</TableHeader>
 				<TableBody>
 					{prepareIngredientsList.map((ingredient) => (
@@ -111,9 +96,7 @@ export const IngredientsTable = () => {
 							<TableCell>
 								{tIngredients(`labels.${ingredient.category}`)}
 							</TableCell>
-							<TableCell>
-								{`${ingredient.count} ${tUnits(`labels.${ingredient.unit}`)}`}
-							</TableCell>
+							<TableCell>{tUnits(`labels.${ingredient.unit}`)}</TableCell>
 							<TableCell>
 								{prepareCurrency(ingredient.currency, ingredient.price)}
 							</TableCell>

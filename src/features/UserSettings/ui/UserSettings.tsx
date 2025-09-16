@@ -12,6 +12,7 @@ import { createUserSettingsSchema } from '../model/userSettings.schema';
 import type { UserSettingsFormData } from '../model/userSettings.types';
 
 export const UserSettings = () => {
+	const { t: tCommon } = useTranslation('common');
 	const { t: tFields } = useTranslation('fields');
 	const { t: tValidation } = useTranslation('validation');
 	const { user, updateUserData } = useUser();
@@ -37,7 +38,9 @@ export const UserSettings = () => {
 	};
 	return (
 		<Form onSubmit={handleSubmit(onSubmit)} className="w-full">
-			<h1 className="text-2xl font-bold">User Settings</h1>
+			<h1 className="text-2xl font-bold">
+				{tCommon('page_titles.user_settings')}
+			</h1>
 			<Controller
 				control={control}
 				name="name"

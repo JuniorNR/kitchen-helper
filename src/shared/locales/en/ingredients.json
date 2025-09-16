@@ -207,6 +207,7 @@
 		"description": "Description",
 		"category": "Category",
 		"count": "Count",
+		"unit": "Unit",
 		"price": "Price",
 		"createdAt": "Created at",
 		"actions": "Actions",

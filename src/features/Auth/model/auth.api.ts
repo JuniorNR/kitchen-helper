@@ -1,5 +1,4 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { userApi } from '@/entities/user/model/user.api';
 import { dto } from '@/shared/lib/helpers/dto/dto';
 import { baseQuery } from '@/shared/lib/store/baseQuery';
 import type { ApiResponse } from '@/shared/lib/types/api.types';

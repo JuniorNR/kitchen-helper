@@ -3,9 +3,10 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { layoutConfig } from '@/configs';
 import { AuthBoundary } from '@/features';
+import { classNames } from '@/shared/lib/helpers';
 import { AppProviders } from '@/shared/lib/providers/AppProviders';
-import { store } from '@/shared/lib/store/store';
 import { Header } from '@/widgets';
+import styles from './layout.module.scss';
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -36,9 +37,11 @@ export default async function RootLayout({
 				<AppProviders>
 					<Header height={layoutConfig.headerHeight} />
 					<main
-						className={
-							'flex flex-col justify-start items-center w-full h-full p-5'
-						}
+						className={classNames(
+							'flex flex-col justify-start items-center w-full h-full p-5',
+							{},
+							[styles.layout],
+						)}
 						style={{ height: layoutConfig.mainHeight }}
 					>
 						<AuthBoundary>{children}</AuthBoundary>

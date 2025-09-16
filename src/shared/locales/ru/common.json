@@ -19,10 +19,14 @@
 	"close": "Закрыть",
 	"accept": "Принять",
 	"reject": "Отклонить",
+	"delete": "Удалить",
 	"user_not_authorized": "Пользователь не авторизован",
 	"create": "Создать",
 	"page_titles": {
 		"ingredient_create": "Создать ингредиент",
-		"ingredient_list": "Список ингредиентов"
+		"ingredient_list": "Список ингредиентов",
+		"recipe_create": "Создать рецепт",
+		"recipe_list": "Список рецептов",
+		"user_settings": "Настройки"
 	}
 }

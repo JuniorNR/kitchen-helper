@@ -10,5 +10,13 @@
 	"currency_required": "Currency is required",
 	"count_unit_required": "Quantity is required",
 	"unit_required": "Unit is required",
-	"category_required": "Category is required"
+	"category_required": "Category is required",
+	"duration_required": "Duration is required",
+	"type_required": "Type is required",
+	"calories_required": "Calories is required",
+	"proteins_required": "Proteins is required",
+	"fats_required": "Fats is required",
+	"carbohydrates_required": "Carbohydrates is required",
+	"priceToBuy_required": "Price to buy is required",
+	"priceOfDish_required": "Price of dish is required"
 }

@@ -10,5 +10,13 @@
 	"currency_required": "Валюта обязательна",
 	"count_unit_required": "Количество обязательно",
 	"unit_required": "Единица измерения обязательна",
-	"category_required": "Категория обязательна"
+	"category_required": "Категория обязательна",
+	"duration_required": "Продолжительность обязательна",
+	"type_required": "Тип обязательна",
+	"calories_required": "Калории обязательны",
+	"proteins_required": "Белки обязательны",
+	"fats_required": "Жиры обязательны",
+	"carbohydrates_required": "Углеводы обязательны",
+	"priceToBuy_required": "Цена покупки обязательна",
+	"priceOfDish_required": "Цена блюда обязательна"
 }

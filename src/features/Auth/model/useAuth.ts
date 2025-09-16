@@ -33,6 +33,14 @@ export const useAuth = () => {
 				});
 			}
 			dispatch(setIsAuthenticated(true));
+			dispatch(
+				addAlert({
+					id: crypto.randomUUID(),
+					status: 'success',
+					title: 'Success',
+					description: code,
+				}),
+			);
 			return data.user;
 		} catch (_) {
 			return null;
@@ -78,12 +86,19 @@ export const useAuth = () => {
 
 	const logoutData = async () => {
 		try {
-			const result = await logout().unwrap();
+			const { code } = await logout().unwrap();
 			localStorage.removeItem('auth_token');
 			Cookies.remove('auth_token', { path: '/' });
 			dispatch(setIsAuthenticated(false));
 			dispatch(userApi.util.invalidateTags(['User']));
-			return result;
+			dispatch(
+				addAlert({
+					id: crypto.randomUUID(),
+					status: 'success',
+					title: 'Success',
+					description: code,
+				}),
+			);
 		} catch (_) {
 			return null;
 		}

@@ -13,8 +13,11 @@ import type { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useIngredient } from '@/entities/ingredient';
-import { getIngredientCategoryGroupsOptions } from '@/shared/lib/constants';
-import { PriceInput, UnitInput } from '@/shared/ui';
+import {
+	getIngredientCategoryGroupsOptions,
+	getUnitGroupsOptions,
+} from '@/shared/lib/constants';
+import { PriceInput } from '@/shared/ui';
 import {
 	getIngredientCreateSchema,
 	type IngredientCreateFormDataType,
@@ -26,6 +29,9 @@ export const IngredientCreate: FC<IngredientCreateProps> = ({ setCreated }) => {
 	const { t: tCommon } = useTranslation('common');
 	const { t: tIngredients } = useTranslation('ingredients');
 	const { t: tValidation } = useTranslation('validation');
+	const { t: tUnits } = useTranslation('units');
+
+	const unitGroupsOptions = getUnitGroupsOptions(tUnits);
 
 	const { control, handleSubmit } = useForm({
 		resolver: zodResolver(getIngredientCreateSchema(tValidation)),
@@ -34,7 +40,6 @@ export const IngredientCreate: FC<IngredientCreateProps> = ({ setCreated }) => {
 			description: '',
 			price: 1,
 			currency: 'RUB',
-			countUnit: 1,
 			unit: 'gr',
 			category: '',
 		},
@@ -42,9 +47,11 @@ export const IngredientCreate: FC<IngredientCreateProps> = ({ setCreated }) => {
 
 	const { createIngredientData, isCreateIngredientLoading } = useIngredient();
 
-	const onSubmit = (data: IngredientCreateFormDataType) => {
-		createIngredientData(data);
-		setCreated(true);
+	const onSubmit = async (data: IngredientCreateFormDataType) => {
+		const result = await createIngredientData(data);
+		if (result) {
+			setCreated(true);
+		}
 	};
 
 	return (
@@ -108,30 +115,26 @@ export const IngredientCreate: FC<IngredientCreateProps> = ({ setCreated }) => {
 					/>
 					<Controller
 						control={control}
-						name="countUnit"
-						render={({ field: unitField, fieldState: unitFieldState }) => (
-							<Controller
-								control={control}
-								name="unit"
-								render={({
-									field: unitUnitField,
-									fieldState: unitUnitFieldState,
-								}) => (
-									<UnitInput
-										value={Number(unitField.value)}
-										onUnitChange={unitField.onChange}
-										unit={unitUnitField.value}
-										onUnitUnitChange={unitUnitField.onChange}
-										isInvalid={
-											unitFieldState.invalid || unitUnitFieldState.invalid
-										}
-										errorMessage={
-											unitFieldState.error?.message ||
-											unitUnitFieldState.error?.message
-										}
-									/>
-								)}
-							/>
+						name="unit"
+						render={({ field, fieldState }) => (
+							<Autocomplete
+								label={tFields('unit')}
+								isInvalid={fieldState.invalid}
+								errorMessage={fieldState.error?.message}
+							>
+								{unitGroupsOptions.map((group) => (
+									<AutocompleteSection key={group.group} title={group.group}>
+										{group.options.map((option) => (
+											<AutocompleteItem
+												key={option.value}
+												onPress={() => field.onChange(option.value)}
+											>
+												{option.label}
+											</AutocompleteItem>
+										))}
+									</AutocompleteSection>
+								))}
+							</Autocomplete>
 						)}
 					/>
 				</div>

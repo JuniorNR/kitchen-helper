@@ -5,11 +5,13 @@ export interface Ingredient {
 	price: number;
 	currency: string;
 	priceUnit: string;
-	countUnit: number;
 	unit: string;
 	category: string;
 	createdAt: string;
 	updatedAt: string;
+	usage?: {
+		amount: string; // TODO: Возможно переписать
+	};
 }
 
 export interface IngredientDTO {
@@ -19,7 +21,6 @@ export interface IngredientDTO {
 	price: number;
 	currency: string;
 	price_unit: string;
-	count_unit: number;
 	unit: string;
 	category: string;
 	created_at: string;
