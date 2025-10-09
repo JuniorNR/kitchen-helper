@@ -10,6 +10,8 @@
 		"lint:fix": "biome check src --write"
 	},
 	"dependencies": {
+		"@dnd-kit/core": "^6.3.1",
+		"@dnd-kit/modifiers": "^9.0.0",
 		"@heroui/alert": "^2.2.25",
 		"@heroui/autocomplete": "^2.3.27",
 		"@heroui/button": "^2.2.24",

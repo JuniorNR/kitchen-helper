@@ -1,12 +1,11 @@
 import { NumberInput } from '@heroui/number-input';
-import { Button, Input } from '@heroui/react';
+import { Button } from '@heroui/react';
 import { Select, SelectItem } from '@heroui/select';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { FC } from 'react';
 import { Controller, useFieldArray } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useIngredient } from '@/entities';
-import { UnitInput } from '@/shared/ui';
 import { DeleteIcon } from '@/shared/ui/icons/deleteIcon';
 import type { RecipeCreateStepIngredientsProps } from '../model/recipeCreate.types';
 
@@ -28,7 +27,7 @@ export const RecipeCreateStepIngredients: FC<
 					type="button"
 					variant="solid"
 					color="primary"
-					onPress={() => append({ ingredientId: 1, amount: 0 })}
+					onPress={() => append({ id: 0, amount: 0 })}
 				>
 					{tFields('add_ingredient')}
 				</Button>
@@ -46,8 +45,8 @@ export const RecipeCreateStepIngredients: FC<
 					>
 						<Controller
 							control={control}
-							name={`steps.${stepIndex}.ingredients.${ingredientIndex}.ingredientId`}
-							render={({ field, fieldState }) => (
+							name={`steps.${stepIndex}.ingredients.${ingredientIndex}.id`}
+							render={({ fieldState, field }) => (
 								<Select
 									className="w-[40%] min-w-[180px]"
 									label={tFields('ingredient')}
@@ -55,7 +54,12 @@ export const RecipeCreateStepIngredients: FC<
 									errorMessage={fieldState.error?.message}
 								>
 									{(ingredients ?? []).map((ingredient) => (
-										<SelectItem key={ingredient.id}>
+										<SelectItem
+											key={ingredient.id}
+											onPress={() => {
+												field.onChange(ingredient.id);
+											}}
+										>
 											{ingredient.title}
 										</SelectItem>
 									))}
@@ -81,6 +85,7 @@ export const RecipeCreateStepIngredients: FC<
 							variant="solid"
 							color="danger"
 							className="h-full"
+							isDisabled={fields.length <= 1}
 							onPress={() => remove(ingredientIndex)}
 						>
 							<DeleteIcon />

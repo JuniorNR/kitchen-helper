@@ -212,5 +212,10 @@
 		"createdAt": "Создано",
 		"actions": "Действия",
 		"delete": "Удалить"
+	},
+	"rations": {
+		"breakfast": "Завтрак",
+		"lunch": "Обед",
+		"dinner": "Ужин"
 	}
 }

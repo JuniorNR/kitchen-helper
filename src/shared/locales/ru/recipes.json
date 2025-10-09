@@ -1,0 +1,109 @@
+{
+	"groups": {
+		"appetizers": "Закуски",
+		"salads": "Салаты",
+		"soups": "Супы",
+		"stews-curries": "Рагу и карри",
+		"mains": "Основные и гарниры",
+		"pasta-noodles-rice": "Паста, лапша и рис",
+		"dumplings-stuffed": "Пельмени и фаршированные",
+		"bakes-casseroles": "Запеканки и запечённое",
+		"grill-stir-braise": "Гриль, стир‑фрай и томление",
+		"street-food": "Уличная еда",
+		"proteins": "Мясо, птица и рыба",
+		"veg-mushroom": "Овощные и грибные",
+		"bakery-savoury": "Несладкая выпечка",
+		"bakery-sweet": "Сладкая выпечка",
+		"desserts": "Десерты",
+		"sauces-condiments": "Соусы и заправки",
+		"preserves-pickles": "Варенье и соленья",
+		"grains-cereals": "Крупы и каши",
+		"beverages": "Напитки"
+	},
+	"labels": {
+		"appetizer": "Закуска",
+		"canape-tapas": "Канапе/тапас",
+		"bruschetta-crostini": "Брускетта/кростини",
+
+		"salad": "Салат",
+
+		"soup": "Суп",
+		"cream-soup": "Крем‑суп",
+		"cold-soup": "Холодный суп",
+		"broth": "Бульон",
+
+		"stew": "Рагу",
+		"curry": "Карри",
+
+		"main": "Основное блюдо",
+		"side": "Гарнир",
+
+		"pasta": "Паста",
+		"noodles": "Лапша",
+		"rice-dish": "Рисовое блюдо",
+		"risotto": "Ризотто",
+		"pilaf": "Плов",
+
+		"dumplings": "Пельмени",
+		"stuffed": "Фаршированные блюда",
+
+		"casserole": "Запеканка",
+		"bake-roast": "Запечённое/жаркое",
+		"grill-bbq": "Гриль/барбекю",
+		"stir-fry": "Стир‑фрай",
+		"braised": "Томлёное",
+		"slow-cooker": "Мультиварка",
+
+		"sandwich-burger": "Сэндвич/бургер",
+		"wrap-roll": "Ролл/лаваш",
+		"taco-burrito": "Тако/буррито",
+		"pizza": "Пицца",
+
+		"fish-seafood": "Рыба и морепродукты",
+		"meat": "Мясное блюдо",
+		"poultry": "Птица",
+		"vegetable": "Овощное блюдо",
+		"mushroom": "Грибное блюдо",
+
+		"pancake-crepe": "Блинчики/крепы",
+		"bread-bakery": "Хлеб и выпечка",
+		"pie-savoury": "Пирог (несладкий)",
+		"pie-sweet": "Пирог (сладкий)",
+		"tart-quiche": "Тарт/киш",
+		"pastry": "Слоёная выпечка",
+		"cookies": "Печенье",
+		"cake": "Торт",
+		"cupcake-muffin": "Кексы/маффины",
+
+		"dessert": "Десерт",
+		"ice-cream": "Мороженое",
+		"pudding": "Пудинг/крем",
+		"jelly-mousse": "Желе/мусс",
+
+		"sauce": "Соус",
+		"dressing": "Заправка",
+		"dip-spread": "Дип/намазка",
+		"marinade": "Маринад",
+		"jam-preserve": "Варенье/конфитюр",
+		"pickles-fermented": "Соленья/квашеное",
+
+		"grain-cereal": "Крупы/зерновые",
+		"porridge": "Каша",
+
+		"beverage": "Напиток",
+		"smoothie": "Смузи",
+		"cocktail-mocktail": "Коктейль/моктейль"
+	},
+	"titles": {
+		"organic_substances": "Органические вещества",
+		"prices": "Цены"
+	},
+	"fields": {
+		"price_of_dish": "Цена блюда",
+		"price_to_buy": "Цена покупки"
+	},
+	"buttons": {
+		"view_steps": "Посмотреть шаги",
+		"put_on_the_market": "Выставить на рынок"
+	}
+}

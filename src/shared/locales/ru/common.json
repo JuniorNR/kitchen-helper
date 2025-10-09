@@ -28,5 +28,13 @@
 		"recipe_create": "Создать рецепт",
 		"recipe_list": "Список рецептов",
 		"user_settings": "Настройки"
+	},
+	"fields": {
+		"description": "Описание",
+		"duration": "Продолжительность",
+		"step": "Шаг"
+	},
+	"time": {
+		"minute_short": "мин"
 	}
 }

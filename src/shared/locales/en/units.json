@@ -8,6 +8,11 @@
 		"package": "Package"
 	},
 	"labels": {
+		"calories": "Calories",
+		"kilocalories": "kcal",
+		"proteins": "Proteins",
+		"fats": "Fats",
+		"carbohydrates": "Carbohydrates",
 		"mg": "mg",
 		"gr": "gr",
 		"kg": "kg",

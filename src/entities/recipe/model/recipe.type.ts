@@ -27,6 +27,7 @@ export interface Recipe {
 	userId: number;
 	title: string;
 	description: string;
+	ration: string;
 	type: string;
 	calories: number;
 	carbohydrates: number;
@@ -67,6 +68,7 @@ export interface RecipeDTO {
 	userId: number;
 	title: string;
 	description: string;
+	ration: string;
 	price_of_dish: number;
 	price_to_buy: number;
 	calories: number;

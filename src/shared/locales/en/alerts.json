@@ -17,6 +17,7 @@
 		"INGREDIENT_RETURNED": "Ingredient returned",
 		"INGREDIENT_UPDATED": "Ingredient updated",
 		"INGREDIENT_DELETED": "Ingredient deleted",
-		"INGREDIENTS_RETURNED": "Ingredients returned"
+		"INGREDIENTS_RETURNED": "Ingredients returned",
+		"RECIPE_CREATED": "Recipe created"
 	}
 }

@@ -1,8 +1,10 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
+import type { RecipeCreateFormInputType } from '@/features/RecipeCreate/model/recipeCreate.schema';
 import { dto } from '@/shared/lib/helpers';
 import { baseQuery } from '@/shared/lib/store/baseQuery';
 import type { ApiResponse } from '@/shared/lib/types';
 import type { Recipe, RecipeDTO } from './recipe.type';
+import { buildRecipeCreateFormData } from './recipe.utils';
 
 export const recipeApi = createApi({
 	reducerPath: 'recipeApi',
@@ -10,8 +12,8 @@ export const recipeApi = createApi({
 	tagTypes: ['Recipe'],
 	endpoints: (builder) => ({
 		getRecipes: builder.query<{ recipes: Recipe[]; code: string }, void>({
-			query: () => `/recipes/`,
 			providesTags: ['Recipe'],
+			query: () => `/recipes`,
 			transformResponse: (response: ApiResponse<RecipeDTO[]>) => {
 				return {
 					recipes: dto('toClient', response.data),
@@ -19,7 +21,24 @@ export const recipeApi = createApi({
 				};
 			},
 		}),
+		createRecipe: builder.mutation<
+			{ recipe: Recipe; code: string },
+			RecipeCreateFormInputType
+		>({
+			invalidatesTags: ['Recipe'],
+			query: (data) => ({
+				url: `/recipes/create`,
+				method: 'POST',
+				body: buildRecipeCreateFormData(data),
+			}),
+			transformResponse: (response: ApiResponse<RecipeDTO>) => {
+				return {
+					recipe: dto('toClient', response.data),
+					code: response.code,
+				};
+			},
+		}),
 	}),
 });
 
-export const { useGetRecipesQuery } = recipeApi;
+export const { useGetRecipesQuery, useCreateRecipeMutation } = recipeApi;

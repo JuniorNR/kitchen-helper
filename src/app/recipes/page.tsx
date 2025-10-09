@@ -3,20 +3,28 @@
 import { Tab, Tabs } from '@heroui/tabs';
 import { type Key, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { RecipeCreate } from '@/features';
+import { useRecipe } from '@/entities';
+import { RecipeCreate, RecipesList } from '@/features';
 
 export default function RecipesPage() {
 	const { t: tCommon } = useTranslation('common');
-	const [selectedKey, setSelectedKey] = useState<Key>('/recipe-create');
+	const { recipes } = useRecipe();
+	const [selectedKey, setSelectedKey] = useState<Key>('/recipes-list');
 	const [created, setCreated] = useState<boolean>(false);
-	const tabStyles = 'w-[75%] h-full flex items-center justify-center';
+	const tabStyles = 'w-[75%] flex items-center justify-center';
 
 	useEffect(() => {
 		if (created) {
-			setSelectedKey('/recipe-list');
+			setSelectedKey('/recipes-list');
 			setCreated(false);
 		}
 	}, [created]);
+
+	useEffect(() => {
+		if (recipes?.length === 0) {
+			setSelectedKey('/recipe-create');
+		}
+	}, [recipes]);
 
 	return (
 		<Tabs
@@ -34,11 +42,12 @@ export default function RecipesPage() {
 				<RecipeCreate setCreated={setCreated} />
 			</Tab>
 			<Tab
-				key="/recipe-list"
+				key="/recipes-list"
 				title={tCommon('page_titles.recipe_list')}
 				className={tabStyles}
+				disabled={recipes?.length === 0}
 			>
-				1234
+				<RecipesList />
 			</Tab>
 		</Tabs>
 	);

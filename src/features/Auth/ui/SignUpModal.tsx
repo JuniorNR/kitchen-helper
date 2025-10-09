@@ -18,7 +18,7 @@ export const SignUpModal = () => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	const { t: tCommon } = useTranslation('common');
 	const formId = useId();
-	const { signUpData } = useAuth();
+	const { signUpData, isSignUpLoading } = useAuth();
 
 	const handleSubmit = async (data: SignUpFormData) => {
 		await signUpData(data);
@@ -39,7 +39,12 @@ export const SignUpModal = () => {
 					</ModalBody>
 					<ModalFooter>
 						<Button onPress={onOpenChange}>{tCommon('close')}</Button>
-						<Button form={formId} type="submit" color="primary">
+						<Button
+							form={formId}
+							type="submit"
+							color="primary"
+							isLoading={isSignUpLoading}
+						>
 							{tCommon('sign_up')}
 						</Button>
 					</ModalFooter>

@@ -18,7 +18,7 @@ export const LoginModal = () => {
 	const formId = useId();
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	const { t: tCommon } = useTranslation('common');
-	const { loginData } = useAuth();
+	const { loginData, isLoginLoading } = useAuth();
 
 	const handleLogin = async (data: LoginFormData) => {
 		await loginData(data);
@@ -37,7 +37,12 @@ export const LoginModal = () => {
 					</ModalBody>
 					<ModalFooter>
 						<Button onPress={onOpenChange}>{tCommon('close')}</Button>
-						<Button form={formId} type="submit" color="primary">
+						<Button
+							form={formId}
+							type="submit"
+							color="primary"
+							isLoading={isLoginLoading}
+						>
 							{tCommon('login')}
 						</Button>
 					</ModalFooter>

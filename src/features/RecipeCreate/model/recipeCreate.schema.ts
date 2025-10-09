@@ -7,6 +7,7 @@ export const createRecipeCreateSchema = (t: TFunction<'validation'>) => {
 		description: z.string().nonempty(t('description_required')),
 		duration: z.number().min(0, t('duration_required')),
 		type: z.string().nonempty(t('type_required')),
+		ration: z.string().nonempty(t('ration_required')),
 		calories: z.number().min(0, t('calories_required')),
 		proteins: z.number().min(0, t('proteins_required')),
 		fats: z.number().min(0, t('fats_required')),
@@ -21,8 +22,8 @@ export const createRecipeCreateSchema = (t: TFunction<'validation'>) => {
 				order: z.number().default(1),
 				ingredients: z.array(
 					z.object({
-						ingredientId: z.number(),
-						amount: z.number().min(0, t('amount_required')),
+						id: z.number(),
+						amount: z.number().min(1, t('amount_required')),
 					}),
 				),
 			}),
@@ -30,7 +31,7 @@ export const createRecipeCreateSchema = (t: TFunction<'validation'>) => {
 		images: z.array(
 			z.object({
 				isMain: z.boolean(),
-				path: z.string(),
+				file: z.file(),
 				position: z.number(),
 			}),
 		),

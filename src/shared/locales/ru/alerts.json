@@ -17,6 +17,7 @@
 		"INGREDIENT_RETURNED": "Ингредиент возвращен",
 		"INGREDIENT_UPDATED": "Ингредиент обновлен",
 		"INGREDIENT_DELETED": "Ингредиент удален",
-		"INGREDIENTS_RETURNED": "Ингредиенты возвращены"
+		"INGREDIENTS_RETURNED": "Ингредиенты возвращены",
+		"RECIPE_CREATED": "Рецепт создан"
 	}
 }

@@ -30,5 +30,13 @@
 		"recipe_create": "Create Recipe",
 		"recipe_list": "Recipe List",
 		"user_settings": "Settings"
+	},
+	"fields": {
+		"description": "Description",
+		"duration": "Duration",
+		"step": "Step"
+	},
+	"time": {
+		"minute_short": "min"
 	}
 }

@@ -8,6 +8,11 @@
 		"package": "Упаковка"
 	},
 	"labels": {
+		"calories": "Калории",
+		"kilocalories": "Ккал",
+		"proteins": "Белки",
+		"fats": "Жиры",
+		"carbohydrates": "Углеводы",
 		"mg": "мг",
 		"gr": "гр",
 		"kg": "кг",

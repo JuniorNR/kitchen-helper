@@ -31,5 +31,6 @@
 	"ingredient": "Ingredient",
 	"add_step": "Add step",
 	"add_ingredient": "Add ingredient",
-	"amount": "Amount"
+	"amount": "Amount",
+	"ration": "Ration"
 }

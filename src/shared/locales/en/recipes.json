@@ -1,0 +1,109 @@
+{
+	"groups": {
+		"appetizers": "Appetizers",
+		"salads": "Salads",
+		"soups": "Soups",
+		"stews-curries": "Stews & curries",
+		"mains": "Mains & sides",
+		"pasta-noodles-rice": "Pasta, noodles & rice",
+		"dumplings-stuffed": "Dumplings & stuffed",
+		"bakes-casseroles": "Bakes & casseroles",
+		"grill-stir-braise": "Grill, stir-fry & braise",
+		"street-food": "Street food",
+		"proteins": "Meat, poultry & seafood",
+		"veg-mushroom": "Vegetable & mushroom",
+		"bakery-savoury": "Savoury bakery",
+		"bakery-sweet": "Sweet bakery",
+		"desserts": "Desserts",
+		"sauces-condiments": "Sauces & condiments",
+		"preserves-pickles": "Preserves & pickles",
+		"grains-cereals": "Grains & porridges",
+		"beverages": "Beverages"
+	},
+	"labels": {
+		"appetizer": "Appetizer",
+		"canape-tapas": "Canapé/Tapas",
+		"bruschetta-crostini": "Bruschetta/Crostini",
+
+		"salad": "Salad",
+
+		"soup": "Soup",
+		"cream-soup": "Cream soup",
+		"cold-soup": "Cold soup",
+		"broth": "Broth",
+
+		"stew": "Stew",
+		"curry": "Curry",
+
+		"main": "Main course",
+		"side": "Side dish",
+
+		"pasta": "Pasta",
+		"noodles": "Noodles",
+		"rice-dish": "Rice dish",
+		"risotto": "Risotto",
+		"pilaf": "Pilaf",
+
+		"dumplings": "Dumplings",
+		"stuffed": "Stuffed dishes",
+
+		"casserole": "Casserole",
+		"bake-roast": "Bake/Roast",
+		"grill-bbq": "Grill/BBQ",
+		"stir-fry": "Stir-fry",
+		"braised": "Braised",
+		"slow-cooker": "Slow cooker",
+
+		"sandwich-burger": "Sandwich/Burger",
+		"wrap-roll": "Wrap/Roll",
+		"taco-burrito": "Taco/Burrito",
+		"pizza": "Pizza",
+
+		"fish-seafood": "Fish & seafood",
+		"meat": "Meat",
+		"poultry": "Poultry",
+		"vegetable": "Vegetable dish",
+		"mushroom": "Mushroom dish",
+
+		"pancake-crepe": "Pancakes/Crepes",
+		"bread-bakery": "Bread & bakery",
+		"pie-savoury": "Pie (savoury)",
+		"pie-sweet": "Pie (sweet)",
+		"tart-quiche": "Tart/Quiche",
+		"pastry": "Pastry",
+		"cookies": "Cookies",
+		"cake": "Cake",
+		"cupcake-muffin": "Cupcakes/Muffins",
+
+		"dessert": "Dessert",
+		"ice-cream": "Ice cream",
+		"pudding": "Pudding/Custard",
+		"jelly-mousse": "Jelly/Mousse",
+
+		"sauce": "Sauce",
+		"dressing": "Dressing",
+		"dip-spread": "Dip/Spread",
+		"marinade": "Marinade",
+		"jam-preserve": "Jam/Preserve",
+		"pickles-fermented": "Pickles/Fermented",
+
+		"grain-cereal": "Grains/Cereals",
+		"porridge": "Porridge",
+
+		"beverage": "Beverage",
+		"smoothie": "Smoothie",
+		"cocktail-mocktail": "Cocktail/Mocktail"
+	},
+	"titles": {
+		"organic_substances": "Organic substances",
+		"prices": "Prices"
+	},
+	"fields": {
+		"price_of_dish": "Price of dish",
+		"price_to_buy": "Price to buy"
+	},
+	"buttons": {
+		"view_steps": "View steps",
+		"put_on_the_market": "Put on the market"
+	}
+}

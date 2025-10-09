@@ -212,5 +212,10 @@
 		"createdAt": "Created at",
 		"actions": "Actions",
 		"delete": "Delete"
+	},
+	"rations": {
+		"breakfast": "Breakfast",
+		"lunch": "Lunch",
+		"dinner": "Dinner"
 	}
 }

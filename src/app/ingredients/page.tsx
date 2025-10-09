@@ -3,10 +3,12 @@
 import { Tab, Tabs } from '@heroui/tabs';
 import { type Key, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useIngredient } from '@/entities';
 import { IngredientCreate, IngredientsTable } from '@/features';
 
 export default function ingredientsPage() {
 	const { t: tCommon } = useTranslation('common');
+	const { ingredients } = useIngredient();
 	const [selectedKey, setSelectedKey] = useState<Key>('/ingredient-list');
 	const [created, setCreated] = useState<boolean>(false);
 	const tabStyles = 'w-[75%] h-full flex items-center justify-center';
@@ -17,6 +19,12 @@ export default function ingredientsPage() {
 			setCreated(false);
 		}
 	}, [created]);
+
+	useEffect(() => {
+		if (ingredients?.length === 0) {
+			setSelectedKey('/ingredient-create');
+		}
+	}, [ingredients]);
 
 	return (
 		<Tabs
@@ -37,6 +45,7 @@ export default function ingredientsPage() {
 				key="/ingredient-list"
 				title={tCommon('page_titles.ingredient_list')}
 				className={tabStyles}
+				disabled={ingredients?.length === 0}
 			>
 				<IngredientsTable />
 			</Tab>

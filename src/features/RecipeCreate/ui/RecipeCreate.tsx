@@ -1,4 +1,9 @@
 'use client';
+import {
+	Autocomplete,
+	AutocompleteItem,
+	AutocompleteSection,
+} from '@heroui/autocomplete';
 import { Button } from '@heroui/button';
 import { Form } from '@heroui/form';
 import { Input, Textarea } from '@heroui/input';
@@ -9,7 +14,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import type { FC } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useIngredient, useRecipe } from '@/entities';
+import { useRecipe } from '@/entities';
 import { classNames } from '@/shared/lib/helpers/classNames';
 import { DeleteIcon } from '@/shared/ui/icons/deleteIcon';
 import { DragIcon } from '@/shared/ui/icons/dragIcon';
@@ -18,14 +23,18 @@ import {
 	type RecipeCreateFormInputType,
 } from '../model/recipeCreate.schema';
 import type { RecipeCreateProps } from '../model/recipeCreate.types';
+import { getGroupedOptions } from '../model/recipeCreate.utils';
+import { RecipeCreateImages } from './RecipeCreateImages';
 import { RecipeCreateStepIngredients } from './RecipeCreateStepIngredients';
 import styles from './recipeCreate.module.scss';
 
 export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
-	const { recipes } = useRecipe();
+	const { createRecipeData, isCreating } = useRecipe();
 	const { t: tValidation } = useTranslation('validation');
 	const { t: tCommon } = useTranslation('common');
 	const { t: tFields } = useTranslation('fields');
+	const { t: tIngredients } = useTranslation('ingredients');
+	const { t: tRecipes } = useTranslation('recipes');
 	const { control, handleSubmit, getValues } =
 		useForm<RecipeCreateFormInputType>({
 			resolver: zodResolver(createRecipeCreateSchema(tValidation)),
@@ -33,6 +42,7 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 				title: '',
 				description: '',
 				type: '',
+				ration: '',
 				duration: 0,
 				calories: 0,
 				proteins: 0,
@@ -45,17 +55,16 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 						title: '',
 						description: '',
 						duration: 0,
+						ingredients: [
+							{
+								id: 0,
+								amount: 0,
+							},
+						],
 						order: 1,
-						ingredients: [],
 					},
 				],
-				images: [
-					{
-						isMain: true,
-						path: '',
-						position: 1,
-					},
-				],
+				images: [],
 			},
 		});
 	const {
@@ -68,29 +77,33 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 	});
 
 	const formSectionStyles = 'flex gap-2 w-full';
-	console.debug(stepFields);
 
 	const onSubmit = async (data: RecipeCreateFormInputType) => {
-		console.debug(data);
-		// const result = await createRecipeData(data);
-		// if (true) {
-		// 	setCreated(true);
-		// }
+		const result = await createRecipeData(data);
+		if (result) {
+			setCreated(true);
+		}
 	};
 
 	const handleAddStep = () => {
+		console.debug(getValues('images'));
 		const newOrder = (stepFields.length ?? 0) + 1;
 		appendStep({
 			title: '',
 			description: '',
 			duration: 0,
-			ingredients: [],
+			ingredients: [
+				{
+					id: 0,
+					amount: 0,
+				},
+			],
 			order: newOrder,
 		});
 	};
 
 	return (
-		<div className={classNames('w-full', { 'mt-50': stepFields.length > 0 })}>
+		<div className={classNames('w-full')}>
 			<h1 className="text-2xl font-bold mb-2">
 				{tCommon('page_titles.recipe_create')}
 			</h1>
@@ -122,6 +135,28 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 				<div className={formSectionStyles}>
 					<Controller
 						control={control}
+						name="ration"
+						render={({ field, fieldState }) => (
+							<Select
+								label={tFields('ration')}
+								isInvalid={fieldState.invalid}
+								errorMessage={fieldState.error?.message}
+								{...field}
+							>
+								<SelectItem onPress={() => field.onChange('breakfast')}>
+									{tIngredients('rations.breakfast')}
+								</SelectItem>
+								<SelectItem onPress={() => field.onChange('lunch')}>
+									{tIngredients('rations.lunch')}
+								</SelectItem>
+								<SelectItem onPress={() => field.onChange('dinner')}>
+									{tIngredients('rations.dinner')}
+								</SelectItem>
+							</Select>
+						)}
+					/>
+					<Controller
+						control={control}
 						name="duration"
 						render={({ field, fieldState }) => (
 							<NumberInput
@@ -139,17 +174,26 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 						control={control}
 						name="type"
 						render={({ field, fieldState }) => (
-							<Select
+							<Autocomplete
 								className="w-full"
 								label={tFields('type')}
 								isInvalid={fieldState.invalid}
 								errorMessage={fieldState.error?.message}
 								{...field}
 							>
-								<SelectItem>Breakfast</SelectItem>
-								<SelectItem>Lunch</SelectItem>
-								<SelectItem>Dinner</SelectItem>
-							</Select>
+								{getGroupedOptions(tRecipes).map((group) => (
+									<AutocompleteSection key={group.label} title={group.label}>
+										{group.options.map((option) => (
+											<AutocompleteItem
+												key={option.value}
+												onPress={() => field.onChange(option.value)}
+											>
+												{option.label}
+											</AutocompleteItem>
+										))}
+									</AutocompleteSection>
+								))}
+							</Autocomplete>
 						)}
 					/>
 				</div>
@@ -245,6 +289,9 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 						)}
 					/>
 				</div>
+				<div className={formSectionStyles}>
+					<RecipeCreateImages control={control} />
+				</div>
 				<Button
 					type="button"
 					fullWidth
@@ -254,7 +301,6 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 				>
 					{tFields('add_step')}
 				</Button>
-
 				<div
 					className={classNames(styles.scrollXGradient, {}, [
 						'flex gap-2 w-full p-1',
@@ -265,7 +311,7 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 							return (
 								<motion.div
 									key={stepField.id}
-									className="border rounded-md p-2 flex min-w-[400px] max-w-[400px] max-h-[400px] flex-col gap-2 flex-grow-1"
+									className="border rounded-md p-2 flex min-w-[400px] max-w-[400px] h-[445px] max-h-[445px] flex-col gap-2 flex-grow-1"
 									initial={{ opacity: 0, y: -150 }}
 									animate={{ opacity: 1, y: 0 }}
 									exit={{ opacity: 0, y: 150 }}
@@ -336,6 +382,7 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 											type="button"
 											variant="solid"
 											color="danger"
+											isDisabled={stepFields.length <= 1}
 											onPress={() => {
 												removeStep(index);
 											}}
@@ -349,7 +396,13 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 						})}
 					</AnimatePresence>
 				</div>
-				<Button type="submit" fullWidth variant="solid" color="primary">
+				<Button
+					type="submit"
+					fullWidth
+					variant="solid"
+					color="primary"
+					isLoading={isCreating}
+				>
 					{tCommon('create')}
 				</Button>
 			</Form>

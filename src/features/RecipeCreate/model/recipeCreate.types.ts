@@ -9,3 +9,7 @@ export interface RecipeCreateStepIngredientsProps {
 	control: Control<RecipeCreateFormInputType>;
 	stepIndex: number;
 }
+
+export interface RecipeCreateImagesProps {
+	control: Control<RecipeCreateFormInputType>;
+}

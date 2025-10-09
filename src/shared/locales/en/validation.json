@@ -13,6 +13,7 @@
 	"category_required": "Category is required",
 	"duration_required": "Duration is required",
 	"type_required": "Type is required",
+	"ration_required": "Ration is required",
 	"calories_required": "Calories is required",
 	"proteins_required": "Proteins is required",
 	"fats_required": "Fats is required",

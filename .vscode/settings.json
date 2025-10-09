@@ -19,9 +19,21 @@
 	"eslint.useFlatConfig": true,
 	"eslint.format.enable": false,
 	"cSpell.words": [
+		"bruschetta",
+		"crostini",
 		"cuid",
 		"heroui",
 		"languagedetector",
-		"Lngs"
+		"Lngs",
+		"mocktail",
+		"Брускетта",
+		"кростини",
+		"маффины",
+		"моктейль",
+		"Стир",
+		"Тако",
+		"тапас",
+		"Тарт",
+		"фрай"
 	]
 }
