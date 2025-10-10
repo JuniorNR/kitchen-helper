@@ -1,9 +1,11 @@
 'use client';
 import { Button } from '@heroui/button';
 import { Divider } from '@heroui/react';
-import type { FC } from 'react';
+import { type FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { SwiperSlide } from 'swiper/react';
 import { ImageSRC } from '@/features';
+import { Slider } from '@/shared/ui';
 import type { RecipeItemProps } from '../model/recipeList.types';
 import { RecipeItemStepsModal } from './RecipeItemStepsModal';
 
@@ -11,18 +13,30 @@ export const RecipeItem: FC<RecipeItemProps> = ({ recipe }) => {
 	const { t: tUnits } = useTranslation('units');
 	const { t: tRecipes } = useTranslation('recipes');
 	const { t: tIngredients } = useTranslation('ingredients');
+	const [isOpen, setIsOpen] = useState<boolean>(false);
+
 	return (
 		<div className="w-[calc(25%-6px)] min-w-[200px] max-w-[250px] border rounded-md p-2 grow-1">
 			<h3 className="text-lg font-bold text-center h-[50px] mb-2 overflow-hidden line-clamp-2">
 				{recipe.title}
 			</h3>
-			<ImageSRC
-				src={recipe.images[0].path}
-				alt={recipe.title}
-				className="w-[100%] h-[100px] object-cover"
-				width={100}
-				height={100}
-			/>
+			<Slider spaceBetween={0} slidesPerView={1} effect="cube" isOpen={isOpen}>
+				{recipe.images.map((image) => (
+					<SwiperSlide
+						key={image.path}
+						onClick={() => setIsOpen((prev) => !prev)}
+					>
+						<ImageSRC
+							src={image.path}
+							alt={image.path}
+							className="w-[175px] h-[175px] object-cover"
+							width={175}
+							height={175}
+						/>
+					</SwiperSlide>
+				))}
+			</Slider>
+
 			<p className="text-sm text-gray-500 line-clamp-3 h-[60px] mt-2">
 				{recipe.description}
 			</p>

@@ -42,6 +42,7 @@
 		"react-hook-form": "^7.62.0",
 		"react-i18next": "^15.6.1",
 		"react-redux": "^9.2.0",
+		"swiper": "^12.0.2",
 		"zod": "^4.0.17"
 	},
 	"devDependencies": {
