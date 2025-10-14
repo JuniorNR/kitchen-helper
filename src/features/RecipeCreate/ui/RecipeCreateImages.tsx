@@ -29,7 +29,17 @@ export const RecipeCreateImages: FC<RecipeCreateImagesProps> = ({
 			<Controller
 				control={control}
 				name="images"
-				render={() => <ImagesPick onChange={handleFilesSelected} />}
+				render={({ field, fieldState }) => {
+					console.debug(field, fieldState.error?.message);
+					return (
+						<div>
+							<ImagesPick
+								errorMessage={fieldState.error?.message}
+								onChange={handleFilesSelected}
+							/>
+						</div>
+					);
+				}}
 			/>
 		</div>
 	);

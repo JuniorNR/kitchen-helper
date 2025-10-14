@@ -17,6 +17,7 @@ export const RecipeItemStepsModal: FC<RecipeItemStepsModalProps> = ({
 }) => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	const { t: tCommon } = useTranslation('common');
+	console.debug(recipeSteps);
 	return (
 		<>
 			<Button className="mb-2" color="primary" fullWidth onPress={onOpen}>

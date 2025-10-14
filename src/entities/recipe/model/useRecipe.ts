@@ -1,11 +1,16 @@
 import { useDispatch } from 'react-redux';
 import { addAlert } from '@/features/Alert';
 import type { RecipeCreateFormInputType } from '@/features/RecipeCreate/model/recipeCreate.schema';
-import { useCreateRecipeMutation, useGetRecipesQuery } from './recipe.api';
+import {
+	useCreateRecipeMutation,
+	useDeleteRecipeMutation,
+	useGetRecipesQuery,
+} from './recipe.api';
 
 export const useRecipe = () => {
 	const { data, isLoading, error } = useGetRecipesQuery();
 	const [createRecipe, { isLoading: isCreating }] = useCreateRecipeMutation();
+	const [deleteRecipe, { isLoading: isDeleting }] = useDeleteRecipeMutation();
 	const dispatch = useDispatch();
 	const createRecipeData = async (data: RecipeCreateFormInputType) => {
 		try {
@@ -41,6 +46,8 @@ export const useRecipe = () => {
 		isLoading,
 		error,
 		createRecipeData,
+		deleteRecipe,
 		isCreating,
+		isDeleting,
 	};
 };

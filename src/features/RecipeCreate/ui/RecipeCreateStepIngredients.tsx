@@ -66,7 +66,6 @@ export const RecipeCreateStepIngredients: FC<
 								</Select>
 							)}
 						/>
-
 						<Controller
 							control={control}
 							name={`steps.${stepIndex}.ingredients.${ingredientIndex}.amount`}
@@ -85,7 +84,6 @@ export const RecipeCreateStepIngredients: FC<
 							variant="solid"
 							color="danger"
 							className="h-full"
-							isDisabled={fields.length <= 1}
 							onPress={() => remove(ingredientIndex)}
 						>
 							<DeleteIcon />

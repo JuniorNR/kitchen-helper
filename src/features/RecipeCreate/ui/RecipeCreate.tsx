@@ -55,12 +55,7 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 						title: '',
 						description: '',
 						duration: 0,
-						ingredients: [
-							{
-								id: 0,
-								amount: 0,
-							},
-						],
+						ingredients: [],
 						order: 1,
 					},
 				],
@@ -86,24 +81,18 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 	};
 
 	const handleAddStep = () => {
-		console.debug(getValues('images'));
 		const newOrder = (stepFields.length ?? 0) + 1;
 		appendStep({
 			title: '',
 			description: '',
 			duration: 0,
-			ingredients: [
-				{
-					id: 0,
-					amount: 0,
-				},
-			],
+			ingredients: [],
 			order: newOrder,
 		});
 	};
 
 	return (
-		<div className={classNames('w-full')}>
+		<div className="w-full">
 			<h1 className="text-2xl font-bold mb-2">
 				{tCommon('page_titles.recipe_create')}
 			</h1>
@@ -208,7 +197,8 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 								errorMessage={fieldState.error?.message}
 								min={0}
 								step={10}
-								{...field}
+								value={Number(field.value) || 0}
+								onValueChange={(value: number) => field.onChange(Number(value))}
 							/>
 						)}
 					/>
@@ -222,7 +212,8 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 								errorMessage={fieldState.error?.message}
 								min={0}
 								step={10}
-								{...field}
+								value={Number(field.value) || 0}
+								onValueChange={(value: number) => field.onChange(Number(value))}
 							/>
 						)}
 					/>
@@ -372,7 +363,7 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 									<div className="flex items-center justify-between">
 										<Button
 											type="button"
-											variant="light"
+											variant="faded"
 											className="cursor-grab"
 										>
 											<DragIcon />

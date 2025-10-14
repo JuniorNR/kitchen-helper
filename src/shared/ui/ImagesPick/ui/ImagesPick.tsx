@@ -1,12 +1,16 @@
 import { Input } from '@heroui/input';
 import Image from 'next/image';
 import { type ChangeEvent, type FC, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/helpers';
 import { DeleteIcon } from '../../icons/deleteIcon';
+import { PhotoIcon } from '../../icons/photoIcon';
 import type { ImagesPickProps } from '../model/ImagesPick.types';
 import styles from './imagesPick.module.scss';
 
-export const ImagesPick: FC<ImagesPickProps> = (props) => {
+export const ImagesPick: FC<ImagesPickProps> = ({ errorMessage, ...props }) => {
+	//TODO: errorMessage add tooltip
+	const { t: tRecipes } = useTranslation('recipes');
 	const maxImages = props.maxImages ?? 5;
 	const inputSelectRef = useRef<HTMLInputElement | null>(null);
 	const [previews, setPreviews] = useState<string[]>([]);
@@ -57,11 +61,14 @@ export const ImagesPick: FC<ImagesPickProps> = (props) => {
 					<button
 						className={classNames(styles.button, {}, [
 							'h-20 w-20 p-2 rounded-md border-1',
+							'block max-w-full truncate',
+							errorMessage ? 'border-danger-400 text-danger-400' : '',
 						])}
 						type="button"
 						onClick={() => inputSelectRef.current?.click()}
 					>
-						Select images
+						{/* {tRecipes('buttons.select_images')} */}
+						<PhotoIcon className="w-full" />
 					</button>
 				)}
 				{previews.length > 0 && (
@@ -91,12 +98,14 @@ export const ImagesPick: FC<ImagesPickProps> = (props) => {
 						<button
 							className={classNames(styles.button, {}, [
 								'h-20 w-20 p-2 rounded-md border-1',
+								'block max-w-full truncate',
 							])}
 							type="button"
 							disabled={previews.length >= maxImages}
 							onClick={handleAdd}
 						>
-							Add images
+							{/* {tRecipes('buttons.add_image')} */}
+							<PhotoIcon className="w-full" />
 						</button>
 					</>
 				)}

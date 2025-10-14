@@ -19,5 +19,6 @@
 	"fats_required": "Fats is required",
 	"carbohydrates_required": "Carbohydrates is required",
 	"priceToBuy_required": "Price to buy is required",
-	"priceOfDish_required": "Price of dish is required"
+	"priceOfDish_required": "Price of dish is required",
+	"images_required": "Add at least one image"
 }

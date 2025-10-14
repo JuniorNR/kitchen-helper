@@ -4,8 +4,10 @@ import { Divider } from '@heroui/react';
 import { type FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SwiperSlide } from 'swiper/react';
+import { useRecipe } from '@/entities';
 import { ImageSRC } from '@/features';
 import { Slider } from '@/shared/ui';
+import { DeleteIcon } from '@/shared/ui/icons/deleteIcon';
 import type { RecipeItemProps } from '../model/recipeList.types';
 import { RecipeItemStepsModal } from './RecipeItemStepsModal';
 
@@ -13,7 +15,12 @@ export const RecipeItem: FC<RecipeItemProps> = ({ recipe }) => {
 	const { t: tUnits } = useTranslation('units');
 	const { t: tRecipes } = useTranslation('recipes');
 	const { t: tIngredients } = useTranslation('ingredients');
+	const { deleteRecipe, isDeleting } = useRecipe();
 	const [isOpen, setIsOpen] = useState<boolean>(false);
+
+	const handleDeleteRecipe = async () => {
+		await deleteRecipe(recipe.id.toString());
+	};
 
 	return (
 		<div className="w-[calc(25%-6px)] min-w-[200px] max-w-[250px] border rounded-md p-2 grow-1">
@@ -102,9 +109,25 @@ export const RecipeItem: FC<RecipeItemProps> = ({ recipe }) => {
 				recipeSteps={recipe.steps}
 				title={`${tRecipes('buttons.view_steps')} (${recipe.steps.length})`}
 			/>
-			<Button color="success" fullWidth onPress={() => {}}>
-				{tRecipes('buttons.put_on_the_market')}
-			</Button>
+			<div className="flex gap-2">
+				<Button
+					className="min-w-0"
+					color="success"
+					fullWidth
+					onPress={() => {}}
+				>
+					<span className="block max-w-full truncate">
+						{tRecipes('buttons.put_on_the_market')}
+					</span>
+				</Button>
+				<Button
+					color="danger"
+					onPress={handleDeleteRecipe}
+					isLoading={isDeleting}
+				>
+					<DeleteIcon />
+				</Button>
+			</div>
 		</div>
 	);
 };

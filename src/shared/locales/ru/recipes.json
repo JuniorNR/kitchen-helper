@@ -104,6 +104,8 @@
 	},
 	"buttons": {
 		"view_steps": "Посмотреть шаги",
-		"put_on_the_market": "Выставить на рынок"
+		"put_on_the_market": "Выставить на рынок",
+		"add_image": "Добавить изображение",
+		"select_images": "Выбрать изображения"
 	}
 }

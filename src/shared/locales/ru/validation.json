@@ -19,5 +19,6 @@
 	"fats_required": "Жиры обязательны",
 	"carbohydrates_required": "Углеводы обязательны",
 	"priceToBuy_required": "Цена покупки обязательна",
-	"priceOfDish_required": "Цена блюда обязательна"
+	"priceOfDish_required": "Цена блюда обязательна",
+	"images_required": "Добавьте хотя бы одно изображение"
 }
