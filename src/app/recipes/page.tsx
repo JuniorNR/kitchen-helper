@@ -1,10 +1,22 @@
 'use client';
 
 import { Tab, Tabs } from '@heroui/tabs';
+import dynamic from 'next/dynamic';
 import { type Key, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRecipe } from '@/entities';
-import { RecipeCreate, RecipesList } from '@/features';
+
+// import { RecipeCreate, RecipesList } from '@/features';
+
+const RecipeCreate = dynamic(
+	() => import('@/features/RecipeCreate').then((m) => m.RecipeCreate),
+	{ ssr: false },
+);
+
+const RecipesList = dynamic(
+	() => import('@/features/RecipesList').then((m) => m.RecipesList),
+	{ ssr: false },
+);
 
 export default function RecipesPage() {
 	const { t: tCommon } = useTranslation('common');

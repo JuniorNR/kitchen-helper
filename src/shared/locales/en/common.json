@@ -1,5 +1,6 @@
 {
 	"header": {
+		"market": "Market",
 		"recipes": "Recipes",
 		"ingredients": "Ingredients",
 		"settings": "Settings",

@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-	/* config options here */
+	modularizeImports: {
+		"@heroui/react": {
+			transform: "@heroui/{{member}}",
+			preventFullImport: true,
+		},
+	},
 };
 
 export default nextConfig;

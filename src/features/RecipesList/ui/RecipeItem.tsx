@@ -1,6 +1,6 @@
 'use client';
 import { Button } from '@heroui/button';
-import { Divider } from '@heroui/react';
+import { Divider } from '@heroui/divider';
 import { type FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SwiperSlide } from 'swiper/react';

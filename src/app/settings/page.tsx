@@ -1,9 +1,15 @@
 'use client';
 
 import { Tab, Tabs } from '@heroui/tabs';
+// import { UserSettings } from '@/features';
+import dynamic from 'next/dynamic';
 import { type Key, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { UserSettings } from '@/features';
+
+const UserSettings = dynamic(
+	() => import('@/features/UserSettings').then((m) => m.UserSettings),
+	{ ssr: false },
+);
 
 export default function SettingsPage() {
 	const { t: tCommon } = useTranslation('common');

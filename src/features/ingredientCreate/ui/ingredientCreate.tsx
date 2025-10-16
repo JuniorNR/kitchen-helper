@@ -1,13 +1,13 @@
 'use client';
 
-import { Button } from '@heroui/button';
-import { Form } from '@heroui/form';
-import { Input, Textarea } from '@heroui/input';
 import {
 	Autocomplete,
 	AutocompleteItem,
 	AutocompleteSection,
-} from '@heroui/react';
+} from '@heroui/autocomplete';
+import { Button } from '@heroui/button';
+import { Form } from '@heroui/form';
+import { Input, Textarea } from '@heroui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';

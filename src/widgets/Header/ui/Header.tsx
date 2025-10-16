@@ -1,6 +1,7 @@
 'use client';
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@heroui/navbar';
-import { Button, Tooltip } from '@heroui/react';
+import { Button } from '@heroui/button';
+import { Tooltip } from '@heroui/tooltip';
 import Link from 'next/link';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -82,7 +83,7 @@ export const Header: FC<HeaderProps> = ({ height }) => {
 		<Navbar style={{ height }}>
 			<NavbarBrand>
 				<Tooltip content={tCommon('app_name')} delay={0} showArrow radius="sm">
-					<Link href="/" className="flex items-center gap-3 text-base">
+					<Link prefetch href="/" className="flex items-center gap-3 text-base">
 						<AcmeLogo />
 					</Link>
 				</Tooltip>

@@ -1,5 +1,5 @@
+import { Button } from '@heroui/button';
 import { NumberInput } from '@heroui/number-input';
-import { Button } from '@heroui/react';
 import { Select, SelectItem } from '@heroui/select';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { FC } from 'react';

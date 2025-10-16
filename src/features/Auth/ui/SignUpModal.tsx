@@ -1,4 +1,5 @@
 'use client';
+import { Button } from '@heroui/button';
 import {
 	Modal,
 	ModalBody,
@@ -7,7 +8,6 @@ import {
 	ModalHeader,
 	useDisclosure,
 } from '@heroui/modal';
-import { Button } from '@heroui/react';
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/features';

@@ -18,6 +18,7 @@
 		"INGREDIENT_UPDATED": "Ingredient updated",
 		"INGREDIENT_DELETED": "Ingredient deleted",
 		"INGREDIENTS_RETURNED": "Ingredients returned",
-		"RECIPE_CREATED": "Recipe created"
+		"RECIPE_CREATED": "Recipe created",
+		"undefined": "Unknown error"
 	}
 }

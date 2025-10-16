@@ -1,12 +1,12 @@
 'use client';
 
+import { Button } from '@heroui/button';
 import {
-	Button,
 	Dropdown,
 	DropdownItem,
 	DropdownMenu,
 	DropdownTrigger,
-} from '@heroui/react';
+} from '@heroui/dropdown';
 import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
 

@@ -6,7 +6,7 @@ import {
 	ModalHeader,
 	useDisclosure,
 } from '@heroui/modal';
-import { Divider } from '@heroui/react';
+import { Divider } from '@heroui/divider';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { RecipeItemStepsModalProps } from '../model/recipeList.types';
