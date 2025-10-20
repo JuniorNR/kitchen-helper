@@ -9,14 +9,37 @@
 			"dark": "Тёмная"
 		}
 	},
+	"footer": {
+		"quick_links": "Быстрые ссылки",
+		"navigation": "Навигация",
+		"categories": "Категории",
+		"subscription": "Подписка",
+		"your_email": "Ваш e-mail",
+		"subscribe": "Подписаться",
+		"get_updates_about_new_recipes": "Получайте обновления о новых рецептах.",
+		"github": "Гит-хаб",
+		"telegram": "Телеграм",
+		"back_to_top": "Вернуться наверх"
+	},
+	"currency": {
+		"rub": "₽",
+		"usd": "$",
+		"eur": "€"
+	},
 	"language": {
 		"ru": "Русский",
 		"en": "Английский"
 	},
 	"app_name": "Помощник на кухне",
+	"app_name_description": "Ваш помощник в создании и организации рецептов.",
 	"logout": "Выйти",
 	"sign_up": "Регистрация",
 	"login": "Войти",
+	"save": "Сохранить",
+	"profile": "Профиль",
+	"preferences": "Предпочтения",
+	"account": "Аккаунт",
+	"information": "Информация",
 	"close": "Закрыть",
 	"accept": "Принять",
 	"reject": "Отклонить",

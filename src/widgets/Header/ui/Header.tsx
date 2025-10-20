@@ -1,9 +1,19 @@
 'use client';
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@heroui/navbar';
 import { Button } from '@heroui/button';
+import {
+	Navbar,
+	NavbarBrand,
+	NavbarContent,
+	NavbarItem,
+	NavbarMenu,
+	NavbarMenuItem,
+	NavbarMenuToggle,
+} from '@heroui/navbar';
 import { Tooltip } from '@heroui/tooltip';
 import Link from 'next/link';
+import { useTheme } from 'next-themes';
 import type { FC } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useUser } from '@/entities';
@@ -14,23 +24,14 @@ import {
 	ThemeSwitcher,
 	useAuth,
 } from '@/features';
+import { classNames } from '@/shared/lib/helpers';
+import { useScroll } from '@/shared/lib/hooks';
 import type { RootState } from '@/shared/lib/store';
+import { Logotype } from '@/shared/ui/icons/logotype';
+import { NAV_ITEMS } from '../model/constants';
+import { buildHeaderGradient, detectSeason } from '../model/header.utils';
 import type { HeaderProps } from '../model/types';
 import { HeaderNavItems } from './HeaderNavItems';
-
-export const AcmeLogo = () => {
-	return (
-		<svg fill="none" height="36" viewBox="0 0 32 32" width="36">
-			<title>Header icon</title>
-			<path
-				clipRule="evenodd"
-				d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
-				fill="currentColor"
-				fillRule="evenodd"
-			/>
-		</svg>
-	);
-};
 
 export const Header: FC<HeaderProps> = ({ height }) => {
 	const { t: tCommon } = useTranslation('common');
@@ -39,6 +40,16 @@ export const Header: FC<HeaderProps> = ({ height }) => {
 		(state: RootState) => state.auth.isAuthenticated,
 	);
 	const { isUserLoading } = useUser();
+	const { theme } = useTheme();
+	const season = detectSeason(new Date());
+	const gradient = buildHeaderGradient(
+		season,
+		(theme as 'light' | 'dark') ?? 'light',
+	);
+
+	const scrollY = useScroll('y');
+	const isScrolled = scrollY > 4;
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	const handleLogout = async () => {
 		await logoutData();
@@ -80,18 +91,61 @@ export const Header: FC<HeaderProps> = ({ height }) => {
 	};
 
 	return (
-		<Navbar style={{ height }}>
-			<NavbarBrand>
-				<Tooltip content={tCommon('app_name')} delay={0} showArrow radius="sm">
-					<Link prefetch href="/" className="flex items-center gap-3 text-base">
-						<AcmeLogo />
-					</Link>
-				</Tooltip>
-			</NavbarBrand>
-			<NavbarContent className="sm:flex gap-4" justify="center">
-				<HeaderNavItems />
-			</NavbarContent>
-			{renderContent()}
-		</Navbar>
+		<div className="w-full">
+			<Navbar
+				isMenuOpen={isMenuOpen}
+				onMenuOpenChange={setIsMenuOpen}
+				style={{ height, background: gradient }}
+				className={classNames(
+					'overflow-visible sticky top-0 z-50 transition-all duration-300',
+					{},
+					[isScrolled ? 'backdrop-blur-md shadow-lg' : ''],
+				)}
+			>
+				<NavbarBrand>
+					<Tooltip
+						content={tCommon('app_name')}
+						delay={0}
+						showArrow
+						radius="sm"
+					>
+						<Link
+							prefetch
+							href="/"
+							aria-label={tCommon('app_name')}
+							className="flex items-center gap-2 text-lg font-semibold tracking-tight opacity-90 hover:opacity-100 transition-opacity duration-300 ease-out"
+						>
+							<Logotype />
+						</Link>
+					</Tooltip>
+				</NavbarBrand>
+				<NavbarContent className="hidden sm:flex gap-4" justify="center">
+					<HeaderNavItems />
+				</NavbarContent>
+				<NavbarContent className="sm:hidden" justify="end">
+					<NavbarMenuToggle
+						className="transition-transform duration-300 ease-out"
+						aria-label={
+							isMenuOpen ? tCommon('close') : tCommon('footer.navigation')
+						}
+					/>
+				</NavbarContent>
+				{renderContent()}
+				<NavbarMenu>
+					{NAV_ITEMS.map((item) => (
+						<NavbarMenuItem key={item.href}>
+							<Link
+								prefetch
+								href={item.href}
+								className="w-full py-2 text-base transition-colors duration-300 ease-out"
+								onClick={() => setIsMenuOpen(false)}
+							>
+								{tCommon(item.labelKey)}123
+							</Link>
+						</NavbarMenuItem>
+					))}
+				</NavbarMenu>
+			</Navbar>
+		</div>
 	);
 };

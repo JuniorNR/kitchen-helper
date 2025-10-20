@@ -11,6 +11,7 @@ export const PriceInput: FC<NumberInputProps & PriceInputProps> = ({
 	onPriceChange,
 	priceUnit,
 	onPriceUnitChange,
+	size = 'md',
 	...props
 }) => {
 	const { t: tFields } = useTranslation('fields');
@@ -21,6 +22,7 @@ export const PriceInput: FC<NumberInputProps & PriceInputProps> = ({
 				className={classNames('w-[75%] min-w-[150px] rounded-r-none', {
 					[styles.radiusInput]: true,
 				})}
+				size={size}
 				name="price"
 				label={tFields('price')}
 				value={Number(value)}
@@ -35,6 +37,7 @@ export const PriceInput: FC<NumberInputProps & PriceInputProps> = ({
 			/>
 			<Select
 				name="priceUnit"
+				size={size}
 				label={tFields('price_unit')}
 				value={priceUnit}
 				className={classNames('w-[25%] min-w-[100px]', {

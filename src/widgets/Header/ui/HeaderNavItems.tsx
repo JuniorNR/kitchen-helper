@@ -26,17 +26,31 @@ export const HeaderNavItems = () => {
 				const isActive = item.href === pathname;
 				return (
 					<NavbarItem
-						className={classNames(
-							'',
-							{
-								['text-blue-700']: isActive,
-							},
-							['hover:text-blue-500', 'transition-colors', 'duration-300'],
-						)}
+						className={classNames('', {}, [
+							'transition-colors',
+							'duration-300',
+						])}
 						key={item.href}
 						isActive={isActive}
 					>
-						<Link href={item.href}>{t(item.labelKey)}</Link>
+						<Link
+							href={item.href === '/market' ? '' : item.href} // TODO: remove this after market is implemented
+							aria-current={isActive ? 'page' : undefined}
+							className={classNames(
+								'px-3 py-1 rounded-full outline-none transition-colors duration-300 ease-out',
+								{
+									['bg-blue-500/10 text-blue-700 dark:text-blue-400']: isActive,
+								},
+								[
+									'hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-blue-300',
+									'focus-visible:ring-2 focus-visible:ring-blue-400/60 focus-visible:ring-offset-2',
+								],
+							)}
+						>
+							{t(item.labelKey)}{' '}
+							{item.href === '/market' ? ' (work in progress)' : ''}
+							{/* // TODO: remove this after market is implemented */}
+						</Link>
 					</NavbarItem>
 				);
 			})}

@@ -4,7 +4,6 @@ export interface Ingredient {
 	description: string;
 	price: number;
 	currency: string;
-	priceUnit: string;
 	unit: string;
 	category: string;
 	createdAt: string;
@@ -20,7 +19,6 @@ export interface IngredientDTO {
 	description: string;
 	price: number;
 	currency: string;
-	price_unit: string;
 	unit: string;
 	category: string;
 	created_at: string;

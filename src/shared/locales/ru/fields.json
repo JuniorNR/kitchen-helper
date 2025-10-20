@@ -32,5 +32,7 @@
 	"add_step": "Добавить шаг",
 	"add_ingredient": "Добавить ингредиент",
 	"amount": "Количество",
-	"ration": "Рацион"
+	"ration": "Рацион",
+	"created_at": "Создано",
+	"updated_at": "Изменено"
 }

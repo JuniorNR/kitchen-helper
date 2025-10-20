@@ -5,7 +5,7 @@ import { layoutConfig } from '@/configs';
 import { AuthBoundary } from '@/features';
 import { classNames } from '@/shared/lib/helpers';
 import { AppProviders } from '@/shared/lib/providers/AppProviders';
-import { Header } from '@/widgets';
+import { Footer, Header } from '@/widgets';
 import styles from './layout.module.scss';
 
 const geistSans = Geist({
@@ -32,21 +32,24 @@ export default async function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased text-foreground bg-background min-h-screen`}
+				className={classNames(
+					`${geistSans.variable} ${geistMono.variable} antialiased text-foreground bg-background min-h-screen`,
+					{},
+					[styles.layout],
+				)}
 			>
 				<AppProviders>
-					<Header height={layoutConfig.headerHeight} />
-					<main
-						className={classNames(
-							'flex flex-col justify-start items-center w-full h-full p-5',
-							{},
-							[styles.layout],
-						)}
-						style={{ height: layoutConfig.mainHeight }}
-					>
-						<AuthBoundary>{children}</AuthBoundary>
-					</main>
-					<footer style={{ height: layoutConfig.footerHeight }}>Footer</footer>
+					<div className="flex flex-col justify-between min-h-screen">
+						<Header height={layoutConfig.headerHeight} />
+						<main
+							className={classNames(
+								`flex flex-col justify-between items-center w-full p-5`,
+							)}
+						>
+							<AuthBoundary>{children}</AuthBoundary>
+						</main>
+						<Footer heightElement={layoutConfig.footerHeight} />
+					</div>
 				</AppProviders>
 			</body>
 		</html>

@@ -15,6 +15,7 @@
 		"@heroui/alert": "^2.2.25",
 		"@heroui/autocomplete": "^2.3.27",
 		"@heroui/button": "^2.2.24",
+		"@heroui/card": "^2.2.25",
 		"@heroui/divider": "^2.2.20",
 		"@heroui/dropdown": "^2.3.27",
 		"@heroui/form": "^2.1.24",

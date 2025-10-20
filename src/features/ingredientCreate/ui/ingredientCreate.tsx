@@ -6,6 +6,8 @@ import {
 	AutocompleteSection,
 } from '@heroui/autocomplete';
 import { Button } from '@heroui/button';
+import { Card, CardBody } from '@heroui/card';
+import { Divider } from '@heroui/divider';
 import { Form } from '@heroui/form';
 import { Input, Textarea } from '@heroui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -55,124 +57,157 @@ export const IngredientCreate: FC<IngredientCreateProps> = ({ setCreated }) => {
 	};
 
 	return (
-		<div className="w-full">
-			<h1 className="text-2xl font-bold mb-2">
+		<div className="w-full max-w-2xl mx-auto">
+			<h1 className="text-2xl font-bold mb-3">
 				{tCommon('page_titles.ingredient_create')}
 			</h1>
-			<Form onSubmit={handleSubmit(onSubmit)}>
-				<Controller
-					control={control}
-					name="title"
-					render={({ field, fieldState }) => (
-						<Input
-							{...field}
-							label={tFields('title')}
-							isInvalid={fieldState.invalid}
-							errorMessage={fieldState.error?.message}
+			<Card radius="sm" shadow="sm">
+				<CardBody className="flex flex-col gap-4">
+					<Form
+						className="flex flex-col gap-4"
+						onSubmit={handleSubmit(onSubmit)}
+					>
+						<Controller
+							control={control}
+							name="title"
+							render={({ field, fieldState }) => (
+								<Input
+									{...field}
+									label={tFields('title')}
+									size="lg"
+									isRequired
+									isInvalid={fieldState.invalid}
+									errorMessage={fieldState.error?.message}
+								/>
+							)}
 						/>
-					)}
-				/>
-				<Controller
-					control={control}
-					name="description"
-					render={({ field, fieldState }) => (
-						<Textarea
-							{...field}
-							label={tFields('description')}
-							isInvalid={fieldState.invalid}
-							errorMessage={fieldState.error?.message}
+						<Controller
+							control={control}
+							name="description"
+							render={({ field, fieldState }) => (
+								<Textarea
+									{...field}
+									label={tFields('description')}
+									size="lg"
+									minRows={3}
+									isRequired
+									isInvalid={fieldState.invalid}
+									errorMessage={fieldState.error?.message}
+								/>
+							)}
 						/>
-					)}
-				/>
-				<div className="flex gap-2 w-full">
-					<Controller
-						control={control}
-						name="price"
-						render={({ field: priceField, fieldState: priceFieldState }) => (
+						<Divider />
+
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
 							<Controller
 								control={control}
-								name="currency"
+								name="price"
 								render={({
-									field: priceUnitField,
-									fieldState: priceUnitFieldState,
+									field: priceField,
+									fieldState: priceFieldState,
 								}) => (
-									<PriceInput
-										value={Number(priceField.value)}
-										onPriceChange={priceField.onChange}
-										priceUnit={priceUnitField.value || 'RUB'}
-										onPriceUnitChange={priceUnitField.onChange}
-										isInvalid={
-											priceFieldState.invalid || priceUnitFieldState.invalid
-										}
-										errorMessage={
-											priceFieldState.error?.message ||
-											priceUnitFieldState.error?.message
-										}
+									<Controller
+										control={control}
+										name="currency"
+										render={({
+											field: priceUnitField,
+											fieldState: priceUnitFieldState,
+										}) => (
+											<PriceInput
+												value={Number(priceField.value)}
+												size="lg"
+												onPriceChange={priceField.onChange}
+												priceUnit={priceUnitField.value || 'RUB'}
+												onPriceUnitChange={priceUnitField.onChange}
+												isInvalid={
+													priceFieldState.invalid || priceUnitFieldState.invalid
+												}
+												errorMessage={
+													priceFieldState.error?.message ||
+													priceUnitFieldState.error?.message
+												}
+											/>
+										)}
 									/>
 								)}
 							/>
-						)}
-					/>
-					<Controller
-						control={control}
-						name="unit"
-						render={({ field, fieldState }) => (
-							<Autocomplete
-								label={tFields('unit')}
-								isInvalid={fieldState.invalid}
-								errorMessage={fieldState.error?.message}
-							>
-								{unitGroupsOptions.map((group) => (
-									<AutocompleteSection key={group.group} title={group.group}>
-										{group.options.map((option) => (
-											<AutocompleteItem
-												key={option.value}
-												onPress={() => field.onChange(option.value)}
+							<Controller
+								control={control}
+								name="unit"
+								render={({ field, fieldState }) => (
+									<Autocomplete
+										label={tFields('unit')}
+										size="lg"
+										isRequired
+										isInvalid={fieldState.invalid}
+										errorMessage={fieldState.error?.message}
+									>
+										{unitGroupsOptions.map((group) => (
+											<AutocompleteSection
+												key={group.group}
+												title={group.group}
 											>
-												{option.label}
-											</AutocompleteItem>
+												{group.options.map((option) => (
+													<AutocompleteItem
+														key={option.value}
+														onPress={() => field.onChange(option.value)}
+													>
+														{option.label}
+													</AutocompleteItem>
+												))}
+											</AutocompleteSection>
 										))}
-									</AutocompleteSection>
-								))}
-							</Autocomplete>
-						)}
-					/>
-				</div>
-				<Controller
-					control={control}
-					name="category"
-					render={({ field, fieldState }) => (
-						<Autocomplete
-							{...field}
+									</Autocomplete>
+								)}
+							/>
+						</div>
+
+						<Divider />
+
+						<Controller
+							control={control}
 							name="category"
-							label={tFields('category')}
-							isInvalid={fieldState.invalid}
-							errorMessage={fieldState.error?.message}
+							render={({ field, fieldState }) => (
+								<Autocomplete
+									{...field}
+									name="category"
+									label={tFields('category')}
+									size="lg"
+									isRequired
+									isInvalid={fieldState.invalid}
+									errorMessage={fieldState.error?.message}
+								>
+									{getIngredientCategoryGroupsOptions(tIngredients).map(
+										(group) => (
+											<AutocompleteSection
+												key={group.group}
+												title={group.group}
+											>
+												{group.options.map((option) => (
+													<AutocompleteItem
+														key={option.value}
+														onPress={() => field.onChange(option.value)}
+													>
+														{option.label}
+													</AutocompleteItem>
+												))}
+											</AutocompleteSection>
+										),
+									)}
+								</Autocomplete>
+							)}
+						/>
+						<Button
+							type="submit"
+							fullWidth
+							color="primary"
+							isLoading={isCreateIngredientLoading}
 						>
-							{getIngredientCategoryGroupsOptions(tIngredients).map((group) => (
-								<AutocompleteSection key={group.group} title={group.group}>
-									{group.options.map((option) => (
-										<AutocompleteItem
-											key={option.value}
-											onPress={() => field.onChange(option.value)}
-										>
-											{option.label}
-										</AutocompleteItem>
-									))}
-								</AutocompleteSection>
-							))}
-						</Autocomplete>
-					)}
-				/>
-				<Button
-					type="submit"
-					fullWidth
-					color="primary"
-					isLoading={isCreateIngredientLoading}
-				>
-					{tCommon('create')}
-				</Button>
-			</Form>
+							{tCommon('create')}
+						</Button>
+					</Form>
+				</CardBody>
+			</Card>
 		</div>
 	);
 };

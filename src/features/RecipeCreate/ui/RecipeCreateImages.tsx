@@ -29,8 +29,7 @@ export const RecipeCreateImages: FC<RecipeCreateImagesProps> = ({
 			<Controller
 				control={control}
 				name="images"
-				render={({ field, fieldState }) => {
-					console.debug(field, fieldState.error?.message);
+				render={({ fieldState }) => {
 					return (
 						<div>
 							<ImagesPick
@@ -44,9 +43,3 @@ export const RecipeCreateImages: FC<RecipeCreateImagesProps> = ({
 		</div>
 	);
 };
-
-// {
-// 	isMain: true,
-// 	path: '/test.png',
-// 	position: 1,
-// },

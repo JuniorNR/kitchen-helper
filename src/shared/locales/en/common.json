@@ -9,14 +9,37 @@
 			"dark": "Dark"
 		}
 	},
+	"footer": {
+		"quick_links": "Quick Links",
+		"navigation": "Navigation",
+		"categories": "Categories",
+		"subscription": "Subscription",
+		"your_email": "Your e-mail",
+		"subscribe": "Subscribe",
+		"get_updates_about_new_recipes": "Get updates about new recipes.",
+		"github": "GitHub",
+		"telegram": "Telegram",
+		"back_to_top": "Back to Top"
+	},
+	"currency": {
+		"rub": "₽",
+		"usd": "$",
+		"eur": "€"
+	},
 	"language": {
 		"ru": "Russian",
 		"en": "English"
 	},
 	"app_name": "Kitchen helper",
+	"app_name_description": "Your assistant in creating and organizing recipes.",
 	"login": "Login",
 	"logout": "Logout",
 	"sign_up": "Sign Up",
+	"save": "Save",
+	"profile": "Profile",
+	"preferences": "Preferences",
+	"account": "Account",
+	"information": "Information",
 	"close": "Close",
 	"accept": "Accept",
 	"reject": "Reject",

@@ -6,7 +6,8 @@ import type { FC } from 'react';
 import { Controller, useFieldArray } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useIngredient } from '@/entities';
-import { DeleteIcon } from '@/shared/ui/icons/deleteIcon';
+import { DeleteButton } from '@/shared/ui';
+import { PlusIcon } from '@/shared/ui/icons/plusIcon';
 import type { RecipeCreateStepIngredientsProps } from '../model/recipeCreate.types';
 
 export const RecipeCreateStepIngredients: FC<
@@ -25,8 +26,10 @@ export const RecipeCreateStepIngredients: FC<
 				<h4 className="text-md font-semibold">{tFields('ingredients')}</h4>
 				<Button
 					type="button"
-					variant="solid"
-					color="primary"
+					variant="shadow"
+					color="secondary"
+					radius="sm"
+					startContent={<PlusIcon />}
 					onPress={() => append({ id: 0, amount: 0 })}
 				>
 					{tFields('add_ingredient')}
@@ -79,15 +82,11 @@ export const RecipeCreateStepIngredients: FC<
 							)}
 						/>
 
-						<Button
-							type="button"
-							variant="solid"
-							color="danger"
-							className="h-full"
+						<DeleteButton
+							className="h-full w-full"
+							size="lg"
 							onPress={() => remove(ingredientIndex)}
-						>
-							<DeleteIcon />
-						</Button>
+						/>
 					</motion.div>
 				))}
 			</AnimatePresence>

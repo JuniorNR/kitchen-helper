@@ -1,3 +1,3 @@
 export default function MarketPage() {
-	return <div>123</div>;
+	return <div>Я ж сказал - WORK IN PROGRESS</div>;
 }

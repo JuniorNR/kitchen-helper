@@ -1,3 +1,4 @@
+import type { Ingredient } from '@/entities';
 import type { Recipe, RecipeStep } from '@/entities/recipe/model/recipe.type';
 
 export interface RecipeItemProps {
@@ -7,4 +8,10 @@ export interface RecipeItemProps {
 export interface RecipeItemStepsModalProps {
 	recipeSteps: RecipeStep[];
 	title: string;
+	className?: string;
+}
+
+export interface RecipeItemStepsModalIngredientCardProps {
+	ingredient: Ingredient;
+	onClose: () => void;
 }

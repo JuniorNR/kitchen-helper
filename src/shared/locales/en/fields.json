@@ -32,5 +32,7 @@
 	"add_step": "Add step",
 	"add_ingredient": "Add ingredient",
 	"amount": "Amount",
-	"ration": "Ration"
+	"ration": "Ration",
+	"created_at": "Created at",
+	"updated_at": "Updated at"
 }

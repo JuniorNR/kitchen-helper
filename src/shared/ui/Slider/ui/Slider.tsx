@@ -1,5 +1,11 @@
 import type { FC } from 'react';
-import { A11y, EffectCube, Navigation, Pagination } from 'swiper/modules';
+import {
+	A11y,
+	EffectCards,
+	EffectCube,
+	Navigation,
+	Pagination,
+} from 'swiper/modules';
 import { Swiper, type SwiperProps } from 'swiper/react';
 
 import 'swiper/css';
@@ -15,7 +21,7 @@ export const Slider: FC<SwiperProps & SliderProps> = ({
 	return (
 		<Swiper
 			{...props}
-			modules={[A11y, Navigation, Pagination, EffectCube]}
+			modules={[A11y, Navigation, Pagination, EffectCube, EffectCards]}
 			navigation
 			pagination={{ clickable: true, dynamicBullets: true }}
 			cubeEffect={{

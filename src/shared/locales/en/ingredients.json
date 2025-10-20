@@ -217,5 +217,9 @@
 		"breakfast": "Breakfast",
 		"lunch": "Lunch",
 		"dinner": "Dinner"
+	},
+	"view": {
+		"table": "Table",
+		"cards": "Cards"
 	}
 }
