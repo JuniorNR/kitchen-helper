@@ -26,3 +26,7 @@ body {
 	color: var(--foreground); */
 	font-family: Roboto, Helvetica, sans-serif;
 }
+
+html {
+	scrollbar-gutter: auto !important;
+}

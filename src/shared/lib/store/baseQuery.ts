@@ -8,7 +8,9 @@ import Cookies from 'js-cookie';
 import { setIsAuthenticated } from '@/features/Auth/model/auth.slice';
 
 const rawBaseQuery = fetchBaseQuery({
-	baseUrl: process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8000/api',
+	baseUrl: process.env.NEXT_PUBLIC_PROD
+		? process.env.NEXT_PUBLIC_API_URL_PROD
+		: process.env.NEXT_PUBLIC_API_URL_DEV,
 	prepareHeaders: (headers) => {
 		const token = localStorage.getItem('auth_token');
 		if (token) {

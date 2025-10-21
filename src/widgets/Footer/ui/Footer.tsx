@@ -126,8 +126,6 @@ export const Footer: FC<FooterProps> = ({ heightElement }) => {
 						© {new Date().getFullYear()} {tCommon('app_name')}
 					</div>
 					<div className="flex items-center gap-3">
-						<LanguageSwitcher />
-						<ThemeSwitcher />
 						<div className="flex items-center gap-2">
 							<a
 								href="https://github.com"
