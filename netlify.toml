@@ -5,12 +5,8 @@
 [[plugins]]
   package = "@netlify/next"
 
-[functions]
-  node_bundler = "esbuild"
-  external_node_modules = ["@swc/core"]
-
 [build.environment]
   NODE_VERSION = "20"
-  NPM_FLAGS = "--version"
   PNPM_VERSION = "9.0.0"
+
 
