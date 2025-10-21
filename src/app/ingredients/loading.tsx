@@ -5,6 +5,7 @@ import { IngredientCardSkeleton } from '@/features/IngredientsList/ui/Ingredient
 
 export default function IngredientsLoading() {
 	const { t: tCommon } = useTranslation('common');
+
 	return (
 		<div className="h-full w-full">
 			<h1 className="text-2xl font-bold mb-3">
