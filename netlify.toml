@@ -34,3 +34,9 @@
     url = ":url"
     w = ":width"
     q = ":quality"
+
+[[redirects]]
+  # Явно сопоставляем URLы Next чанков с физической папкой .next/static
+  from = "/_next/static/*"
+  to = "/static/:splat"
+  status = 200
