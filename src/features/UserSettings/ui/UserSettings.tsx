@@ -17,12 +17,14 @@ import { Typography } from '@/shared/ui';
 import { CheckIcon } from '@/shared/ui/icons/checkIcon';
 import { createUserSettingsSchema } from '../model/userSettings.schema';
 import type { UserSettingsFormData } from '../model/userSettings.types';
+import { UserSettingsSkeleton } from './UserSettingsSkeleton';
 
 export const UserSettings = () => {
 	const { t: tCommon, i18n } = useTranslation('common');
 	const { t: tFields } = useTranslation('fields');
 	const { t: tValidation } = useTranslation('validation');
-	const { user, updateUserData, isUpdateUserLoading } = useUser();
+	const { user, isUserLoading, updateUserData, isUpdateUserLoading } =
+		useUser();
 	const { control, handleSubmit, reset } = useForm({
 		resolver: zodResolver(createUserSettingsSchema(tValidation)),
 		defaultValues: {
@@ -40,22 +42,25 @@ export const UserSettings = () => {
 		}
 	}, [user, reset]);
 
-	const userInitial = useMemo(() => {
+	const userInitial = () => {
 		const source = (user?.name || user?.email || '').trim();
 		return source ? source.charAt(0).toUpperCase() : '?';
-	}, [user]);
+	};
 
-	const dateLocale = useMemo(() => {
+	const dateLocale = () => {
 		return i18n.language?.toLowerCase().startsWith('ru') ? ru : enUS;
-	}, [i18n.language]);
+	};
 
 	const onSubmit = async (data: UserSettingsFormData) => {
 		await updateUserData(data);
 	};
+	if (isUserLoading) {
+		return <UserSettingsSkeleton />;
+	}
 	return (
 		<Form
 			onSubmit={handleSubmit(onSubmit)}
-			className="w-full max-w-5xl mx-auto"
+			className="w-full max-w-5xl mx-auto min-h-[600px]"
 		>
 			<div className="mb-2">
 				<Typography component="h1">
@@ -70,7 +75,7 @@ export const UserSettings = () => {
 					<Divider />
 					<CardBody className="flex items-center gap-3">
 						<div className="h-12 w-12 rounded-full bg-primary text-white flex items-center justify-center font-semibold">
-							{userInitial}
+							{userInitial()}
 						</div>
 						<div className="flex flex-col">
 							<span className="text-sm text-neutral-500 dark:text-neutral-400">
@@ -166,7 +171,7 @@ export const UserSettings = () => {
 								value={
 									user
 										? format(new Date(user.createdAt), 'dd.MM.yyyy HH:mm', {
-												locale: dateLocale,
+												locale: dateLocale(),
 											})
 										: ''
 								}
@@ -179,7 +184,7 @@ export const UserSettings = () => {
 								value={
 									user
 										? format(new Date(user.updatedAt), 'dd.MM.yyyy HH:mm', {
-												locale: dateLocale,
+												locale: dateLocale(),
 											})
 										: ''
 								}

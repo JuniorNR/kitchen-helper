@@ -62,6 +62,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit, formId }) => {
 					<Input
 						size="sm"
 						label={tFields('password')}
+						type="password"
 						placeholder={tFields('password_placeholder')}
 						errorMessage={fieldState.error?.message}
 						isInvalid={!!fieldState.error}
@@ -76,6 +77,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit, formId }) => {
 					<Input
 						size="sm"
 						label={tFields('confirm_password')}
+						type="password"
 						placeholder={tFields('password_placeholder')}
 						errorMessage={fieldState.error?.message}
 						isInvalid={!!fieldState.error}

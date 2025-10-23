@@ -11,6 +11,8 @@ import {
 import { type FC, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Ingredient } from '@/entities';
+import { Typography } from '@/shared/ui';
+import { CheckIcon } from '@/shared/ui/icons/checkIcon';
 import type { RecipeItemStepsModalProps } from '../model/recipeList.types';
 import { getStepMinutes } from '../model/recipeList.utils';
 import { RecipeItemStepsModalIngredientCard } from './RecipeItemStepsModalIngredientCard';
@@ -23,6 +25,7 @@ export const RecipeItemStepsModal: FC<RecipeItemStepsModalProps> = ({
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	const { t: tCommon } = useTranslation('common');
 	const { t: tRecipes } = useTranslation('recipes');
+	const { t: tFields } = useTranslation('fields');
 	const [activeIngredientData, setActiveIngredientData] =
 		useState<Ingredient | null>(null);
 	const [activeStepId, setActiveStepId] = useState<number | null>(null);
@@ -79,19 +82,20 @@ export const RecipeItemStepsModal: FC<RecipeItemStepsModalProps> = ({
 				size="4xl"
 			>
 				<ModalContent className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-gradient-to-br from-white to-neutral-50/70 dark:from-neutral-900 dark:to-neutral-950">
-					<ModalHeader className="flex flex-col gap-2 px-6 pt-5 pb-3">
+					<ModalHeader className="flex flex-col gap-2 px-6 pt-5 pb-3 pr-10">
 						<div className="flex items-start justify-between gap-4">
-							<h2 className="text-2xl font-semibold leading-tight">{title}</h2>
-							<div className="flex items-center gap-2">
+							<Typography component="h2">{title}</Typography>
+							<div className="flex gap-2 flex-col sm:flex-row items-end sm:items-center">
 								<span className="inline-flex items-center gap-1 rounded-full border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 px-2.5 py-1 text-xs text-neutral-700 dark:text-neutral-300">
-									{tCommon('fields.step')}: {recipeSteps.length}
+									{tFields('total_steps')}: {recipeSteps.length}
 								</span>
-								<span className="inline-flex items-center gap-1 rounded-full border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 px-2.5 py-1 text-xs text-neutral-700 dark:text-neutral-300 mr-5">
+								<span className="inline-flex items-center gap-1 rounded-full border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 px-2.5 py-1 text-xs text-neutral-700 dark:text-neutral-300">
 									{tCommon('fields.duration')}: {totalMinutes}{' '}
 									{tCommon('time.minute_short')}
 								</span>
 							</div>
 						</div>
+
 						{recipeSteps.length > 1 ? (
 							<div className="flex items-center gap-1.5">
 								{recipeSteps.map((step, idx) => (
@@ -100,8 +104,8 @@ export const RecipeItemStepsModal: FC<RecipeItemStepsModalProps> = ({
 										className={
 											'h-1.5 rounded-full transition-colors w-full ' +
 											(idx <= (activeStepIndex ?? -1)
-												? 'bg-primary-500'
-												: 'bg-neutral-200 dark:bg-neutral-700')
+												? 'bg-primary-400'
+												: 'bg-primary-200 dark:bg-primary-100')
 										}
 									/>
 								))}
@@ -120,35 +124,47 @@ export const RecipeItemStepsModal: FC<RecipeItemStepsModalProps> = ({
 											<div
 												key={step.id}
 												className={
-													'group rounded-xl border px-4 py-3 transition-colors ' +
+													'rounded-xl border px-4 py-3 transition-colors overflow-hidden ' +
 													(isActive
 														? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20 dark:border-primary-700'
 														: 'border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900')
 												}
 											>
-												<button
-													type="button"
-													onClick={() => handleSelectStep(step.id)}
-													className="w-full text-left"
-												>
-													<div className="flex items-start justify-between gap-3">
-														<h4 className="text-lg font-semibold">
-															{tCommon('fields.step')} {step.order} — «
-															{step.title}»
-														</h4>
-														<span className="shrink-0 inline-flex items-center rounded-full bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 px-2 py-0.5 text-xs text-neutral-700 dark:text-neutral-300">
+												<div className="flex items-center justify-between gap-3">
+													<Typography component="h3" tooltip maxLength={25}>
+														{tCommon('fields.step')} {String(step.order)} — «
+														{step.title}»
+													</Typography>
+													<div className="flex items-center gap-2 shrink-0">
+														<span className="inline-flex items-center rounded-full bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 px-2 py-0.5 text-xs text-neutral-700 dark:text-neutral-300">
 															{minutes} {tCommon('time.minute_short')}
 														</span>
+														<Button
+															aria-label={tCommon('accept')}
+															isIconOnly
+															radius="full"
+															variant={isActive ? 'solid' : 'bordered'}
+															size="sm"
+															color={isActive ? 'primary' : 'secondary'}
+															onPress={() => handleSelectStep(step.id)}
+															className={
+																isActive
+																	? 'shadow-lg shadow-primary-500/30 ring-2 ring-primary-500'
+																	: 'opacity-85 hover:opacity-100 w-8 h-8'
+															}
+														>
+															<CheckIcon width={16} height={16} />
+														</Button>
 													</div>
-												</button>
-												<p className="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
+												</div>
+												<Typography tooltip maxLength={75}>
 													{step.description}
-												</p>
+												</Typography>
 												{step.ingredients?.length ? (
 													<div className="mt-3 flex gap-2 flex-wrap">
 														{step.ingredients.map((ingredient) => (
 															<Button
-																className="text-wrap shrink-0"
+																className="text-wrap"
 																key={ingredient.id}
 																color={
 																	activeIngredientData?.id === ingredient.id

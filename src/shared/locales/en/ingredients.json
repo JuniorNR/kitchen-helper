@@ -221,5 +221,8 @@
 	"view": {
 		"table": "Table",
 		"cards": "Cards"
+	},
+	"titles": {
+		"empty_state": "Ingredient list is empty"
 	}
 }

@@ -26,7 +26,12 @@ export const SignUpModal = () => {
 	};
 	return (
 		<>
-			<Button onPress={onOpen} color="primary" variant="solid">
+			<Button
+				onPress={onOpen}
+				color="primary"
+				variant="solid"
+				className="shadow-md shadow-primary/30 hover:shadow-lg hover:shadow-primary/40 transition-shadow"
+			>
 				{tCommon('sign_up')}
 			</Button>
 			<Modal isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -43,6 +48,8 @@ export const SignUpModal = () => {
 							form={formId}
 							type="submit"
 							color="primary"
+							variant="solid"
+							className="shadow-md shadow-primary/30 hover:shadow-lg hover:shadow-primary/40 transition-shadow"
 							isLoading={isSignUpLoading}
 						>
 							{tCommon('sign_up')}

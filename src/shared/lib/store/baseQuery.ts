@@ -5,19 +5,16 @@ import {
 	fetchBaseQuery,
 } from '@reduxjs/toolkit/query';
 import Cookies from 'js-cookie';
+import { apiConfig } from '@/configs';
 import { setIsAuthenticated } from '@/features/Auth/model/auth.slice';
 
 const rawBaseQuery = fetchBaseQuery({
-	// baseUrl: process.env.NEXT_PUBLIC_PROD
-	// 	? process.env.NEXT_PUBLIC_API_URL_PROD
-	// 	: process.env.NEXT_PUBLIC_API_URL_DEV,
-	baseUrl: 'https://kitchen-helper-server-production.up.railway.app/api',
+	baseUrl: `${apiConfig.isProd ? apiConfig.APP_BACKEND_URL_PROD : apiConfig.APP_BACKEND_URL}/api`,
 	prepareHeaders: (headers) => {
 		const token = localStorage.getItem('auth_token');
 		if (token) {
 			headers.set('Authorization', `Bearer ${token}`);
 		}
-
 		headers.set('Accept', 'application/json');
 		return headers;
 	},

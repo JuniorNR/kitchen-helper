@@ -33,7 +33,7 @@ export const RecipesList = () => {
 				</div>
 			) : (
 				<div className="mt-10 rounded-2xl border border-dashed border-neutral-300 dark:border-neutral-700 p-8 text-center text-neutral-600 dark:text-neutral-400">
-					{tCommon('page_titles.recipe_list')}: {tRecipes('titles.empty_state')}
+					{tRecipes('titles.empty_state')}
 				</div>
 			)}
 		</div>

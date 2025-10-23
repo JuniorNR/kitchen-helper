@@ -1,14 +1,7 @@
 'use client';
 import { Button } from '@heroui/button';
-import {
-	Navbar,
-	NavbarBrand,
-	NavbarContent,
-	NavbarItem,
-	NavbarMenu,
-	NavbarMenuItem,
-	NavbarMenuToggle,
-} from '@heroui/navbar';
+
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@heroui/navbar';
 import { Tooltip } from '@heroui/tooltip';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
@@ -28,7 +21,6 @@ import { classNames } from '@/shared/lib/helpers';
 import { useScroll } from '@/shared/lib/hooks';
 import type { RootState } from '@/shared/lib/store';
 import { Logotype } from '@/shared/ui/icons/logotype';
-import { NAV_ITEMS } from '../model/constants';
 import { buildHeaderGradient, detectSeason } from '../model/header.utils';
 import type { HeaderProps } from '../model/types';
 import { HeaderNavItems } from './HeaderNavItems';
@@ -64,10 +56,10 @@ export const Header: FC<HeaderProps> = ({ height }) => {
 				}}
 				justify="center"
 			>
-				<NavbarItem>
+				<NavbarItem className="hidden sm:block">
 					<ThemeSwitcher />
 				</NavbarItem>
-				<NavbarItem>
+				<NavbarItem className="hidden sm:block">
 					<LanguageSwitcher />
 				</NavbarItem>
 				{isAuthenticated ? (
@@ -119,32 +111,8 @@ export const Header: FC<HeaderProps> = ({ height }) => {
 						</Link>
 					</Tooltip>
 				</NavbarBrand>
-				<NavbarContent className="hidden sm:flex gap-4" justify="center">
-					<HeaderNavItems />
-				</NavbarContent>
-				<NavbarContent className="sm:hidden" justify="end">
-					<NavbarMenuToggle
-						className="transition-transform duration-300 ease-out"
-						aria-label={
-							isMenuOpen ? tCommon('close') : tCommon('footer.navigation')
-						}
-					/>
-				</NavbarContent>
+				<HeaderNavItems />
 				{renderContent()}
-				<NavbarMenu>
-					{NAV_ITEMS.map((item) => (
-						<NavbarMenuItem key={item.href}>
-							<Link
-								prefetch
-								href={item.href}
-								className="w-full py-2 text-base transition-colors duration-300 ease-out"
-								onClick={() => setIsMenuOpen(false)}
-							>
-								{tCommon(item.labelKey)}123
-							</Link>
-						</NavbarMenuItem>
-					))}
-				</NavbarMenu>
 			</Navbar>
 		</div>
 	);

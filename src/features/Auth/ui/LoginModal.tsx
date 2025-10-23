@@ -26,7 +26,14 @@ export const LoginModal = () => {
 
 	return (
 		<>
-			<Button onPress={onOpen}>{tCommon('login')}</Button>
+			<Button
+				onPress={onOpen}
+				color="primary"
+				variant="solid"
+				className="shadow-md shadow-primary/30 hover:shadow-lg hover:shadow-primary/40 transition-shadow"
+			>
+				{tCommon('login')}
+			</Button>
 			<Modal isOpen={isOpen} onOpenChange={onOpenChange}>
 				<ModalContent>
 					<ModalHeader>
@@ -36,11 +43,20 @@ export const LoginModal = () => {
 						<LoginForm formId={formId} onSubmit={handleLogin} />
 					</ModalBody>
 					<ModalFooter>
-						<Button onPress={onOpenChange}>{tCommon('close')}</Button>
+						<Button
+							variant="bordered"
+							size="md"
+							className="border-default-300 text-foreground hover:bg-default-100"
+							onPress={onOpenChange}
+						>
+							{tCommon('close')}
+						</Button>
 						<Button
 							form={formId}
 							type="submit"
 							color="primary"
+							variant="solid"
+							className="shadow-md shadow-primary/30 hover:shadow-lg hover:shadow-primary/40 transition-shadow"
 							isLoading={isLoginLoading}
 						>
 							{tCommon('login')}

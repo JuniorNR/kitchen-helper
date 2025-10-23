@@ -12,7 +12,7 @@ export default function ingredientsPage() {
 	const { ingredients } = useIngredient();
 	const [selectedKey, setSelectedKey] = useState<Key>('/ingredient-list');
 	const [created, setCreated] = useState<boolean>(false);
-	const tabStyles = 'w-[75%] h-full flex items-center justify-center';
+	const tabStyles = 'w-[75%] flex items-center justify-center';
 
 	useEffect(() => {
 		if (created) {
@@ -20,12 +20,6 @@ export default function ingredientsPage() {
 			setCreated(false);
 		}
 	}, [created]);
-
-	useEffect(() => {
-		if (ingredients?.length === 0) {
-			setSelectedKey('/ingredient-create');
-		}
-	}, [ingredients]);
 
 	return (
 		<Tabs
@@ -46,7 +40,6 @@ export default function ingredientsPage() {
 				key="/ingredient-list"
 				title={tCommon('page_titles.ingredient_list')}
 				className={tabStyles}
-				disabled={ingredients?.length === 0}
 			>
 				<IngredientsList />
 			</Tab>

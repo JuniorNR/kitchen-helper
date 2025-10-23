@@ -21,12 +21,6 @@ export default function RecipesPage() {
 		}
 	}, [created]);
 
-	useEffect(() => {
-		if (recipes?.length === 0) {
-			setSelectedKey('/recipe-create');
-		}
-	}, [recipes]);
-
 	return (
 		<Tabs
 			variant="bordered"
@@ -46,7 +40,6 @@ export default function RecipesPage() {
 				key="/recipes-list"
 				title={tCommon('page_titles.recipe_list')}
 				className={tabStyles}
-				disabled={recipes?.length === 0}
 			>
 				<RecipesList />
 			</Tab>
