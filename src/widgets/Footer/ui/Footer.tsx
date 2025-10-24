@@ -138,7 +138,7 @@ export const Footer: FC<FooterProps> = ({ heightElement }) => {
 								<span className="sr-only">{tCommon('github')}</span>
 							</a>
 							<a
-								href="https://t.me"
+								href="https://t.me/brotherFromAnotherMother52"
 								target="_blank"
 								rel="noreferrer"
 								aria-label={tCommon('telegram')}

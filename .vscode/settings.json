@@ -1,6 +1,7 @@
 {
 	"editor.formatOnSave": true,
 	"editor.defaultFormatter": "biomejs.biome",
+	"css.customData": [".vscode/tailwind.json"],
 	"editor.codeActionsOnSave": {
 		"source.fixAll.biome": "explicit",
 		"source.organizeImports.biome": "explicit"

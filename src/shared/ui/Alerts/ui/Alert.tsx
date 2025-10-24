@@ -11,7 +11,7 @@ export const Alert: FC<AlertProps> = (props) => {
 
 	return (
 		<AlertComponent
-			className="mb-5"
+			className="mb-5 text-wrap"
 			title={title}
 			description={description}
 			onClose={() => dispatch(removeAlert(id ?? ''))}

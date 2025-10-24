@@ -14,7 +14,7 @@ export const RecipeItemStepsModalIngredientCard: FC<
 	const { t: tIngredients } = useTranslation('ingredients');
 
 	return (
-		<Card className="mt-3 rounded-2xl border border-neutral-200 dark:border-neutral-700 bg-gradient-to-br from-white to-neutral-50/80 dark:from-neutral-900 dark:to-neutral-900/60 shadow-medium">
+		<Card className="rounded-2xl border border-neutral-200 dark:border-neutral-700 bg-gradient-to-br from-white to-neutral-50/80 dark:from-neutral-900 dark:to-neutral-900/60 shadow-medium">
 			<CardHeader className="flex items-start justify-between gap-3 px-4 pt-4 pb-0">
 				<h3 className="text-xl font-semibold leading-tight">
 					{ingredient.title}

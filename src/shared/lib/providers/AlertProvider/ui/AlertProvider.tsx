@@ -9,7 +9,11 @@ export const AlertProvider: FC<AlertProviderProps> = ({ children }) => {
 	return (
 		<>
 			{children}
-			<Alerts alerts={alerts} autoCloseMS={5000} />
+			<Alerts
+				className="max-[520px]:hidden"
+				alerts={alerts}
+				autoCloseMS={5000}
+			/>
 		</>
 	);
 };

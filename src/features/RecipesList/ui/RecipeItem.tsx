@@ -33,7 +33,7 @@ export const RecipeItem: FC<RecipeItemProps> = ({ recipe }) => {
 	};
 
 	return (
-		<div className="relative rounded-2xl border w-full border-neutral-200 dark:border-neutral-800 bg-gradient-to-br from-white to-neutral-50/70 dark:from-neutral-900 dark:to-neutral-950 shadow-sm hover:shadow-md transition-shadow duration-200 p-3 sm:p-4 focus-within:ring-2 focus-within:ring-primary-500">
+		<div className="relative rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-gradient-to-br from-white to-neutral-50/70 dark:from-neutral-900 dark:to-neutral-950 shadow-sm hover:shadow-md transition-shadow duration-200 p-3 sm:p-4 focus-within:ring-2 focus-within:ring-primary-500">
 			<div className="flex flex-col h-full">
 				<div>
 					<h3 className="text-lg font-bold text-center mb-2 overflow-hidden line-clamp-2">

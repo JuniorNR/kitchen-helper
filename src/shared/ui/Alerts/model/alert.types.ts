@@ -1,6 +1,7 @@
 export interface AlertsProps {
 	alerts: AlertType[];
 	autoCloseMS?: number;
+	className?: string;
 }
 
 export interface AlertType {

@@ -26,7 +26,7 @@ export const RecipesList = () => {
 					))}
 				</div>
 			) : recipes && recipes.length > 0 ? (
-				<div className={classNames(styles.recipeList)}>
+				<div className={`${styles.recipeList} justify-center lg:justify-start`}>
 					{recipes.map((recipe) => (
 						<RecipeItem key={recipe.id} recipe={recipe} />
 					))}

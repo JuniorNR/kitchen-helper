@@ -197,7 +197,7 @@ export const RecipeItemStepsModal: FC<RecipeItemStepsModalProps> = ({
 										onClose={() => setActiveIngredientData(null)}
 									/>
 								) : (
-									<div className="text-center p-1 mt-1 h-full min-h-40 rounded-2xl border border-dashed border-neutral-300 dark:border-neutral-700 flex items-center justify-center text-sm text-neutral-500 dark:text-neutral-400">
+									<div className="text-center p-1 h-full min-h-40 rounded-2xl border border-dashed border-neutral-300 dark:border-neutral-700 flex items-center justify-center text-sm text-neutral-500 dark:text-neutral-400">
 										{tRecipes('titles.select_ingredient_to_see_details')}
 									</div>
 								)}

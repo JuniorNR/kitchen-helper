@@ -8,7 +8,7 @@ import { removeAlert } from '@/features/Alert';
 import type { AlertsProps } from '../model/alert.types';
 import { Alert } from './Alert';
 
-export const Alerts: FC<AlertsProps> = ({ alerts, autoCloseMS }) => {
+export const Alerts: FC<AlertsProps> = ({ alerts, autoCloseMS, className }) => {
 	const { t: tAlerts } = useTranslation('alerts');
 	const timeoutsRef = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
 	const dispatch = useDispatch();
@@ -47,7 +47,9 @@ export const Alerts: FC<AlertsProps> = ({ alerts, autoCloseMS }) => {
 	}, []);
 
 	return (
-		<div className="fixed bottom-10 right-15 w-[400px] z-100 transition-all duration-300">
+		<div
+			className={`fixed bottom-10 right-15 w-[400px] z-100 transition-all duration-300 ${className}`}
+		>
 			<AnimatePresence initial={false}>
 				{alerts.map((alert) => (
 					<motion.div
