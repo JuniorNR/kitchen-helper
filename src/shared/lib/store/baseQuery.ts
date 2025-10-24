@@ -4,7 +4,6 @@ import {
 	type FetchBaseQueryError,
 	fetchBaseQuery,
 } from '@reduxjs/toolkit/query';
-import Cookies from 'js-cookie';
 import { apiConfig } from '@/configs';
 import { setIsAuthenticated } from '@/features/Auth/model/auth.slice';
 
@@ -31,7 +30,6 @@ export const baseQuery: BaseQueryFn<
 	if (error?.status === 401) {
 		api.dispatch(setIsAuthenticated(false));
 		localStorage.removeItem('auth_token');
-		Cookies.remove('auth_token', { path: '/' });
 	}
 
 	return result;

@@ -36,7 +36,7 @@ export const SignUpModal = () => {
 			</Button>
 			<Modal isOpen={isOpen} onOpenChange={onOpenChange}>
 				<ModalContent>
-					<ModalHeader className="cursor-pointer">
+					<ModalHeader>
 						<h2 className="text-2xl font-bold">{tCommon('sign_up')}</h2>
 					</ModalHeader>
 					<ModalBody>

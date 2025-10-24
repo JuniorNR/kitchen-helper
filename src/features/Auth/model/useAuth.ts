@@ -1,22 +1,18 @@
 'use client';
-import Cookies from 'js-cookie';
-import { useDispatch } from 'react-redux';
 import { userApi } from '@/entities/user/model/user.api';
 import { addAlert } from '@/features/Alert';
+import { useAppDispatch } from '@/shared/lib/store';
+import { isApiErrorResponse } from '@/shared/lib/types';
 import {
 	useLoginMutation,
 	useLogoutMutation,
 	useSignUpMutation,
 } from './auth.api';
 import { setIsAuthenticated } from './auth.slice';
-import type {
-	AuthResponseError,
-	LoginFormData,
-	SignUpFormData,
-} from './auth.types';
+import type { LoginFormData, SignUpFormData } from './auth.types';
 
 export const useAuth = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const [signUp, { isLoading: isSignUpLoading }] = useSignUpMutation();
 	const [login, { isLoading: isLoginLoading }] = useLoginMutation();
 	const [logout, { isLoading: isLogoutLoading }] = useLogoutMutation();
@@ -26,11 +22,6 @@ export const useAuth = () => {
 			const { data, code } = await signUp(dataToSend).unwrap();
 			if (data.token) {
 				localStorage.setItem('auth_token', data.token);
-				Cookies.set('auth_token', data.token, {
-					expires: 2,
-					path: '/',
-					sameSite: 'Lax',
-				});
 			}
 			dispatch(setIsAuthenticated(true));
 			dispatch(
@@ -52,11 +43,6 @@ export const useAuth = () => {
 			const { data, code } = await login(dataToSend).unwrap();
 			if (data.token) {
 				localStorage.setItem('auth_token', data.token);
-				Cookies.set('auth_token', data.token, {
-					expires: 2,
-					path: '/',
-					sameSite: 'Lax',
-				});
 			}
 			dispatch(setIsAuthenticated(true));
 			dispatch(
@@ -71,14 +57,16 @@ export const useAuth = () => {
 				user: data.user,
 				code,
 			};
-		} catch (error) {
-			const { data } = error as AuthResponseError;
+		} catch (error: unknown) {
+			const code = isApiErrorResponse(error)
+				? error.data.code
+				: 'UNKNOWN_ERROR';
 			dispatch(
 				addAlert({
 					id: crypto.randomUUID(),
 					status: 'danger',
 					title: 'Error',
-					description: data.code,
+					description: code,
 				}),
 			);
 		}
@@ -88,7 +76,6 @@ export const useAuth = () => {
 		try {
 			const { code } = await logout().unwrap();
 			localStorage.removeItem('auth_token');
-			Cookies.remove('auth_token', { path: '/' });
 			dispatch(setIsAuthenticated(false));
 			dispatch(userApi.util.invalidateTags(['User']));
 			dispatch(

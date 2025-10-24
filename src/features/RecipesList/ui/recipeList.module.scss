@@ -1,23 +1,21 @@
 .recipeList {
-  @apply grid m-[0_auto];
-  grid-template-columns: repeat(4, minmax(250px, 1fr));
-  grid-gap: 1rem;
+  @apply grid gap-[1rem] m-[0_auto] grid-cols-[repeat(4,minmax(250px,1fr))];
 }
 
 @media (max-width: 1400px) {
   .recipeList {
-    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    @apply grid-cols-[repeat(3,minmax(250px,1fr))];
   }
 }
 
 @media (max-width: 900px) {
   .recipeList {
-    grid-template-columns: repeat(2, minmax(250px, 1fr));
+    @apply grid-cols-[repeat(2,minmax(250px,1fr))];
   }
 }
 
 @media (max-width: 600px) {
   .recipeList {
-    grid-template-columns: minmax(250px, 1fr);
+    @apply grid-cols-[minmax(250px,1fr)];
   }
 }

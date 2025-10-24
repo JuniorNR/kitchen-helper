@@ -1,6 +1,7 @@
-import { useDispatch } from 'react-redux';
 import { addAlert } from '@/features/Alert';
 import type { RecipeCreateFormInputType } from '@/features/RecipeCreate/model/recipeCreate.schema';
+import { useAppDispatch } from '@/shared/lib/store';
+import { isApiErrorResponse } from '@/shared/lib/types';
 import {
 	useCreateRecipeMutation,
 	useDeleteRecipeMutation,
@@ -11,25 +12,35 @@ export const useRecipe = () => {
 	const { data, isLoading, error } = useGetRecipesQuery();
 	const [createRecipe, { isLoading: isCreating }] = useCreateRecipeMutation();
 	const [deleteRecipe, { isLoading: isDeleting }] = useDeleteRecipeMutation();
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const createRecipeData = async (data: RecipeCreateFormInputType) => {
 		try {
-			const result = await createRecipe(data);
-			if (result.data?.recipe) {
+			const result = await createRecipe(data).unwrap();
+			if (result.recipe) {
 				dispatch(
 					addAlert({
 						id: crypto.randomUUID(),
 						status: 'success',
 						title: 'Success',
-						description: result.data?.code,
+						description: result.code,
 					}),
 				);
-				return result.data.recipe;
+				return result.recipe;
 			} else {
+				dispatch(
+					addAlert({
+						id: crypto.randomUUID(),
+						status: 'danger',
+						title: 'Error',
+						description: result.code,
+					}),
+				);
 				return null;
 			}
-		} catch (error) {
-			const code = (error as { data: { code: string } }).data?.code;
+		} catch (error: unknown) {
+			const code = isApiErrorResponse(error)
+				? error.data.code
+				: 'UNKNOWN_ERROR';
 			dispatch(
 				addAlert({
 					id: crypto.randomUUID(),

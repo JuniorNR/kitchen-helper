@@ -45,11 +45,13 @@ export const HeaderNavItems = () => {
 							>
 								<Link
 									prefetch
-									href={item.href}
+									href={item.href === '/market' ? '' : item.href} // TODO: remove this after market is implemented
 									className="p-2 block"
 									aria-current={isActive ? 'page' : undefined}
 								>
 									{tCommon(item.labelKey)}
+									{item.href === '/market' ? ' (work in progress)' : ''}
+									{/* // TODO: remove this after market is implemented */}
 								</Link>
 							</DropdownItem>
 						);
@@ -85,7 +87,7 @@ export const HeaderNavItems = () => {
 									],
 								)}
 							>
-								{tCommon(item.labelKey)}{' '}
+								{tCommon(item.labelKey)}
 								{item.href === '/market' ? ' (work in progress)' : ''}
 								{/* // TODO: remove this after market is implemented */}
 							</Link>
