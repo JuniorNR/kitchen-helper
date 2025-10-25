@@ -52,7 +52,10 @@ export const UserSettings = () => {
 	};
 
 	const onSubmit = async (data: UserSettingsFormData) => {
-		await updateUserData(data);
+		const isDisabled = true; // TODO: remove later
+		if (!isDisabled) {
+			await updateUserData(data);
+		}
 	};
 	if (isUserLoading) {
 		return <UserSettingsSkeleton />;
@@ -135,6 +138,7 @@ export const UserSettings = () => {
 									color="primary"
 									startContent={<CheckIcon />}
 									isLoading={isUpdateUserLoading}
+									disabled
 								>
 									{tCommon('save')}
 								</Button>

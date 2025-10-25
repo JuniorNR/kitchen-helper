@@ -34,7 +34,6 @@ export const RecipeItem: FC<RecipeItemProps> = ({ recipe }) => {
 	};
 
 	const renderImages = () => {
-		console.debug(recipe.images.length);
 		if (recipe.images.length) {
 			return recipe.images.map((image) => (
 				<SwiperSlide
