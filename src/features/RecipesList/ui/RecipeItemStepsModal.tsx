@@ -131,7 +131,7 @@ export const RecipeItemStepsModal: FC<RecipeItemStepsModalProps> = ({
 												}
 											>
 												<div className="flex items-center justify-between gap-3">
-													<Typography component="h3" tooltip maxLength={25}>
+													<Typography component="h3" tooltip lineClamp={1}>
 														{tCommon('fields.step')} {String(step.order)} — «
 														{step.title}»
 													</Typography>
@@ -157,7 +157,7 @@ export const RecipeItemStepsModal: FC<RecipeItemStepsModalProps> = ({
 														</Button>
 													</div>
 												</div>
-												<Typography tooltip maxLength={75}>
+												<Typography hideLargeText>
 													{step.description}
 												</Typography>
 												{step.ingredients?.length ? (

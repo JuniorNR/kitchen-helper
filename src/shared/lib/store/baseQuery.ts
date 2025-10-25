@@ -10,7 +10,16 @@ import { setIsAuthenticated } from '@/features/Auth/model/auth.slice';
 const rawBaseQuery = fetchBaseQuery({
 	baseUrl: `${apiConfig.isProd ? apiConfig.APP_BACKEND_URL_PROD : apiConfig.APP_BACKEND_URL}/api`,
 	prepareHeaders: (headers) => {
-		const token = localStorage.getItem('auth_token');
+		const token =
+			typeof window !== 'undefined'
+				? (() => {
+						try {
+							return localStorage.getItem('auth_token');
+						} catch {
+							return null;
+						}
+					})()
+				: null;
 		if (token) {
 			headers.set('Authorization', `Bearer ${token}`);
 		}
@@ -29,7 +38,11 @@ export const baseQuery: BaseQueryFn<
 	const error = (result as { error?: FetchBaseQueryError }).error;
 	if (error?.status === 401) {
 		api.dispatch(setIsAuthenticated(false));
-		localStorage.removeItem('auth_token');
+		if (typeof window !== 'undefined') {
+			try {
+				localStorage.removeItem('auth_token');
+			} catch {}
+		}
 	}
 
 	return result;

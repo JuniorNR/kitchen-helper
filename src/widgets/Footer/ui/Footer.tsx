@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { LanguageSwitcher, ThemeSwitcher } from '@/features';
 import { GithubIcon } from '@/shared/ui/icons/githubIcon';
 import { TelegramIcon } from '@/shared/ui/icons/telegramIcon';
 import type { FooterProps } from '../model/footer.types';

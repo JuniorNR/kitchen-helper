@@ -216,7 +216,8 @@
 	"rations": {
 		"breakfast": "Breakfast",
 		"lunch": "Lunch",
-		"dinner": "Dinner"
+		"dinner": "Dinner",
+		"snack": "Snack"
 	},
 	"view": {
 		"table": "Table",

@@ -8,7 +8,7 @@ import { Input } from '@heroui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { format } from 'date-fns';
 import { enUS, ru } from 'date-fns/locale';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useUser } from '@/entities';

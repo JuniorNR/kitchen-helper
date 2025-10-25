@@ -170,9 +170,12 @@ export const IngredientCard: FC<IngredientCardProps> = ({
 						{tIngredients('table.createdAt')}
 					</p>
 					<div className="mt-1 text-sm">
-						{format(new Date(ingredient.createdAt), 'dd.MM.yyyy HH:mm', {
-							locale: ru,
-						})}
+						{(() => {
+							const date = new Date(ingredient.createdAt);
+							return Number.isNaN(date.getTime())
+								? '-'
+								: format(date, 'dd.MM.yyyy HH:mm', { locale: ru });
+						})()}
 					</div>
 				</div>
 				<div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/40 px-3 py-2">

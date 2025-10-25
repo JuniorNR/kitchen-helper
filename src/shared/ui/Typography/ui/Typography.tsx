@@ -1,6 +1,7 @@
 import { Tooltip } from '@heroui/tooltip';
 import type { FC } from 'react';
 import type { TypographyProps } from '../model/typography.types';
+import styles from './typography.module.scss';
 
 export const Typography: FC<TypographyProps> = ({
 	children,
@@ -8,7 +9,11 @@ export const Typography: FC<TypographyProps> = ({
 	className = '',
 	tooltip = false,
 	maxLength = null,
+	lineClamp = null,
+	hideLargeText = false,
 }) => {
+	const isShowLargeText = hideLargeText && !tooltip ? styles.clampIsShow : '';
+	const lineClampClass = lineClamp ? `line-clamp-${lineClamp}` : '';
 	const renderComponent = (
 		children: TypographyProps['children'],
 		type: TypographyProps['component'],
@@ -73,7 +78,7 @@ export const Typography: FC<TypographyProps> = ({
 		}
 	};
 	return (
-		<div className={`${className}`}>
+		<div className={`${className} ${isShowLargeText} ${lineClampClass}`}>
 			{tooltip ? (
 				<Tooltip content={children} closeDelay={0} delay={1000}>
 					{renderComponent(children, component)}

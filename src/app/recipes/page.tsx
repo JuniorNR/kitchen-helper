@@ -3,13 +3,11 @@
 import { Tab, Tabs } from '@heroui/tabs';
 import { type Key, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useRecipe } from '@/entities';
 
 import { RecipeCreate, RecipesList } from '@/features';
 
 export default function RecipesPage() {
 	const { t: tCommon } = useTranslation('common');
-	const { recipes } = useRecipe();
 	const [selectedKey, setSelectedKey] = useState<Key>('/recipes-list');
 	const [created, setCreated] = useState<boolean>(false);
 	const tabStyles = 'w-[75%] flex items-center justify-center';

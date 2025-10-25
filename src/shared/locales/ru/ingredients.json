@@ -216,7 +216,8 @@
 	"rations": {
 		"breakfast": "Завтрак",
 		"lunch": "Обед",
-		"dinner": "Ужин"
+		"dinner": "Ужин",
+		"snack": "Перекус"
 	},
 	"view": {
 		"table": "Таблица",

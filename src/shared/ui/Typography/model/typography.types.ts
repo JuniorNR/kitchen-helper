@@ -4,4 +4,6 @@ export type TypographyProps = {
 	className?: string;
 	component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'p';
 	maxLength?: number | null;
+	hideLargeText?: boolean;
+	lineClamp?: number | null;
 };

@@ -1,0 +1,43 @@
+@property --fade-start {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 65%;
+}
+
+@property --fade-end {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 95%;
+}
+
+.clampIsShow {
+  overflow: hidden;
+  line-height: 1.4;
+  max-height: calc(2 * 1lh);
+  transition: max-height .5s ease, --fade-start .5s ease, --fade-end .5s ease;
+  transition-delay: 1s;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 var(--fade-start),
+    rgba(0, 0, 0, 0) var(--fade-end)
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 var(--fade-start),
+    transparent var(--fade-end)
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  &:hover {
+    transition-delay: 1s;
+    max-height: calc(10 * 1lh);
+    --fade-start: 100%;
+    --fade-end: 100%;
+  }
+}
+
+ 

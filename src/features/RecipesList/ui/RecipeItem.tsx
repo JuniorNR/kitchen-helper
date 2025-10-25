@@ -7,6 +7,7 @@ import { SwiperSlide } from 'swiper/react';
 import { useRecipe } from '@/entities';
 import { ImageSRC } from '@/features';
 import { DeleteButton, Slider, Typography } from '@/shared/ui';
+import fallbackImg from '@/shared/ui/images/default.jpg';
 import type { RecipeItemProps } from '../model/recipeList.types';
 import { RecipeItemStepsModal } from './RecipeItemStepsModal';
 
@@ -32,6 +33,54 @@ export const RecipeItem: FC<RecipeItemProps> = ({ recipe }) => {
 		await deleteRecipe(recipe.id.toString());
 	};
 
+	const renderImages = () => {
+		console.debug(recipe.images.length);
+		if (recipe.images.length) {
+			return recipe.images.map((image) => (
+				<SwiperSlide
+					key={image.path}
+					onClick={() => setIsOpen((prev) => !prev)}
+				>
+					<div className="relative w-full aspect-square overflow-hidden rounded-md">
+						<div className="absolute left-3 top-3 z-10 flex gap-1">
+							<span className="rounded-full bg-neutral-900/70 text-white text-xs px-2 py-0.5 backdrop-blur">
+								{tIngredients(`rations.${recipe.ration}`)}
+							</span>
+							<span className="rounded-full bg-primary-600/80 text-white text-xs px-2 py-0.5 backdrop-blur">
+								{tRecipes(`labels.${recipe.type}`)}
+							</span>
+						</div>
+						<ImageSRC
+							src={image.path}
+							alt={image.path}
+							fill
+							className="object-cover"
+						/>
+					</div>
+				</SwiperSlide>
+			));
+		}
+		return (
+			<div className="relative w-full aspect-square overflow-hidden rounded-md">
+				<div className="absolute left-3 top-3 z-10 flex gap-1">
+					<span className="rounded-full bg-neutral-900/70 text-white text-xs px-2 py-0.5 backdrop-blur">
+						{tIngredients(`rations.${recipe.ration}`)}
+					</span>
+					<span className="rounded-full bg-primary-600/80 text-white text-xs px-2 py-0.5 backdrop-blur">
+						{tRecipes(`labels.${recipe.type}`)}
+					</span>
+				</div>
+				<ImageSRC
+					alt="fallback photo"
+					src={fallbackImg.src}
+					default
+					fill
+					className="object-cover"
+				/>
+			</div>
+		);
+	};
+
 	return (
 		<div className="relative rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-gradient-to-br from-white to-neutral-50/70 dark:from-neutral-900 dark:to-neutral-950 shadow-sm hover:shadow-md transition-shadow duration-200 p-3 sm:p-4 focus-within:ring-2 focus-within:ring-primary-500">
 			<div className="flex flex-col h-full">
@@ -47,29 +96,7 @@ export const RecipeItem: FC<RecipeItemProps> = ({ recipe }) => {
 						effect="cards"
 						isOpen={isOpen}
 					>
-						{recipe.images.map((image) => (
-							<SwiperSlide
-								key={image.path}
-								onClick={() => setIsOpen((prev) => !prev)}
-							>
-								<div className="relative w-full aspect-square overflow-hidden rounded-md">
-									<div className="absolute left-3 top-3 z-10 flex gap-1">
-										<span className="rounded-full bg-neutral-900/70 text-white text-xs px-2 py-0.5 backdrop-blur">
-											{tIngredients(`rations.${recipe.ration}`)}
-										</span>
-										<span className="rounded-full bg-primary-600/80 text-white text-xs px-2 py-0.5 backdrop-blur">
-											{tRecipes(`labels.${recipe.type}`)}
-										</span>
-									</div>
-									<ImageSRC
-										src={image.path}
-										alt={image.path}
-										fill
-										className="object-cover"
-									/>
-								</div>
-							</SwiperSlide>
-						))}
+						{renderImages()}
 					</Slider>
 					<Typography
 						className="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-1 mt-2"
