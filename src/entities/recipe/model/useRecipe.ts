@@ -1,7 +1,6 @@
+import { useDispatch } from 'react-redux';
 import { addAlert } from '@/features/Alert';
 import type { RecipeCreateFormInputType } from '@/features/RecipeCreate/model/recipeCreate.schema';
-import { useAppDispatch } from '@/shared/lib/store';
-import { isApiErrorResponse } from '@/shared/lib/types';
 import {
 	useCreateRecipeMutation,
 	useDeleteRecipeMutation,
@@ -12,7 +11,7 @@ export const useRecipe = () => {
 	const { data, isLoading, error } = useGetRecipesQuery();
 	const [createRecipe, { isLoading: isCreating }] = useCreateRecipeMutation();
 	const [deleteRecipe, { isLoading: isDeleting }] = useDeleteRecipeMutation();
-	const dispatch = useAppDispatch();
+	const dispatch = useDispatch();
 	const createRecipeData = async (data: RecipeCreateFormInputType) => {
 		try {
 			const result = await createRecipe(data).unwrap();
@@ -37,10 +36,8 @@ export const useRecipe = () => {
 				);
 				return null;
 			}
-		} catch (error: unknown) {
-			const code = isApiErrorResponse(error)
-				? error.data.code
-				: 'UNKNOWN_ERROR';
+		} catch (error) {
+			const code = (error as { data: { code: string } }).data?.code;
 			dispatch(
 				addAlert({
 					id: crypto.randomUUID(),

@@ -1,18 +1,21 @@
 'use client';
+import { useDispatch } from 'react-redux';
 import { userApi } from '@/entities/user/model/user.api';
 import { addAlert } from '@/features/Alert';
-import { useAppDispatch } from '@/shared/lib/store';
-import { isApiErrorResponse } from '@/shared/lib/types';
 import {
 	useLoginMutation,
 	useLogoutMutation,
 	useSignUpMutation,
 } from './auth.api';
 import { setIsAuthenticated } from './auth.slice';
-import type { LoginFormData, SignUpFormData } from './auth.types';
+import type {
+	AuthResponseError,
+	LoginFormData,
+	SignUpFormData,
+} from './auth.types';
 
 export const useAuth = () => {
-	const dispatch = useAppDispatch();
+	const dispatch = useDispatch();
 	const [signUp, { isLoading: isSignUpLoading }] = useSignUpMutation();
 	const [login, { isLoading: isLoginLoading }] = useLoginMutation();
 	const [logout, { isLoading: isLogoutLoading }] = useLogoutMutation();
@@ -57,16 +60,14 @@ export const useAuth = () => {
 				user: data.user,
 				code,
 			};
-		} catch (error: unknown) {
-			const code = isApiErrorResponse(error)
-				? error.data.code
-				: 'UNKNOWN_ERROR';
+		} catch (error) {
+			const { data } = error as AuthResponseError;
 			dispatch(
 				addAlert({
 					id: crypto.randomUUID(),
 					status: 'danger',
 					title: 'Error',
-					description: code,
+					description: data.code,
 				}),
 			);
 		}

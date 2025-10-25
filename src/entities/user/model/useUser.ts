@@ -1,10 +1,10 @@
+import { useDispatch } from 'react-redux';
 import { addAlert } from '@/features/Alert/model/alert.slice';
 import type { UserSettingsFormData } from '@/features/UserSettings';
-import { useAppDispatch } from '@/shared/lib/store';
 import { useGetUserQuery, useUpdateUserMutation } from './user.api';
 
 export const useUser = () => {
-	const dispatch = useAppDispatch();
+	const dispatch = useDispatch();
 	const { data: user, isLoading: isUserLoading } = useGetUserQuery();
 	const [updateUser, { isLoading: isUpdateUserLoading }] =
 		useUpdateUserMutation();

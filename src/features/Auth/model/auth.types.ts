@@ -39,4 +39,11 @@ export interface AuthResponseDTO {
 	token: string;
 }
 
-// Удалено в пользу универсального ApiErrorResponse
+export interface AuthResponseError {
+	data: {
+		user: null;
+		token: null;
+		code: string;
+	};
+	status: number;
+}

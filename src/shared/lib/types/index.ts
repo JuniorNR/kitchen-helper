@@ -1,2 +1,1 @@
-export type { ApiErrorResponse, ApiResponse } from './api.types';
-export { isApiErrorResponse } from './api.types';
+export type { ApiResponse } from './api.types';
