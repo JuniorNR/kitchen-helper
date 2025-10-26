@@ -40,7 +40,7 @@ export const RecipeCreateStepIngredients: FC<
 				{fields?.map((ingredientField, ingredientIndex) => (
 					<motion.div
 						key={ingredientField.id}
-						className="flex gap-2 items-end"
+						className="flex gap-2 items-end md:flex-row flex-col"
 						initial={{ opacity: 0, x: -50 }}
 						animate={{ opacity: 1, x: 0 }}
 						exit={{ opacity: 0, x: 50 }}
@@ -51,7 +51,7 @@ export const RecipeCreateStepIngredients: FC<
 							name={`steps.${stepIndex}.ingredients.${ingredientIndex}.id`}
 							render={({ fieldState, field }) => (
 								<Select
-									className="w-[40%] min-w-[180px]"
+									className="md:w-[40%] w-full min-w-[180px]"
 									label={tFields('ingredient')}
 									isInvalid={fieldState.invalid}
 									errorMessage={fieldState.error?.message}
@@ -83,7 +83,7 @@ export const RecipeCreateStepIngredients: FC<
 						/>
 
 						<DeleteButton
-							className="h-full w-full"
+							className="h-full w-full md:w-auto"
 							size="lg"
 							onPress={() => remove(ingredientIndex)}
 						/>

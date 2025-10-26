@@ -13,14 +13,12 @@ import { NumberInput } from '@heroui/number-input';
 import { Select, SelectItem } from '@heroui/select';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AnimatePresence, motion } from 'framer-motion';
-import type { FC } from 'react';
+import { type FC, useRef, useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useRecipe } from '@/entities';
 import { classNames } from '@/shared/lib/helpers/classNames';
-import { DeleteButton } from '@/shared/ui';
 import { CheckIcon } from '@/shared/ui/icons/checkIcon';
-import { DragIcon } from '@/shared/ui/icons/dragIcon';
 import { PlusIcon } from '@/shared/ui/icons/plusIcon';
 import {
 	createRecipeCreateSchema,
@@ -29,7 +27,7 @@ import {
 import type { RecipeCreateProps } from '../model/recipeCreate.types';
 import { getGroupedOptions } from '../model/recipeCreate.utils';
 import { RecipeCreateImages } from './RecipeCreateImages';
-import { RecipeCreateStepIngredients } from './RecipeCreateStepIngredients';
+import { RecipeCreateStepCard } from './RecipeCreateStepCard';
 import styles from './recipeCreate.module.scss';
 
 export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
@@ -93,6 +91,8 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 			order: newOrder,
 		});
 	};
+
+	const stepsContainerRef = useRef<HTMLDivElement>(null);
 
 	return (
 		<div className="w-full max-w-4xl mx-auto">
@@ -340,101 +340,20 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 							{tFields('add_step')}
 						</Button>
 						<div
+							ref={stepsContainerRef}
 							className={classNames(styles.scrollXGradient, {}, [
-								'flex gap-4 w-full p-2',
+								'flex w-full py-2 px-0 xl:px-2 overflow-x-auto flex-row gap-4 snap-x snap-mandatory scroll-smooth',
 							])}
 						>
 							<AnimatePresence initial={true}>
-								{stepFields.map((stepField, index) => {
-									return (
-										<motion.div
-											key={stepField.id}
-											className="bg-content1 border border-default-200 rounded-medium p-3 flex min-w-[420px] max-w-[420px] h-[470px] max-h-[470px] flex-col gap-3"
-											initial={{ opacity: 0, y: -150 }}
-											animate={{ opacity: 1, y: 0 }}
-											exit={{ opacity: 0, y: 150 }}
-											transition={{ duration: 0.3, ease: 'backIn' }}
-										>
-											<h3 className="text-lg font-bold">
-												{tFields('step')} {index + 1}
-											</h3>
-											<div
-												className={classNames(styles.scrollYGradient, {}, [
-													'flex-col gap-3 flex-grow flex overflow-x-hidden',
-												])}
-											>
-												<Controller
-													control={control}
-													name={`steps.${index}.title`}
-													render={({ field, fieldState }) => (
-														<Input
-															label={tFields('title')}
-															size="lg"
-															isRequired
-															isInvalid={fieldState.invalid}
-															errorMessage={fieldState.error?.message}
-															{...field}
-														/>
-													)}
-												/>
-												<Controller
-													control={control}
-													name={`steps.${index}.description`}
-													render={({ field, fieldState }) => (
-														<Textarea
-															label={tFields('description')}
-															size="lg"
-															minRows={3}
-															isRequired
-															isInvalid={fieldState.invalid}
-															errorMessage={fieldState.error?.message}
-															{...field}
-														/>
-													)}
-												/>
-												<Controller
-													control={control}
-													name={`steps.${index}.duration`}
-													render={({ field, fieldState }) => (
-														<NumberInput
-															label={tFields('duration_minutes')}
-															size="lg"
-															isRequired
-															isInvalid={fieldState.invalid}
-															errorMessage={fieldState.error?.message}
-															min={0}
-															step={1}
-															{...field}
-														/>
-													)}
-												/>
-
-												<RecipeCreateStepIngredients
-													control={control}
-													stepIndex={index}
-												/>
-											</div>
-											<div className="flex items-center justify-between">
-												<Button
-													type="button"
-													variant="faded"
-													className="cursor-grab"
-												>
-													<DragIcon />
-													{index + 1}
-												</Button>
-												<DeleteButton
-													ariaLabel={tCommon('delete')}
-													label={tCommon('delete')}
-													isDisabled={stepFields.length <= 1}
-													onPress={() => {
-														removeStep(index);
-													}}
-												/>
-											</div>
-										</motion.div>
-									);
-								})}
+								{stepFields.map((stepField, index) => (
+									<RecipeCreateStepCard
+										key={stepField.id}
+										stepIndex={index}
+										control={control}
+										onRemove={() => removeStep(index)}
+									/>
+								))}
 							</AnimatePresence>
 						</div>
 						<Button

@@ -13,3 +13,9 @@ export interface RecipeCreateStepIngredientsProps {
 export interface RecipeCreateImagesProps {
 	control: Control<RecipeCreateFormInputType>;
 }
+
+export interface RecipeCreateStepCardProps {
+	stepIndex: number;
+	control: Control<RecipeCreateFormInputType>;
+	onRemove: () => void;
+}
