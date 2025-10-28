@@ -5,8 +5,8 @@ import {
 	useGetIngredientsQuery,
 } from './ingredient.api';
 
-export const useIngredient = () => {
-	const { data: ingredients, isLoading, error } = useGetIngredientsQuery();
+export const useIngredient = (page?: number) => {
+	const { data, isLoading, error } = useGetIngredientsQuery(page);
 	const [deleteIngredient, { isLoading: isDeleteIngredientLoading }] =
 		useDeleteIngredientMutation();
 	const [createIngredient, { isLoading: isCreateIngredientLoading }] =
@@ -35,7 +35,8 @@ export const useIngredient = () => {
 	};
 
 	return {
-		ingredients,
+		ingredients: data?.data,
+		pagination: data?.pagination,
 		isLoading,
 		error,
 		createIngredientData,

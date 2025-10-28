@@ -2,7 +2,11 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import type { IngredientCreateFormDataType } from '@/features/ingredientCreate/model/IngredientCreate.schema';
 import { dto } from '@/shared/lib/helpers/dto';
 import { baseQuery } from '@/shared/lib/store/baseQuery';
-import type { ApiResponse } from '@/shared/lib/types/api.types';
+import type {
+	ApiResponse,
+	ApiResponsePagination,
+	ApiResponsePaginationDTO,
+} from '@/shared/lib/types/api.types';
 import type { Ingredient, IngredientDTO } from './ingredient.types';
 
 export const ingredientApi = createApi({
@@ -10,10 +14,25 @@ export const ingredientApi = createApi({
 	baseQuery,
 	tagTypes: ['Ingredients'],
 	endpoints: (builder) => ({
-		getIngredients: builder.query<Ingredient[], void>({
-			query: () => '/ingredients',
-			transformResponse: (response: ApiResponse<IngredientDTO[]>) => {
-				return dto<IngredientDTO[], Ingredient[]>('toClient', response.data);
+		getIngredients: builder.query<
+			ApiResponse<Ingredient[], ApiResponsePagination>,
+			number | undefined
+		>({
+			query: (page) => ({
+				url: '/ingredients',
+				params: { page },
+			}),
+			transformResponse: (
+				response: ApiResponse<IngredientDTO[], ApiResponsePaginationDTO>,
+			) => {
+				return {
+					data: dto<IngredientDTO[], Ingredient[]>('toClient', response.data),
+					pagination: dto<ApiResponsePaginationDTO, ApiResponsePagination>(
+						'toClient',
+						response.pagination,
+					),
+					code: response.code,
+				};
 			},
 			providesTags: ['Ingredients'],
 		}),

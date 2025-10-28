@@ -81,39 +81,3 @@ export interface RecipeDTO {
 	created_at: string;
 	updated_at: string;
 }
-
-// {
-//   "title": "Омлет",
-//   "description": "Классический",
-//   "price_of_dish": 150,
-//   "price_to_buy": 120,
-//   "calories": 300,
-//   "fats": 20,
-//   "proteins": 18,
-//   "carbohydrates": 5,
-//   "ration": "breakfast",
-//   "type": "main",
-//   "steps": [
-//     {
-//       "title": "Подготовка",
-//       "description": "Взбить яйца",
-//       "order": 1,
-//       "duration": "5m",
-//       "ingredients": [
-//         { "id": 1, "amount": 2.0 }
-//       ]
-//     },
-//     {
-//       "title": "Жарка",
-//       "description": "Обжарить на сковороде",
-//       "order": 2,
-//       "duration": "7m",
-//       "ingredients": [
-//         { "id": 2, "amount": 10.0 }
-//       ]
-//     }
-//   ],
-//   "images": [
-//     { "path": "/storage/public/recipes/1.jpg", "is_main": true, "position": 0 }
-//   ]
-// }

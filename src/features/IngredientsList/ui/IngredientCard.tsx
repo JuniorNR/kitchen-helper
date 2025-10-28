@@ -136,7 +136,7 @@ export const IngredientCard: FC<IngredientCardProps> = ({
 
 	return (
 		<div
-			className={`flex flex-col group relative rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-gradient-to-br from-white to-neutral-50/70 dark:from-neutral-900 dark:to-neutral-950 shadow-sm hover:shadow-lg transition-all duration-200 p-3 sm:p-4 focus-within:ring-2 ${variant.ring} hover:-translate-y-0.5`}
+			className={`flex flex-col sm:h-[280px] relative rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-gradient-to-br from-white to-neutral-50/70 dark:from-neutral-900 dark:to-neutral-950 shadow-sm hover:shadow-lg transition-all duration-200 p-3 sm:p-4 focus-within:ring-2 ${variant.ring} hover:-translate-y-0.5`}
 		>
 			<div className="absolute right-3 top-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
 				<DeleteButton
@@ -157,7 +157,7 @@ export const IngredientCard: FC<IngredientCardProps> = ({
 			</div>
 
 			<div className="flex-grow-1 mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
-				<div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/40 px-3 py-2">
+				<div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/40 px-3 py-2 overflow-hidden">
 					<p className="text-xs text-neutral-500 dark:text-neutral-400">
 						{tIngredients('table.price')}
 					</p>
@@ -165,7 +165,7 @@ export const IngredientCard: FC<IngredientCardProps> = ({
 						{currencyFormatter.format(Number(ingredient.price))}
 					</div>
 				</div>
-				<div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/40 px-3 py-2">
+				<div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/40 px-3 py-2 overflow-hidden">
 					<p className="text-xs text-neutral-500 dark:text-neutral-400">
 						{tIngredients('table.createdAt')}
 					</p>
@@ -178,7 +178,7 @@ export const IngredientCard: FC<IngredientCardProps> = ({
 						})()}
 					</div>
 				</div>
-				<div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/40 px-3 py-2">
+				<div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/40 px-3 py-2 overflow-hidden">
 					<p className="text-xs text-neutral-500 dark:text-neutral-400">
 						{tIngredients('table.category')}
 					</p>
@@ -186,7 +186,7 @@ export const IngredientCard: FC<IngredientCardProps> = ({
 						{tIngredients(`labels.${ingredient.category}`)}
 					</div>
 				</div>
-				<div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/40 px-3 py-2">
+				<div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/40 px-3 py-2 overflow-hidden">
 					<p className="text-xs text-neutral-500 dark:text-neutral-400">
 						{tIngredients('table.unit')}
 					</p>

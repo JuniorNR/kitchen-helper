@@ -18,7 +18,6 @@ html {
 	scrollbar-gutter: stable;
 }
 
-/* Cursor pointer for all modal close buttons (HeroUI/NextUI) */
-:where([data-slot="close-button"], [aria-label="Close"], [aria-label="Закрыть"]) {
+:where([role="button"], [data-slot="close-button"], [aria-label="Close"], [aria-label="Закрыть"]) {
 	cursor: pointer;
 }

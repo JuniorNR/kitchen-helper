@@ -1,8 +1,10 @@
 'use client';
 
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRecipe } from '@/entities';
 import { classNames } from '@/shared/lib/helpers';
+import { PaginationBar } from '@/shared/ui';
 import { SKELETON_KEYS } from '../model/recipeList.utils';
 import { RecipeItem } from './RecipeItem';
 import { RecipeItemSkeleton } from './RecipeItemSkeleton';
@@ -12,7 +14,8 @@ import styles from './recipeList.module.scss';
 export const RecipesList = () => {
 	const { t: tCommon } = useTranslation('common');
 	const { t: tRecipes } = useTranslation('recipes');
-	const { recipes, isLoading } = useRecipe();
+	const [page, setPage] = useState<number>(1);
+	const { recipes, pagination, isLoading } = useRecipe(page);
 
 	return (
 		<div className={`w-full min-h-[600px] transition-all duration-300`}>
@@ -26,10 +29,20 @@ export const RecipesList = () => {
 					))}
 				</div>
 			) : recipes && recipes.length > 0 ? (
-				<div className={`${styles.recipeList} justify-center lg:justify-start`}>
-					{recipes.map((recipe) => (
-						<RecipeItem key={recipe.id} recipe={recipe} />
-					))}
+				<div className="flex flex-col gap-6">
+					<div
+						className={`${styles.recipeList} justify-center lg:justify-start`}
+					>
+						{recipes.map((recipe) => (
+							<RecipeItem key={recipe.id} recipe={recipe} />
+						))}
+					</div>
+					<PaginationBar
+						page={page}
+						onPageChange={setPage}
+						totalItems={pagination?.total || 0}
+						currentPage={pagination?.currentPage || 1}
+					/>
 				</div>
 			) : (
 				<div className="mt-10 rounded-2xl border border-dashed border-neutral-300 dark:border-neutral-700 p-8 text-center text-neutral-600 dark:text-neutral-400">

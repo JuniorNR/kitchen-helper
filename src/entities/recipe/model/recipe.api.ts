@@ -11,12 +11,18 @@ export const recipeApi = createApi({
 	baseQuery: baseQuery,
 	tagTypes: ['Recipe'],
 	endpoints: (builder) => ({
-		getRecipes: builder.query<{ recipes: Recipe[]; code: string }, void>({
+		getRecipes: builder.query<ApiResponse<Recipe[]>, number | undefined>({
 			providesTags: ['Recipe'],
-			query: () => `/recipes`,
+			query: (page) => ({
+				url: `/recipes`,
+				params: {
+					page,
+				},
+			}),
 			transformResponse: (response: ApiResponse<RecipeDTO[]>) => {
 				return {
-					recipes: dto('toClient', response.data),
+					data: dto('toClient', response.data),
+					pagination: dto('toClient', response.pagination),
 					code: response.code,
 				};
 			},

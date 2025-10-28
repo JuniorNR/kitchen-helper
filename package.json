@@ -24,6 +24,7 @@
 		"@heroui/modal": "^2.2.21",
 		"@heroui/navbar": "^2.2.22",
 		"@heroui/number-input": "^2.0.16",
+		"@heroui/pagination": "^2.2.24",
 		"@heroui/react": "^2.8.2",
 		"@heroui/select": "^2.4.26",
 		"@heroui/system": "^2.4.20",

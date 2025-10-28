@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useIngredient } from '@/entities';
 import { classNames } from '@/shared/lib/helpers';
+import { PaginationBar } from '@/shared/ui';
 import { INGREDIENT_SKELETON_KEYS } from '../model/ingredientsList.utils';
 import { IngredientCard } from './IngredientCard';
 import { IngredientCardSkeleton } from './IngredientCardSkeleton';
@@ -10,7 +11,11 @@ import { IngredientCardSkeleton } from './IngredientCardSkeleton';
 export const IngredientsList = () => {
 	const { t: tCommon } = useTranslation('common');
 	const { t: tIngredients } = useTranslation('ingredients');
-	const { ingredients, isLoading, deleteIngredientData } = useIngredient();
+
+	const [page, setPage] = useState<number>(1);
+
+	const { ingredients, pagination, isLoading, deleteIngredientData } =
+		useIngredient(page);
 	const [isDeleteLoadingIngredient, setIsDeleteLoadingIngredient] = useState<
 		string | null
 	>(null);
@@ -62,19 +67,28 @@ export const IngredientsList = () => {
 					))}
 				</div>
 			) : hasItems ? (
-				<div
-					className={classNames(
-						'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4',
-					)}
-				>
-					{prepareIngredientsList.map((ingredient) => (
-						<IngredientCard
-							key={ingredient.id}
-							ingredient={ingredient}
-							isDeleting={isDeleteLoadingIngredient === ingredient.id}
-							onDelete={(id) => handleDeleteIngredient(id)}
-						/>
-					))}
+				<div className="flex flex-col gap-6">
+					<div
+						className={classNames(
+							'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 min-h-[600px]',
+						)}
+					>
+						{prepareIngredientsList.map((ingredient) => (
+							<IngredientCard
+								key={ingredient.id}
+								ingredient={ingredient}
+								isDeleting={isDeleteLoadingIngredient === ingredient.id}
+								onDelete={(id) => handleDeleteIngredient(id)}
+							/>
+						))}
+					</div>
+
+					<PaginationBar
+						page={page}
+						onPageChange={setPage}
+						totalItems={pagination?.total || 0}
+						currentPage={pagination?.currentPage || 1}
+					/>
 				</div>
 			) : (
 				<div className="mt-10 rounded-2xl border border-dashed border-neutral-300 dark:border-neutral-700 p-8 text-center text-neutral-600 dark:text-neutral-400">

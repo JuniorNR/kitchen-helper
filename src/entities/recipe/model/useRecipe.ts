@@ -7,14 +7,15 @@ import {
 	useGetRecipesQuery,
 } from './recipe.api';
 
-export const useRecipe = () => {
-	const { data, isLoading, error } = useGetRecipesQuery();
+export const useRecipe = (page?: number) => {
+	const { data, isLoading, error } = useGetRecipesQuery(page);
 	const [createRecipe, { isLoading: isCreating }] = useCreateRecipeMutation();
 	const [deleteRecipe, { isLoading: isDeleting }] = useDeleteRecipeMutation();
 	const dispatch = useDispatch();
 	const createRecipeData = async (data: RecipeCreateFormInputType) => {
 		try {
 			const result = await createRecipe(data).unwrap();
+
 			if (result.recipe) {
 				dispatch(
 					addAlert({
@@ -50,7 +51,8 @@ export const useRecipe = () => {
 	};
 
 	return {
-		recipes: data?.recipes,
+		recipes: data?.data,
+		pagination: data?.pagination,
 		isLoading,
 		error,
 		createRecipeData,
