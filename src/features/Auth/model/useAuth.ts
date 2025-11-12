@@ -32,7 +32,7 @@ export const useAuth = () => {
 					id: crypto.randomUUID(),
 					status: 'success',
 					title: 'Success',
-					description: code,
+					description: code || 'Unknown error',
 				}),
 			);
 			return data.user;
@@ -53,7 +53,7 @@ export const useAuth = () => {
 					id: crypto.randomUUID(),
 					status: 'success',
 					title: 'Success',
-					description: code,
+					description: code || 'Unknown error',
 				}),
 			);
 			return {
@@ -67,7 +67,7 @@ export const useAuth = () => {
 					id: crypto.randomUUID(),
 					status: 'danger',
 					title: 'Error',
-					description: data.code,
+					description: data.code || 'Unknown error',
 				}),
 			);
 		}
@@ -84,7 +84,7 @@ export const useAuth = () => {
 					id: crypto.randomUUID(),
 					status: 'success',
 					title: 'Success',
-					description: code,
+					description: code || 'Unknown error',
 				}),
 			);
 		} catch (_) {

@@ -22,7 +22,7 @@ export const useRecipe = (page?: number) => {
 						id: crypto.randomUUID(),
 						status: 'success',
 						title: 'Success',
-						description: result.code,
+						description: result.code || 'Unknown error',
 					}),
 				);
 				return result.recipe;
@@ -32,7 +32,7 @@ export const useRecipe = (page?: number) => {
 						id: crypto.randomUUID(),
 						status: 'danger',
 						title: 'Error',
-						description: result.code,
+						description: result.code || 'Unknown error',
 					}),
 				);
 				return null;
@@ -44,7 +44,7 @@ export const useRecipe = (page?: number) => {
 					id: crypto.randomUUID(),
 					status: 'danger',
 					title: 'Error',
-					description: code,
+					description: code || 'Unknown error',
 				}),
 			);
 		}

@@ -19,7 +19,7 @@ export const useUser = () => {
 						id: crypto.randomUUID(),
 						status: 'success',
 						title: 'success',
-						description: code,
+						description: code || 'Unknown error',
 					}),
 				);
 				return data;
@@ -29,7 +29,7 @@ export const useUser = () => {
 						id: crypto.randomUUID(),
 						status: 'danger',
 						title: 'error',
-						description: code,
+						description: code || 'Unknown error',
 					}),
 				);
 				return null;
@@ -41,7 +41,7 @@ export const useUser = () => {
 					id: crypto.randomUUID(),
 					status: 'danger',
 					title: 'error',
-					description: code,
+					description: code || 'Unknown error',
 				}),
 			);
 			return null;
