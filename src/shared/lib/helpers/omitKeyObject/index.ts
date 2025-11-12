@@ -1,0 +1,1 @@
+export { omitKeyObject } from './omitKeyObject';

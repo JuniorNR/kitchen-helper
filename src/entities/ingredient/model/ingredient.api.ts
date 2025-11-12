@@ -9,6 +9,16 @@ import type {
 } from '@/shared/lib/types/api.types';
 import type { Ingredient, IngredientDTO } from './ingredient.types';
 
+export interface GetIngredientsQueryArgs {
+	page?: number;
+	priceFrom?: number;
+	priceTo?: number;
+	createdFrom?: string | Date;
+	createdTo?: string | Date;
+	categories?: string[];
+	units?: string[];
+}
+
 export const ingredientApi = createApi({
 	reducerPath: 'ingredientApi',
 	baseQuery,
@@ -16,12 +26,34 @@ export const ingredientApi = createApi({
 	endpoints: (builder) => ({
 		getIngredients: builder.query<
 			ApiResponse<Ingredient[], ApiResponsePagination>,
-			number | undefined
+			GetIngredientsQueryArgs | undefined
 		>({
-			query: (page) => ({
-				url: '/ingredients',
-				params: { page },
-			}),
+			query: (args) => {
+				const {
+					page,
+					priceFrom,
+					priceTo,
+					createdFrom,
+					createdTo,
+					categories,
+					units,
+				} = args || {};
+
+				const params: Record<string, unknown> = {
+					page,
+					price_from: priceFrom,
+					price_to: priceTo,
+					created_from: createdFrom,
+					created_to: createdTo,
+					categories,
+					units,
+				};
+
+				return {
+					url: '/ingredients',
+					params,
+				};
+			},
 			transformResponse: (
 				response: ApiResponse<IngredientDTO[], ApiResponsePaginationDTO>,
 			) => {

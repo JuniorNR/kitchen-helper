@@ -47,7 +47,7 @@ export const IngredientCreate: FC<IngredientCreateProps> = ({ setCreated }) => {
 		},
 	});
 
-	const { createIngredientData, isCreateIngredientLoading } = useIngredient();
+	const { createIngredientData, isCreateIngredientLoading } = useIngredient({});
 
 	const onSubmit = async (data: IngredientCreateFormDataType) => {
 		const result = await createIngredientData(data);

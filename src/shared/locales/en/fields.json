@@ -11,7 +11,9 @@
 	"title": "Title",
 	"description": "Description",
 	"category": "Category",
+	"categories": "categories",
 	"unit": "Unit",
+	"units": "units",
 	"count_unit": "Count",
 	"duration_minutes": "Duration (minutes)",
 	"type": "Type",
@@ -35,5 +37,13 @@
 	"amount": "Amount",
 	"ration": "Ration",
 	"created_at": "Created at",
-	"updated_at": "Updated at"
+	"updated_at": "Updated at",
+	"price_from": "Price from",
+	"price_to": "Price to",
+	"created_from": "Create from",
+	"created_to": "Created to",
+	"apply": "Apply",
+	"cancel": "Cancel",
+	"reset_preset": "Reset preset",
+	"save_preset": "Save preset"
 }

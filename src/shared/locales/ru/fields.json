@@ -11,7 +11,9 @@
 	"title": "Заголовок",
 	"description": "Описание",
 	"category": "Категория",
+	"categories": "Категории",
 	"unit": "Единица",
+	"units": "Единицы",
 	"count_unit": "Количество",
 	"duration_minutes": "Продолжительность (минуты)",
 	"type": "Тип",
@@ -35,5 +37,13 @@
 	"amount": "Количество",
 	"ration": "Рацион",
 	"created_at": "Создано",
-	"updated_at": "Изменено"
+	"updated_at": "Изменено",
+	"price_from": "Цена от",
+	"price_to": "Цена до",
+	"created_from": "Создано от",
+	"created_to": "Создано до",
+	"apply": "Применить",
+	"cancel": "Отменить",
+	"reset_preset": "Сбросить пресет",
+	"save_preset": "Сохранить пресет"
 }

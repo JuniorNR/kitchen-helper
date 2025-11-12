@@ -20,5 +20,7 @@
 	"carbohydrates_required": "Carbohydrates is required",
 	"priceToBuy_required": "Price to buy is required",
 	"priceOfDish_required": "Price of dish is required",
-	"images_required": "Add at least one image"
+	"images_required": "Add at least one image",
+	"date_cannot_be_greater_from": "The date cannot be greater than 'Created to'",
+	"date_must_not_be_in_future": "Date cannot be in the future"
 }

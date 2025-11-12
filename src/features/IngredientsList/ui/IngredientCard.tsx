@@ -136,7 +136,7 @@ export const IngredientCard: FC<IngredientCardProps> = ({
 
 	return (
 		<div
-			className={`flex flex-col sm:h-[280px] relative rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-gradient-to-br from-white to-neutral-50/70 dark:from-neutral-900 dark:to-neutral-950 shadow-sm hover:shadow-lg transition-all duration-200 p-3 sm:p-4 focus-within:ring-2 ${variant.ring} hover:-translate-y-0.5`}
+			className={`group flex flex-col sm:h-[280px] relative rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-gradient-to-br from-white to-neutral-50/70 dark:from-neutral-900 dark:to-neutral-950 shadow-sm hover:shadow-lg transition-all duration-200 p-3 sm:p-4 focus-within:ring-2 ${variant.ring} hover:-translate-y-0.5`}
 		>
 			<div className="absolute right-3 top-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
 				<DeleteButton

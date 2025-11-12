@@ -1,3 +1,15 @@
+export interface UseIngredients {
+	page?: number;
+	filters?: {
+		priceFrom?: number;
+		priceTo?: number;
+		createdFrom?: string | Date;
+		createdTo?: string | Date;
+		categories?: string[];
+		units?: string[];
+	};
+}
+
 export interface Ingredient {
 	id: string;
 	title: string;

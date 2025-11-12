@@ -20,5 +20,7 @@
 	"carbohydrates_required": "Углеводы обязательны",
 	"priceToBuy_required": "Цена покупки обязательна",
 	"priceOfDish_required": "Цена блюда обязательна",
-	"images_required": "Добавьте хотя бы одно изображение"
+	"images_required": "Добавьте хотя бы одно изображение",
+	"date_cannot_be_greater_from": "Дата не может быть больше даты в поле 'Создано до'",
+	"date_must_not_be_in_future": "Дата не может быть назначена в будущем"
 }

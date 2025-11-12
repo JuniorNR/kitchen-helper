@@ -13,7 +13,7 @@ import type { RecipeCreateStepIngredientsProps } from '../model/recipeCreate.typ
 export const RecipeCreateStepIngredients: FC<
 	RecipeCreateStepIngredientsProps
 > = ({ control, stepIndex }) => {
-	const { ingredients } = useIngredient();
+	const { ingredients } = useIngredient({});
 	const { t: tFields } = useTranslation('fields');
 
 	const { fields, append, remove } = useFieldArray({
