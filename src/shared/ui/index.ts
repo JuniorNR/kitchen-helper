@@ -1,10 +1,11 @@
 export { Alerts } from './Alerts';
 export { DeleteButton } from './DeleteButton';
-export { Filter } from './Filter';
+export { Filter, FilterGroup } from './Filter';
 export { ImagesPick } from './ImagesPick';
 export { NumberInput } from './NumberInput';
 export { PaginationBar } from './PaginationBar';
 export { PriceInput } from './PriceInput';
+export { Range } from './Range';
 export { Slider } from './Slider';
 export { Typography } from './Typography';
 export { UnitInput } from './UnitInput';

@@ -97,8 +97,10 @@
 	"titles": {
 		"organic_substances": "Органические вещества",
 		"prices": "Цены",
+		"created": "Создан",
 		"select_ingredient_to_see_details": "Выберите ингредиент, чтобы увидеть детали",
-		"empty_state": "Список рецептов пуст"
+		"empty_state": "Список рецептов пуст",
+		"common_information": "Общая информация"
 	},
 	"fields": {
 		"price_of_dish": "Цена блюда",

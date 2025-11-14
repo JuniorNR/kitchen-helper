@@ -34,3 +34,8 @@ export interface FilterFormProps {
 	saveDisabled?: boolean;
 	submitDisabled?: boolean;
 }
+
+export interface FilterGroupProps {
+	children: React.ReactNode;
+	title: string;
+}

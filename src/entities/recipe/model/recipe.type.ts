@@ -1,5 +1,11 @@
 import type { Ingredient, IngredientDTO } from '@/entities/ingredient';
 import type { User, UserDTO } from '@/entities/user';
+import type { RecipeListFilter } from '@/features/RecipesList/model/recipeList.types';
+
+export interface UseRecipe {
+	page?: number;
+	filters?: Partial<RecipeListFilter>;
+}
 
 export interface RecipeImage {
 	id: number;

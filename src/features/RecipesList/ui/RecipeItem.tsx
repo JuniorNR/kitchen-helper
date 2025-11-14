@@ -16,7 +16,7 @@ export const RecipeItem: FC<RecipeItemProps> = ({ recipe }) => {
 	const { t: tRecipes } = useTranslation('recipes');
 	const { t: tIngredients } = useTranslation('ingredients');
 	const { t: tCommon, i18n } = useTranslation('common');
-	const { deleteRecipe, isDeleting } = useRecipe();
+	const { deleteRecipe, isDeleting } = useRecipe({});
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 
 	const currencyFormatter = useMemo(

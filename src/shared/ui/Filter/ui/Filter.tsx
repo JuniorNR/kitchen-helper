@@ -77,7 +77,6 @@ export const Filter: FC<FilterProps> = ({
 					] as BadgeTuple;
 				}
 
-				// Arrays (e.g., categories, units) — compare by values disregarding order
 				if (
 					Array.isArray(value) &&
 					Array.isArray(filterFromLocalStorage[presetKey])
@@ -89,7 +88,6 @@ export const Filter: FC<FilterProps> = ({
 					return [prepareCase(key, 'snake'), value, { inPreset }] as BadgeTuple;
 				}
 
-				// Fallback strict equality for scalars
 				inPreset = filterFromLocalStorage[presetKey] === value;
 				return [prepareCase(key, 'snake'), value, { inPreset }] as BadgeTuple;
 			},

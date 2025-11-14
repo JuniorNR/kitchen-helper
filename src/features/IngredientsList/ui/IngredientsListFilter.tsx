@@ -12,18 +12,26 @@ import {
 } from '@/shared/lib/constants';
 import {
 	deleteFieldsWithUndefinedValues,
+	localStorageHelper,
 	prepareDateForInput,
 } from '@/shared/lib/helpers';
 import { Filter, NumberInput } from '@/shared/ui';
 import { createIngredientsListFilterSchema } from '../model/ingredientListFilter.schema';
-import type { IngredientsListFilterProps } from '../model/ingredientsList.types';
+import type {
+	IngredientListFilter,
+	IngredientsListFilterProps,
+} from '../model/ingredientsList.types';
 
 export const IngredientsListFilter: FC<IngredientsListFilterProps> = ({
 	setPage,
 	filters,
 	setFilters,
-	filterFromLocalStorage,
 }) => {
+	const {
+		item: filterFromLocalStorage,
+		storageRemoveItem,
+		storageSetItem,
+	} = localStorageHelper<IngredientListFilter>('filter_ingredients');
 	const [formKey, setFormKey] = useState<number>(0);
 	const [badges, setBadges] = useState(filters);
 
@@ -42,11 +50,20 @@ export const IngredientsListFilter: FC<IngredientsListFilterProps> = ({
 		defaultValues: filters as unknown as z.input<typeof schema>,
 		resolver: zodResolver(schema),
 	});
+
 	const onHandleSubmit = handleSubmit((data) => {
 		setFilters(deleteFieldsWithUndefinedValues(data));
 		setBadges(deleteFieldsWithUndefinedValues(data));
 		setPage(1);
 	});
+
+	const onHandleSaveToLocalStorage = () => {
+		const formValues: Partial<IngredientListFilter> =
+			getValues() as Partial<IngredientListFilter>;
+
+		storageSetItem(formValues);
+		setFormKey((prev) => prev + 1);
+	};
 
 	const onHandleSoftReset = () => {
 		const emptyValues: z.input<typeof schema> = {
@@ -74,7 +91,7 @@ export const IngredientsListFilter: FC<IngredientsListFilterProps> = ({
 
 	const onHandleHardReset = () => {
 		setPage(1);
-		localStorage.removeItem('filter_ingredients');
+		storageRemoveItem();
 		setFilters({});
 		setBadges({});
 
@@ -90,18 +107,10 @@ export const IngredientsListFilter: FC<IngredientsListFilterProps> = ({
 		setFormKey((prev) => prev + 1);
 	};
 
-	const onHandleSaveToLocalStorage = () => {
-		const formValues = getValues();
-
-		localStorage.setItem('filter_ingredients', JSON.stringify(formValues));
-		setFormKey((prev) => prev + 1);
-	};
-
 	const onHandleDeleteBadge = (
 		key: string,
 		_value?: string | number | Date | string[] | number[],
 	) => {
-		// При удалении бейджа сбрасываем соответствующее поле формы и состояния фильтра/бейджей
 		const nextFilters = { ...filters };
 		delete (nextFilters as Record<string, unknown>)[key];
 		setFilters(nextFilters);
@@ -111,17 +120,18 @@ export const IngredientsListFilter: FC<IngredientsListFilterProps> = ({
 		setBadges(nextBadges);
 
 		const valuesFromFilters: z.input<typeof schema> = {
-			priceFrom: nextFilters.priceFrom as number | undefined,
-			priceTo: nextFilters.priceTo as number | undefined,
-			createdFrom: nextFilters.createdFrom as string | undefined,
-			createdTo: nextFilters.createdTo as string | undefined,
-			categories: nextFilters.categories as string[] | undefined,
-			units: nextFilters.units as string[] | undefined,
+			priceFrom: nextFilters.priceFrom,
+			priceTo: nextFilters.priceTo,
+			createdFrom: nextFilters.createdFrom,
+			createdTo: nextFilters.createdTo,
+			categories: nextFilters.categories,
+			units: nextFilters.units,
 		};
 		reset(valuesFromFilters);
 
 		setPage(1);
 	};
+
 	return (
 		<Filter
 			key={formKey}

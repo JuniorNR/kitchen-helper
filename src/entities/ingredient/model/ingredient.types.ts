@@ -1,13 +1,8 @@
+import type { IngredientListFilter } from '@/features/IngredientsList/model/ingredientsList.types';
+
 export interface UseIngredients {
 	page?: number;
-	filters?: {
-		priceFrom?: number;
-		priceTo?: number;
-		createdFrom?: string | Date;
-		createdTo?: string | Date;
-		categories?: string[];
-		units?: string[];
-	};
+	filters?: Partial<IngredientListFilter>;
 }
 
 export interface Ingredient {

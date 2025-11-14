@@ -1,14 +1,25 @@
 import { useDispatch } from 'react-redux';
 import { addAlert } from '@/features/Alert';
 import type { RecipeCreateFormInputType } from '@/features/RecipeCreate/model/recipeCreate.schema';
+import { serializeDate } from '@/shared/lib/helpers';
 import {
 	useCreateRecipeMutation,
 	useDeleteRecipeMutation,
 	useGetRecipesQuery,
 } from './recipe.api';
+import type { UseRecipe } from './recipe.type';
 
-export const useRecipe = (page?: number) => {
-	const { data, isLoading, error } = useGetRecipesQuery(page);
+export const useRecipe = ({ page, filters }: UseRecipe) => {
+	const { data, isLoading, error } = useGetRecipesQuery({
+		page,
+		filters: filters
+			? {
+					createdFrom: serializeDate(filters?.createdFrom),
+					createdTo: serializeDate(filters?.createdTo),
+					...filters,
+				}
+			: undefined,
+	});
 	const [createRecipe, { isLoading: isCreating }] = useCreateRecipeMutation();
 	const [deleteRecipe, { isLoading: isDeleting }] = useDeleteRecipeMutation();
 	const dispatch = useDispatch();

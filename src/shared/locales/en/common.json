@@ -47,8 +47,6 @@
 	"delete": "Delete",
 	"user_not_authorized": "User not authorized",
 	"create": "Create",
-	"ingredient_list": "Ingredient List",
-	"ingredient_create": "Create Ingredient",
 	"page_titles": {
 		"ingredient_create": "Create Ingredient",
 		"ingredient_list": "Ingredient List",

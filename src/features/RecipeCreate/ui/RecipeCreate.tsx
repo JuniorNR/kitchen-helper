@@ -31,7 +31,7 @@ import { RecipeCreateStepCard } from './RecipeCreateStepCard';
 import styles from './recipeCreate.module.scss';
 
 export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
-	const { createRecipeData, isCreating } = useRecipe();
+	const { createRecipeData, isCreating } = useRecipe({});
 	const { t: tValidation } = useTranslation('validation');
 	const { t: tCommon } = useTranslation('common');
 	const { t: tFields } = useTranslation('fields');
@@ -141,7 +141,6 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 									<Select
 										label={tFields('ration')}
 										size="lg"
-										isRequired
 										isInvalid={fieldState.invalid}
 										errorMessage={fieldState.error?.message}
 										{...field}

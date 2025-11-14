@@ -1,4 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
+import type {
+	IngredientListFilter,
+	IngredientListFilterDTO,
+} from '@/features/IngredientsList/model/ingredientsList.types';
 import type { IngredientCreateFormDataType } from '@/features/ingredientCreate/model/IngredientCreate.schema';
 import { dto } from '@/shared/lib/helpers/dto';
 import { baseQuery } from '@/shared/lib/store/baseQuery';
@@ -7,17 +11,11 @@ import type {
 	ApiResponsePagination,
 	ApiResponsePaginationDTO,
 } from '@/shared/lib/types/api.types';
-import type { Ingredient, IngredientDTO } from './ingredient.types';
-
-export interface GetIngredientsQueryArgs {
-	page?: number;
-	priceFrom?: number;
-	priceTo?: number;
-	createdFrom?: string | Date;
-	createdTo?: string | Date;
-	categories?: string[];
-	units?: string[];
-}
+import type {
+	Ingredient,
+	IngredientDTO,
+	UseIngredients,
+} from './ingredient.types';
 
 export const ingredientApi = createApi({
 	reducerPath: 'ingredientApi',
@@ -26,29 +24,18 @@ export const ingredientApi = createApi({
 	endpoints: (builder) => ({
 		getIngredients: builder.query<
 			ApiResponse<Ingredient[], ApiResponsePagination>,
-			GetIngredientsQueryArgs | undefined
+			UseIngredients
 		>({
-			query: (args) => {
-				const {
-					page,
-					priceFrom,
-					priceTo,
-					createdFrom,
-					createdTo,
-					categories,
-					units,
-				} = args || {};
-
+			query: ({ page, filters }) => {
 				const params: Record<string, unknown> = {
 					page,
-					price_from: priceFrom,
-					price_to: priceTo,
-					created_from: createdFrom,
-					created_to: createdTo,
-					categories,
-					units,
+					...(filters
+						? dto<
+								Partial<IngredientListFilter>,
+								Partial<IngredientListFilterDTO>
+							>('toServer', filters)
+						: {}),
 				};
-
 				return {
 					url: '/ingredients',
 					params,

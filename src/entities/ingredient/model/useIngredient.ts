@@ -1,4 +1,5 @@
 import type { IngredientCreateFormDataType } from '@/features/ingredientCreate/model/IngredientCreate.schema';
+import { serializeDate } from '@/shared/lib/helpers';
 import {
 	useCreateIngredientMutation,
 	useDeleteIngredientMutation,
@@ -7,17 +8,15 @@ import {
 import type { UseIngredients } from './ingredient.types';
 
 export const useIngredient = ({ page, filters }: UseIngredients) => {
-	const serializeDate = (d?: string | Date) =>
-		typeof d === 'string' ? d : d?.toISOString();
-
 	const { data, isLoading, error } = useGetIngredientsQuery({
 		page,
-		priceFrom: filters?.priceFrom,
-		priceTo: filters?.priceTo,
-		createdFrom: serializeDate(filters?.createdFrom),
-		createdTo: serializeDate(filters?.createdTo),
-		categories: filters?.categories,
-		units: filters?.units,
+		filters: filters
+			? {
+					createdFrom: serializeDate(filters?.createdFrom),
+					createdTo: serializeDate(filters?.createdTo),
+					...filters,
+				}
+			: undefined,
 	});
 	const [deleteIngredient, { isLoading: isDeleteIngredientLoading }] =
 		useDeleteIngredientMutation();

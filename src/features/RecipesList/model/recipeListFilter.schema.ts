@@ -1,16 +1,26 @@
 import type { TFunction } from 'i18next';
-import z from 'zod';
+import { z } from 'zod';
 import { parseDate } from '@/shared/lib/helpers';
 
 const DDMMYYYY_REGEX = /^\d{2}\.\d{2}\.\d{4}$/;
 
-export const createIngredientsListFilterSchema = (
-	t?: TFunction<'validation'>,
-) =>
-	z
+export const createRecipeListFilterSchema = (t: TFunction<'validation'>) => {
+	return z
 		.object({
-			priceFrom: z.union([z.number(''), z.undefined()]),
-			priceTo: z.union([z.number(''), z.undefined()]),
+			priceOfDishFrom: z.union([z.number(''), z.undefined()]),
+			priceOfDishTo: z.union([z.number(''), z.undefined()]),
+			priceToBuyFrom: z.union([z.number(''), z.undefined()]),
+			priceToBuyTo: z.union([z.number(''), z.undefined()]),
+			caloriesFrom: z.union([z.number(''), z.undefined()]),
+			caloriesTo: z.union([z.number(''), z.undefined()]),
+			fatsFrom: z.union([z.number(''), z.undefined()]),
+			fatsTo: z.union([z.number(''), z.undefined()]),
+			proteinsFrom: z.union([z.number(''), z.undefined()]),
+			proteinsTo: z.union([z.number(''), z.undefined()]),
+			carbohydratesFrom: z.union([z.number(''), z.undefined()]),
+			carbohydratesTo: z.union([z.number(''), z.undefined()]),
+			ration: z.union([z.array(z.string()), z.undefined()]),
+			type: z.union([z.array(z.string()), z.undefined()]),
 			createdFrom: z
 				.string()
 				.regex(DDMMYYYY_REGEX, {
@@ -51,8 +61,6 @@ export const createIngredientsListFilterSchema = (
 							: 'Date cannot be in the future',
 					},
 				),
-			categories: z.union([z.array(z.string()), z.undefined()]),
-			units: z.union([z.array(z.string()), z.undefined()]),
 		})
 		.superRefine((data, ctx) => {
 			if (data.createdFrom && data.createdTo) {
@@ -70,3 +78,4 @@ export const createIngredientsListFilterSchema = (
 				}
 			}
 		});
+};

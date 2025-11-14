@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useIngredient } from '@/entities';
-import { classNames } from '@/shared/lib/helpers';
+import { classNames, localStorageHelper } from '@/shared/lib/helpers';
 import { PaginationBar } from '@/shared/ui';
 import type { IngredientListFilter } from '../model/ingredientsList.types';
 import {
@@ -16,26 +16,20 @@ import { IngredientCardSkeleton } from './IngredientCardSkeleton';
 import { IngredientsListFilter } from './IngredientsListFilter';
 
 export const IngredientsList = () => {
-	const filterFromLocalStorage: Partial<IngredientListFilter> = (() => {
-		try {
-			return JSON.parse(
-				localStorage.getItem('filter_ingredients') || '',
-			) as Partial<IngredientListFilter>;
-		} catch {
-			return {};
-		}
-	})();
+	const { item: filterFromLocalStorage } =
+		localStorageHelper<IngredientListFilter>('filter_ingredients');
 
 	const { t: tCommon } = useTranslation('common');
 	const { t: tIngredients } = useTranslation('ingredients');
+
+	const [isDeleteLoadingIngredient, setIsDeleteLoadingIngredient] = useState<
+		string | null
+	>(null);
 
 	const [page, setPage] = useState<number>(1);
 	const [filters, setFilters] = useState<Partial<IngredientListFilter>>(
 		filterFromLocalStorage,
 	);
-	const [isDeleteLoadingIngredient, setIsDeleteLoadingIngredient] = useState<
-		string | null
-	>(null);
 
 	const { ingredients, pagination, isLoading, deleteIngredientData } =
 		useIngredient({
@@ -53,7 +47,6 @@ export const IngredientsList = () => {
 					setPage={setPage}
 					filters={filters}
 					setFilters={setFilters}
-					filterFromLocalStorage={filterFromLocalStorage}
 				/>
 			</div>
 			<AnimatePresence mode="wait">
