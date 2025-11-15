@@ -136,6 +136,7 @@ export const IngredientsListFilter: FC<IngredientsListFilterProps> = ({
 		<Filter
 			key={formKey}
 			badges={badges}
+			filterFromLocalStorage={filterFromLocalStorage}
 			onSubmit={onHandleSubmit}
 			onSave={onHandleSaveToLocalStorage}
 			onReset={onHandleHardReset}

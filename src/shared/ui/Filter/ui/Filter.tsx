@@ -12,6 +12,7 @@ import { FilterForm } from './FilterForm';
 export const Filter: FC<FilterProps> = ({
 	children,
 	badges,
+	filterFromLocalStorage,
 	onSubmit,
 	onReset,
 	onSave,
@@ -23,6 +24,7 @@ export const Filter: FC<FilterProps> = ({
 	const { t: tFields } = useTranslation('fields');
 	const { t: tIngredients } = useTranslation('ingredients');
 	const { t: tUnits } = useTranslation('units');
+	const { t: tRecipes } = useTranslation('recipes');
 	const [isOpen, setIsOpen] = useState<boolean>(true);
 
 	type BadgeTuple = [
@@ -103,16 +105,6 @@ export const Filter: FC<FilterProps> = ({
 		onDeleteBadge(key, value);
 	};
 
-	const filterFromLocalStorage: Partial<IngredientListFilter> = (() => {
-		try {
-			return JSON.parse(
-				localStorage.getItem('filter_ingredients') || '',
-			) as Partial<IngredientListFilter>;
-		} catch {
-			return {};
-		}
-	})();
-
 	const renderBadges = () => {
 		const preparedBadges = prepareBadges(badges);
 		return preparedBadges.map((badge) => {
@@ -134,14 +126,33 @@ export const Filter: FC<FilterProps> = ({
 					>{`${tFields(badge[0])}: ${badge[1]}`}</FilterBadge>
 				);
 			}
-			if (badge[0] === 'categories' && Array.isArray(badge[1])) {
+			if (typeof badge[0] === 'string' && Array.isArray(badge[1])) {
+				const label = tFields(badge[0]);
+				const preparedValue = (
+					badgeItem: string | number | Date | string[] | number[],
+				): string => {
+					console.debug(badge[0], badgeItem);
+					if (badge[0] === 'categories') {
+						return tIngredients(`labels.${badgeItem}`);
+					}
+					if (badge[0] === 'units') {
+						return tUnits(`labels.${badgeItem}`);
+					}
+					if (badge[0] === 'type') {
+						return tRecipes(`labels.${badgeItem}`);
+					}
+					if (badge[0] === 'ration') {
+						return tIngredients(`rations.${badgeItem}`);
+					}
+					return String(badgeItem);
+				};
 				return (
 					<div
 						key={`${badge[0]}-group`}
 						className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-white/60 px-2 py-1.5 shadow-sm ring-1 ring-gray-200/60 dark:border-white/10 dark:bg-white/5 dark:ring-white/10"
 					>
 						<span className="text-xs text-gray-600 dark:text-gray-300 mr-0.5">
-							{tFields('categories')}:
+							{label}:
 						</span>
 						{badge[1].map((badgeItem) => (
 							<FilterBadge
@@ -151,7 +162,7 @@ export const Filter: FC<FilterProps> = ({
 								compact
 								className="text-xs !px-1 !py-0.5"
 							>
-								{tIngredients(`labels.${badgeItem}`)}
+								{preparedValue(badgeItem)}
 							</FilterBadge>
 						))}
 						{!inPreset && (

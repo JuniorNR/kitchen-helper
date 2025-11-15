@@ -3,6 +3,10 @@ import type { PressEvent } from '@heroui/button';
 export interface FilterProps {
 	children: React.ReactNode;
 	badges: Record<string, string | number | Date | string[] | number[]>;
+	filterFromLocalStorage: Record<
+		string,
+		string | number | Date | string[] | number[]
+	>;
 	onDeleteBadge: (
 		key: string,
 		value: string | number | Date | string[] | number[],
