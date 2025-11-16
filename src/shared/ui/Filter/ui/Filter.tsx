@@ -25,7 +25,7 @@ export const Filter: FC<FilterProps> = ({
 	const { t: tIngredients } = useTranslation('ingredients');
 	const { t: tUnits } = useTranslation('units');
 	const { t: tRecipes } = useTranslation('recipes');
-	const [isOpen, setIsOpen] = useState<boolean>(true);
+	const [isOpen, setIsOpen] = useState<boolean>(false);
 
 	type BadgeTuple = [
 		string,
