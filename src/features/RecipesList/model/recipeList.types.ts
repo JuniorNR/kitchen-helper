@@ -3,6 +3,8 @@ import type { Recipe, RecipeStep } from '@/entities/recipe/model/recipe.type';
 
 export interface RecipeItemProps {
 	recipe: Recipe;
+	isDeleting?: boolean;
+	onDelete?: (id: string) => void;
 }
 
 export interface RecipeItemStepsModalProps {

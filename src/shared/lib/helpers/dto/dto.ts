@@ -24,6 +24,10 @@ export const dto = <T extends object | object[], U extends object>(
 					})
 					.join('');
 
+				if (Array.isArray(value)) {
+					return [keyToClient, value];
+				}
+
 				if (typeof value === 'object') {
 					return [keyToClient, dto(type, value)];
 				}
@@ -40,6 +44,10 @@ export const dto = <T extends object | object[], U extends object>(
 					.split(/(?<=[a-z])(?=[A-Z])/)
 					.join('_')
 					.toLowerCase();
+
+				if (Array.isArray(value)) {
+					return [keyToServer, value];
+				}
 
 				if (typeof value === 'object') {
 					return [keyToServer, dto(type, value)];

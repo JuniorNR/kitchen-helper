@@ -9,6 +9,7 @@ import type z from 'zod';
 import { getGroupedOptions } from '@/features/RecipeCreate/model/recipeCreate.utils';
 import {
 	deleteFieldsWithUndefinedValues,
+	dto,
 	localStorageHelper,
 	prepareDateForInput,
 } from '@/shared/lib/helpers';
@@ -30,6 +31,15 @@ export const RecipesListFilter: FC<RecipesListFilterProps> = ({
 		storageSetItem,
 	} = localStorageHelper<RecipeListFilter>('filter_recipes');
 
+	const limits = {
+		priceOfDish: { min: 0, max: 5000 },
+		priceToBuy: { min: 0, max: 5000 },
+		calories: { min: 0, max: 5000 },
+		proteins: { min: 0, max: 5000 },
+		fats: { min: 0, max: 5000 },
+		carbohydrates: { min: 0, max: 5000 },
+	};
+
 	const [formKey, setFormKey] = useState<number>(0);
 	const [badges, setBadges] = useState(filters);
 
@@ -47,16 +57,108 @@ export const RecipesListFilter: FC<RecipesListFilterProps> = ({
 	});
 
 	const onHandleSubmit = handleSubmit((data) => {
-		setFilters(deleteFieldsWithUndefinedValues(data));
-		setBadges(deleteFieldsWithUndefinedValues(data));
+		const preparedData = deleteFieldsWithUndefinedValues({
+			...data,
+			priceOfDishFrom:
+				data.priceOfDishFrom === limits.priceOfDish.min
+					? undefined
+					: data.priceOfDishFrom,
+			priceOfDishTo:
+				data.priceOfDishTo === limits.priceOfDish.max
+					? undefined
+					: data.priceOfDishTo,
+			priceToBuyFrom:
+				data.priceToBuyFrom === limits.priceToBuy.min
+					? undefined
+					: data.priceToBuyFrom,
+			priceToBuyTo:
+				data.priceToBuyTo === limits.priceToBuy.max
+					? undefined
+					: data.priceToBuyTo,
+			caloriesFrom:
+				data.caloriesFrom === limits.calories.min
+					? undefined
+					: data.caloriesFrom,
+			caloriesTo:
+				data.caloriesTo === limits.calories.max ? undefined : data.caloriesTo,
+			proteinsFrom:
+				data.proteinsFrom === limits.proteins.min
+					? undefined
+					: data.proteinsFrom,
+			proteinsTo:
+				data.proteinsTo === limits.proteins.max ? undefined : data.proteinsTo,
+			fatsFrom: data.fatsFrom === limits.fats.min ? undefined : data.fatsFrom,
+			fatsTo: data.fatsTo === limits.fats.max ? undefined : data.fatsTo,
+			carbohydratesFrom:
+				data.carbohydratesFrom === limits.carbohydrates.min
+					? undefined
+					: data.carbohydratesFrom,
+			carbohydratesTo:
+				data.carbohydratesTo === limits.carbohydrates.max
+					? undefined
+					: data.carbohydratesTo,
+			ration: data.ration?.length ? data.ration : undefined,
+			type: data.type?.length ? data.type : undefined,
+		});
+		setFilters(deleteFieldsWithUndefinedValues(preparedData));
+		setBadges(deleteFieldsWithUndefinedValues(preparedData));
 		setPage(1);
 	});
 
 	const onHandleSaveToLocalStorage = () => {
 		const formValues: Partial<RecipeListFilter> =
 			getValues() as Partial<RecipeListFilter>;
+		const preparedFormValues = deleteFieldsWithUndefinedValues({
+			...formValues,
+			priceOfDishFrom:
+				formValues?.priceOfDishFrom === limits.priceOfDish.min
+					? undefined
+					: formValues?.priceOfDishFrom,
+			priceOfDishTo:
+				formValues?.priceOfDishTo === limits.priceOfDish.max
+					? undefined
+					: formValues?.priceOfDishTo,
+			priceToBuyFrom:
+				formValues?.priceToBuyFrom === limits.priceToBuy.min
+					? undefined
+					: formValues?.priceToBuyFrom,
+			priceToBuyTo:
+				formValues?.priceToBuyTo === limits.priceToBuy.max
+					? undefined
+					: formValues?.priceToBuyTo,
+			caloriesFrom:
+				formValues?.caloriesFrom === limits.calories.min
+					? undefined
+					: formValues?.caloriesFrom,
+			caloriesTo:
+				formValues?.caloriesTo === limits.calories.max
+					? undefined
+					: formValues?.caloriesTo,
+			proteinsFrom:
+				formValues?.proteinsFrom === limits.proteins.min
+					? undefined
+					: formValues?.proteinsFrom,
+			proteinsTo:
+				formValues?.proteinsTo === limits.proteins.max
+					? undefined
+					: formValues?.proteinsTo,
+			fatsFrom:
+				formValues?.fatsFrom === limits.fats.min
+					? undefined
+					: formValues?.fatsFrom,
+			fatsTo:
+				formValues?.fatsTo === limits.fats.max ? undefined : formValues?.fatsTo,
+			carbohydratesFrom:
+				formValues?.carbohydratesFrom === limits.carbohydrates.min
+					? undefined
+					: formValues?.carbohydratesFrom,
+			carbohydratesTo:
+				formValues?.carbohydratesTo === limits.carbohydrates.max
+					? undefined
+					: formValues?.carbohydratesTo,
+		});
 
-		storageSetItem(formValues);
+		storageSetItem(deleteFieldsWithUndefinedValues(preparedFormValues));
 		setFormKey((prev) => prev + 1);
 	};
 
@@ -175,10 +277,13 @@ export const RecipesListFilter: FC<RecipesListFilterProps> = ({
 					render={({ field }) => (
 						<Range
 							label={tFields('price_of_dish')}
-							minValue={0}
-							maxValue={5000}
+							minValue={limits.priceOfDish.min}
+							maxValue={limits.priceOfDish.max}
 							step={10}
-							value={[watch('priceOfDishFrom') ?? 0, field.value ?? 5000]}
+							value={[
+								watch('priceOfDishFrom') ?? limits.priceOfDish.min,
+								field.value ?? limits.priceOfDish.max,
+							]}
 							onChange={(val) => {
 								if (Array.isArray(val) && val.length === 2) {
 									const [from, to] = val as [number, number];

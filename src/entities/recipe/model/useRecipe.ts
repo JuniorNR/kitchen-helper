@@ -61,13 +61,22 @@ export const useRecipe = ({ page, filters }: UseRecipe) => {
 		}
 	};
 
+	const deleteRecipeData = async (id: string) => {
+		try {
+			const result = await deleteRecipe(id).unwrap();
+			return result;
+		} catch (_) {
+			return null;
+		}
+	};
+
 	return {
 		recipes: data?.data,
 		pagination: data?.pagination,
 		isLoading,
 		error,
 		createRecipeData,
-		deleteRecipe,
+		deleteRecipeData,
 		isCreating,
 		isDeleting,
 	};

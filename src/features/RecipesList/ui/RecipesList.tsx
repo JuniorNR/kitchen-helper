@@ -1,12 +1,13 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRecipe } from '@/entities';
 import { classNames, localStorageHelper } from '@/shared/lib/helpers';
 import { PaginationBar } from '@/shared/ui';
 import type { RecipeListFilter } from '../model/recipeList.types';
-import { SKELETON_KEYS } from '../model/recipeList.utils';
+import { handleDeleteRecipe, SKELETON_KEYS } from '../model/recipeList.utils';
 import { RecipeItem } from './RecipeItem';
 import { RecipeItemSkeleton } from './RecipeItemSkeleton';
 import { RecipesListFilter } from './RecipesListFilter';
@@ -17,11 +18,14 @@ export const RecipesList = () => {
 	const { t: tRecipes } = useTranslation('recipes');
 	const { item: filterFromLocalStorage } =
 		localStorageHelper<RecipeListFilter>('filter_recipes');
+	const [isDeleteLoadingRecipe, setIsDeleteLoadingRecipe] = useState<
+		string | null
+	>(null);
 	const [page, setPage] = useState<number>(1);
 	const [filters, setFilters] = useState<Partial<RecipeListFilter>>(
 		filterFromLocalStorage,
 	);
-	const { recipes, pagination, isLoading } = useRecipe({
+	const { recipes, pagination, isLoading, deleteRecipeData } = useRecipe({
 		page,
 		filters,
 	});
@@ -38,33 +42,89 @@ export const RecipesList = () => {
 					setFilters={setFilters}
 				/>
 			</div>
-			{isLoading ? (
-				<div className={classNames(styles.recipeList)}>
-					{SKELETON_KEYS.map((key) => (
-						<RecipeItemSkeleton key={key} />
-					))}
-				</div>
-			) : recipes && recipes.length > 0 ? (
-				<div className="flex flex-col gap-6">
-					<div
-						className={`${styles.recipeList} justify-center lg:justify-start`}
+			<AnimatePresence mode="wait">
+				{isLoading ? (
+					<motion.div
+						key="loading"
+						initial={{ opacity: 0, filter: 'blur(6px)' }}
+						animate={{ opacity: 1, filter: 'blur(0px)' }}
+						exit={{ opacity: 0, filter: 'blur(6px)' }}
+						transition={{ duration: 0.25 }}
+						className={classNames(styles.recipeList)}
 					>
-						{recipes.map((recipe) => (
-							<RecipeItem key={recipe.id} recipe={recipe} />
+						{SKELETON_KEYS.map((key) => (
+							<RecipeItemSkeleton key={key} />
 						))}
-					</div>
-					<PaginationBar
-						page={page}
-						onPageChange={setPage}
-						totalItems={pagination?.total || 0}
-						currentPage={pagination?.currentPage || 1}
-					/>
-				</div>
-			) : (
-				<div className="mt-10 rounded-2xl border border-dashed border-neutral-300 dark:border-neutral-700 p-8 text-center text-neutral-600 dark:text-neutral-400">
-					{tRecipes('titles.empty_state')}
-				</div>
-			)}
+					</motion.div>
+				) : recipes && recipes.length > 0 ? (
+					<motion.div
+						key="list"
+						initial={{ opacity: 0, filter: 'blur(6px)' }}
+						animate={{ opacity: 1, filter: 'blur(0px)' }}
+						exit={{ opacity: 0, filter: 'blur(6px)' }}
+						transition={{ duration: 0.25 }}
+						className="flex flex-col gap-6"
+					>
+						<motion.div
+							className={`${styles.recipeList} justify-center lg:justify-start`}
+							initial="hidden"
+							animate="visible"
+							variants={{
+								hidden: { opacity: 1 },
+								visible: {
+									opacity: 1,
+									transition: { staggerChildren: 0.06, delayChildren: 0.05 },
+								},
+							}}
+						>
+							{recipes.map((recipe) => (
+								<motion.div
+									key={recipe.id}
+									layout
+									variants={{
+										hidden: { opacity: 0, y: 10, scale: 0.98 },
+										visible: {
+											opacity: 1,
+											y: 0,
+											scale: 1,
+											transition: { duration: 0.25, ease: 'easeOut' },
+										},
+									}}
+								>
+									<RecipeItem
+										recipe={recipe}
+										isDeleting={isDeleteLoadingRecipe === recipe.id.toString()}
+										onDelete={(id) =>
+											handleDeleteRecipe(
+												id,
+												setIsDeleteLoadingRecipe,
+												deleteRecipeData,
+											)
+										}
+									/>
+								</motion.div>
+							))}
+						</motion.div>
+						<PaginationBar
+							page={page}
+							onPageChange={setPage}
+							totalItems={pagination?.total || 0}
+							currentPage={pagination?.currentPage || 1}
+						/>
+					</motion.div>
+				) : (
+					<motion.div
+						key="empty"
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						transition={{ duration: 0.2 }}
+						className="mt-10 rounded-2xl border border-dashed border-neutral-300 dark:border-neutral-700 p-8 text-center text-neutral-600 dark:text-neutral-400"
+					>
+						{tRecipes('titles.empty_state')}
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</div>
 	);
 };

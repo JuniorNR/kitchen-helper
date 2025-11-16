@@ -4,19 +4,22 @@ import { Divider } from '@heroui/divider';
 import { type FC, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SwiperSlide } from 'swiper/react';
-import { useRecipe } from '@/entities';
 import { ImageSRC } from '@/features';
 import { DeleteButton, Slider, Typography } from '@/shared/ui';
 import fallbackImg from '@/shared/ui/images/default.jpg';
 import type { RecipeItemProps } from '../model/recipeList.types';
 import { RecipeItemStepsModal } from './RecipeItemStepsModal';
 
-export const RecipeItem: FC<RecipeItemProps> = ({ recipe }) => {
+export const RecipeItem: FC<RecipeItemProps> = ({
+	recipe,
+	isDeleting = false,
+	onDelete,
+}) => {
 	const { t: tUnits } = useTranslation('units');
 	const { t: tRecipes } = useTranslation('recipes');
 	const { t: tIngredients } = useTranslation('ingredients');
 	const { t: tCommon, i18n } = useTranslation('common');
-	const { deleteRecipe, isDeleting } = useRecipe({});
+
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 
 	const currencyFormatter = useMemo(
@@ -29,8 +32,8 @@ export const RecipeItem: FC<RecipeItemProps> = ({ recipe }) => {
 		[i18n.language],
 	);
 
-	const handleDeleteRecipe = async () => {
-		await deleteRecipe(recipe.id.toString());
+	const handleDeleteRecipe = () => {
+		onDelete?.(recipe.id.toString());
 	};
 
 	const renderImages = () => {
@@ -81,7 +84,15 @@ export const RecipeItem: FC<RecipeItemProps> = ({ recipe }) => {
 	};
 
 	return (
-		<div className="relative rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-gradient-to-br from-white to-neutral-50/70 dark:from-neutral-900 dark:to-neutral-950 shadow-sm hover:shadow-md transition-shadow duration-200 p-3 sm:p-4 focus-within:ring-2 focus-within:ring-primary-500">
+		<div className="group relative rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-gradient-to-br from-white to-neutral-50/70 dark:from-neutral-900 dark:to-neutral-950 shadow-sm hover:shadow-md transition-shadow duration-200 p-3 sm:p-4 focus-within:ring-2 focus-within:ring-primary-500">
+			<div className="absolute right-3 top-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+				<DeleteButton
+					ariaLabel={tCommon('delete')}
+					size="sm"
+					onPress={handleDeleteRecipe}
+					isLoading={isDeleting}
+				/>
+			</div>
 			<div className="flex flex-col h-full">
 				<div>
 					<h3 className="text-lg font-bold text-center mb-2 overflow-hidden line-clamp-2">
@@ -174,9 +185,11 @@ export const RecipeItem: FC<RecipeItemProps> = ({ recipe }) => {
 						</Button>
 						<DeleteButton
 							ariaLabel={tCommon('delete')}
+							label={tCommon('delete')}
 							size="sm"
 							onPress={handleDeleteRecipe}
 							isLoading={isDeleting}
+							className="sm:hidden"
 						/>
 					</div>
 				</div>

@@ -135,7 +135,7 @@ const INGREDIENT_CATEGORY_KEYS: Record<string, readonly string[]> = {
 	bakery: ['bread', 'flatbreads', 'pastries', 'breadcrumbs'],
 	'breakfast-cereals': ['cereals', 'porridge-mixes'],
 	snacks: ['chips', 'dried-meat', 'bars'],
-	beverages: ['tea-coffee', 'juices', 'sodas', 'water', 'non-dairy'],
+	beverages: ['tea-coffee', 'juices', 'sodas', 'water', 'ice', 'non-dairy'],
 	other: ['baby', 'diet', 'supplements'],
 } as const;
 

@@ -52,8 +52,13 @@ export const IngredientsListFilter: FC<IngredientsListFilterProps> = ({
 	});
 
 	const onHandleSubmit = handleSubmit((data) => {
-		setFilters(deleteFieldsWithUndefinedValues(data));
-		setBadges(deleteFieldsWithUndefinedValues(data));
+		const preparedData = deleteFieldsWithUndefinedValues({
+			...data,
+			categories: data.categories?.length ? data.categories : undefined,
+			units: data.units?.length ? data.units : undefined,
+		});
+		setFilters(preparedData);
+		setBadges(preparedData);
 		setPage(1);
 	});
 

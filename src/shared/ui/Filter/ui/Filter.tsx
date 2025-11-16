@@ -131,7 +131,6 @@ export const Filter: FC<FilterProps> = ({
 				const preparedValue = (
 					badgeItem: string | number | Date | string[] | number[],
 				): string => {
-					console.debug(badge[0], badgeItem);
 					if (badge[0] === 'categories') {
 						return tIngredients(`labels.${badgeItem}`);
 					}
