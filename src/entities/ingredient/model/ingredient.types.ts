@@ -15,6 +15,7 @@ export interface Ingredient {
 	category: string;
 	createdAt: string;
 	updatedAt: string;
+	stepsCount: number;
 	usage?: {
 		amount: string; // TODO: Возможно переписать
 	};
@@ -30,4 +31,5 @@ export interface IngredientDTO {
 	category: string;
 	created_at: string;
 	updated_at: string;
+	steps_count: number;
 }

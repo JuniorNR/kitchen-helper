@@ -22,9 +22,6 @@ export default function SettingsPage() {
 					<Tab key="user" title={tCommon('page_titles.user_settings')}>
 						<UserSettings />
 					</Tab>
-					<Tab key="music" title="Music" disabled>
-						music
-					</Tab>
 				</Tabs>
 			</div>
 		</div>

@@ -11,21 +11,7 @@ export const INGREDIENT_SKELETON_KEYS = [
 ];
 
 export const prepareIngredientsList = (ingredients?: Ingredient[]) => {
-	if (ingredients) {
-		return ingredients.map((ingredient) => ({
-			id: ingredient.id,
-			title: ingredient.title,
-			description: ingredient.description,
-			category: ingredient.category,
-			unit: ingredient.unit,
-			price: ingredient.price,
-			currency: ingredient.currency,
-			updatedAt: ingredient.updatedAt,
-			createdAt: ingredient.createdAt,
-		}));
-	}
-
-	return [];
+	return ingredients ?? [];
 };
 
 export const handleDeleteIngredient = async (

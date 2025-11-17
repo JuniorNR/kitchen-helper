@@ -36,11 +36,12 @@ export const FilterForm: FC<FilterFormProps> = ({
 							{children}
 
 							<Divider className="md:col-span-2" />
-							<div className="mt-1 flex flex-wrap items-center justify-end gap-2 md:col-span-2">
+							<div className="mt-1 flex flex-col md:flex-row flex-wrap items-stretch md:items-center gap-2 md:justify-end md:col-span-2">
 								<Button
 									type="submit"
 									color="primary"
 									size="sm"
+									className="w-full md:w-auto"
 									isDisabled={submitDisabled}
 								>
 									{tFields('apply')}
@@ -49,13 +50,17 @@ export const FilterForm: FC<FilterFormProps> = ({
 									type="button"
 									variant="light"
 									size="sm"
+									className="w-full md:w-auto"
 									onPress={onCancel}
 								>
 									{tFields('cancel')}
 								</Button>
-								<Divider orientation="vertical" />
+								<Divider
+									orientation="vertical"
+									className="hidden md:block h-6"
+								/>
 								<Button
-									className="dark:text-primary-foreground"
+									className="dark:text-primary-foreground w-full md:w-auto"
 									type="button"
 									variant="flat"
 									color="primary"
@@ -70,6 +75,7 @@ export const FilterForm: FC<FilterFormProps> = ({
 									variant="bordered"
 									color="danger"
 									size="sm"
+									className="w-full md:w-auto"
 									onPress={onReset}
 								>
 									{tFields('reset_preset')}

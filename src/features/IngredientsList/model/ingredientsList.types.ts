@@ -1,3 +1,5 @@
+import type { Ingredient } from '@/entities';
+
 export interface IngredientListFilter {
 	priceFrom: number;
 	priceTo: number;
@@ -20,4 +22,17 @@ export interface IngredientListFilterDTO {
 	created_to: string;
 	categories: string[];
 	units: string[];
+}
+
+export interface IngredientCardProps {
+	ingredient: Ingredient;
+	isDeleting: boolean;
+	onDelete: (id: string) => void;
+}
+
+export interface IngredientCardDeleteModalProps {
+	id: string;
+	title: string;
+	isDeleting: boolean;
+	onDelete: (id: string) => void;
 }

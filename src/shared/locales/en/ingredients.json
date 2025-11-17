@@ -226,5 +226,11 @@
 	},
 	"titles": {
 		"empty_state": "Ingredient list is empty"
+	},
+	"delete_modal": {
+		"title": "Delete ingredient",
+		"description": "Are you sure you want to delete the ingredient «{{title}}»?",
+		"warning": "This action is irreversible",
+		"warning_description": "The ingredient is used in one or more recipes"
 	}
 }

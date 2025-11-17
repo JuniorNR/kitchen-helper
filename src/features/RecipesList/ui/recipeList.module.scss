@@ -2,9 +2,9 @@
   @apply grid gap-[1rem] m-[0_auto] grid-cols-[repeat(4,minmax(250px,1fr))];
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1460px) {
   .recipeList {
-    @apply grid-cols-[repeat(3,minmax(250px,1fr))];
+    @apply grid-cols-[repeat(2,minmax(250px,1fr))];
   }
 }
 
@@ -14,7 +14,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 750px) {
   .recipeList {
     @apply grid-cols-[minmax(250px,1fr)];
   }

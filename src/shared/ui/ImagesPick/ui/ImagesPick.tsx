@@ -7,8 +7,11 @@ import { PhotoIcon } from '../../icons/photoIcon';
 import type { ImagesPickProps } from '../model/ImagesPick.types';
 import styles from './imagesPick.module.scss';
 
-export const ImagesPick: FC<ImagesPickProps> = ({ errorMessage, ...props }) => {
-	const maxImages = props.maxImages ?? 5;
+export const ImagesPick: FC<ImagesPickProps> = ({
+	errorMessage,
+	maxImages = 5,
+	...props
+}) => {
 	const inputSelectRef = useRef<HTMLInputElement | null>(null);
 	const [previews, setPreviews] = useState<string[]>([]);
 

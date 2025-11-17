@@ -7,21 +7,27 @@ import type { RecipeCreateImagesProps } from '../model/recipeCreate.types';
 export const RecipeCreateImages: FC<RecipeCreateImagesProps> = ({
 	control,
 }) => {
-	const { update } = useFieldArray<RecipeCreateFormInputType>({
+	const { fields, append } = useFieldArray<RecipeCreateFormInputType>({
 		control,
 		name: 'images',
 	});
 
 	const handleFilesSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
-		if (event.target.files !== null && (event.target.files.length ?? 0)) {
-			for (let i = 0; i < event.target.files.length; i++) {
-				update(i, {
-					isMain: i === 0,
-					file: event.target.files[i],
-					position: i + 1,
-				});
-			}
-		}
+		const maxImages = 5;
+		const remainingSlots = Math.max(0, maxImages - fields.length);
+		if (remainingSlots <= 0) return;
+
+		const files = Array.from(event.target.files ?? []).slice(0, remainingSlots);
+		if (files.length === 0) return;
+
+		const startIndex = fields.length;
+		files.forEach((file, index) => {
+			append({
+				isMain: startIndex === 0 && index === 0,
+				file,
+				position: startIndex + index + 1,
+			});
+		});
 	};
 
 	return (
@@ -34,6 +40,7 @@ export const RecipeCreateImages: FC<RecipeCreateImagesProps> = ({
 						<div>
 							<ImagesPick
 								errorMessage={fieldState.error?.message}
+								maxImages={5}
 								onChange={handleFilesSelected}
 							/>
 						</div>

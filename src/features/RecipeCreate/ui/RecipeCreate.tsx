@@ -37,6 +37,9 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 	const { t: tFields } = useTranslation('fields');
 	const { t: tIngredients } = useTranslation('ingredients');
 	const { t: tRecipes } = useTranslation('recipes');
+
+	const formSectionStyles = 'grid grid-cols-1 md:grid-cols-2 gap-4 w-full';
+
 	const { control, handleSubmit } = useForm<RecipeCreateFormInputType>({
 		resolver: zodResolver(createRecipeCreateSchema(tValidation)),
 		defaultValues: {
@@ -71,8 +74,6 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 		control,
 		name: 'steps',
 	});
-
-	const formSectionStyles = 'grid grid-cols-1 md:grid-cols-2 gap-4 w-full';
 
 	const onSubmit = async (data: RecipeCreateFormInputType) => {
 		const result = await createRecipeData(data);
