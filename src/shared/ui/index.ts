@@ -2,6 +2,7 @@ export { Alerts } from './Alerts';
 export { DeleteButton } from './DeleteButton';
 export { Filter, FilterGroup } from './Filter';
 export { ImagesPick } from './ImagesPick';
+export { Modal } from './Modal';
 export { NumberInput } from './NumberInput';
 export { PaginationBar } from './PaginationBar';
 export { PriceInput } from './PriceInput';

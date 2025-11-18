@@ -3,9 +3,8 @@ import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { type FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { DeleteButton, Typography } from '@/shared/ui';
+import { DeleteButton, Modal, Typography } from '@/shared/ui';
 import type { IngredientCardProps } from '../model/ingredientsList.types';
-import { IngredientCardDeleteModal } from './IngredientCardDeleteModal';
 
 export const IngredientCard: FC<IngredientCardProps> = ({
 	ingredient,
@@ -134,11 +133,30 @@ export const IngredientCard: FC<IngredientCardProps> = ({
 			className={`group flex flex-col sm:h-[280px] relative rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-gradient-to-br from-white to-neutral-50/70 dark:from-neutral-900 dark:to-neutral-950 shadow-sm hover:shadow-lg transition-all duration-200 p-3 sm:p-4 focus-within:ring-2 ${variant.ring} hover:-translate-y-0.5`}
 		>
 			<div className="absolute right-3 top-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
-				<IngredientCardDeleteModal
-					id={ingredient.id}
-					title={ingredient.title}
-					onDelete={() => onDelete?.(ingredient.id)}
-					isDeleting={isDeleting}
+				<Modal
+					TriggerComponent={({ onPress }) => (
+						<DeleteButton
+							ariaLabel={tCommon('delete')}
+							size="sm"
+							onPress={onPress}
+						/>
+					)}
+					title={tIngredients('delete_modal.title')}
+					subtitle={tIngredients('delete_modal.warning')}
+					accentItemTitle={ingredient.title}
+					warningFields={[
+						tIngredients('delete_modal.warning_description', {
+							title: ingredient.title,
+						}),
+					]}
+					description={tIngredients('delete_modal.description', {
+						title: ingredient.title,
+					})}
+					onConfirm={() => onDelete?.(ingredient.id)}
+					isLoading={isDeleting}
+					confirmButtonText={tCommon('delete')}
+					confirmButtonColor="danger"
+					confirmButtonVariant="shadow"
 				/>
 			</div>
 

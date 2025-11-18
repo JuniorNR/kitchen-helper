@@ -111,5 +111,10 @@
 		"put_on_the_market": "Put on the market",
 		"add_image": "Add image",
 		"select_images": "Select images"
+	},
+	"delete_modal": {
+		"title": "Delete recipe",
+		"description": "Are you sure you want to delete the recipe «{{title}}»?",
+		"warning": "This action is irreversible"
 	}
 }
