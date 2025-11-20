@@ -1,3 +1,5 @@
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
+
 export interface ApiResponsePaginationDTO {
 	current_page: number;
 	last_page: number;
@@ -26,3 +28,22 @@ export interface ApiResponse<
 	pagination: U;
 	code: string;
 }
+
+export type ApiErrorDTO = FetchBaseQueryError & {
+	error: {
+		data: {
+			code?: string;
+			current_role?: string;
+			required_roles?: string[];
+		};
+	};
+};
+export type ApiError = FetchBaseQueryError & {
+	error: {
+		data: {
+			code?: string;
+			currentRole?: string;
+			requiredRoles?: string[];
+		};
+	};
+};

@@ -1,4 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
+import { addAlert } from '@/features/Alert';
 import type {
 	IngredientListFilter,
 	IngredientListFilterDTO,
@@ -7,6 +8,8 @@ import type { IngredientCreateFormDataType } from '@/features/ingredientCreate/m
 import { dto } from '@/shared/lib/helpers/dto';
 import { baseQuery } from '@/shared/lib/store/baseQuery';
 import type {
+	ApiError,
+	ApiErrorDTO,
 	ApiResponse,
 	ApiResponsePagination,
 	ApiResponsePaginationDTO,
@@ -54,6 +57,25 @@ export const ingredientApi = createApi({
 				};
 			},
 			providesTags: ['Ingredients'],
+			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+				try {
+					await queryFulfilled;
+				} catch (error) {
+					const apiError = dto<ApiErrorDTO, ApiError>(
+						'toClient',
+						error as ApiError,
+					);
+					const code = apiError.error.data?.code;
+					dispatch(
+						addAlert({
+							id: crypto.randomUUID(),
+							status: 'danger',
+							title: 'Error',
+							description: code || 'UNKNOWN_ERROR',
+						}),
+					);
+				}
+			},
 		}),
 		createIngredient: builder.mutation<
 			Ingredient,

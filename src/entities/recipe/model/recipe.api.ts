@@ -1,4 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
+import { addAlert } from '@/features/Alert';
 import type { RecipeCreateFormInputType } from '@/features/RecipeCreate/model/recipeCreate.schema';
 import type {
 	RecipeListFilter,
@@ -6,7 +7,7 @@ import type {
 } from '@/features/RecipesList/model/recipeList.types';
 import { dto } from '@/shared/lib/helpers';
 import { baseQuery } from '@/shared/lib/store/baseQuery';
-import type { ApiResponse } from '@/shared/lib/types';
+import type { ApiError, ApiErrorDTO, ApiResponse } from '@/shared/lib/types';
 import type { Recipe, RecipeDTO, UseRecipe } from './recipe.type';
 import { buildRecipeCreateFormData } from './recipe.utils';
 
@@ -39,6 +40,25 @@ export const recipeApi = createApi({
 					code: response.code,
 				};
 			},
+			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+				try {
+					await queryFulfilled;
+				} catch (error) {
+					const apiError = dto<ApiErrorDTO, ApiError>(
+						'toClient',
+						error as ApiError,
+					);
+					const code = apiError.error.data?.code;
+					dispatch(
+						addAlert({
+							id: crypto.randomUUID(),
+							status: 'danger',
+							title: 'Error',
+							description: code || 'UNKNOWN_ERROR',
+						}),
+					);
+				}
+			},
 		}),
 		createRecipe: builder.mutation<
 			{ recipe: Recipe; code: string },
@@ -56,6 +76,41 @@ export const recipeApi = createApi({
 					code: response.code,
 				};
 			},
+			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+				try {
+					const result = await queryFulfilled;
+					if (result.data.recipe) {
+						dispatch(
+							addAlert({
+								id: crypto.randomUUID(),
+								status: 'success',
+								title: 'Success',
+								description: result.data.code || 'SUCCESS',
+							}),
+						);
+					} else {
+						dispatch(
+							addAlert({
+								id: crypto.randomUUID(),
+								status: 'danger',
+								title: 'Error',
+								description: result.data.code || 'UNKNOWN_ERROR',
+							}),
+						);
+					}
+				} catch (error) {
+					const apiError = error as ApiError;
+					const code = apiError.error.data?.code;
+					dispatch(
+						addAlert({
+							id: crypto.randomUUID(),
+							status: 'danger',
+							title: 'Error',
+							description: code || 'UNKNOWN_ERROR',
+						}),
+					);
+				}
+			},
 		}),
 		deleteRecipe: builder.mutation<{ code: string }, string>({
 			invalidatesTags: ['Recipe'],
@@ -63,6 +118,22 @@ export const recipeApi = createApi({
 				url: `/recipes/delete/${id}`,
 				method: 'DELETE',
 			}),
+			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+				try {
+					await queryFulfilled;
+				} catch (error) {
+					const apiError = error as ApiError;
+					const code = apiError.error.data?.code;
+					dispatch(
+						addAlert({
+							id: crypto.randomUUID(),
+							status: 'danger',
+							title: 'Error',
+							description: code || 'UNKNOWN_ERROR',
+						}),
+					);
+				}
+			},
 		}),
 	}),
 });
