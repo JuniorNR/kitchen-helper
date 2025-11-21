@@ -12,12 +12,13 @@ import { Input, Textarea } from '@heroui/input';
 import { NumberInput } from '@heroui/number-input';
 import { Select, SelectItem } from '@heroui/select';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { type FC, useRef } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useRecipe } from '@/entities';
 import { classNames } from '@/shared/lib/helpers/classNames';
+import { Alert } from '@/shared/ui';
 import { CheckIcon } from '@/shared/ui/icons/checkIcon';
 import { PlusIcon } from '@/shared/ui/icons/plusIcon';
 import {
@@ -31,12 +32,13 @@ import { RecipeCreateStepCard } from './RecipeCreateStepCard';
 import styles from './recipeCreate.module.scss';
 
 export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
-	const { createRecipeData, isCreating } = useRecipe({});
+	const { createRecipeData, isCreating, error, isLoading } = useRecipe({});
 	const { t: tValidation } = useTranslation('validation');
 	const { t: tCommon } = useTranslation('common');
 	const { t: tFields } = useTranslation('fields');
 	const { t: tIngredients } = useTranslation('ingredients');
 	const { t: tRecipes } = useTranslation('recipes');
+	const { t: tAlerts } = useTranslation('alerts');
 
 	const formSectionStyles = 'grid grid-cols-1 md:grid-cols-2 gap-4 w-full';
 
@@ -95,281 +97,331 @@ export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
 
 	const stepsContainerRef = useRef<HTMLDivElement>(null);
 
+	const renderLoading = () => {
+		return (
+			<motion.div
+				key="loading"
+				initial={{ opacity: 0, filter: 'blur(6px)' }}
+				animate={{ opacity: 1, filter: 'blur(0px)' }}
+				exit={{ opacity: 0, filter: 'blur(6px)' }}
+				transition={{ duration: 0.25 }}
+			>
+				<Card radius="sm" shadow="sm">
+					<CardBody className="flex flex-col gap-4">
+						<div className="flex items-center justify-center py-20">
+							<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+						</div>
+					</CardBody>
+				</Card>
+			</motion.div>
+		);
+	};
+
+	const renderError = () => {
+		return (
+			<Alert
+				status="danger"
+				title={tAlerts('codes.ACCESS_DENIED')}
+				description={tCommon('common.section_only_for', {
+					roles: error?.data.requiredRoles?.map((role) =>
+						tCommon(`roles.${role}`).toLowerCase(),
+					),
+				})}
+			/>
+		);
+	};
+
+	const renderForm = () => {
+		return (
+			<motion.div
+				key="form"
+				initial={{ opacity: 0, filter: 'blur(6px)' }}
+				animate={{ opacity: 1, filter: 'blur(0px)' }}
+				exit={{ opacity: 0, filter: 'blur(6px)' }}
+				transition={{ duration: 0.25 }}
+			>
+				<Card radius="sm" shadow="sm">
+					<CardBody className="flex flex-col gap-4">
+						<Form
+							className="flex flex-col gap-4"
+							onSubmit={handleSubmit(onSubmit)}
+						>
+							<Controller
+								control={control}
+								name="title"
+								render={({ field, fieldState }) => (
+									<Input
+										label={tFields('title')}
+										isInvalid={fieldState.invalid}
+										isRequired
+										errorMessage={fieldState.error?.message}
+										{...field}
+									/>
+								)}
+							/>
+							<Controller
+								control={control}
+								name="description"
+								render={({ field, fieldState }) => (
+									<Textarea
+										{...field}
+										isRequired
+										label={tFields('description')}
+										isInvalid={fieldState.invalid}
+										errorMessage={fieldState.error?.message}
+									/>
+								)}
+							/>
+							<Divider />
+
+							<div className={formSectionStyles}>
+								<Controller
+									control={control}
+									name="ration"
+									render={({ field, fieldState }) => (
+										<Select
+											label={tFields('ration')}
+											size="lg"
+											isInvalid={fieldState.invalid}
+											errorMessage={fieldState.error?.message}
+											{...field}
+										>
+											<SelectItem onPress={() => field.onChange('breakfast')}>
+												{tIngredients('rations.breakfast')}
+											</SelectItem>
+											<SelectItem onPress={() => field.onChange('lunch')}>
+												{tIngredients('rations.lunch')}
+											</SelectItem>
+											<SelectItem onPress={() => field.onChange('dinner')}>
+												{tIngredients('rations.dinner')}
+											</SelectItem>
+										</Select>
+									)}
+								/>
+								<Controller
+									control={control}
+									name="duration"
+									render={({ field, fieldState }) => (
+										<NumberInput
+											label={tFields('duration_minutes')}
+											size="lg"
+											isRequired
+											isInvalid={fieldState.invalid}
+											errorMessage={fieldState.error?.message}
+											min={0}
+											step={1}
+											value={Number(field.value) || 0}
+											onValueChange={(value: number) =>
+												field.onChange(Number(value))
+											}
+										/>
+									)}
+								/>
+								<Controller
+									control={control}
+									name="type"
+									render={({ field, fieldState }) => (
+										<Autocomplete
+											className="w-full"
+											label={tFields('type')}
+											size="lg"
+											isRequired
+											isInvalid={fieldState.invalid}
+											errorMessage={fieldState.error?.message}
+											{...field}
+										>
+											{getGroupedOptions(tRecipes).map((group) => (
+												<AutocompleteSection
+													key={group.label}
+													title={group.label}
+												>
+													{group.options.map((option) => (
+														<AutocompleteItem
+															key={option.value}
+															onPress={() => field.onChange(option.value)}
+														>
+															{option.label}
+														</AutocompleteItem>
+													))}
+												</AutocompleteSection>
+											))}
+										</Autocomplete>
+									)}
+								/>
+							</div>
+
+							<Divider />
+							<div className={formSectionStyles}>
+								<Controller
+									control={control}
+									name="calories"
+									render={({ field, fieldState }) => (
+										<NumberInput
+											label={tFields('calories')}
+											size="lg"
+											isInvalid={fieldState.invalid}
+											errorMessage={fieldState.error?.message}
+											min={0}
+											step={10}
+											value={Number(field.value) || 0}
+											onValueChange={(value: number) =>
+												field.onChange(Number(value))
+											}
+										/>
+									)}
+								/>
+								<Controller
+									control={control}
+									name="proteins"
+									render={({ field, fieldState }) => (
+										<NumberInput
+											label={tFields('proteins')}
+											size="lg"
+											isInvalid={fieldState.invalid}
+											errorMessage={fieldState.error?.message}
+											min={0}
+											step={10}
+											value={Number(field.value) || 0}
+											onValueChange={(value: number) =>
+												field.onChange(Number(value))
+											}
+										/>
+									)}
+								/>
+								<Controller
+									control={control}
+									name="fats"
+									render={({ field, fieldState }) => (
+										<NumberInput
+											label={tFields('fats')}
+											size="lg"
+											isInvalid={fieldState.invalid}
+											errorMessage={fieldState.error?.message}
+											min={0}
+											step={10}
+											value={Number(field.value) || 0}
+											onValueChange={(value: number) =>
+												field.onChange(Number(value))
+											}
+										/>
+									)}
+								/>
+								<Controller
+									control={control}
+									name="carbohydrates"
+									render={({ field, fieldState }) => (
+										<NumberInput
+											label={tFields('carbohydrates')}
+											size="lg"
+											isInvalid={fieldState.invalid}
+											errorMessage={fieldState.error?.message}
+											min={0}
+											step={10}
+											value={Number(field.value) || 0}
+											onValueChange={(value: number) =>
+												field.onChange(Number(value))
+											}
+										/>
+									)}
+								/>
+							</div>
+							<div className={formSectionStyles}>
+								<Controller
+									control={control}
+									name="priceToBuy"
+									render={({ field, fieldState }) => (
+										<NumberInput
+											label={tFields('price_to_buy')}
+											size="lg"
+											isInvalid={fieldState.invalid}
+											errorMessage={fieldState.error?.message}
+											min={0}
+											step={10}
+											value={Number(field.value) || 0}
+											onValueChange={(value: number) =>
+												field.onChange(Number(value))
+											}
+										/>
+									)}
+								/>
+								<Controller
+									control={control}
+									name="priceOfDish"
+									render={({ field, fieldState }) => (
+										<NumberInput
+											label={tFields('price_of_dish')}
+											size="lg"
+											isInvalid={fieldState.invalid}
+											errorMessage={fieldState.error?.message}
+											min={0}
+											step={10}
+											value={Number(field.value) || 0}
+											onValueChange={(value: number) =>
+												field.onChange(Number(value))
+											}
+										/>
+									)}
+								/>
+							</div>
+							<Divider />
+
+							<div className="flex w-full">
+								<RecipeCreateImages control={control} />
+							</div>
+							<Button
+								type="button"
+								fullWidth
+								variant="shadow"
+								color="secondary"
+								radius="sm"
+								startContent={<PlusIcon />}
+								onPress={handleAddStep}
+							>
+								{tFields('add_step')}
+							</Button>
+							<div
+								ref={stepsContainerRef}
+								className={classNames(styles.scrollXGradient, {}, [
+									'flex w-full py-2 px-0 xl:px-2 overflow-x-auto flex-row gap-4 snap-x snap-mandatory scroll-smooth',
+								])}
+							>
+								<AnimatePresence initial={true}>
+									{stepFields.map((stepField, index) => (
+										<RecipeCreateStepCard
+											key={stepField.id}
+											stepIndex={index}
+											control={control}
+											onRemove={() => removeStep(index)}
+										/>
+									))}
+								</AnimatePresence>
+							</div>
+							<Button
+								type="submit"
+								fullWidth
+								variant="shadow"
+								color="primary"
+								radius="sm"
+								startContent={<CheckIcon />}
+								isLoading={isCreating}
+							>
+								{tCommon('create')}
+							</Button>
+						</Form>
+					</CardBody>
+				</Card>
+			</motion.div>
+		);
+	};
+
 	return (
-		<div className="w-full max-w-4xl mx-auto">
+		<div className="w-full max-w-4xl mx-auto min-h-[600px] transition-all duration-300">
 			<h1 className="text-2xl font-bold mb-3">
 				{tCommon('page_titles.recipe_create')}
 			</h1>
-			<Card radius="sm" shadow="sm">
-				<CardBody className="flex flex-col gap-4">
-					<Form
-						className="flex flex-col gap-4"
-						onSubmit={handleSubmit(onSubmit)}
-					>
-						<Controller
-							control={control}
-							name="title"
-							render={({ field, fieldState }) => (
-								<Input
-									label={tFields('title')}
-									isInvalid={fieldState.invalid}
-									isRequired
-									errorMessage={fieldState.error?.message}
-									{...field}
-								/>
-							)}
-						/>
-						<Controller
-							control={control}
-							name="description"
-							render={({ field, fieldState }) => (
-								<Textarea
-									{...field}
-									isRequired
-									label={tFields('description')}
-									isInvalid={fieldState.invalid}
-									errorMessage={fieldState.error?.message}
-								/>
-							)}
-						/>
-						<Divider />
-
-						<div className={formSectionStyles}>
-							<Controller
-								control={control}
-								name="ration"
-								render={({ field, fieldState }) => (
-									<Select
-										label={tFields('ration')}
-										size="lg"
-										isInvalid={fieldState.invalid}
-										errorMessage={fieldState.error?.message}
-										{...field}
-									>
-										<SelectItem onPress={() => field.onChange('breakfast')}>
-											{tIngredients('rations.breakfast')}
-										</SelectItem>
-										<SelectItem onPress={() => field.onChange('lunch')}>
-											{tIngredients('rations.lunch')}
-										</SelectItem>
-										<SelectItem onPress={() => field.onChange('dinner')}>
-											{tIngredients('rations.dinner')}
-										</SelectItem>
-									</Select>
-								)}
-							/>
-							<Controller
-								control={control}
-								name="duration"
-								render={({ field, fieldState }) => (
-									<NumberInput
-										label={tFields('duration_minutes')}
-										size="lg"
-										isRequired
-										isInvalid={fieldState.invalid}
-										errorMessage={fieldState.error?.message}
-										min={0}
-										step={1}
-										value={Number(field.value) || 0}
-										onValueChange={(value: number) =>
-											field.onChange(Number(value))
-										}
-									/>
-								)}
-							/>
-							<Controller
-								control={control}
-								name="type"
-								render={({ field, fieldState }) => (
-									<Autocomplete
-										className="w-full"
-										label={tFields('type')}
-										size="lg"
-										isRequired
-										isInvalid={fieldState.invalid}
-										errorMessage={fieldState.error?.message}
-										{...field}
-									>
-										{getGroupedOptions(tRecipes).map((group) => (
-											<AutocompleteSection
-												key={group.label}
-												title={group.label}
-											>
-												{group.options.map((option) => (
-													<AutocompleteItem
-														key={option.value}
-														onPress={() => field.onChange(option.value)}
-													>
-														{option.label}
-													</AutocompleteItem>
-												))}
-											</AutocompleteSection>
-										))}
-									</Autocomplete>
-								)}
-							/>
-						</div>
-
-						<Divider />
-						<div className={formSectionStyles}>
-							<Controller
-								control={control}
-								name="calories"
-								render={({ field, fieldState }) => (
-									<NumberInput
-										label={tFields('calories')}
-										size="lg"
-										isInvalid={fieldState.invalid}
-										errorMessage={fieldState.error?.message}
-										min={0}
-										step={10}
-										value={Number(field.value) || 0}
-										onValueChange={(value: number) =>
-											field.onChange(Number(value))
-										}
-									/>
-								)}
-							/>
-							<Controller
-								control={control}
-								name="proteins"
-								render={({ field, fieldState }) => (
-									<NumberInput
-										label={tFields('proteins')}
-										size="lg"
-										isInvalid={fieldState.invalid}
-										errorMessage={fieldState.error?.message}
-										min={0}
-										step={10}
-										value={Number(field.value) || 0}
-										onValueChange={(value: number) =>
-											field.onChange(Number(value))
-										}
-									/>
-								)}
-							/>
-							<Controller
-								control={control}
-								name="fats"
-								render={({ field, fieldState }) => (
-									<NumberInput
-										label={tFields('fats')}
-										size="lg"
-										isInvalid={fieldState.invalid}
-										errorMessage={fieldState.error?.message}
-										min={0}
-										step={10}
-										value={Number(field.value) || 0}
-										onValueChange={(value: number) =>
-											field.onChange(Number(value))
-										}
-									/>
-								)}
-							/>
-							<Controller
-								control={control}
-								name="carbohydrates"
-								render={({ field, fieldState }) => (
-									<NumberInput
-										label={tFields('carbohydrates')}
-										size="lg"
-										isInvalid={fieldState.invalid}
-										errorMessage={fieldState.error?.message}
-										min={0}
-										step={10}
-										value={Number(field.value) || 0}
-										onValueChange={(value: number) =>
-											field.onChange(Number(value))
-										}
-									/>
-								)}
-							/>
-						</div>
-						<div className={formSectionStyles}>
-							<Controller
-								control={control}
-								name="priceToBuy"
-								render={({ field, fieldState }) => (
-									<NumberInput
-										label={tFields('price_to_buy')}
-										size="lg"
-										isInvalid={fieldState.invalid}
-										errorMessage={fieldState.error?.message}
-										min={0}
-										step={10}
-										value={Number(field.value) || 0}
-										onValueChange={(value: number) =>
-											field.onChange(Number(value))
-										}
-									/>
-								)}
-							/>
-							<Controller
-								control={control}
-								name="priceOfDish"
-								render={({ field, fieldState }) => (
-									<NumberInput
-										label={tFields('price_of_dish')}
-										size="lg"
-										isInvalid={fieldState.invalid}
-										errorMessage={fieldState.error?.message}
-										min={0}
-										step={10}
-										value={Number(field.value) || 0}
-										onValueChange={(value: number) =>
-											field.onChange(Number(value))
-										}
-									/>
-								)}
-							/>
-						</div>
-						<Divider />
-
-						<div className="flex w-full">
-							<RecipeCreateImages control={control} />
-						</div>
-						<Button
-							type="button"
-							fullWidth
-							variant="shadow"
-							color="secondary"
-							radius="sm"
-							startContent={<PlusIcon />}
-							onPress={handleAddStep}
-						>
-							{tFields('add_step')}
-						</Button>
-						<div
-							ref={stepsContainerRef}
-							className={classNames(styles.scrollXGradient, {}, [
-								'flex w-full py-2 px-0 xl:px-2 overflow-x-auto flex-row gap-4 snap-x snap-mandatory scroll-smooth',
-							])}
-						>
-							<AnimatePresence initial={true}>
-								{stepFields.map((stepField, index) => (
-									<RecipeCreateStepCard
-										key={stepField.id}
-										stepIndex={index}
-										control={control}
-										onRemove={() => removeStep(index)}
-									/>
-								))}
-							</AnimatePresence>
-						</div>
-						<Button
-							type="submit"
-							fullWidth
-							variant="shadow"
-							color="primary"
-							radius="sm"
-							startContent={<CheckIcon />}
-							isLoading={isCreating}
-						>
-							{tCommon('create')}
-						</Button>
-					</Form>
-				</CardBody>
-			</Card>
+			<AnimatePresence mode="wait">
+				{error ? renderError() : isLoading ? renderLoading() : renderForm()}
+			</AnimatePresence>
 		</div>
 	);
 };

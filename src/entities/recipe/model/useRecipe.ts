@@ -1,5 +1,6 @@
 import type { RecipeCreateFormInputType } from '@/features/RecipeCreate/model/recipeCreate.schema';
-import { serializeDate } from '@/shared/lib/helpers';
+import { dto, serializeDate } from '@/shared/lib/helpers';
+import type { ApiError, ApiErrorDTO } from '@/shared/lib/types';
 import {
 	useCreateRecipeMutation,
 	useDeleteRecipeMutation,
@@ -8,7 +9,7 @@ import {
 import type { UseRecipe } from './recipe.type';
 
 export const useRecipe = ({ page, filters }: UseRecipe) => {
-	const { data, isLoading, error } = useGetRecipesQuery({
+	const { data, isLoading, error, refetch } = useGetRecipesQuery({
 		page,
 		filters: filters
 			? {
@@ -43,7 +44,10 @@ export const useRecipe = ({ page, filters }: UseRecipe) => {
 		recipes: data?.data,
 		pagination: data?.pagination,
 		isLoading,
-		error,
+		error: dto<ApiErrorDTO, ApiError>('toClient', error as ApiErrorDTO) as
+			| ApiError
+			| undefined,
+		refetch,
 		createRecipeData,
 		deleteRecipeData,
 		isCreating,

@@ -14,11 +14,12 @@
 		"USER_LOGOUT_ALL": "Пользователь вышел из всех устройств",
 		"USER_UPDATED": "Пользователь обновлен",
 		"INGREDIENT_CREATED": "Ингредиент создан",
-		"INGREDIENT_RETURNED": "Ингредиент возвращен",
-		"INGREDIENT_UPDATED": "Ингредиент обновлен",
-		"INGREDIENT_DELETED": "Ингредиент удален",
-		"INGREDIENTS_RETURNED": "Ингредиенты возвращены",
 		"RECIPE_CREATED": "Рецепт создан",
-		"undefined": "Неизвестная ошибка"
+		"UNKNOWN_ERROR": "Неизвестная ошибка",
+		"ACCESS_DENIED": "Доступ запрещен",
+		"SUCCESS": "Успешно",
+		"ERROR": "Ошибка",
+		"WARNING": "Предупреждение",
+		"INFO": "Информация"
 	}
 }

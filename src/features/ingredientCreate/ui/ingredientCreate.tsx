@@ -11,6 +11,7 @@ import { Divider } from '@heroui/divider';
 import { Form } from '@heroui/form';
 import { Input, Textarea } from '@heroui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { AnimatePresence, motion } from 'framer-motion';
 import type { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -19,7 +20,7 @@ import {
 	getIngredientCategoryGroupsOptions,
 	getUnitGroupsOptions,
 } from '@/shared/lib/constants';
-import { PriceInput } from '@/shared/ui';
+import { Alert, PriceInput } from '@/shared/ui';
 import {
 	getIngredientCreateSchema,
 	type IngredientCreateFormDataType,
@@ -32,6 +33,7 @@ export const IngredientCreate: FC<IngredientCreateProps> = ({ setCreated }) => {
 	const { t: tIngredients } = useTranslation('ingredients');
 	const { t: tValidation } = useTranslation('validation');
 	const { t: tUnits } = useTranslation('units');
+	const { t: tAlerts } = useTranslation('alerts');
 
 	const unitGroupsOptions = getUnitGroupsOptions(tUnits);
 
@@ -47,7 +49,8 @@ export const IngredientCreate: FC<IngredientCreateProps> = ({ setCreated }) => {
 		},
 	});
 
-	const { createIngredientData, isCreateIngredientLoading } = useIngredient({});
+	const { createIngredientData, isCreateIngredientLoading, error, isLoading } =
+		useIngredient({});
 
 	const onSubmit = async (data: IngredientCreateFormDataType) => {
 		const result = await createIngredientData(data);
@@ -56,158 +59,209 @@ export const IngredientCreate: FC<IngredientCreateProps> = ({ setCreated }) => {
 		}
 	};
 
-	return (
-		<div className="w-full max-w-2xl mx-auto">
-			<h1 className="text-2xl font-bold mb-3">
-				{tCommon('page_titles.ingredient_create')}
-			</h1>
-			<Card radius="sm" shadow="sm">
-				<CardBody className="flex flex-col gap-4">
-					<Form
-						className="flex flex-col gap-4"
-						onSubmit={handleSubmit(onSubmit)}
-					>
-						<Controller
-							control={control}
-							name="title"
-							render={({ field, fieldState }) => (
-								<Input
-									{...field}
-									label={tFields('title')}
-									size="lg"
-									isRequired
-									isInvalid={fieldState.invalid}
-									errorMessage={fieldState.error?.message}
-								/>
-							)}
-						/>
-						<Controller
-							control={control}
-							name="description"
-							render={({ field, fieldState }) => (
-								<Textarea
-									{...field}
-									label={tFields('description')}
-									size="lg"
-									minRows={3}
-									isRequired
-									isInvalid={fieldState.invalid}
-									errorMessage={fieldState.error?.message}
-								/>
-							)}
-						/>
-						<Divider />
+	const renderLoading = () => {
+		return (
+			<motion.div
+				key="loading"
+				initial={{ opacity: 0, filter: 'blur(6px)' }}
+				animate={{ opacity: 1, filter: 'blur(0px)' }}
+				exit={{ opacity: 0, filter: 'blur(6px)' }}
+				transition={{ duration: 0.25 }}
+			>
+				<Card radius="sm" shadow="sm">
+					<CardBody className="flex flex-col gap-4">
+						<div className="flex items-center justify-center py-20">
+							<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+						</div>
+					</CardBody>
+				</Card>
+			</motion.div>
+		);
+	};
 
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+	const renderError = () => {
+		return (
+			<Alert
+				status="danger"
+				title={tAlerts('codes.ACCESS_DENIED')}
+				description={tCommon('common.section_only_for', {
+					roles: error?.data.requiredRoles?.map((role) =>
+						tCommon(`roles.${role}`).toLowerCase(),
+					),
+				})}
+			/>
+		);
+	};
+
+	const renderForm = () => {
+		return (
+			<motion.div
+				key="form"
+				initial={{ opacity: 0, filter: 'blur(6px)' }}
+				animate={{ opacity: 1, filter: 'blur(0px)' }}
+				exit={{ opacity: 0, filter: 'blur(6px)' }}
+				transition={{ duration: 0.25 }}
+			>
+				<Card radius="sm" shadow="sm">
+					<CardBody className="flex flex-col gap-4">
+						<Form
+							className="flex flex-col gap-4"
+							onSubmit={handleSubmit(onSubmit)}
+						>
 							<Controller
 								control={control}
-								name="price"
-								render={({
-									field: priceField,
-									fieldState: priceFieldState,
-								}) => (
-									<Controller
-										control={control}
-										name="currency"
-										render={({
-											field: priceUnitField,
-											fieldState: priceUnitFieldState,
-										}) => (
-											<PriceInput
-												value={Number(priceField.value)}
-												size="lg"
-												onPriceChange={priceField.onChange}
-												priceUnit={priceUnitField.value || 'RUB'}
-												onPriceUnitChange={priceUnitField.onChange}
-												isInvalid={
-													priceFieldState.invalid || priceUnitFieldState.invalid
-												}
-												errorMessage={
-													priceFieldState.error?.message ||
-													priceUnitFieldState.error?.message
-												}
-											/>
-										)}
+								name="title"
+								render={({ field, fieldState }) => (
+									<Input
+										{...field}
+										label={tFields('title')}
+										size="lg"
+										isRequired
+										isInvalid={fieldState.invalid}
+										errorMessage={fieldState.error?.message}
 									/>
 								)}
 							/>
 							<Controller
 								control={control}
-								name="unit"
+								name="description"
+								render={({ field, fieldState }) => (
+									<Textarea
+										{...field}
+										label={tFields('description')}
+										size="lg"
+										minRows={3}
+										isRequired
+										isInvalid={fieldState.invalid}
+										errorMessage={fieldState.error?.message}
+									/>
+								)}
+							/>
+							<Divider />
+
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+								<Controller
+									control={control}
+									name="price"
+									render={({
+										field: priceField,
+										fieldState: priceFieldState,
+									}) => (
+										<Controller
+											control={control}
+											name="currency"
+											render={({
+												field: priceUnitField,
+												fieldState: priceUnitFieldState,
+											}) => (
+												<PriceInput
+													value={Number(priceField.value)}
+													size="lg"
+													onPriceChange={priceField.onChange}
+													priceUnit={priceUnitField.value || 'RUB'}
+													onPriceUnitChange={priceUnitField.onChange}
+													isInvalid={
+														priceFieldState.invalid ||
+														priceUnitFieldState.invalid
+													}
+													errorMessage={
+														priceFieldState.error?.message ||
+														priceUnitFieldState.error?.message
+													}
+												/>
+											)}
+										/>
+									)}
+								/>
+								<Controller
+									control={control}
+									name="unit"
+									render={({ field, fieldState }) => (
+										<Autocomplete
+											label={tFields('unit')}
+											size="lg"
+											isRequired
+											isInvalid={fieldState.invalid}
+											errorMessage={fieldState.error?.message}
+										>
+											{unitGroupsOptions.map((group) => (
+												<AutocompleteSection
+													key={group.group}
+													title={group.group}
+												>
+													{group.options.map((option) => (
+														<AutocompleteItem
+															key={option.value}
+															onPress={() => field.onChange(option.value)}
+														>
+															{option.label}
+														</AutocompleteItem>
+													))}
+												</AutocompleteSection>
+											))}
+										</Autocomplete>
+									)}
+								/>
+							</div>
+
+							<Divider />
+
+							<Controller
+								control={control}
+								name="category"
 								render={({ field, fieldState }) => (
 									<Autocomplete
-										label={tFields('unit')}
+										{...field}
+										name="category"
+										label={tFields('category')}
 										size="lg"
 										isRequired
 										isInvalid={fieldState.invalid}
 										errorMessage={fieldState.error?.message}
 									>
-										{unitGroupsOptions.map((group) => (
-											<AutocompleteSection
-												key={group.group}
-												title={group.group}
-											>
-												{group.options.map((option) => (
-													<AutocompleteItem
-														key={option.value}
-														onPress={() => field.onChange(option.value)}
-													>
-														{option.label}
-													</AutocompleteItem>
-												))}
-											</AutocompleteSection>
-										))}
+										{getIngredientCategoryGroupsOptions(tIngredients).map(
+											(group) => (
+												<AutocompleteSection
+													key={group.group}
+													title={group.group}
+												>
+													{group.options.map((option) => (
+														<AutocompleteItem
+															key={option.value}
+															onPress={() => field.onChange(option.value)}
+														>
+															{option.label}
+														</AutocompleteItem>
+													))}
+												</AutocompleteSection>
+											),
+										)}
 									</Autocomplete>
 								)}
 							/>
-						</div>
+							<Button
+								type="submit"
+								fullWidth
+								color="primary"
+								isLoading={isCreateIngredientLoading}
+							>
+								{tCommon('create')}
+							</Button>
+						</Form>
+					</CardBody>
+				</Card>
+			</motion.div>
+		);
+	};
 
-						<Divider />
-
-						<Controller
-							control={control}
-							name="category"
-							render={({ field, fieldState }) => (
-								<Autocomplete
-									{...field}
-									name="category"
-									label={tFields('category')}
-									size="lg"
-									isRequired
-									isInvalid={fieldState.invalid}
-									errorMessage={fieldState.error?.message}
-								>
-									{getIngredientCategoryGroupsOptions(tIngredients).map(
-										(group) => (
-											<AutocompleteSection
-												key={group.group}
-												title={group.group}
-											>
-												{group.options.map((option) => (
-													<AutocompleteItem
-														key={option.value}
-														onPress={() => field.onChange(option.value)}
-													>
-														{option.label}
-													</AutocompleteItem>
-												))}
-											</AutocompleteSection>
-										),
-									)}
-								</Autocomplete>
-							)}
-						/>
-						<Button
-							type="submit"
-							fullWidth
-							color="primary"
-							isLoading={isCreateIngredientLoading}
-						>
-							{tCommon('create')}
-						</Button>
-					</Form>
-				</CardBody>
-			</Card>
+	return (
+		<div className="w-full max-w-2xl mx-auto min-h-[600px] transition-all duration-300">
+			<h1 className="text-2xl font-bold mb-3">
+				{tCommon('page_titles.ingredient_create')}
+			</h1>
+			<AnimatePresence mode="wait">
+				{error ? renderError() : isLoading ? renderLoading() : renderForm()}
+			</AnimatePresence>
 		</div>
 	);
 };

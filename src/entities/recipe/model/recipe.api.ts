@@ -46,9 +46,12 @@ export const recipeApi = createApi({
 				} catch (error) {
 					const apiError = dto<ApiErrorDTO, ApiError>(
 						'toClient',
-						error as ApiError,
+						(error as unknown as { error: ApiErrorDTO }).error as ApiError,
 					);
-					const code = apiError.error.data?.code;
+					if (apiError.status === 401 || apiError.status === 403) {
+						return;
+					}
+					const code = apiError.data?.code;
 					dispatch(
 						addAlert({
 							id: crypto.randomUUID(),
@@ -99,8 +102,11 @@ export const recipeApi = createApi({
 						);
 					}
 				} catch (error) {
-					const apiError = error as ApiError;
-					const code = apiError.error.data?.code;
+					const apiError = dto<ApiErrorDTO, ApiError>(
+						'toClient',
+						(error as unknown as { error: ApiErrorDTO }).error as ApiError,
+					);
+					const code = apiError.data?.code;
 					dispatch(
 						addAlert({
 							id: crypto.randomUUID(),
@@ -122,8 +128,11 @@ export const recipeApi = createApi({
 				try {
 					await queryFulfilled;
 				} catch (error) {
-					const apiError = error as ApiError;
-					const code = apiError.error.data?.code;
+					const apiError = dto<ApiErrorDTO, ApiError>(
+						'toClient',
+						(error as unknown as { error: ApiErrorDTO }).error as ApiError,
+					);
+					const code = apiError.data?.code;
 					dispatch(
 						addAlert({
 							id: crypto.randomUUID(),

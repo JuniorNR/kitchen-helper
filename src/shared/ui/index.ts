@@ -1,3 +1,4 @@
+export { Alert } from './Alert';
 export { Alerts } from './Alerts';
 export { DeleteButton } from './DeleteButton';
 export { Filter, FilterGroup } from './Filter';

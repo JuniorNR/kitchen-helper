@@ -63,9 +63,13 @@ export const ingredientApi = createApi({
 				} catch (error) {
 					const apiError = dto<ApiErrorDTO, ApiError>(
 						'toClient',
-						error as ApiError,
+						(error as unknown as { error: ApiErrorDTO }).error as ApiError,
 					);
-					const code = apiError.error.data?.code;
+
+					if (apiError.status === 401 || apiError.status === 403) {
+						return;
+					}
+					const code = apiError.data?.code;
 					dispatch(
 						addAlert({
 							id: crypto.randomUUID(),

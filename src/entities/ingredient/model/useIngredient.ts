@@ -1,5 +1,6 @@
 import type { IngredientCreateFormDataType } from '@/features/ingredientCreate/model/IngredientCreate.schema';
-import { serializeDate } from '@/shared/lib/helpers';
+import { dto, serializeDate } from '@/shared/lib/helpers';
+import type { ApiError, ApiErrorDTO } from '@/shared/lib/types';
 import {
 	useCreateIngredientMutation,
 	useDeleteIngredientMutation,
@@ -49,7 +50,9 @@ export const useIngredient = ({ page, filters }: UseIngredients) => {
 		ingredients: data?.data,
 		pagination: data?.pagination,
 		isLoading,
-		error,
+		error: dto<ApiErrorDTO, ApiError>('toClient', error as ApiErrorDTO) as
+			| ApiError
+			| undefined,
 		createIngredientData,
 		deleteIngredientData,
 		isDeleteIngredientLoading,

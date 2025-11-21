@@ -22,6 +22,11 @@
 		"telegram": "Telegram",
 		"back_to_top": "Back to Top"
 	},
+	"roles": {
+		"admin": "Administration",
+		"support": "Support",
+		"user": "User"
+	},
 	"currency": {
 		"rub": "₽",
 		"usd": "$",
@@ -61,5 +66,8 @@
 	},
 	"time": {
 		"minute_short": "min"
+	},
+	"common": {
+		"section_only_for": "This section is only for: {{roles}}"
 	}
 }

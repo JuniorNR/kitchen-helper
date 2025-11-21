@@ -30,20 +30,18 @@ export interface ApiResponse<
 }
 
 export type ApiErrorDTO = FetchBaseQueryError & {
-	error: {
-		data: {
-			code?: string;
-			current_role?: string;
-			required_roles?: string[];
-		};
+	status: number;
+	data: {
+		code?: string;
+		current_role?: string;
+		required_roles?: string[];
 	};
 };
 export type ApiError = FetchBaseQueryError & {
-	error: {
-		data: {
-			code?: string;
-			currentRole?: string;
-			requiredRoles?: string[];
-		};
+	status: number;
+	data: {
+		code?: string;
+		currentRole?: string;
+		requiredRoles?: string[];
 	};
 };

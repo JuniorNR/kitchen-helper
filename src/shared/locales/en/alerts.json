@@ -14,11 +14,12 @@
 		"USER_LOGOUT_ALL": "User logged out from all devices",
 		"USER_UPDATED": "User updated",
 		"INGREDIENT_CREATED": "Ingredient created",
-		"INGREDIENT_RETURNED": "Ingredient returned",
-		"INGREDIENT_UPDATED": "Ingredient updated",
-		"INGREDIENT_DELETED": "Ingredient deleted",
-		"INGREDIENTS_RETURNED": "Ingredients returned",
 		"RECIPE_CREATED": "Recipe created",
-		"undefined": "Unknown error"
+		"UNKNOWN_ERROR": "Unknown error",
+		"ACCESS_DENIED": "Access denied",
+		"SUCCESS": "Success",
+		"ERROR": "Error",
+		"WARNING": "Warning",
+		"INFO": "Info"
 	}
 }
