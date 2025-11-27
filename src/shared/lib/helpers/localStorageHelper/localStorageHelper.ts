@@ -1,9 +1,11 @@
-export const localStorageHelper = <T extends object>(key: string) => {
-	const storageGetItem = () => {
+export const localStorageHelper = <T extends string | object>(key: string) => {
+	const storageGetItem = (key: string) => {
+		const raw = localStorage.getItem(key);
+		if (!raw) return {};
 		try {
-			return JSON.parse(localStorage.getItem(key) || '') as Partial<T>;
+			return JSON.parse(raw);
 		} catch {
-			return {};
+			return raw ?? null;
 		}
 	};
 	const storageSetItem = (value: Partial<T>) => {
@@ -16,6 +18,6 @@ export const localStorageHelper = <T extends object>(key: string) => {
 		localStorage.clear();
 	};
 
-	const item = storageGetItem();
-	return { item, storageSetItem, storageRemoveItem, storageClear };
+	const item = storageGetItem(key);
+	return { item: item as T, storageSetItem, storageRemoveItem, storageClear };
 };

@@ -37,3 +37,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 TODO: Сделать кастомный select, InputNumber
 TODO: Сделать предупреждение о том, что ингридиент находится в рецепте, при удалении
+TODO: Удалить axios после тестов

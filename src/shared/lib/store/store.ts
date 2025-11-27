@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { ingredientApi, recipeApi, userApi } from '@/entities';
+import { chatApi, ingredientApi, recipeApi, userApi } from '@/entities';
 import { authApi } from '@/features';
 import alertReducer from '@/features/Alert/model/alert.slice';
 import { authReducer } from '@/features/Auth/model/auth.slice';
@@ -14,6 +14,7 @@ export const store = configureStore({
 		[userApi.reducerPath]: userApi.reducer,
 		[ingredientApi.reducerPath]: ingredientApi.reducer,
 		[recipeApi.reducerPath]: recipeApi.reducer,
+		[chatApi.reducerPath]: chatApi.reducer,
 	},
 	devTools: process.env.NODE_ENV !== 'production',
 	middleware: (getDefaultMiddleware) =>
@@ -22,6 +23,7 @@ export const store = configureStore({
 			userApi.middleware,
 			ingredientApi.middleware,
 			recipeApi.middleware,
+			chatApi.middleware,
 		),
 });
 

@@ -38,10 +38,3 @@ export const buildFooterGradient = (
 		? seasonToGradientDark[season]
 		: seasonToGradient[season];
 };
-
-export const seasonToWaveFill: Record<Season, string> = {
-	winter: 'rgba(59,130,246,0.35)',
-	spring: 'rgba(132,204,22,0.40)',
-	summer: 'rgba(34,197,94,0.40)',
-	autumn: 'rgba(234,179,8,0.35)',
-};

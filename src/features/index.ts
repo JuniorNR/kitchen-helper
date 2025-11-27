@@ -9,6 +9,7 @@ export {
 	SignUpModal,
 	useAuth,
 } from './Auth';
+export { Chat } from './Chat';
 export * from './Counter';
 export { ImageSRC } from './ImageSRC';
 export { IngredientsList } from './IngredientsList';

@@ -7,7 +7,7 @@ import { addAlert } from '@/features/Alert';
 import { dto } from '@/shared/lib/helpers/dto/dto';
 import { baseQuery } from '@/shared/lib/store/baseQuery';
 import type { ApiResponse } from '@/shared/lib/types/api.types';
-import { setIsAuthenticated } from './auth.slice';
+import { setAuthToken, setIsAuthenticated } from './auth.slice';
 import type {
 	AuthResponse,
 	AuthResponseDTO,
@@ -47,6 +47,7 @@ export const authApi = createApi({
 						}
 					}
 					dispatch(setIsAuthenticated(true));
+					dispatch(setAuthToken(result.data.data.token));
 					dispatch(
 						addAlert({
 							id: crypto.randomUUID(),
@@ -91,6 +92,7 @@ export const authApi = createApi({
 						}
 					}
 					dispatch(setIsAuthenticated(true));
+					dispatch(setAuthToken(result.data.data.token));
 					dispatch(userApi.util.invalidateTags(['User']));
 					dispatch(ingredientApi.util.invalidateTags(['Ingredients']));
 					dispatch(recipeApi.util.invalidateTags(['Recipe']));
@@ -140,8 +142,10 @@ export const authApi = createApi({
 					const result = await queryFulfilled;
 					if (typeof window !== 'undefined') {
 						localStorage.removeItem('auth_token');
+						localStorage.removeItem('active_chat_id');
 					}
 					dispatch(setIsAuthenticated(false));
+					dispatch(setAuthToken(null));
 					dispatch(userApi.util.invalidateTags(['User']));
 					dispatch(
 						addAlert({

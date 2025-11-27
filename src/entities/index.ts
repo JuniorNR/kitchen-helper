@@ -1,3 +1,4 @@
+export { chatApi, useChat } from './chat';
 export {
 	type Ingredient,
 	type IngredientDTO,

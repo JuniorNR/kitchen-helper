@@ -5,7 +5,10 @@ import {
 	fetchBaseQuery,
 } from '@reduxjs/toolkit/query';
 import { apiConfig } from '@/configs';
-import { setIsAuthenticated } from '@/features/Auth/model/auth.slice';
+import {
+	setAuthToken,
+	setIsAuthenticated,
+} from '@/features/Auth/model/auth.slice';
 
 const rawBaseQuery = fetchBaseQuery({
 	baseUrl: `${apiConfig.isProd ? apiConfig.APP_BACKEND_URL_PROD : apiConfig.APP_BACKEND_URL}/api`,
@@ -38,6 +41,7 @@ export const baseQuery: BaseQueryFn<
 	const error = (result as { error?: FetchBaseQueryError }).error;
 	if (error?.status === 401) {
 		api.dispatch(setIsAuthenticated(false));
+		api.dispatch(setAuthToken(null));
 		if (typeof window !== 'undefined') {
 			try {
 				localStorage.removeItem('auth_token');
