@@ -1,5 +1,6 @@
 import { Button } from '@heroui/button';
 import { Divider } from '@heroui/divider';
+import { motion } from 'framer-motion';
 import moment from 'moment';
 import type { FC } from 'react';
 import { useUser } from '@/entities';
@@ -28,7 +29,8 @@ export const ChatListAside: FC<ChatListAsideProps> = ({
 			<Divider />
 
 			{hasChats ? (
-				<ul
+				<motion.ul
+					layout="position"
 					className={`p-5 flex-1 space-y-2 overflow-y-auto ${styles.scrollbar}`}
 				>
 					{chats?.map((chat) => {
@@ -66,7 +68,16 @@ export const ChatListAside: FC<ChatListAsideProps> = ({
 								: 'mt-2 line-clamp-2 text-sm font-medium text-slate-700 dark:text-slate-100';
 
 						return (
-							<li key={chat.id}>
+							<motion.li
+								key={chat.id}
+								layout="position"
+								transition={{
+									layout: {
+										duration: 0.1,
+										ease: [0.22, 1, 0.36, 1],
+									},
+								}}
+							>
 								<Button
 									type="button"
 									className={`group h-fit relative flex w-full flex-col gap-3 overflow-hidden rounded-2xl border px-2 py-2 text-left transition duration-300 ${
@@ -145,10 +156,10 @@ export const ChatListAside: FC<ChatListAsideProps> = ({
 										</div>
 									</div>
 								</Button>
-							</li>
+							</motion.li>
 						);
 					})}
-				</ul>
+				</motion.ul>
 			) : (
 				<Alert
 					status="info"

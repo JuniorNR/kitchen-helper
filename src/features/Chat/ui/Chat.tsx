@@ -2,11 +2,13 @@
 import { useEcho } from '@laravel/echo-react';
 import { useEffect, useState } from 'react';
 import { layoutConfig } from '@/configs';
-import { useChat } from '@/entities';
 import type {
+	ChatDTO as ChatDTOType,
 	ChatMessage,
 	ChatMessageDTO,
-} from '@/entities/chat/model/chat.types';
+	Chat as ChatType,
+} from '@/entities';
+import { useChat, useUser } from '@/entities';
 import { dto, localStorageHelper } from '@/shared/lib/helpers';
 import { ChatListAside } from './ChatListAside';
 import { ChatListAsideSkeleton } from './ChatListAside.skeleton';
@@ -23,30 +25,54 @@ export const Chat = () => {
 	const {
 		chats,
 		messages,
-		sendMessageData,
 		isSending,
 		isChatsLoading,
 		isMessagesLoading,
+		sendMessageData,
+		refetchMessages,
 	} = useChat(activeChatId);
+	const { user } = useUser();
 
 	const [localMessages, setLocalMessages] = useState<ChatMessage[]>(
 		messages || [],
 	);
+	const [localChats, setLocalChats] = useState<ChatType[]>(chats || []);
 
-	useEcho(
-		`chats.${activeChatId}`,
-		'.MessageSent',
-		(message: ChatMessageDTO) => {
+	useEffect(() => {
+		if (!activeChatId) {
+			setLocalMessages([]);
+			return;
+		}
+		refetchMessages(); // заставляем RTK Query снова сходить на бэк
+	}, [activeChatId, refetchMessages]); // refetch messages by change activeChatId
+
+	useEffect(() => {
+		setLocalMessages(messages || []);
+	}, [messages]); // set messages
+
+	useEffect(() => {
+		setLocalChats(chats || []);
+	}, [chats]); // set chats
+
+	useEcho(`user.${user?.id}`, '.MessageSent', (message: ChatMessageDTO) => {
+		if (message.chat_id === activeChatId) {
 			setLocalMessages((prev) => [
 				...prev,
 				dto<ChatMessageDTO, ChatMessage>('toClient', message),
 			]);
-		},
-	);
+		}
+	});
 
-	useEffect(() => {
-		setLocalMessages(messages || []);
-	}, [messages]);
+	useEcho(`user.${user?.id}`, '.ChatUpdated', (chat: ChatDTOType) => {
+		setLocalChats((prev) => {
+			const updatedChat = dto<ChatDTOType, ChatType>('toClient', chat);
+			const reorderedChats = [
+				updatedChat,
+				...prev.filter((current) => current.id !== updatedChat.id),
+			];
+			return reorderedChats;
+		});
+	});
 
 	const handleSetActiveChatId = (id: number) => {
 		setActiveChatId(id);
@@ -59,7 +85,7 @@ export const Chat = () => {
 		>
 			{!isChatsLoading ? (
 				<ChatListAside
-					chats={chats || []}
+					chats={localChats || []}
 					activeChatId={activeChatId}
 					onChatClick={handleSetActiveChatId}
 				/>
@@ -68,7 +94,7 @@ export const Chat = () => {
 			)}
 			{!isMessagesLoading ? (
 				<ChatMessagesWindow
-					chats={chats || []}
+					chats={localChats || []}
 					activeChatId={activeChatId}
 					localMessages={localMessages}
 					sendMessageData={sendMessageData}

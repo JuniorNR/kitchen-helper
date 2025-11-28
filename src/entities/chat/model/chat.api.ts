@@ -33,6 +33,8 @@ export const chatApi = createApi({
 				url: `/chats/${chatId}/messages`,
 				method: 'POST',
 				body: { content },
+				refetchOnMountOrArgChange: true,
+				keepUnusedDataFor: 0,
 				transformResponse: (response: ChatMessageDTO) => {
 					return dto<ChatMessageDTO, ChatMessage>('toClient', response);
 				},

@@ -1,4 +1,11 @@
-export { chatApi, useChat } from './chat';
+export {
+	type Chat,
+	type ChatDTO,
+	type ChatMessage,
+	type ChatMessageDTO,
+	chatApi,
+	useChat,
+} from './chat';
 export {
 	type Ingredient,
 	type IngredientDTO,

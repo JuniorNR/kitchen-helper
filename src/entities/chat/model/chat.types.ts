@@ -20,6 +20,7 @@ export interface ChatUserDTO {
 
 export interface ChatMessageDTO {
 	id: number;
+	chat_id: number;
 	content: string;
 	created_at: string;
 	updated_at: string;
@@ -46,6 +47,7 @@ export interface ChatUser {
 
 export interface ChatMessage {
 	id: number;
+	chatId: number;
 	content: string;
 	createdAt: string;
 	updatedAt: string;

@@ -6,8 +6,19 @@ import {
 
 export const useChat = (id: number | null) => {
 	const { data: chats, isLoading: isChatsLoading } = useGetChatsQuery();
-	const { data: messages, isLoading: isMessagesLoading } =
-		useGetChatMessagesQuery({ chatId: id });
+	const {
+		data: messages,
+		isLoading: isMessagesLoading,
+		refetch: refetchMessages,
+	} = useGetChatMessagesQuery(
+		{ chatId: id },
+		{
+			skip: !id,
+			refetchOnMountOrArgChange: true,
+			refetchOnFocus: true,
+			refetchOnReconnect: true,
+		},
+	);
 	const [sendMessage, { isLoading: isSending }] = useSendMessageMutation();
 
 	const sendMessageData = async (content: string) => {
@@ -23,9 +34,10 @@ export const useChat = (id: number | null) => {
 	return {
 		chats,
 		isChatsLoading,
+		isSending,
 		messages,
 		isMessagesLoading,
+		refetchMessages,
 		sendMessageData,
-		isSending,
 	};
 };
