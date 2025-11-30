@@ -1,6 +1,6 @@
 'use client';
 import { useEcho } from '@laravel/echo-react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { layoutConfig } from '@/configs';
 import type {
 	ChatDTO as ChatDTOType,
@@ -9,7 +9,9 @@ import type {
 	Chat as ChatType,
 } from '@/entities';
 import { useChat, useUser } from '@/entities';
+import { chatApi } from '@/entities/chat/model/chat.api';
 import { dto, localStorageHelper } from '@/shared/lib/helpers';
+import { store } from '@/shared/lib/store';
 import { ChatListAside } from './ChatListAside';
 import { ChatListAsideSkeleton } from './ChatListAside.skeleton';
 import { ChatMessagesWindow } from './ChatMessagesWindow';
@@ -21,7 +23,7 @@ export const Chat = () => {
 	const [activeChatId, setActiveChatId] = useState<number | null>(
 		Number(localStorageChatId) || null,
 	);
-
+	const [isBlockFetch, setIsBlockFetch] = useState<boolean>(false);
 	const {
 		chats,
 		messages,
@@ -30,7 +32,8 @@ export const Chat = () => {
 		isMessagesLoading,
 		sendMessageData,
 		refetchMessages,
-	} = useChat(activeChatId);
+		getChatMessages,
+	} = useChat({ chatId: activeChatId, limit: 25 });
 	const { user } = useUser();
 
 	const [localMessages, setLocalMessages] = useState<ChatMessage[]>(
@@ -38,12 +41,29 @@ export const Chat = () => {
 	);
 	const [localChats, setLocalChats] = useState<ChatType[]>(chats || []);
 
+	const currentMessages =
+		chatApi.endpoints.getChatMessages.select({
+			chatId: activeChatId,
+			limit: 25,
+			after_id: undefined,
+			before_id: undefined,
+		})(store.getState())?.data ?? [];
+
 	useEffect(() => {
+		console.debug('mount------------------------------');
+
+		return () => {
+			console.debug('unmount------------------------------');
+		};
+	}, []);
+
+	useEffect(() => {
+		setIsBlockFetch(false);
 		if (!activeChatId) {
 			setLocalMessages([]);
 			return;
 		}
-		refetchMessages(); // заставляем RTK Query снова сходить на бэк
+		refetchMessages();
 	}, [activeChatId, refetchMessages]); // refetch messages by change activeChatId
 
 	useEffect(() => {
@@ -54,14 +74,33 @@ export const Chat = () => {
 		setLocalChats(chats || []);
 	}, [chats]); // set chats
 
-	useEcho(`user.${user?.id}`, '.MessageSent', (message: ChatMessageDTO) => {
-		if (message.chat_id === activeChatId) {
-			setLocalMessages((prev) => [
-				...prev,
-				dto<ChatMessageDTO, ChatMessage>('toClient', message),
-			]);
-		}
-	});
+	useEcho(
+		`user.${user?.id}`,
+		'.MessageSent',
+		(message: ChatMessageDTO) => {
+			if (message.chat_id === activeChatId) {
+				setLocalMessages((prev) => [
+					...prev,
+					dto<ChatMessageDTO, ChatMessage>('toClient', message),
+				]);
+				store.dispatch(
+					chatApi.util.updateQueryData(
+						'getChatMessages',
+						{
+							chatId: activeChatId,
+							limit: 25,
+							after_id: undefined,
+							before_id: undefined,
+						},
+						(draft) => {
+							draft.push(dto<ChatMessageDTO, ChatMessage>('toClient', message));
+						},
+					),
+				);
+			}
+		},
+		[activeChatId],
+	);
 
 	useEcho(`user.${user?.id}`, '.ChatUpdated', (chat: ChatDTOType) => {
 		setLocalChats((prev) => {
@@ -79,6 +118,24 @@ export const Chat = () => {
 		storageSetItem(String(id));
 	};
 
+	const handleRefetchOldestMessagesByScroll = useCallback(async () => {
+		const beforeMessageId = localMessages[0].id;
+		const limit = 25;
+		try {
+			const oldestMessages = await getChatMessages({
+				chatId: activeChatId,
+				limit,
+				before_id: beforeMessageId,
+			}).unwrap();
+			if (oldestMessages.length < limit) {
+				setIsBlockFetch(true);
+			}
+			setLocalMessages((prev) => [...oldestMessages, ...prev]);
+		} catch (error) {
+			console.error('Не удалось загрузить старые сообщения', error);
+		}
+	}, [activeChatId, getChatMessages, localMessages]);
+
 	return (
 		<section
 			className={`flex w-full h-[${layoutConfig.chatHeight}] max-h-[650px] min-h-[400px] gap-6 rounded-3xl border border-slate-200/90 bg-gradient-to-br from-white via-slate-50 to-slate-100 p-6 shadow-[0_25px_70px_rgba(15,23,42,0.08)] backdrop-blur-sm dark:bg-none dark:border-slate-800 dark:bg-slate-900/80 dark:shadow-slate-900/40`}
@@ -94,10 +151,12 @@ export const Chat = () => {
 			)}
 			{!isMessagesLoading ? (
 				<ChatMessagesWindow
+					loadOldestMessages={handleRefetchOldestMessagesByScroll}
 					chats={localChats || []}
 					activeChatId={activeChatId}
 					localMessages={localMessages}
 					sendMessageData={sendMessageData}
+					isBlockFetch={isBlockFetch}
 					isSending={isSending}
 				/>
 			) : (

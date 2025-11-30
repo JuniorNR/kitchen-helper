@@ -18,6 +18,8 @@ export interface ChatMessagesWindowProps {
 	chats: Chat[];
 	activeChatId: number | null;
 	localMessages: ChatMessage[];
-	sendMessageData: (content: string) => Promise<ChatMessage | null>;
 	isSending: boolean;
+	isBlockFetch: boolean;
+	sendMessageData: (content: string) => Promise<ChatMessage | null>;
+	loadOldestMessages?: () => void;
 }

@@ -56,6 +56,9 @@ export interface ChatMessage {
 
 export interface ChatMessageQuery {
 	chatId: ChatIdType;
+	limit?: number;
+	after_id?: number;
+	before_id?: number;
 }
 
 export interface SendMessageQuery {

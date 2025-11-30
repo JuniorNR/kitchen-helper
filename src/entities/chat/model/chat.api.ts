@@ -22,7 +22,14 @@ export const chatApi = createApi({
 			},
 		}),
 		getChatMessages: builder.query<ChatMessage[], ChatMessageQuery>({
-			query: ({ chatId }) => ({ url: `/chats/${chatId}/messages` }),
+			query: ({ chatId, limit, before_id, after_id }) => ({
+				url: `/chats/${chatId}/messages`,
+				params: {
+					limit,
+					before_id,
+					after_id,
+				},
+			}),
 			providesTags: ['ChatMessages'],
 			transformResponse: (response: ChatMessageDTO[]) => {
 				return dto<ChatMessageDTO[], ChatMessage[]>('toClient', response);
@@ -39,7 +46,6 @@ export const chatApi = createApi({
 					return dto<ChatMessageDTO, ChatMessage>('toClient', response);
 				},
 			}),
-			invalidatesTags: ['ChatMessages'],
 		}),
 	}),
 });
@@ -48,5 +54,5 @@ export const {
 	useGetChatsQuery,
 	useGetChatMessagesQuery,
 	useSendMessageMutation,
-	// useLazyGetChatMessagesQuery,
+	useLazyGetChatMessagesQuery,
 } = chatApi;

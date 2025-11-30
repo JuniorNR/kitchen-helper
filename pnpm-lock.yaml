@@ -131,6 +131,9 @@ importers:
       react-i18next:
         specifier: ^15.6.1
         version: 15.6.1(i18next@25.3.6(typescript@5.9.2))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(typescript@5.9.2)
+      react-infinite-scroll-component:
+        specifier: ^6.1.0
+        version: 6.1.0(react@19.1.1)
       react-redux:
         specifier: ^9.2.0
         version: 9.2.0(@types/react@19.1.10)(react@19.1.1)(redux@5.0.1)
@@ -3987,6 +3990,11 @@ packages:
       typescript:
         optional: true
 
+  react-infinite-scroll-component@6.1.0:
+    resolution: {integrity: sha512-SQu5nCqy8DxQWpnUVLx7V7b7LcA37aM7tvoWjTLZp1dk6EJibM5/4EJKzOnl07/BsM1Y40sKLuqjCwwH/xV0TQ==}
+    peerDependencies:
+      react: '>=16.0.0'
+
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -4231,6 +4239,10 @@ packages:
   tar@7.4.3:
     resolution: {integrity: sha512-5S7Va8hKfV7W5U6g3aYxXmlPoZVAwUMy9AOKyF2fVuZa2UD3qZjg578OrLRt8PcNN1PleVaL/5/yYATNL0ICUw==}
     engines: {node: '>=18'}
+
+  throttle-debounce@2.3.0:
+    resolution: {integrity: sha512-H7oLPV0P7+jgvrk+6mwwwBDmxTaxnu9HMXmloNLXwnNO0ZxZ31Orah2n8lU1eMPvsaowP2CX+USCgyovXfdOFQ==}
+    engines: {node: '>=8'}
 
   tinyglobby@0.2.14:
     resolution: {integrity: sha512-tX5e7OM1HnYr2+a2C/4V0htOcSQcoSTH9KgJnVvNm5zm/cyEWKJ7j7YutsH9CxMdtOkkLFy2AHrMci9IM8IPZQ==}
@@ -9553,6 +9565,11 @@ snapshots:
       react-dom: 19.1.1(react@19.1.1)
       typescript: 5.9.2
 
+  react-infinite-scroll-component@6.1.0(react@19.1.1):
+    dependencies:
+      react: 19.1.1
+      throttle-debounce: 2.3.0
+
   react-is@16.13.1: {}
 
   react-redux@9.2.0(@types/react@19.1.10)(react@19.1.1)(redux@5.0.1):
@@ -9868,6 +9885,8 @@ snapshots:
       minizlib: 3.0.2
       mkdirp: 3.0.1
       yallist: 5.0.0
+
+  throttle-debounce@2.3.0: {}
 
   tinyglobby@0.2.14:
     dependencies:

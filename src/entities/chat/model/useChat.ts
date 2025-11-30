@@ -1,29 +1,38 @@
 import {
 	useGetChatMessagesQuery,
 	useGetChatsQuery,
+	useLazyGetChatMessagesQuery,
 	useSendMessageMutation,
 } from './chat.api';
+import type { ChatMessageQuery } from './chat.types';
 
-export const useChat = (id: number | null) => {
+export const useChat = ({
+	chatId,
+	limit,
+	after_id,
+	before_id,
+}: ChatMessageQuery) => {
 	const { data: chats, isLoading: isChatsLoading } = useGetChatsQuery();
 	const {
 		data: messages,
 		isLoading: isMessagesLoading,
 		refetch: refetchMessages,
 	} = useGetChatMessagesQuery(
-		{ chatId: id },
+		{ chatId, limit, after_id, before_id },
 		{
-			skip: !id,
+			skip: !chatId,
 			refetchOnMountOrArgChange: true,
 			refetchOnFocus: true,
 			refetchOnReconnect: true,
 		},
 	);
+	const [getChatMessages, { isLoading: isMessagesOldestLoading }] =
+		useLazyGetChatMessagesQuery();
 	const [sendMessage, { isLoading: isSending }] = useSendMessageMutation();
 
 	const sendMessageData = async (content: string) => {
 		try {
-			const data = await sendMessage({ chatId: id, content }).unwrap();
+			const data = await sendMessage({ chatId, content }).unwrap();
 			return data;
 		} catch (error) {
 			console.error(error);
@@ -37,7 +46,9 @@ export const useChat = (id: number | null) => {
 		isSending,
 		messages,
 		isMessagesLoading,
+		isMessagesOldestLoading,
 		refetchMessages,
 		sendMessageData,
+		getChatMessages,
 	};
 };
