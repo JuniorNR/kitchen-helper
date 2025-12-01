@@ -1,4 +1,5 @@
 export * from './classNames';
+export { customizeString } from './customizeString';
 export { deleteFieldsWithUndefinedValues } from './deleteFieldsWithUndefinedValues';
 export * from './dto';
 export { localStorageHelper } from './localStorageHelper';

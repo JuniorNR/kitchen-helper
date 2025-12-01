@@ -1,0 +1,1 @@
+export { cutStringWithSeparator } from './cutStringWithSeparator';

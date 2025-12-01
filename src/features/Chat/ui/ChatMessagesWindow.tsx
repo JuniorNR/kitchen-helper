@@ -1,9 +1,11 @@
 import moment from 'moment';
 import * as motion from 'motion/react-client';
 import { useId, useLayoutEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useUser } from '@/entities';
 import type { ChatMessage } from '@/entities/chat/model/chat.types';
+import { customizeString } from '@/shared/lib/helpers';
 import { Alert, Typography } from '@/shared/ui';
 import type { ChatMessagesWindowProps } from '../model/chat.types';
 import { ChatSendControlPanel } from './ChatSendControlPanel';
@@ -21,10 +23,12 @@ export const ChatMessagesWindow = ({
 	loadOldestMessages,
 }: ChatMessagesWindowProps) => {
 	const scrollableId = safeId(`chat-scroll-${useId()}`);
-	const limits = { scroll: 25, max: 250, min: 1 };
 	const messagesContainerRef = useRef<HTMLDivElement>(null);
 	const hasMessages = localMessages?.length > 0;
 	const lastScrolledChatIdRef = useRef<number | null>(null);
+	const usersCount = `${chats?.find((chat) => chat.id === activeChatId)?.usersCount || 0} `;
+
+	const { t: tChats, i18n } = useTranslation('chats');
 
 	const { user } = useUser();
 	const [message, setMessage] = useState<string>('');
@@ -63,8 +67,22 @@ export const ChatMessagesWindow = ({
 							{chats?.find((chat) => chat.id === activeChatId)?.name || ''}
 						</Typography>
 						<p className="text-sm text-slate-500 dark:text-slate-400">
-							{chats?.find((chat) => chat.id === activeChatId)?.usersCount || 0}{' '}
-							участника
+							{usersCount}
+							{customizeString(tChats('member'), {
+								language: i18n.language,
+								ended: {
+									countTrigger: Number(usersCount),
+									russian: {
+										zero: 'ов',
+										fromTwoToFour: 'а',
+										fromFiveToTen: 'ов',
+										fromElevenToNineteen: 'ов',
+									},
+									english: {
+										moreThatOne: 's',
+									},
+								},
+							}).toLowerCase()}
 						</p>
 					</div>
 				</header>
@@ -87,11 +105,7 @@ export const ChatMessagesWindow = ({
 								scrollableTarget={scrollableId}
 								inverse
 								scrollThreshold={0.1}
-								loader={
-									<div className="hidden py-2 text-center text-xs text-slate-400">
-										Загружаем историю...
-									</div>
-								}
+								loader={<span className="hidden">Loading...</span>}
 							>
 								<ul className="space-y-4">
 									{localMessages?.map((message: ChatMessage) => (
@@ -145,11 +159,12 @@ export const ChatMessagesWindow = ({
 								</ul>
 							</InfiniteScroll>
 						) : (
-							<div className="flex justify-center">
+							<div className="shrink-1 grow-1 py-20 px-40">
 								<Alert
+									className="h-full"
 									status="info"
-									title="Сообщений пока нет"
-									description="Напишите первое сообщение, чтобы запустить диалог."
+									title={tChats('alerts.titles.no_messages')}
+									description={tChats('alerts.descriptions.no_messages')}
 								/>
 							</div>
 						)}
@@ -166,8 +181,8 @@ export const ChatMessagesWindow = ({
 				<div className="flex justify-center items-center h-full">
 					<Alert
 						status="info"
-						title="Выберите чат"
-						description="Чтобы начать переписку, выберите чат из списка слева."
+						title={tChats('alerts.titles.select_chat')}
+						description={tChats('alerts.descriptions.select_chat')}
 					/>
 				</div>
 			)}

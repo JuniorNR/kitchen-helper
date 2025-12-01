@@ -1,7 +1,4 @@
 'use client';
-
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -26,33 +23,31 @@ export const Footer: FC<FooterProps> = ({ heightElement }) => {
 			}
 			style={{ minHeight: heightElement, background: gradient }}
 		>
-			<div className="border-t border-foreground/10">
-				<div className="max-w-7xl mx-auto px-5 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
-					<div className="text-xs opacity-80">
-						© {new Date().getFullYear()} {tCommon('app_name')}
-					</div>
-					<div className="flex items-center gap-2">
-						<a
-							href="https://github.com"
-							target="_blank"
-							rel="noreferrer"
-							aria-label={tCommon('github')}
-							className="opacity-80 hover:opacity-100"
-						>
-							<GithubIcon />
-							<span className="sr-only">{tCommon('github')}</span>
-						</a>
-						<a
-							href="https://t.me/brotherFromAnotherMother52"
-							target="_blank"
-							rel="noreferrer"
-							aria-label={tCommon('telegram')}
-							className="opacity-80 hover:opacity-100"
-						>
-							<TelegramIcon />
-							<span className="sr-only">{tCommon('telegram')}</span>
-						</a>
-					</div>
+			<div className="max-w-7xl mx-auto px-5 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
+				<div className="text-xs opacity-80">
+					© {new Date().getFullYear()} {tCommon('app_name')}
+				</div>
+				<div className="flex items-center gap-2">
+					<a
+						href="https://github.com"
+						target="_blank"
+						rel="noreferrer"
+						aria-label={tCommon('github')}
+						className="opacity-80 hover:opacity-100"
+					>
+						<GithubIcon />
+						<span className="sr-only">{tCommon('github')}</span>
+					</a>
+					<a
+						href="https://t.me/brotherFromAnotherMother52"
+						target="_blank"
+						rel="noreferrer"
+						aria-label={tCommon('telegram')}
+						className="opacity-80 hover:opacity-100"
+					>
+						<TelegramIcon />
+						<span className="sr-only">{tCommon('telegram')}</span>
+					</a>
 				</div>
 			</div>
 		</footer>

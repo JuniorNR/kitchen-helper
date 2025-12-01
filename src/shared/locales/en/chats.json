@@ -1,0 +1,14 @@
+{
+	"chats": "Chats",
+	"member": "Member",
+	"alerts": {
+		"titles": {
+			"no_messages": "There are no messages yet",
+			"select_chat": "Select chat"
+		},
+		"descriptions": {
+			"no_messages": "Write the first message to start the dialog.",
+			"select_chat": "To start a conversation, select a chat from the list on the left."
+		}
+	}
+}

@@ -23,7 +23,7 @@ export default function SettingsPage() {
 			<Tab
 				className="flex max-w-screen-xl flex-grow-1 w-full"
 				key="chat"
-				title={'Chat'}
+				title={tCommon('page_titles.user_chats')}
 			>
 				<Chat />
 			</Tab>

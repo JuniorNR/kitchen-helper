@@ -5,6 +5,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import { useEffect, useState } from 'react';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import alertsEn from '@/shared/locales/en/alerts.json';
+import chatsEn from '@/shared/locales/en/chats.json';
 import commonEn from '@/shared/locales/en/common.json';
 import fieldsEn from '@/shared/locales/en/fields.json';
 import ingredientsEn from '@/shared/locales/en/ingredients.json';
@@ -12,6 +13,7 @@ import recipesEn from '@/shared/locales/en/recipes.json';
 import unitsEn from '@/shared/locales/en/units.json';
 import validationEn from '@/shared/locales/en/validation.json';
 import alertsRu from '@/shared/locales/ru/alerts.json';
+import chatsRu from '@/shared/locales/ru/chats.json';
 import commonRu from '@/shared/locales/ru/common.json';
 import fieldsRu from '@/shared/locales/ru/fields.json';
 import ingredientsRu from '@/shared/locales/ru/ingredients.json';
@@ -28,6 +30,7 @@ const resources = {
 		units: unitsEn,
 		alerts: alertsEn,
 		recipes: recipesEn,
+		chats: chatsEn,
 	},
 	ru: {
 		common: commonRu,
@@ -37,6 +40,7 @@ const resources = {
 		units: unitsRu,
 		alerts: alertsRu,
 		recipes: recipesRu,
+		chats: chatsRu,
 	},
 };
 
@@ -61,6 +65,7 @@ export const I18nProvider = ({ children }: { children: React.ReactNode }) => {
 					'ingredients',
 					'alerts',
 					'recipes',
+					'chats',
 				],
 				interpolation: { escapeValue: false },
 				load: 'languageOnly' as const,

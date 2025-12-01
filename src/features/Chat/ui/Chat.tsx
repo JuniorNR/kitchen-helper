@@ -11,13 +11,15 @@ import type {
 import { useChat, useUser } from '@/entities';
 import { chatApi } from '@/entities/chat/model/chat.api';
 import { dto, localStorageHelper } from '@/shared/lib/helpers';
-import { store } from '@/shared/lib/store';
+import { useAppDispatch } from '@/shared/lib/hooks';
+import { LIMITS_MESSAGES } from '../model/chat.utils';
 import { ChatListAside } from './ChatListAside';
 import { ChatListAsideSkeleton } from './ChatListAside.skeleton';
 import { ChatMessagesWindow } from './ChatMessagesWindow';
 import { ChatMessagesWindowSkeleton } from './ChatMessagesWindow.skeleton';
 
 export const Chat = () => {
+	const dispatch = useAppDispatch();
 	const { item: localStorageChatId, storageSetItem } =
 		localStorageHelper('active_chat_id');
 	const [activeChatId, setActiveChatId] = useState<number | null>(
@@ -33,29 +35,13 @@ export const Chat = () => {
 		sendMessageData,
 		refetchMessages,
 		getChatMessages,
-	} = useChat({ chatId: activeChatId, limit: 25 });
+	} = useChat({ chatId: activeChatId, limit: LIMITS_MESSAGES });
 	const { user } = useUser();
 
 	const [localMessages, setLocalMessages] = useState<ChatMessage[]>(
 		messages || [],
 	);
 	const [localChats, setLocalChats] = useState<ChatType[]>(chats || []);
-
-	const currentMessages =
-		chatApi.endpoints.getChatMessages.select({
-			chatId: activeChatId,
-			limit: 25,
-			after_id: undefined,
-			before_id: undefined,
-		})(store.getState())?.data ?? [];
-
-	useEffect(() => {
-		console.debug('mount------------------------------');
-
-		return () => {
-			console.debug('unmount------------------------------');
-		};
-	}, []);
 
 	useEffect(() => {
 		setIsBlockFetch(false);
@@ -83,12 +69,12 @@ export const Chat = () => {
 					...prev,
 					dto<ChatMessageDTO, ChatMessage>('toClient', message),
 				]);
-				store.dispatch(
+				dispatch(
 					chatApi.util.updateQueryData(
 						'getChatMessages',
 						{
 							chatId: activeChatId,
-							limit: 25,
+							limit: LIMITS_MESSAGES,
 							after_id: undefined,
 							before_id: undefined,
 						},
@@ -120,14 +106,13 @@ export const Chat = () => {
 
 	const handleRefetchOldestMessagesByScroll = useCallback(async () => {
 		const beforeMessageId = localMessages[0].id;
-		const limit = 25;
 		try {
 			const oldestMessages = await getChatMessages({
 				chatId: activeChatId,
-				limit,
+				limit: LIMITS_MESSAGES,
 				before_id: beforeMessageId,
 			}).unwrap();
-			if (oldestMessages.length < limit) {
+			if (oldestMessages.length < LIMITS_MESSAGES) {
 				setIsBlockFetch(true);
 			}
 			setLocalMessages((prev) => [...oldestMessages, ...prev]);

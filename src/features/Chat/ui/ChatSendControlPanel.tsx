@@ -1,8 +1,9 @@
 import { Button } from '@heroui/button';
 import { Input } from '@heroui/input';
 import type { FC } from 'react';
-import type { ChatSendControlPanelProps } from '@/entities/chat/model/chat.types';
+import { useTranslation } from 'react-i18next';
 import { SendMessageIcon } from '@/shared/ui/icons/sendMessageIcon';
+import type { ChatSendControlPanelProps } from '../model/chat.types';
 
 export const ChatSendControlPanel: FC<ChatSendControlPanelProps> = ({
 	message,
@@ -10,13 +11,14 @@ export const ChatSendControlPanel: FC<ChatSendControlPanelProps> = ({
 	sendMessage,
 	isSending,
 }) => {
+	const { t: tFields } = useTranslation('fields');
 	return (
 		<div className="flex items-center">
 			<Input
 				size="md"
 				color="primary"
 				radius="none"
-				placeholder="Напишите сообщение..."
+				placeholder={`${tFields('write_message')}...`}
 				disabled={isSending}
 				value={message}
 				onChange={(e) => setMessage(e.target.value)}

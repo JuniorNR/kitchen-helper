@@ -57,7 +57,8 @@
 		"ingredient_list": "Ingredient List",
 		"recipe_create": "Create Recipe",
 		"recipe_list": "Recipe List",
-		"user_settings": "Settings"
+		"user_settings": "Settings",
+		"user_chats": "Chats"
 	},
 	"fields": {
 		"description": "Description",

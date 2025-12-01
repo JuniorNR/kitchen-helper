@@ -3,7 +3,9 @@ import { Divider } from '@heroui/divider';
 import { motion } from 'framer-motion';
 import moment from 'moment';
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useUser } from '@/entities';
+import { customizeString } from '@/shared/lib/helpers';
 import { Alert, Typography } from '@/shared/ui';
 import type { ChatListAsideProps } from '../model/chat.types';
 import styles from './chat.module.scss';
@@ -13,9 +15,9 @@ export const ChatListAside: FC<ChatListAsideProps> = ({
 	activeChatId,
 	onChatClick,
 }) => {
+	const { t: tChats, i18n } = useTranslation('chats');
 	const { user } = useUser();
 	const hasChats = Boolean(chats?.length);
-
 	return (
 		<aside className="flex flex-shrink-0 overflow-y-auto w-1/4 max-w-1/4 min-w-[220px] flex-col rounded-2xl border border-slate-200 bg-gradient-to-b from-slate-50 via-white to-slate-100 ring-1 ring-white/60 shadow-[0_12px_35px_rgba(148,163,184,0.25)] dark:bg-none dark:border-slate-800 dark:bg-slate-900/60 dark:ring-0 dark:shadow-none">
 			<div className="px-5 py-2">
@@ -23,7 +25,7 @@ export const ChatListAside: FC<ChatListAsideProps> = ({
 					component="h2"
 					className="text-sm font-semibold tracking-wide text-slate-600 dark:text-slate-300"
 				>
-					Чаты
+					{tChats('chats')}
 				</Typography>
 			</div>
 			<Divider />
@@ -125,7 +127,26 @@ export const ChatListAside: FC<ChatListAsideProps> = ({
 												component="span"
 												className="flex items-center gap-1 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-200"
 											>
-												{String(chat.usersCount || 0)} участн.
+												{String(chat.usersCount || 0)}{' '}
+												{customizeString(tChats('member'), {
+													language: i18n.language,
+													cut: {
+														english: 4,
+														russian: 2,
+													},
+													ended: {
+														countTrigger: chat.usersCount || 0,
+														russian: {
+															zero: 'ов',
+															fromTwoToFour: 'а',
+															fromFiveToTen: 'ов',
+															fromElevenToNineteen: 'ов',
+														},
+														english: {
+															moreThatOne: 's',
+														},
+													},
+												}).toLowerCase()}
 											</Typography>
 											<div
 												className={`flex flex-col items-center justify-center rounded-full border px-2 py-1 text-xs font-semibold uppercase tracking-wide ${

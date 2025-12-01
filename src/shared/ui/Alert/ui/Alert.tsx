@@ -55,7 +55,10 @@ const STATUS_STYLES = {
 
 const mergeClasses = (...classes: Array<string | undefined>) =>
 	classes
-		.filter((cls): cls is string => Boolean(cls && cls.trim().length))
+		.filter(
+			(className): className is string =>
+				typeof className === 'string' && className.trim().length > 0,
+		)
 		.join(' ');
 
 export const Alert: FC<AlertProps> = ({
@@ -97,7 +100,12 @@ export const Alert: FC<AlertProps> = ({
 				}}
 				className="flex items-center justify-center"
 			>
-				<div className={mergeClasses('rounded-full p-4 transition-colors', iconWrapper)}>
+				<div
+					className={mergeClasses(
+						'rounded-full p-4 transition-colors',
+						iconWrapper,
+					)}
+				>
 					<Icon className={mergeClasses('h-12 w-12', iconColor)} />
 				</div>
 			</motion.div>

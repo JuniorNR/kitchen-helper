@@ -57,5 +57,6 @@
 	"apply": "Apply",
 	"cancel": "Cancel",
 	"reset_preset": "Reset preset",
-	"save_preset": "Save preset"
+	"save_preset": "Save preset",
+	"write_message": "Write message"
 }

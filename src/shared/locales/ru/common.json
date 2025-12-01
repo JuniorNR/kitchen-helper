@@ -57,7 +57,8 @@
 		"ingredient_list": "Список ингредиентов",
 		"recipe_create": "Создать рецепт",
 		"recipe_list": "Список рецептов",
-		"user_settings": "Настройки"
+		"user_settings": "Настройки",
+		"user_chats": "Чаты"
 	},
 	"fields": {
 		"description": "Описание",

@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/suspicious/noConfusingVoidType: <explanation> */
 import type { Ingredient } from '@/entities';
 
 export const INGREDIENT_SKELETON_KEYS = [
@@ -17,7 +16,7 @@ export const prepareIngredientsList = (ingredients?: Ingredient[]) => {
 export const handleDeleteIngredient = async (
 	id: string,
 	setIsDeleteLoadingIngredient: (id: string | null) => void,
-	deleteIngredientData: (id: string) => Promise<void | null>,
+	deleteIngredientData: (id: string) => Promise<void>,
 ) => {
 	try {
 		setIsDeleteLoadingIngredient(id);

@@ -1,13 +1,10 @@
 'use client';
-
-import { Button } from '@heroui/button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRecipe } from '@/entities';
 import { classNames, localStorageHelper } from '@/shared/lib/helpers';
-import { Alert, PaginationBar, Typography } from '@/shared/ui';
-import { WarningIcon } from '@/shared/ui/icons/warningIcon';
+import { Alert, PaginationBar } from '@/shared/ui';
 import type { RecipeListFilter } from '../model/recipeList.types';
 import { handleDeleteRecipe, SKELETON_KEYS } from '../model/recipeList.utils';
 import { RecipeItem } from './RecipeItem';
@@ -28,11 +25,12 @@ export const RecipesList = () => {
 	const [filters, setFilters] = useState<Partial<RecipeListFilter>>(
 		filterFromLocalStorage,
 	);
-	const { recipes, error, pagination, isLoading, deleteRecipeData, refetch } =
-		useRecipe({
+	const { recipes, error, pagination, isLoading, deleteRecipeData } = useRecipe(
+		{
 			page,
 			filters,
-		});
+		},
+	);
 
 	const renderRecipes = () => {
 		return (
