@@ -1,1 +1,7 @@
-export type { ApiError, ApiErrorDTO, ApiResponse } from './api.types';
+export type {
+	ApiError,
+	ApiErrorDTO,
+	ApiResponse,
+	ApiResponsePagination,
+	ApiResponsePaginationDTO,
+} from './api.types';

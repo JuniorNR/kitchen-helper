@@ -36,6 +36,42 @@
 		"ru": "Russian",
 		"en": "English"
 	},
+	"page_titles": {
+		"ingredient_create": "Create Ingredient",
+		"ingredient_list": "Ingredient List",
+		"recipe_create": "Create Recipe",
+		"recipe_list": "Recipe List",
+		"user_settings": "Settings",
+		"user_chats": "Chats",
+		"market": "Market"
+	},
+	"fields": {
+		"description": "Description",
+		"duration": "Duration",
+		"step": "Step"
+	},
+	"time": {
+		"minute_short": "min"
+	},
+	"common": {
+		"section_only_for": "This section is only for: {{roles}}"
+	},
+	"market": {
+		"title": "Home Authors Market",
+		"title_description": "Homemade recipes",
+		"description": "They sell recipes here — they are published by the authors themselves, who cook at home: from grandmothers with notebooks to student chats. Customers receive ready-made instructions and can immediately repeat the dish in their kitchen.",
+		"empty_state": "Market list is empty"
+	},
+	"recipes": {
+		"title": "Community Recipes Catalog",
+		"title_description": "Home cooks' recipes",
+		"description": "This is where authors keep their step-by-step instructions, share seasonal selections and return to favorite dishes in one click. A convenient space to maintain a personal recipe book and show it to friends."
+	},
+	"ingredients": {
+		"title": "Ingredient Pantry",
+		"title_description": "Kitchen inventory",
+		"description": "Track every product, note prices and availability to see what is already on the shelf and what you need to buy for the next recipe. Planning grocery runs becomes easier and you avoid unnecessary spending."
+	},
 	"app_name": "Kitchen helper",
 	"app_name_description": "Your assistant in creating and organizing recipes.",
 	"login": "Login",
@@ -51,24 +87,5 @@
 	"reject": "Reject",
 	"delete": "Delete",
 	"user_not_authorized": "User not authorized",
-	"create": "Create",
-	"page_titles": {
-		"ingredient_create": "Create Ingredient",
-		"ingredient_list": "Ingredient List",
-		"recipe_create": "Create Recipe",
-		"recipe_list": "Recipe List",
-		"user_settings": "Settings",
-		"user_chats": "Chats"
-	},
-	"fields": {
-		"description": "Description",
-		"duration": "Duration",
-		"step": "Step"
-	},
-	"time": {
-		"minute_short": "min"
-	},
-	"common": {
-		"section_only_for": "This section is only for: {{roles}}"
-	}
+	"create": "Create"
 }

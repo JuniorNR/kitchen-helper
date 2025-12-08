@@ -19,6 +19,9 @@
 	},
 	"eslint.useFlatConfig": true,
 	"eslint.format.enable": false,
+	// Настройки вкладок редактора
+	"workbench.editor.enablePreview": false,
+	"workbench.editor.tabSizing": "fixed",
 	"cSpell.words": [
 		"bruschetta",
 		"crostini",

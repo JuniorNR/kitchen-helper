@@ -5,6 +5,7 @@ export { Filter, FilterGroup } from './Filter';
 export { ImagesPick } from './ImagesPick';
 export { Modal } from './Modal';
 export { NumberInput } from './NumberInput';
+export { PageInfoBlock } from './PageInfoBlock';
 export { PaginationBar } from './PaginationBar';
 export { PriceInput } from './PriceInput';
 export { Range } from './Range';

@@ -5,6 +5,7 @@ import { type Key, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IngredientsList } from '@/features/IngredientsList';
 import { IngredientCreate } from '@/features/ingredientCreate';
+import { PageInfoBlock } from '@/shared/ui';
 
 export default function ingredientsPage() {
 	const { t: tCommon } = useTranslation('common');
@@ -20,27 +21,35 @@ export default function ingredientsPage() {
 	}, [created]);
 
 	return (
-		<Tabs
-			variant="bordered"
-			color="primary"
-			aria-label="Options"
-			selectedKey={String(selectedKey)}
-			onSelectionChange={(key) => setSelectedKey(key)}
-		>
-			<Tab
-				key="/ingredient-create"
-				title={tCommon('page_titles.ingredient_create')}
-				className={tabStyles}
+		<>
+			<PageInfoBlock
+				version="0.9.0"
+				titleDescription={tCommon('ingredients.title_description')}
+				title={tCommon('ingredients.title')}
+				description={tCommon('ingredients.description')}
+			/>
+			<Tabs
+				variant="bordered"
+				color="primary"
+				aria-label="Options"
+				selectedKey={String(selectedKey)}
+				onSelectionChange={(key) => setSelectedKey(key)}
 			>
-				<IngredientCreate setCreated={setCreated} />
-			</Tab>
-			<Tab
-				key="/ingredient-list"
-				title={tCommon('page_titles.ingredient_list')}
-				className={tabStyles}
-			>
-				<IngredientsList />
-			</Tab>
-		</Tabs>
+				<Tab
+					key="/ingredient-create"
+					title={tCommon('page_titles.ingredient_create')}
+					className={tabStyles}
+				>
+					<IngredientCreate setCreated={setCreated} />
+				</Tab>
+				<Tab
+					key="/ingredient-list"
+					title={tCommon('page_titles.ingredient_list')}
+					className={tabStyles}
+				>
+					<IngredientsList />
+				</Tab>
+			</Tabs>
+		</>
 	);
 }

@@ -1,0 +1,8 @@
+{
+	"card": {
+		"themes": "Store themes",
+		"count_of_recipes": "Number of recipes",
+		"average_price": "Average price",
+		"buy_most_often": "Most often bought"
+	}
+}

@@ -9,6 +9,7 @@ import chatsEn from '@/shared/locales/en/chats.json';
 import commonEn from '@/shared/locales/en/common.json';
 import fieldsEn from '@/shared/locales/en/fields.json';
 import ingredientsEn from '@/shared/locales/en/ingredients.json';
+import marketsEn from '@/shared/locales/en/markets.json';
 import recipesEn from '@/shared/locales/en/recipes.json';
 import unitsEn from '@/shared/locales/en/units.json';
 import validationEn from '@/shared/locales/en/validation.json';
@@ -17,6 +18,7 @@ import chatsRu from '@/shared/locales/ru/chats.json';
 import commonRu from '@/shared/locales/ru/common.json';
 import fieldsRu from '@/shared/locales/ru/fields.json';
 import ingredientsRu from '@/shared/locales/ru/ingredients.json';
+import marketsRu from '@/shared/locales/ru/markets.json';
 import recipesRu from '@/shared/locales/ru/recipes.json';
 import unitsRu from '@/shared/locales/ru/units.json';
 import validationRu from '@/shared/locales/ru/validation.json';
@@ -31,6 +33,7 @@ const resources = {
 		alerts: alertsEn,
 		recipes: recipesEn,
 		chats: chatsEn,
+		markets: marketsEn,
 	},
 	ru: {
 		common: commonRu,
@@ -41,6 +44,7 @@ const resources = {
 		alerts: alertsRu,
 		recipes: recipesRu,
 		chats: chatsRu,
+		markets: marketsRu,
 	},
 };
 
@@ -66,6 +70,7 @@ export const I18nProvider = ({ children }: { children: React.ReactNode }) => {
 					'alerts',
 					'recipes',
 					'chats',
+					'markets',
 				],
 				interpolation: { escapeValue: false },
 				load: 'languageOnly' as const,
