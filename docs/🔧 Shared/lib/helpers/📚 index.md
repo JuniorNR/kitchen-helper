@@ -1,0 +1,23 @@
+# 📚 Helpers Index
+
+Индекс всех вспомогательных функций.
+
+## 📋 Список функций
+
+- [[🔧 Shared/lib/helpers/🎨 classNames|classNames]] - объединение CSS классов
+- [[🔧 Shared/lib/helpers/🎭 customizeString|customizeString]] - кастомизация строк
+- [[🔧 Shared/lib/helpers/✂️ cutStringWithSeparator|cutStringWithSeparator]] - обрезка строки
+- [[🔧 Shared/lib/helpers/🗑️ deleteFieldsWithUndefinedValues|deleteFieldsWithUndefinedValues]] - удаление undefined полей
+- [[🔧 Shared/lib/helpers/📦 dto|dto]] - преобразование DTO
+- [[🔧 Shared/lib/helpers/💾 localStorageHelper|localStorageHelper]] - работа с localStorage
+- [[🔧 Shared/lib/helpers/🔀 mergeUniqueKeysObjects|mergeUniqueKeysObjects]] - объединение объектов
+- [[🔧 Shared/lib/helpers/🚫 omitKeyObject|omitKeyObject]] - исключение ключей
+- [[🔧 Shared/lib/helpers/📅 parseDate|parseDate]] - парсинг даты
+- [[🔧 Shared/lib/helpers/📝 prepareCase|prepareCase]] - преобразование регистра
+- [[🔧 Shared/lib/helpers/📅 prepareDateForInput|prepareDateForInput]] - подготовка даты для input
+- [[🔧 Shared/lib/helpers/📅 serializeDate|serializeDate]] - сериализация даты
+
+## 🔗 Связанные документы
+
+- [[🔧 Shared|🔧 Shared]]
+

@@ -123,7 +123,7 @@ export const Chat = () => {
 
 	return (
 		<section
-			className={`flex w-full h-[${layoutConfig.chatHeight}] max-h-[650px] min-h-[400px] gap-6 rounded-3xl border border-slate-200/90 bg-gradient-to-br from-white via-slate-50 to-slate-100 p-6 shadow-[0_25px_70px_rgba(15,23,42,0.08)] backdrop-blur-sm dark:bg-none dark:border-slate-800 dark:bg-slate-900/80 dark:shadow-slate-900/40`}
+			className={`flex w-full h-[${layoutConfig.chatHeight}] max-h-[650px] min-h-[650px] gap-6 rounded-3xl border border-slate-200/90 bg-linear-to-br from-white via-slate-50 to-slate-100 p-6 shadow-[0_25px_70px_rgba(15,23,42,0.08)] backdrop-blur-sm dark:bg-none dark:border-slate-800 dark:bg-slate-900/80 dark:shadow-slate-900/40`}
 		>
 			{!isChatsLoading ? (
 				<ChatListAside
