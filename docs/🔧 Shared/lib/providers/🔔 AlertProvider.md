@@ -24,6 +24,6 @@
 ## 🔗 Связанные документы
 
 - [[🔧 Shared/lib/providers|React провайдеры]]
-- [[🔧 Shared/ui/🔔 Alerts|Alerts Component]]
+- [[🔔 Alerts|Alerts Component]]
 - [[🔔 Alert Feature|🎨 Features/🔔 Alert]]
 

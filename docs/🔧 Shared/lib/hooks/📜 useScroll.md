@@ -97,5 +97,5 @@ const isScrolled = scrollY > 4;
 ## 🔗 Связанные документы
 
 - [[🔧 Shared/lib/hooks|Кастомные хуки]]
-- [[🧩 Widgets/📄 Header|Header Widget]]
+- [[📄 Header|Header Widget]]
 

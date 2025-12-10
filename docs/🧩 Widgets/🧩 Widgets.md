@@ -37,7 +37,7 @@ widgets/
 - Поддержка темной/светлой темы
 
 **Связанные документы**:
-- [[⚙️ Конфигурация/📐 layout.config|layout.config.ts]]
+- [[📐 layout.config|layout.config.ts]]
 
 ---
 
@@ -60,7 +60,7 @@ widgets/
 - Навигационные элементы
 
 **Связанные документы**:
-- [[⚙️ Конфигурация/📐 layout.config|layout.config.ts]]
+- [[📐 layout.config|layout.config.ts]]
 - [[🔐 Auth Feature|🎨 Features/🔐 Auth]]
 - [[🌐 LanguageSwitcher Feature|🎨 Features/🌐 LanguageSwitcher]]
 - [[🎨 ThemeSwitcher Feature|🎨 Features/🎨 ThemeSwitcher]]

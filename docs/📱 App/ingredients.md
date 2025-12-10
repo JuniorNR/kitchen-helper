@@ -27,5 +27,5 @@
 
 - [[➕ IngredientCreate Feature|🎨 Features/➕ IngredientCreate]]
 - [[🥘 IngredientsList Feature|🎨 Features/🥘 IngredientsList]]
-- [[🔧 Shared/ui/📄 PageInfoBlock|PageInfoBlock]]
+- [[📄 PageInfoBlock|PageInfoBlock]]
 

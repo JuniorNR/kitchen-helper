@@ -101,7 +101,6 @@ export const ImagesPick: FC<ImagesPickProps> = ({
 							disabled={previews.length >= maxImages}
 							onClick={handleAdd}
 						>
-							{/* {tRecipes('buttons.add_image')} */}
 							<PhotoIcon className="w-full" />
 						</button>
 					</>

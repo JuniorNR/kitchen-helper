@@ -69,8 +69,8 @@ transformResponse: (response: ChatMessageDTO[]) => {
 
 ## 🔗 Связанные документы
 
-- [[💬 Chat|📦 Entities/💬 Chat]]
-- [[💬 Chat/📋 chat.types|chat.types.ts]]
-- [[💬 Chat/🪝 useChat|useChat.ts]]
+- [[FrontEnd/Kitchen-helper/docs/📦 Entities/💬 Chat|📦 Entities/💬 Chat]]
+- [[📋 chat.types|chat.types.ts]]
+- [[🪝 useChat|useChat.ts]]
 - [[🔧 Shared/lib/helpers/dto|DTO Helper]]
 

@@ -73,5 +73,5 @@ IngredientsList/
 ## 🔗 Связанные документы
 
 - [[🥘 Ingredient Entity|📦 Entities/🥘 Ingredient]]
-- [[🔧 Shared/ui/🔍 Filter|Filter Component]]
+- [[🔍 Filter|Filter Component]]
 

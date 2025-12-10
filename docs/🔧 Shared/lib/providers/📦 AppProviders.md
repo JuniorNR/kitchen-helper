@@ -58,5 +58,5 @@ export default function RootLayout({ children }) {
 ## 🔗 Связанные документы
 
 - [[🔧 Shared/lib/providers|React провайдеры]]
-- [[📱 App/layout|Root Layout]]
+- [[layout|Root Layout]]
 

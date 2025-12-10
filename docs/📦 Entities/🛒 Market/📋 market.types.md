@@ -78,6 +78,6 @@ TypeScript типы для магазинов.
 ## 🔗 Связанные документы
 
 - [[🛒 Market|📦 Entities/🛒 Market]]
-- [[🛒 Market/📡 market.api|market.api.ts]]
-- [[🛒 Market/🪝 useMarket|useMarket.ts]]
+- [[📡 market.api|market.api.ts]]
+- [[🪝 useMarket|useMarket.ts]]
 

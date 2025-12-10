@@ -4,9 +4,9 @@
 
 ## 📋 Список хуков
 
-- [[🔧 Shared/lib/hooks/🔄 useAppDispatch|useAppDispatch]] - типизированный dispatch
-- [[🔧 Shared/lib/hooks/🔄 useAppSelector|useAppSelector]] - типизированный selector
-- [[🔧 Shared/lib/hooks/📜 useScroll|useScroll]] - отслеживание скролла
+- [[🔄 useAppDispatch|useAppDispatch]] - типизированный dispatch
+- [[🔄 useAppSelector|useAppSelector]] - типизированный selector
+- [[📜 useScroll|useScroll]] - отслеживание скролла
 
 ## 🔗 Связанные документы
 

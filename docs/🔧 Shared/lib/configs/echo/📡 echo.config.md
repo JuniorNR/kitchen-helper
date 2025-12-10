@@ -42,6 +42,6 @@ initEcho(authToken);
 
 ## 🔗 Связанные документы
 
-- [[🔧 Shared/lib/providers/📡 EchoProvider|EchoProvider]]
+- [[📡 EchoProvider|EchoProvider]]
 - [[💬 Chat Feature|🎨 Features/💬 Chat]]
 

@@ -20,7 +20,7 @@ market/
 
 ## 📄 Файлы
 
-### [[🛒 Market/📡 market.api|market.api.ts]]
+### [[📡 market.api|market.api.ts]]
 
 RTK Query API для работы с магазинами.
 
@@ -28,12 +28,12 @@ RTK Query API для работы с магазинами.
 - `getMarkets` - GET `/markets` - получение списка магазинов с пагинацией
 
 **Связанные документы**:
-- [[🛒 Market/📋 market.types|market.types.ts]]
-- [[🛒 Market/🪝 useMarket|useMarket.ts]]
+- [[📋 market.types|market.types.ts]]
+- [[🪝 useMarket|useMarket.ts]]
 
 ---
 
-### [[🛒 Market/📋 market.types|market.types.ts]]
+### [[📋 market.types|market.types.ts]]
 
 TypeScript типы для магазинов.
 
@@ -47,12 +47,12 @@ TypeScript типы для магазинов.
 - `UseMarket` - параметры для хука
 
 **Связанные документы**:
-- [[🛒 Market/📡 market.api|market.api.ts]]
-- [[🛒 Market/🪝 useMarket|useMarket.ts]]
+- [[📡 market.api|market.api.ts]]
+- [[🪝 useMarket|useMarket.ts]]
 
 ---
 
-### [[🛒 Market/🪝 useMarket|useMarket.ts]]
+### [[🪝 useMarket|useMarket.ts]]
 
 Кастомный хук для работы с магазинами.
 
@@ -72,7 +72,7 @@ TypeScript типы для магазинов.
 ```
 
 **Связанные документы**:
-- [[🛒 Market/📡 market.api|market.api.ts]]
+- [[📡 market.api|market.api.ts]]
 - [[🛒 MarketList Feature|🎨 Features/🛒 MarketList]]
 
 ---

@@ -19,7 +19,7 @@ user/
 
 ## 📄 Файлы
 
-### [[👤 User/📡 user.api|user.api.ts]]
+### [[📡 user.api|user.api.ts]]
 
 RTK Query API для работы с пользователями.
 
@@ -32,12 +32,12 @@ RTK Query API для работы с пользователями.
 - Показывает уведомления при успехе/ошибке обновления
 
 **Связанные документы**:
-- [[👤 User/📋 user.types|user.types.ts]]
-- [[👤 User/🪝 useUser|useUser.ts]]
+- [[📋 user.types|user.types.ts]]
+- [[🪝 useUser|useUser.ts]]
 
 ---
 
-### [[👤 User/📋 user.types|user.types.ts]]
+### [[📋 user.types|user.types.ts]]
 
 TypeScript типы для пользователей.
 
@@ -46,12 +46,12 @@ TypeScript типы для пользователей.
 - `UserDTO` - серверный тип пользователя
 
 **Связанные документы**:
-- [[👤 User/📡 user.api|user.api.ts]]
-- [[👤 User/🪝 useUser|useUser.ts]]
+- [[📡 user.api|user.api.ts]]
+- [[🪝 useUser|useUser.ts]]
 
 ---
 
-### [[👤 User/🪝 useUser|useUser.ts]]
+### [[🪝 useUser|useUser.ts]]
 
 Кастомный хук для работы с пользователями.
 
@@ -73,7 +73,7 @@ const { user, updateUserData, isUserLoading } = useUser();
 ```
 
 **Связанные документы**:
-- [[👤 User/📡 user.api|user.api.ts]]
+- [[📡 user.api|user.api.ts]]
 - [[⚙️ UserSettings Feature|🎨 Features/⚙️ UserSettings]]
 
 ---

@@ -50,5 +50,5 @@ Zod схема для валидации формы:
 ## 🔗 Связанные документы
 
 - [[👤 User Entity|📦 Entities/👤 User]]
-- [[📱 App/settings|settings/page.tsx]]
+- [[settings|settings/page.tsx]]
 

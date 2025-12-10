@@ -59,6 +59,6 @@ export const myApi = createApi({
 ## 🔗 Связанные документы
 
 - [[🔧 Shared/lib/store|Redux Store]]
-- [[⚙️ Конфигурация/🌐 api.config|api.config.ts]]
+- [[🌐 api.config|api.config.ts]]
 - [[🔐 Auth Feature|🎨 Features/🔐 Auth]]
 

@@ -41,7 +41,7 @@ Redux slice для управления уведомлениями.
 
 ## 🔗 Связанные документы
 
-- [[🔧 Shared/ui/🔔 Alert|Alert Component]]
-- [[🔧 Shared/ui/🔔 Alerts|Alerts Component]]
-- [[🔧 Shared/lib/providers/🔔 AlertProvider|AlertProvider]]
+- [[FrontEnd/Kitchen-helper/docs/🔧 Shared/ui/🔔 Alert|Alert Component]]
+- [[🔔 Alerts|Alerts Component]]
+- [[🔔 AlertProvider|AlertProvider]]
 

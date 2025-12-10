@@ -38,6 +38,6 @@ const { markets, isLoading } = useMarket({ page: 1 });
 ## 🔗 Связанные документы
 
 - [[🛒 Market|📦 Entities/🛒 Market]]
-- [[🛒 Market/📡 market.api|market.api.ts]]
+- [[📡 market.api|market.api.ts]]
 - [[🛒 MarketList Feature|🎨 Features/🛒 MarketList]]
 

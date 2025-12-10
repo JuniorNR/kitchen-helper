@@ -116,8 +116,8 @@ TypeScript типы для чата и сообщений.
 
 ## 🔗 Связанные документы
 
-- [[💬 Chat|📦 Entities/💬 Chat]]
-- [[💬 Chat/📡 chat.api|chat.api.ts]]
-- [[💬 Chat/🪝 useChat|useChat.ts]]
+- [[FrontEnd/Kitchen-helper/docs/📦 Entities/💬 Chat|📦 Entities/💬 Chat]]
+- [[📡 chat.api|chat.api.ts]]
+- [[🪝 useChat|useChat.ts]]
 - [[🔧 Shared/lib/helpers/dto|DTO Helper]]
 

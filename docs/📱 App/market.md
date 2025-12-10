@@ -25,5 +25,5 @@
 ## 🔗 Связанные документы
 
 - [[🛒 MarketList Feature|🎨 Features/🛒 MarketList]]
-- [[🔧 Shared/ui/📄 PageInfoBlock|PageInfoBlock]]
+- [[📄 PageInfoBlock|PageInfoBlock]]
 

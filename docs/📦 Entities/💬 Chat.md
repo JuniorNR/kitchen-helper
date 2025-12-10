@@ -19,7 +19,7 @@ chat/
 
 ## 📄 Файлы
 
-### [[💬 Chat/📡 chat.api|chat.api.ts]]
+### [[📡 chat.api|chat.api.ts]]
 
 RTK Query API для работы с чатами и сообщениями.
 
@@ -36,12 +36,12 @@ RTK Query API для работы с чатами и сообщениями.
 - `sendMessage` - POST `/chats/:chatId/messages` - отправка сообщения
 
 **Связанные документы**:
-- [[💬 Chat/📋 chat.types|chat.types.ts]]
-- [[💬 Chat/🪝 useChat|useChat.ts]]
+- [[📋 chat.types|chat.types.ts]]
+- [[🪝 useChat|useChat.ts]]
 
 ---
 
-### [[💬 Chat/📋 chat.types|chat.types.ts]]
+### [[📋 chat.types|chat.types.ts]]
 
 TypeScript типы для чата и сообщений.
 
@@ -54,12 +54,12 @@ TypeScript типы для чата и сообщений.
 - `SendMessageQuery` - параметры отправки сообщения
 
 **Связанные документы**:
-- [[💬 Chat/📡 chat.api|chat.api.ts]]
-- [[💬 Chat/🪝 useChat|useChat.ts]]
+- [[📡 chat.api|chat.api.ts]]
+- [[🪝 useChat|useChat.ts]]
 
 ---
 
-### [[💬 Chat/🪝 useChat|useChat.ts]]
+### [[🪝 useChat|useChat.ts]]
 
 Кастомный хук для работы с чатом.
 
@@ -99,7 +99,7 @@ const {
 ```
 
 **Связанные документы**:
-- [[💬 Chat/📡 chat.api|chat.api.ts]]
+- [[📡 chat.api|chat.api.ts]]
 - [[💬 Chat Feature|🎨 Features/💬 Chat]]
 
 ---

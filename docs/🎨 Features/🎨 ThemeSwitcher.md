@@ -36,6 +36,6 @@ import { ThemeSwitcher } from '@/features';
 
 ## 🔗 Связанные документы
 
-- [[🔧 Shared/lib/providers/🎨 HeroUIProvider|HeroUI Provider]]
-- [[🧩 Widgets/📄 Header|Header Widget]]
+- [[🎨 HeroUIProvider|HeroUI Provider]]
+- [[📄 Header|Header Widget]]
 

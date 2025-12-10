@@ -45,5 +45,5 @@ interface ChatMessagesWindowProps {
 
 - [[💬 Chat Feature|🎨 Features/💬 Chat]]
 - [[💬 Chat Entity|📦 Entities/💬 Chat]]
-- [[💬 Chat/📤 ChatSendControlPanel|ChatSendControlPanel.tsx]]
+- [[📤 ChatSendControlPanel|ChatSendControlPanel.tsx]]
 

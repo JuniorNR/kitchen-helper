@@ -49,8 +49,8 @@
 
 ## 🔗 Связанные документы
 
-- [[🧩 Widgets/📄 Header|Header Widget]]
-- [[🧩 Widgets/📄 Footer|Footer Widget]]
+- [[📄 Header|Header Widget]]
+- [[📄 Footer|Footer Widget]]
 - [[🔐 Auth Feature|🎨 Features/🔐 Auth]]
-- [[⚙️ Конфигурация/📐 layout.config|layout.config.ts]]
+- [[📐 layout.config|layout.config.ts]]
 

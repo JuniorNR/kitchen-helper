@@ -79,5 +79,5 @@ prepareCase('XMLHttpRequest'); // "xml_http_request"
 ## 🔗 Связанные документы
 
 - [[🔧 Shared/lib/helpers|Вспомогательные функции]]
-- [[🔧 Shared/lib/helpers/📦 dto|dto]]
+- [[📦 dto|dto]]
 

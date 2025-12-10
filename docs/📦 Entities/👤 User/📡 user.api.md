@@ -55,6 +55,6 @@ RTK Query API для работы с пользователями.
 ## 🔗 Связанные документы
 
 - [[👤 User|📦 Entities/👤 User]]
-- [[👤 User/🪝 useUser|useUser.ts]]
+- [[🪝 useUser|useUser.ts]]
 - [[🔐 Auth Feature|🎨 Features/🔐 Auth]]
 

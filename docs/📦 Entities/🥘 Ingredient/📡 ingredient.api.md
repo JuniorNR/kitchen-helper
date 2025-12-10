@@ -65,5 +65,5 @@ RTK Query API для работы с ингредиентами.
 ## 🔗 Связанные документы
 
 - [[🥘 Ingredient|📦 Entities/🥘 Ingredient]]
-- [[🥘 Ingredient/🪝 useIngredient|useIngredient.ts]]
+- [[🪝 useIngredient|useIngredient.ts]]
 

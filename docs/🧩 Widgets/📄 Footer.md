@@ -56,5 +56,5 @@ interface FooterProps {
 
 ## 🔗 Связанные документы
 
-- [[⚙️ Конфигурация/📐 layout.config|layout.config.ts]]
+- [[📐 layout.config|layout.config.ts]]
 

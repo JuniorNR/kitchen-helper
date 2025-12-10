@@ -69,6 +69,6 @@ RTK Query API для работы с рецептами.
 ## 🔗 Связанные документы
 
 - [[🍳 Recipe|📦 Entities/🍳 Recipe]]
-- [[🍳 Recipe/🛠️ recipe.utils|recipe.utils.ts]]
-- [[🍳 Recipe/🪝 useRecipe|useRecipe.ts]]
+- [[🛠️ recipe.utils|recipe.utils.ts]]
+- [[🪝 useRecipe|useRecipe.ts]]
 

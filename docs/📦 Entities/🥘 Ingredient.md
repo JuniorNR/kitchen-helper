@@ -19,7 +19,7 @@ ingredient/
 
 ## 📄 Файлы
 
-### [[🥘 Ingredient/📡 ingredient.api|ingredient.api.ts]]
+### [[📡 ingredient.api|ingredient.api.ts]]
 
 RTK Query API для работы с ингредиентами.
 
@@ -29,12 +29,12 @@ RTK Query API для работы с ингредиентами.
 - `deleteIngredient` - DELETE `/ingredients/delete/:id` - удаление ингредиента
 
 **Связанные документы**:
-- [[🥘 Ingredient/📋 ingredient.types|ingredient.types.ts]]
-- [[🥘 Ingredient/🪝 useIngredient|useIngredient.ts]]
+- [[📋 ingredient.types|ingredient.types.ts]]
+- [[🪝 useIngredient|useIngredient.ts]]
 
 ---
 
-### [[🥘 Ingredient/📋 ingredient.types|ingredient.types.ts]]
+### [[📋 ingredient.types|ingredient.types.ts]]
 
 TypeScript типы для ингредиентов.
 
@@ -44,12 +44,12 @@ TypeScript типы для ингредиентов.
 - `UseIngredients` - параметры для хука
 
 **Связанные документы**:
-- [[🥘 Ingredient/📡 ingredient.api|ingredient.api.ts]]
-- [[🥘 Ingredient/🪝 useIngredient|useIngredient.ts]]
+- [[📡 ingredient.api|ingredient.api.ts]]
+- [[🪝 useIngredient|useIngredient.ts]]
 
 ---
 
-### [[🥘 Ingredient/🪝 useIngredient|useIngredient.ts]]
+### [[🪝 useIngredient|useIngredient.ts]]
 
 Кастомный хук для работы с ингредиентами.
 
@@ -76,7 +76,7 @@ TypeScript типы для ингредиентов.
 ```
 
 **Связанные документы**:
-- [[🥘 Ingredient/📡 ingredient.api|ingredient.api.ts]]
+- [[📡 ingredient.api|ingredient.api.ts]]
 - [[🥘 IngredientsList Feature|🎨 Features/🥘 IngredientsList]]
 
 ---

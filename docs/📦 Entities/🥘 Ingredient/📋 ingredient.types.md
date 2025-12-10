@@ -67,6 +67,6 @@ TypeScript типы для ингредиентов.
 ## 🔗 Связанные документы
 
 - [[🥘 Ingredient|📦 Entities/🥘 Ingredient]]
-- [[🥘 Ingredient/📡 ingredient.api|ingredient.api.ts]]
-- [[🥘 Ingredient/🪝 useIngredient|useIngredient.ts]]
+- [[📡 ingredient.api|ingredient.api.ts]]
+- [[🪝 useIngredient|useIngredient.ts]]
 

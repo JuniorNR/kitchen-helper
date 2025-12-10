@@ -38,6 +38,6 @@ await createRecipe(formData);
 ## 🔗 Связанные документы
 
 - [[🍳 Recipe|📦 Entities/🍳 Recipe]]
-- [[🍳 Recipe/📡 recipe.api|recipe.api.ts]]
+- [[📡 recipe.api|recipe.api.ts]]
 - [[➕ RecipeCreate Feature|🎨 Features/➕ RecipeCreate]]
 

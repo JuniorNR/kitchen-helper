@@ -82,6 +82,6 @@ TypeScript типы для рецептов.
 ## 🔗 Связанные документы
 
 - [[🍳 Recipe|📦 Entities/🍳 Recipe]]
-- [[🍳 Recipe/📡 recipe.api|recipe.api.ts]]
-- [[🍳 Recipe/🪝 useRecipe|useRecipe.ts]]
+- [[📡 recipe.api|recipe.api.ts]]
+- [[🪝 useRecipe|useRecipe.ts]]
 

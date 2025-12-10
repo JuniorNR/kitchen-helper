@@ -55,5 +55,5 @@ const [images, setImages] = useState<File[]>([]);
 ## 🔗 Связанные документы
 
 - [[🔧 Shared/ui|UI компоненты]]
-- [[🔧 Shared/ui/🗑️ DeleteButton|DeleteButton]]
+- [[🗑️ DeleteButton|DeleteButton]]
 

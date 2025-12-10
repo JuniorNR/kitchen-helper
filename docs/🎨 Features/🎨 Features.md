@@ -32,7 +32,7 @@ features/
 
 ## 📚 Features
 
-### [[🔔 Alert|🎨 Features/🔔 Alert]]
+### [[FrontEnd/Kitchen-helper/docs/🎨 Features/🔔 Alert|🎨 Features/🔔 Alert]]
 
 Система уведомлений для отображения сообщений пользователю.
 
@@ -63,7 +63,7 @@ features/
 
 ---
 
-### [[💬 Chat|🎨 Features/💬 Chat]]
+### [[FrontEnd/Kitchen-helper/docs/🎨 Features/💬 Chat|🎨 Features/💬 Chat]]
 
 Чат для обмена сообщениями между пользователями.
 

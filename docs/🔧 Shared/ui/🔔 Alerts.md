@@ -51,6 +51,6 @@ import { Alerts } from '@/shared/ui';
 ## 🔗 Связанные документы
 
 - [[🔧 Shared/ui|UI компоненты]]
-- [[🔧 Shared/ui/🔔 Alert|Alert]]
+- [[FrontEnd/Kitchen-helper/docs/🔧 Shared/ui/🔔 Alert|Alert]]
 - [[🔔 Alert Feature|🎨 Features/🔔 Alert]]
 

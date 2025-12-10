@@ -20,7 +20,7 @@ recipe/
 
 ## 📄 Файлы
 
-### [[🍳 Recipe/📡 recipe.api|recipe.api.ts]]
+### [[📡 recipe.api|recipe.api.ts]]
 
 RTK Query API для работы с рецептами.
 
@@ -30,13 +30,13 @@ RTK Query API для работы с рецептами.
 - `deleteRecipe` - DELETE `/recipes/delete/:id` - удаление рецепта
 
 **Связанные документы**:
-- [[🍳 Recipe/📋 recipe.type|recipe.type.ts]]
-- [[🍳 Recipe/🛠️ recipe.utils|recipe.utils.ts]]
-- [[🍳 Recipe/🪝 useRecipe|useRecipe.ts]]
+- [[📋 recipe.type|recipe.type.ts]]
+- [[🛠️ recipe.utils|recipe.utils.ts]]
+- [[🪝 useRecipe|useRecipe.ts]]
 
 ---
 
-### [[🍳 Recipe/📋 recipe.type|recipe.type.ts]]
+### [[📋 recipe.type|recipe.type.ts]]
 
 TypeScript типы для рецептов.
 
@@ -48,12 +48,12 @@ TypeScript типы для рецептов.
 - `UseRecipe` - параметры для хука
 
 **Связанные документы**:
-- [[🍳 Recipe/📡 recipe.api|recipe.api.ts]]
-- [[🍳 Recipe/🪝 useRecipe|useRecipe.ts]]
+- [[📡 recipe.api|recipe.api.ts]]
+- [[🪝 useRecipe|useRecipe.ts]]
 
 ---
 
-### [[🍳 Recipe/🛠️ recipe.utils|recipe.utils.ts]]
+### [[🛠️ recipe.utils|recipe.utils.ts]]
 
 Утилиты для работы с рецептами.
 
@@ -61,12 +61,12 @@ TypeScript типы для рецептов.
 - `buildRecipeCreateFormData(input: RecipeCreateFormInputType): FormData` - построение FormData для создания рецепта
 
 **Связанные документы**:
-- [[🍳 Recipe/📡 recipe.api|recipe.api.ts]]
+- [[📡 recipe.api|recipe.api.ts]]
 - [[➕ RecipeCreate Feature|🎨 Features/➕ RecipeCreate]]
 
 ---
 
-### [[🍳 Recipe/🪝 useRecipe|useRecipe.ts]]
+### [[🪝 useRecipe|useRecipe.ts]]
 
 Кастомный хук для работы с рецептами.
 
@@ -94,7 +94,7 @@ TypeScript типы для рецептов.
 ```
 
 **Связанные документы**:
-- [[🍳 Recipe/📡 recipe.api|recipe.api.ts]]
+- [[📡 recipe.api|recipe.api.ts]]
 - [[🍳 RecipesList Feature|🎨 Features/🍳 RecipesList]]
 
 ---

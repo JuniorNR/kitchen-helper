@@ -27,5 +27,5 @@
 
 - [[➕ RecipeCreate Feature|🎨 Features/➕ RecipeCreate]]
 - [[🍳 RecipesList Feature|🎨 Features/🍳 RecipesList]]
-- [[🔧 Shared/ui/📄 PageInfoBlock|PageInfoBlock]]
+- [[📄 PageInfoBlock|PageInfoBlock]]
 

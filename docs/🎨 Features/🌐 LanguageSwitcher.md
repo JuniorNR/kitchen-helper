@@ -35,6 +35,6 @@ import { LanguageSwitcher } from '@/features';
 
 ## 🔗 Связанные документы
 
-- [[🔧 Shared/lib/providers/🌐 I18nProvider|I18n Provider]]
-- [[🧩 Widgets/📄 Header|Header Widget]]
+- [[🌐 I18nProvider|I18n Provider]]
+- [[📄 Header|Header Widget]]
 

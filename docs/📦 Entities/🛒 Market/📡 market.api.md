@@ -38,5 +38,5 @@ RTK Query API для работы с магазинами.
 ## 🔗 Связанные документы
 
 - [[🛒 Market|📦 Entities/🛒 Market]]
-- [[🛒 Market/🪝 useMarket|useMarket.ts]]
+- [[🪝 useMarket|useMarket.ts]]
 

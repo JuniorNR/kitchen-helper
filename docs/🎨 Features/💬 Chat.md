@@ -26,7 +26,7 @@ Chat/
 
 ## 📄 Компоненты
 
-### [[💬 Chat/💬 Chat Component|Chat.tsx]]
+### [[💬 Chat Component|Chat.tsx]]
 
 Главный компонент чата, объединяющий все части.
 
@@ -42,7 +42,7 @@ Chat/
 
 ---
 
-### [[💬 Chat/📋 ChatListAside|ChatListAside.tsx]]
+### [[📋 ChatListAside|ChatListAside.tsx]]
 
 Боковая панель со списком чатов.
 
@@ -60,7 +60,7 @@ Chat/
 
 ---
 
-### [[💬 Chat/💬 ChatMessagesWindow|ChatMessagesWindow.tsx]]
+### [[💬 ChatMessagesWindow|ChatMessagesWindow.tsx]]
 
 Окно для отображения сообщений.
 
@@ -78,7 +78,7 @@ Chat/
 
 ---
 
-### [[💬 Chat/📤 ChatSendControlPanel|ChatSendControlPanel.tsx]]
+### [[📤 ChatSendControlPanel|ChatSendControlPanel.tsx]]
 
 Панель для отправки сообщений.
 

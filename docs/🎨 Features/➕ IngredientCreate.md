@@ -56,6 +56,6 @@ Zod схема для валидации формы:
 ## 🔗 Связанные документы
 
 - [[🥘 Ingredient Entity|📦 Entities/🥘 Ingredient]]
-- [[🔧 Shared/ui/💰 PriceInput|PriceInput Component]]
-- [[🔧 Shared/ui/📏 UnitInput|UnitInput Component]]
+- [[💰 PriceInput|PriceInput Component]]
+- [[📏 UnitInput|UnitInput Component]]
 

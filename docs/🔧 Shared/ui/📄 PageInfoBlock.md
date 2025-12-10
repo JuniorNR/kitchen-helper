@@ -50,6 +50,6 @@ import { PageInfoBlock } from '@/shared/ui';
 ## 🔗 Связанные документы
 
 - [[🔧 Shared/ui|UI компоненты]]
-- [[📱 App/ingredients|ingredients/page.tsx]]
-- [[📱 App/recipes|recipes/page.tsx]]
+- [[ingredients|ingredients/page.tsx]]
+- [[recipes|recipes/page.tsx]]
 

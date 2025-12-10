@@ -127,5 +127,5 @@ const result = customizeString('ингредиент', {
 ## 🔗 Связанные документы
 
 - [[🔧 Shared/lib/helpers|Вспомогательные функции]]
-- [[🔧 Shared/lib/helpers/✂️ cutStringWithSeparator|cutStringWithSeparator]]
+- [[✂️ cutStringWithSeparator|cutStringWithSeparator]]
 

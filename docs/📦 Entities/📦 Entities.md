@@ -23,7 +23,7 @@ entities/
 
 ## 📚 Сущности
 
-### [[Projects/Kitchen-helper/docs/🎨 Features/💬 Chat|📦 Entities/💬 Chat]]
+### [[FrontEnd/Kitchen-helper/docs/🎨 Features/💬 Chat|📦 Entities/💬 Chat]]
 
 Сущность чата для обмена сообщениями между пользователями.
 

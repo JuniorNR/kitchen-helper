@@ -87,5 +87,5 @@ RecipesList/
 ## 🔗 Связанные документы
 
 - [[🍳 Recipe Entity|📦 Entities/🍳 Recipe]]
-- [[🔧 Shared/ui/🔍 Filter|Filter Component]]
+- [[🔍 Filter|Filter Component]]
 

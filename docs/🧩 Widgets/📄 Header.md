@@ -70,9 +70,9 @@ interface HeaderProps {
 
 ## 🔗 Связанные документы
 
-- [[⚙️ Конфигурация/📐 layout.config|layout.config.ts]]
+- [[📐 layout.config|layout.config.ts]]
 - [[🔐 Auth Feature|🎨 Features/🔐 Auth]]
 - [[🌐 LanguageSwitcher Feature|🎨 Features/🌐 LanguageSwitcher]]
 - [[🎨 ThemeSwitcher Feature|🎨 Features/🎨 ThemeSwitcher]]
-- [[🔧 Shared/lib/hooks/📜 useScroll|useScroll]]
+- [[📜 useScroll|useScroll]]
 

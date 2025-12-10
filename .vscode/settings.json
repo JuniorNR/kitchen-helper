@@ -23,6 +23,7 @@
 	"workbench.editor.enablePreview": false,
 	"workbench.editor.tabSizing": "fixed",
 	"cSpell.words": [
+		"autodocs",
 		"bruschetta",
 		"crostini",
 		"cuid",

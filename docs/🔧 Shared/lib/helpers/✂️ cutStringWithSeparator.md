@@ -48,5 +48,5 @@ const truncated = cutStringWithSeparator(longText, 20);
 ## 🔗 Связанные документы
 
 - [[🔧 Shared/lib/helpers|Вспомогательные функции]]
-- [[🔧 Shared/lib/helpers/🎭 customizeString|customizeString]]
+- [[🎭 customizeString|customizeString]]
 

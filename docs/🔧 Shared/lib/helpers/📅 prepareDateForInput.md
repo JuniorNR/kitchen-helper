@@ -82,5 +82,5 @@ const [date, setDate] = useState<Date>();
 ## 🔗 Связанные документы
 
 - [[🔧 Shared/lib/helpers|Вспомогательные функции]]
-- [[🔧 Shared/lib/helpers/📅 parseDate|parseDate]]
+- [[📅 parseDate|parseDate]]
 

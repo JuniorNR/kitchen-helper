@@ -50,6 +50,6 @@ import { Chat } from '@/features/Chat';
 
 - [[💬 Chat Feature|🎨 Features/💬 Chat]]
 - [[💬 Chat Entity|📦 Entities/💬 Chat]]
-- [[💬 Chat/📋 ChatListAside|ChatListAside.tsx]]
-- [[💬 Chat/💬 ChatMessagesWindow|ChatMessagesWindow.tsx]]
+- [[📋 ChatListAside|ChatListAside.tsx]]
+- [[💬 ChatMessagesWindow|ChatMessagesWindow.tsx]]
 

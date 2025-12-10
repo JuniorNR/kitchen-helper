@@ -52,6 +52,6 @@ await updateUserData({
 ## 🔗 Связанные документы
 
 - [[👤 User|📦 Entities/👤 User]]
-- [[👤 User/📡 user.api|user.api.ts]]
+- [[📡 user.api|user.api.ts]]
 - [[⚙️ UserSettings Feature|🎨 Features/⚙️ UserSettings]]
 

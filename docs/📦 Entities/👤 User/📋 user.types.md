@@ -45,6 +45,6 @@ TypeScript типы для пользователей.
 ## 🔗 Связанные документы
 
 - [[👤 User|📦 Entities/👤 User]]
-- [[👤 User/📡 user.api|user.api.ts]]
-- [[👤 User/🪝 useUser|useUser.ts]]
+- [[📡 user.api|user.api.ts]]
+- [[🪝 useUser|useUser.ts]]
 

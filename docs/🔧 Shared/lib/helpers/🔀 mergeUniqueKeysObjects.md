@@ -68,5 +68,5 @@ const finalFilters = mergeUniqueKeysObjects(defaultFilters, userFilters);
 ## 🔗 Связанные документы
 
 - [[🔧 Shared/lib/helpers|Вспомогательные функции]]
-- [[🔧 Shared/lib/helpers/🗑️ deleteFieldsWithUndefinedValues|deleteFieldsWithUndefinedValues]]
+- [[🗑️ deleteFieldsWithUndefinedValues|deleteFieldsWithUndefinedValues]]
 

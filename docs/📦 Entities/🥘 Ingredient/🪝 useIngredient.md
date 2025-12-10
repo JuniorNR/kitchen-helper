@@ -60,6 +60,6 @@ const {
 ## 🔗 Связанные документы
 
 - [[🥘 Ingredient|📦 Entities/🥘 Ingredient]]
-- [[🥘 Ingredient/📡 ingredient.api|ingredient.api.ts]]
+- [[📡 ingredient.api|ingredient.api.ts]]
 - [[🥘 IngredientsList Feature|🎨 Features/🥘 IngredientsList]]
 

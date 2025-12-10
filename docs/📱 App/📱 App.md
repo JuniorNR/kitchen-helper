@@ -25,7 +25,7 @@ app/
 
 ## 📄 Страницы
 
-### [[📱 App/layout|layout.tsx]]
+### [[layout|layout.tsx]]
 
 Корневой layout приложения.
 
@@ -41,13 +41,13 @@ app/
 - Структура layout с header, main, footer
 
 **Связанные документы**:
-- [[🧩 Widgets/📄 Header|Header Widget]]
-- [[🧩 Widgets/📄 Footer|Footer Widget]]
+- [[📄 Header|Header Widget]]
+- [[📄 Footer|Footer Widget]]
 - [[🔐 Auth Feature|🎨 Features/🔐 Auth]]
 
 ---
 
-### [[📱 App/page|page.tsx]]
+### [[page|page.tsx]]
 
 Главная страница приложения.
 
@@ -55,7 +55,7 @@ app/
 
 ---
 
-### [[📱 App/ingredients|ingredients/page.tsx]]
+### [[ingredients|ingredients/page.tsx]]
 
 Страница работы с ингредиентами.
 
@@ -76,7 +76,7 @@ app/
 
 ---
 
-### [[📱 App/recipes|recipes/page.tsx]]
+### [[recipes|recipes/page.tsx]]
 
 Страница работы с рецептами.
 
@@ -97,7 +97,7 @@ app/
 
 ---
 
-### [[📱 App/market|market/page.tsx]]
+### [[market|market/page.tsx]]
 
 Страница магазинов.
 
@@ -115,7 +115,7 @@ app/
 
 ---
 
-### [[📱 App/settings|settings/page.tsx]]
+### [[settings|settings/page.tsx]]
 
 Страница настроек пользователя.
 
@@ -134,7 +134,7 @@ app/
 
 ---
 
-### [[📱 App/not-found|not-found.tsx]]
+### [[not-found|not-found.tsx]]
 
 Страница 404 (не найдено).
 

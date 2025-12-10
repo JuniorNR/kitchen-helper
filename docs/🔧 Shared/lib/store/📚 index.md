@@ -5,7 +5,7 @@
 ## 📋 Файлы
 
 - `store.ts` - конфигурация Redux store
-- [[🔧 Shared/lib/store/🔌 baseQuery|baseQuery.ts]] - базовый запрос для RTK Query
+- [[🔌 baseQuery|baseQuery.ts]] - базовый запрос для RTK Query
 
 ## 🗄️ Reducers
 

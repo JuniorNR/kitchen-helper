@@ -91,5 +91,5 @@ RecipeCreate/
 ## 🔗 Связанные документы
 
 - [[🍳 Recipe Entity|📦 Entities/🍳 Recipe]]
-- [[🔧 Shared/ui/🖼️ ImagesPick|ImagesPick Component]]
+- [[🖼️ ImagesPick|ImagesPick Component]]
 

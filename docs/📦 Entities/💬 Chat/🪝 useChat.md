@@ -80,8 +80,8 @@ const ChatComponent = () => {
 
 ## 🔗 Связанные документы
 
-- [[💬 Chat|📦 Entities/💬 Chat]]
-- [[💬 Chat/📡 chat.api|chat.api.ts]]
-- [[💬 Chat/📋 chat.types|chat.types.ts]]
+- [[FrontEnd/Kitchen-helper/docs/📦 Entities/💬 Chat|📦 Entities/💬 Chat]]
+- [[📡 chat.api|chat.api.ts]]
+- [[📋 chat.types|chat.types.ts]]
 - [[💬 Chat Feature|🎨 Features/💬 Chat]]
 

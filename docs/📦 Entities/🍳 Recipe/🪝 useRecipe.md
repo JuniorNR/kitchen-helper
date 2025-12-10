@@ -62,6 +62,6 @@ const {
 ## 🔗 Связанные документы
 
 - [[🍳 Recipe|📦 Entities/🍳 Recipe]]
-- [[🍳 Recipe/📡 recipe.api|recipe.api.ts]]
+- [[📡 recipe.api|recipe.api.ts]]
 - [[🍳 RecipesList Feature|🎨 Features/🍳 RecipesList]]
 
