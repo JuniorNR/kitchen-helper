@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMarket } from '@/entities';
-import { PaginationBar } from '@/shared/ui';
+import { Alert, PaginationBar } from '@/shared/ui';
 import { MarketCard } from './MarketCard';
 import { MarketCardSkeleton } from './MarketCardSkeleton';
 
@@ -12,12 +12,13 @@ const SKELETON_KEYS: string[] = Array.from(
 	(_, i) => `market-skeleton-${i}`,
 );
 
-export const MarketList = () => {
-	const { t } = useTranslation('common');
+export const MarketsList = () => {
+	const { t: tCommon } = useTranslation('common');
+	const { t: tAlerts } = useTranslation('alerts');
 
 	const [page, setPage] = useState<number>(1);
 
-	const { markets, isLoading } = useMarket({ page });
+	const { markets, pagination, isLoading, error } = useMarket({ page });
 
 	const renderSkeleton = () => {
 		return (
@@ -35,6 +36,7 @@ export const MarketList = () => {
 			</motion.div>
 		);
 	};
+
 	const renderMarkets = () => {
 		return (
 			<motion.div
@@ -57,7 +59,7 @@ export const MarketList = () => {
 						},
 					}}
 				>
-					{markets?.data.map((market) => (
+					{markets?.map((market) => (
 						<motion.div
 							key={market.id}
 							layout
@@ -77,9 +79,9 @@ export const MarketList = () => {
 				</motion.div>
 				<PaginationBar
 					page={page}
-					currentPage={markets?.pagination.currentPage || 0}
+					currentPage={pagination?.currentPage || 0}
 					onPageChange={setPage}
-					totalItems={markets?.pagination.total || 0}
+					totalItems={pagination?.total || 0}
 				/>
 			</motion.div>
 		);
@@ -95,19 +97,35 @@ export const MarketList = () => {
 				transition={{ duration: 0.2 }}
 				className="mt-10 rounded-2xl border border-dashed border-neutral-300 dark:border-neutral-700 p-8 text-center text-neutral-600 dark:text-neutral-400"
 			>
-				{t('market.empty_state')}
+				{tCommon('market.empty_state')}
 			</motion.div>
 		);
 	};
 
+	const renderError = () => {
+		return (
+			<Alert
+				status="danger"
+				title={tAlerts('codes.ACCESS_DENIED')}
+				description={tCommon('common.section_only_for', {
+					roles: error?.data.requiredRoles?.map((role) =>
+						tCommon(`roles.${role}`).toLowerCase(),
+					),
+				})}
+			/>
+		);
+	};
+
 	return (
-		<section className="space-y-6 py-3 px-1">
+		<section className="space-y-6 py-3 px-1 w-full">
 			<AnimatePresence mode="wait">
-				{isLoading
-					? renderSkeleton()
-					: markets?.data && markets.data.length > 0
-						? renderMarkets()
-						: renderEmptyState()}
+				{error
+					? renderError()
+					: isLoading
+						? renderSkeleton()
+						: markets && markets.length > 0
+							? renderMarkets()
+							: renderEmptyState()}
 			</AnimatePresence>
 		</section>
 	);

@@ -1,11 +1,17 @@
 export interface UseMarket {
-	page: number;
+	page?: number;
 }
 
 export interface Market {
 	id: number;
 	title: string;
-	images: string[] | null;
+	images:
+		| {
+				is_main: boolean;
+				path: string;
+				position: number;
+		  }[]
+		| null;
 	averagePrice: string;
 	rating: string;
 	countOfRecipes: number;

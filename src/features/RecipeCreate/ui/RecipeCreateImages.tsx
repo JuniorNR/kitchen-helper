@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { type FC, useCallback } from 'react';
 import { Controller, useFieldArray } from 'react-hook-form';
 import { ImagesPick } from '@/shared/ui';
 import type { RecipeCreateFormInputType } from '../model/recipeCreate.schema';
@@ -7,41 +7,36 @@ import type { RecipeCreateImagesProps } from '../model/recipeCreate.types';
 export const RecipeCreateImages: FC<RecipeCreateImagesProps> = ({
 	control,
 }) => {
-	const { fields, append } = useFieldArray<RecipeCreateFormInputType>({
+	const { replace } = useFieldArray<RecipeCreateFormInputType>({
 		control,
 		name: 'images',
 	});
 
-	const handleFilesSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const maxImages = 5;
-		const remainingSlots = Math.max(0, maxImages - fields.length);
-		if (remainingSlots <= 0) return;
-
-		const files = Array.from(event.target.files ?? []).slice(0, remainingSlots);
-		if (files.length === 0) return;
-
-		const startIndex = fields.length;
-		files.forEach((file, index) => {
-			append({
-				isMain: startIndex === 0 && index === 0,
-				file,
-				position: startIndex + index + 1,
-			});
-		});
-	};
+	const handleFilesSelected = useCallback(
+		(files: File[]) => {
+			replace(
+				files.map((file, index) => ({
+					isMain: index === 0,
+					file,
+					position: index,
+				})),
+			);
+		},
+		[replace],
+	);
 
 	return (
 		<div>
 			<Controller
 				control={control}
 				name="images"
-				render={({ fieldState }) => {
+				render={() => {
 					return (
 						<div>
 							<ImagesPick
-								errorMessage={fieldState.error?.message}
+								// errorMessage={fieldState.error?.message} TODO: потом добавить
 								maxImages={5}
-								onChange={handleFilesSelected}
+								onFilesChange={handleFilesSelected}
 							/>
 						</div>
 					);

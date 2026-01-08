@@ -43,7 +43,8 @@
 		"recipe_list": "Список рецептов",
 		"user_settings": "Настройки",
 		"user_chats": "Чаты",
-		"market": "Рынок"
+		"market": "Рынок",
+		"my_market": "Мой магазин"
 	},
 	"fields": {
 		"description": "Описание",

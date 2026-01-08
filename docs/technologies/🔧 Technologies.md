@@ -7,6 +7,8 @@
 ### 🎯 Доступные технологии
 
 - [[📚 Storybook|storybook/📚 Storybook]] - Инструмент для разработки UI-компонентов
+- [[🧪 Jest + React Testing Library|jest-rtl/🧪 Jest + React Testing Library]] - Юнит и компонентные тесты под Next.js
+- [[🎞️ Framer Motion|framer-motion/🎞️ Framer Motion]] - Анимации и микровзаимодействия в React/Next.js
 
 ## 📚 Документация по технологиям
 
@@ -27,6 +29,25 @@
 1. [[📦 Установка и настройка|storybook/📦 Установка и настройка]] - Установите Storybook
 2. [[📝 Создание Stories|storybook/📝 Создание Stories]] - Создайте свои первые stories
 3. [[✨ Best Practices|storybook/✨ Best Practices]] - Изучите лучшие практики
+
+### 🎞️ Framer Motion
+
+**Framer Motion** — библиотека анимаций для React 19/Next.js 15. В проекте отвечает за плавные появления списков, алертов, карточек, модалок и переходов между состояниями.
+
+**Документация:**
+- [[🎞️ Framer Motion|framer-motion/🎞️ Framer Motion]] - Обзор и оглавление
+- [[📥 Установка и импорты|framer-motion/📥 Установка и импорты]] - Проверка зависимостей, импорты, `use client`
+- [[⚙️ Конфигурация под Next.js|framer-motion/⚙️ Конфигурация под Next.js]] - Настройка `AnimatePresence`, `LazyMotion`, SSR
+- [[🧭 Базовые концепции|framer-motion/🧭 Базовые концепции]] - `variants`, `initial/animate/exit`, жесты
+- [[🎬 Паттерны и примеры|framer-motion/🎬 Паттерны и примеры]] - Готовые шаблоны под списки, модалки, layoutId
+- [[💡 Best Practices|framer-motion/💡 Best Practices]] - Рекомендации и перфоманс
+- [[✅ Чеклист|framer-motion/✅ Чеклист]] - Быстрая самопроверка
+- [[🐞 Troubleshooting|framer-motion/🐞 Troubleshooting]] - Частые проблемы и фиксы
+
+**Быстрый старт:**
+1. [[📥 Установка и импорты|framer-motion/📥 Установка и импорты]] - убедитесь, что зависимости на месте.
+2. [[⚙️ Конфигурация под Next.js|framer-motion/⚙️ Конфигурация под Next.js]] - расставьте провайдеры и `use client`.
+3. Возьмите готовый паттерн из [[🎬 Паттерны и примеры|framer-motion/🎬 Паттерны и примеры]] и проверьте по [[✅ Чеклист|framer-motion/✅ Чеклист]].
 
 ## 🚀 Технологический стек проекта
 

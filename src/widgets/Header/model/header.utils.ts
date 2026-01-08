@@ -21,7 +21,7 @@ export const seasonToGradient: Record<Season, string> = {
 
 export const seasonToGradientDark: Record<Season, string> = {
 	winter:
-		'linear-gradient(180deg, rgba(30,58,138,0.65) 0%, rgba(30,64,175,0.45) 60%, rgba(15,23,42,0.0) 100%)',
+		'linear-gradient(180deg, rgba(30,58,138,0.65) 0%, rgba(30,64,175,0.45) 77%, rgba(15,23,42,0.0) 100%)',
 	spring:
 		'linear-gradient(180deg, rgba(77,124,15,0.60) 0%, rgba(101,163,13,0.45) 60%, rgba(15,23,42,0.0) 100%)',
 	summer:

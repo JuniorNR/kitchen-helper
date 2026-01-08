@@ -43,7 +43,8 @@
 		"recipe_list": "Recipe List",
 		"user_settings": "Settings",
 		"user_chats": "Chats",
-		"market": "Market"
+		"market": "Market",
+		"my_market": "My market"
 	},
 	"fields": {
 		"description": "Description",

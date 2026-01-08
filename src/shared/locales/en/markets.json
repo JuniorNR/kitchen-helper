@@ -1,8 +1,28 @@
 {
+	"create": {
+		"not_have_store": "You don't have a store yet",
+		"create_market_description": "Create your first store to start working with products and prices.",
+		"create_market": "Create market",
+		"creating_market_title": "Creating market",
+		"creating_market_description": "Fill out the brand card to show the identity of the seller and attract customers from the first lines.",
+		"introductions": {
+			"branding_title": "Branding",
+			"branding_description": "Store name and history",
+			"seller_title": "Seller",
+			"seller_description": "A few facts about yourself",
+			"themes_title": "Themes",
+			"themes_description": "Topics, key tags, and ideas"
+		},
+		"publish_store": "Publish a store",
+		"save_draft": "Save the draft"
+	},
 	"card": {
 		"themes": "Store themes",
 		"count_of_recipes": "Number of recipes",
 		"average_price": "Average price",
-		"buy_most_often": "Most often bought"
+		"buy_most_often": "Most often bought",
+		"empty_list": "The list is empty",
+		"visit": "Visit",
+		"contact_seller": "Contact seller"
 	}
 }

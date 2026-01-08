@@ -9,4 +9,5 @@ export interface AlertType {
 	status: 'success' | 'danger' | 'warning' | 'info' | 'default';
 	title: string;
 	description: string;
+	customDescription?: boolean;
 }

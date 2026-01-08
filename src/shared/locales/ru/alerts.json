@@ -20,6 +20,9 @@
 		"SUCCESS": "Успешно",
 		"ERROR": "Ошибка",
 		"WARNING": "Предупреждение",
-		"INFO": "Информация"
+		"INFO": "Информация",
+		"MARKET_CREATED": "Магазин создан",
+		"MARKET_UPDATED": "Market updated",
+		"MARKET_DELETED": "Market deleted"
 	}
 }

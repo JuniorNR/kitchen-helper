@@ -65,9 +65,13 @@ export const Alerts: FC<AlertsProps> = ({ alerts, autoCloseMS, className }) => {
 							variant="solid"
 							color={prepareStatus(alert.status)}
 							title={tAlerts(`titles.${alert.title?.toString().toLowerCase()}`)}
-							description={tAlerts(
-								`codes.${alert.description?.toString().toUpperCase()}`,
-							)}
+							description={
+								alert.customDescription
+									? alert.description
+									: tAlerts(
+											`codes.${alert.description?.toString().toUpperCase()}`,
+										)
+							}
 						/>
 					</motion.div>
 				))}

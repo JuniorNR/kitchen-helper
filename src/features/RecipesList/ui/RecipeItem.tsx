@@ -16,6 +16,10 @@ export const RecipeItem: FC<RecipeItemProps> = ({
 	isDeleting = false,
 	onDelete,
 }) => {
+	// Размеры картинки для сетки: 4 колонки ≥1460px (~25vw), 2 колонки на планшете, 1 колонка на мобилке.
+	const CARD_IMAGE_SIZES =
+		'(min-width: 1460px) 25vw, (min-width: 900px) 50vw, (min-width: 750px) 50vw, 100vw';
+
 	const { t: tUnits } = useTranslation('units');
 	const { t: tRecipes } = useTranslation('recipes');
 	const { t: tIngredients } = useTranslation('ingredients');
@@ -57,6 +61,7 @@ export const RecipeItem: FC<RecipeItemProps> = ({
 							src={image.path}
 							alt={image.path}
 							fill
+							sizes={CARD_IMAGE_SIZES}
 							className="object-cover"
 						/>
 					</div>
@@ -78,6 +83,7 @@ export const RecipeItem: FC<RecipeItemProps> = ({
 					src={fallbackImg.src}
 					default
 					fill
+					sizes={CARD_IMAGE_SIZES}
 					className="object-cover"
 				/>
 			</div>

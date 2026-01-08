@@ -8,4 +8,4 @@ export type {
 	ThemesOfMarket,
 	UseMarket,
 } from './model/market.types';
-export { useMarket } from './model/useMarket';
+export { useMarket, useMarketById } from './model/useMarket';

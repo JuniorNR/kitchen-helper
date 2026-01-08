@@ -1,26 +1,64 @@
-.previews {
-  position: relative;
-  & .deleteButton {
-    position: absolute;
-    cursor: pointer;
-    opacity: 0;
-    transition: all 0.3s ease;
-  }
-  &:hover {
-    > .deleteButton {
-      opacity: 1;
+.imagesPick {
+  @apply w-full flex justify-start;
+  & .button {
+    display: flex;
+    flex-direction: column; 
+    height: 100px;
+    width: 100px;
+    &:disabled {
+      cursor: not-allowed;
     }
   }
-}
-.button {
-  cursor: pointer;
-  transition: all 0.3s ease;
-  &:not(:disabled):hover {
-    background-color: #e0e0e0;
-    color: #000;
+
+  & .imagesItems {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    gap: 10px;
+    & .imagesItem {
+      position: relative;
+  
+      & .imagesDeleteButton {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        opacity: 0;
+      }
+      
+      &:hover {
+        & .imagesDeleteButton {
+          opacity: 1;
+        }
+      }
+    }
   }
-  &:disabled {
-    opacity: 0.5;
-    cursor: default;
-  }
+
 }
+
+
+// .previews {
+//   position: relative;
+//   & .deleteButton {
+//     position: absolute;
+//     cursor: pointer;
+//     opacity: 0;
+//     transition: all 0.3s ease;
+//   }
+//   &:hover {
+//     > .deleteButton {
+//       opacity: 1;
+//     }
+//   }
+// }
+// .button {
+//   cursor: pointer;
+//   transition: all 0.3s ease;
+//   &:not(:disabled):hover {
+//     background-color: #e0e0e0;
+//     color: #000;
+//   }
+//   &:disabled {
+//     opacity: 0.5;
+//     cursor: default;
+//   }
+// }

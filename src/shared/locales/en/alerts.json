@@ -20,6 +20,9 @@
 		"SUCCESS": "Success",
 		"ERROR": "Error",
 		"WARNING": "Warning",
-		"INFO": "Info"
+		"INFO": "Info",
+		"MARKET_CREATED": "Market created",
+		"MARKET_UPDATED": "Market updated",
+		"MARKET_DELETED": "Market deleted"
 	}
 }

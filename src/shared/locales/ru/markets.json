@@ -1,8 +1,28 @@
 {
+	"create": {
+		"not_have_store": "У вас еще нет магазина",
+		"create_market_description": "Создайте первый магазин, чтобы начать работать с товарами и ценами.s",
+		"create_market": "Создать магазин",
+		"creating_market_title": "Создание магазина",
+		"creating_market_description": "Заполните карточку бренда, чтобы показать личность продавца и зацепить клиентов с первых строк.",
+		"introductions": {
+			"branding_title": "Брендинг",
+			"branding_description": "Название и история магазина",
+			"seller_title": "Продавец",
+			"seller_description": "Несколько фактов о себе",
+			"themes_title": "Темы",
+			"themes_description": "Тематика, ключевые теги и идеи"
+		},
+		"publish_store": "Опубликовать магазин",
+		"save_draft": "Сохранить черновик"
+	},
 	"card": {
 		"themes": "Тематики витрины",
 		"count_of_recipes": "Кол-во рецептов",
 		"average_price": "Средний чек",
-		"buy_most_often": "Покупают чаще всего"
+		"buy_most_often": "Покупают чаще всего",
+		"empty_list": "Список пока пуст",
+		"visit": "Посетить",
+		"contact_seller": "Связаться с продавцом"
 	}
 }

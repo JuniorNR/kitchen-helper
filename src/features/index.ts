@@ -1,3 +1,4 @@
+export { addAlert } from './Alert';
 export {
 	AuthBoundary,
 	authApi,
@@ -15,7 +16,9 @@ export { ImageSRC } from './ImageSRC';
 export { IngredientsList } from './IngredientsList';
 export { IngredientCreate } from './ingredientCreate';
 export * from './LanguageSwitcher';
-export { MarketList } from './MarketList';
+export { Market } from './Market';
+export { MarketCreate } from './MarketCreate';
+export { MarketsList } from './MarketsList';
 export { RecipeCreate } from './RecipeCreate';
 export { RecipesList } from './RecipesList';
 export * from './ThemeSwitcher';

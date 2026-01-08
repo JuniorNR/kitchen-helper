@@ -4,8 +4,8 @@
 	"email_invalid": "Invalid email address",
 	"password_min": "Password must be at least 8 characters long",
 	"passwords_mismatch": "Passwords do not match",
-	"title_required": "Title is required. Minimum length",
-	"description_required": "Description is required. Minimum length",
+	"title_required": "Title is required. Minimum length {{min}}",
+	"description_required": "Description is required. Minimum length {{min}}",
 	"price_required": "Price is required",
 	"currency_required": "Currency is required",
 	"count_unit_required": "Quantity is required",
@@ -21,6 +21,10 @@
 	"priceToBuy_required": "Price to buy is required",
 	"priceOfDish_required": "Price of dish is required",
 	"images_required": "Add at least one image",
+	"story_required": "Story is required. Minimum length {{min}}",
+	"facts_about_seller_required": "Facts about seller are required",
+	"themes_of_market_required": "Themes of market are required",
 	"date_cannot_be_greater_from": "The date cannot be greater than 'Created to'",
-	"date_must_not_be_in_future": "Date cannot be in the future"
+	"date_must_not_be_in_future": "Date cannot be in the future",
+	"max_images": "Images {{totalImages}} of {{maxImages}}"
 }

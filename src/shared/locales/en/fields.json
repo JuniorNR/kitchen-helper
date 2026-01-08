@@ -58,5 +58,22 @@
 	"cancel": "Cancel",
 	"reset_preset": "Reset preset",
 	"save_preset": "Save preset",
-	"write_message": "Write message"
+	"write_message": "Write message",
+	"market": {
+		"title": "Store name",
+		"title_example": "For example: Home market of farm products.",
+		"title_description": "A short, memorable brand name.",
+		"description": "Store description",
+		"description_example": "What you sell, what values, and how you differ.",
+		"description_description": "A couple of suggestions for a first impression.",
+		"story": "The history of the store's creation",
+		"story_example": "How we came up with the idea of the store, what inspires.",
+		"story_description": "A personal story makes the brand warmer and closer.",
+		"facts_about_seller": "A few facts about the seller",
+		"facts_about_seller_example": "Experience, achievements, interesting facts.",
+		"facts_about_seller_description": "Specify 2-4 facts about you separated by commas.",
+		"themes_of_market": "Store themes",
+		"themes_of_market_example": "For example: farm products, eco-packaging, seasonality.",
+		"themes_of_market_description": "Specify 2-4 key topics, separated by commas."
+	}
 }

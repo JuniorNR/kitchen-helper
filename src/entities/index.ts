@@ -22,6 +22,7 @@ export {
 	type ThemesOfMarket,
 	type UseMarket,
 	useMarket,
+	useMarketById,
 } from './market';
 export { recipeApi, useRecipe } from './recipe';
 export { type User, type UserDTO, userApi, useUser } from './user';

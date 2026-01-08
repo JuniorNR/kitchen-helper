@@ -4,8 +4,8 @@
 	"email_invalid": "Некорректный email",
 	"password_min": "Пароль должен быть не менее 8 символов",
 	"passwords_mismatch": "Пароли не совпадают",
-	"title_required": "Название обязательно. Минимальное значение",
-	"description_required": "Описание обязательно. Минимальное значение",
+	"title_required": "Название обязательно. Минимальное значение {{min}}",
+	"description_required": "Описание обязательно. Минимальное значение {{min}}",
 	"price_required": "Цена обязательна",
 	"currency_required": "Валюта обязательна",
 	"count_unit_required": "Количество обязательно",
@@ -21,6 +21,10 @@
 	"priceToBuy_required": "Цена покупки обязательна",
 	"priceOfDish_required": "Цена блюда обязательна",
 	"images_required": "Добавьте хотя бы одно изображение",
+	"story_required": "История обязательна. Минимальное значение {{min}}",
+	"facts_about_seller_required": "Факты о продавце обязательны",
+	"themes_of_market_required": "Темы магазина обязательны",
 	"date_cannot_be_greater_from": "Дата не может быть больше даты в поле 'Создано до'",
-	"date_must_not_be_in_future": "Дата не может быть назначена в будущем"
+	"date_must_not_be_in_future": "Дата не может быть назначена в будущем",
+	"max_images": "Изображений {{totalImages}} из {{maxImages}}"
 }
