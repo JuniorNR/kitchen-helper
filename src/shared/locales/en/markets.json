@@ -23,6 +23,18 @@
 		"buy_most_often": "Most often bought",
 		"empty_list": "The list is empty",
 		"visit": "Visit",
-		"contact_seller": "Contact seller"
+		"contact_seller": "Contact seller",
+		"purchase": "Purchase",
+		"price_of_dish": "Price of dish",
+		"calories": "Calories",
+		"step": "Step",
+		"steps_count": "Steps count",
+		"seller": "Seller",
+		"rating": "Rating",
+		"story_of_market": "The history of the store's creation",
+		"about_seller": "About seller",
+		"view_products": "View products",
+		"about_market": "About market",
+		"products": "Products"
 	}
 }

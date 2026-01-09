@@ -57,7 +57,22 @@ export const MarketCard: FC<MarketProps> = ({ market }) => {
 			>
 				<Slider className="h-full">{renderImages()}</Slider>
 			</div>
-
+			<div className="flex flex-col sm:flex-row gap-3 pt-2">
+				<Button
+					color="primary"
+					variant="solid"
+					size="md"
+					className="flex-1 font-semibold"
+					isLoading={isPending}
+					onPress={() => {
+						startTransition(() => {
+							router.push(`/market/${market.id}`);
+						});
+					}}
+				>
+					{tMarkets('card.visit')}
+				</Button>
+			</div>
 			<div className="flex flex-col gap-3">
 				<div className="flex flex-wrap items-start justify-between gap-3">
 					<div>
@@ -82,7 +97,7 @@ export const MarketCard: FC<MarketProps> = ({ market }) => {
 							{market.rating || 0}
 						</div>
 						<Typography classNameComponent="inline-flex items-center rounded-full border border-sky-400/30 bg-sky-500/15 px-3 py-1.5 text-sm font-semibold uppercase tracking-wide text-sky-700 shadow-sm dark:border-sky-300/30 dark:bg-sky-400/10 dark:text-sky-100">
-							20{' '}
+							20 {/* TODO: доделать перевод */}
 							{customizeString('отзыв', {
 								language: String(localStorageHelper('i18nextLng').item),
 								ended: {

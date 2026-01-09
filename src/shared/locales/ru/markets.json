@@ -23,6 +23,18 @@
 		"buy_most_often": "Покупают чаще всего",
 		"empty_list": "Список пока пуст",
 		"visit": "Посетить",
-		"contact_seller": "Связаться с продавцом"
+		"contact_seller": "Связаться с продавцом",
+		"purchase": "Приобрести",
+		"price_of_dish": "Цена блюда",
+		"calories": "Калории",
+		"step": "Шаг",
+		"steps_count": "Количество шагов",
+		"seller": "Продавец",
+		"rating": "Рейтинг",
+		"story_of_market": "История создания магазина",
+		"about_seller": "О продавце",
+		"view_products": "Посмотреть продукты",
+		"about_market": "О магазине",
+		"products": "Продукты"
 	}
 }

@@ -116,5 +116,9 @@
 		"title": "Delete recipe",
 		"description": "Are you sure you want to delete the recipe «{{title}}»?",
 		"warning": "This action is irreversible"
+	},
+	"card": {
+		"recipes_empty": "There are no recipes yet",
+		"market_recipes_empty": "This seller does not have any published recipes yet. Check back later!"
 	}
 }

@@ -6,7 +6,7 @@ import { Market } from '@/features';
 
 export default function MarketDetailPage() {
 	const params = useParams();
-	const { isLoading } = useMarketById(Number(params?.id));
+	useMarketById(Number(params?.id));
 
 	return (
 		<div className="flex flex-col items-center justify-center">
