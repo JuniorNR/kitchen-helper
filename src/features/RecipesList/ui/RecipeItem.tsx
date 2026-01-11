@@ -4,6 +4,7 @@ import { Divider } from '@heroui/divider';
 import { type FC, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SwiperSlide } from 'swiper/react';
+import { useRecipe, useUser } from '@/entities';
 import { ImageSRC } from '@/features';
 import { DeleteButton, Modal, Slider, Typography } from '@/shared/ui';
 import { DeleteIcon } from '@/shared/ui/icons/deleteIcon';
@@ -16,7 +17,7 @@ export const RecipeItem: FC<RecipeItemProps> = ({
 	isDeleting = false,
 	onDelete,
 }) => {
-	// Размеры картинки для сетки: 4 колонки ≥1460px (~25vw), 2 колонки на планшете, 1 колонка на мобилке.
+	// Размеры картинки для сетки: 4 колонки ≥1460px (~25vw), 2 колонки на планшете, 1 колонка на телефоне.
 	const CARD_IMAGE_SIZES =
 		'(min-width: 1460px) 25vw, (min-width: 900px) 50vw, (min-width: 750px) 50vw, 100vw';
 
@@ -26,6 +27,20 @@ export const RecipeItem: FC<RecipeItemProps> = ({
 	const { t: tCommon, i18n } = useTranslation('common');
 
 	const [isOpen, setIsOpen] = useState<boolean>(false);
+
+	const {
+		attachRecipeToMarketData,
+		detachRecipeToMarketData,
+		isAttaching,
+		isDetaching,
+	} = useRecipe({ skip: true });
+	const { user } = useUser();
+
+	const isProductOnSale = user?.markets[0]?.products.find(
+		(product) => product.id === recipe.id,
+	);
+
+	const [attached, setAttached] = useState<boolean>(Boolean(isProductOnSale));
 
 	const currencyFormatter = useMemo(
 		() =>
@@ -88,6 +103,30 @@ export const RecipeItem: FC<RecipeItemProps> = ({
 				/>
 			</div>
 		);
+	};
+
+	const attachRecipeToMarket = async () => {
+		if (user?.markets[0]?.id) {
+			const result = await attachRecipeToMarketData({
+				marketId: user?.markets[0]?.id,
+				recipeIds: [recipe.id],
+			});
+			if (result?.code === 'PRODUCT_ATTACH_TO_MARKET') {
+				setAttached(true);
+			}
+		}
+	};
+
+	const detachRecipeToMarket = async () => {
+		if (user?.markets[0]?.id) {
+			const result = await detachRecipeToMarketData({
+				marketId: user?.markets[0]?.id,
+				recipeIds: [recipe.id],
+			});
+			if (result?.code === 'PRODUCT_DETACH_FROM_MARKET') {
+				setAttached(false);
+			}
+		}
 	};
 
 	return (
@@ -194,17 +233,33 @@ export const RecipeItem: FC<RecipeItemProps> = ({
 						title={`${tRecipes('buttons.view_steps')} (${recipe.steps.length})`}
 					/>
 					<div className="flex gap-2">
-						<Button
-							className="w-full"
-							color="success"
-							size="sm"
-							variant="flat"
-							onPress={() => {}}
-						>
-							<span className="block max-w-[140px] truncate">
-								{tRecipes('buttons.put_on_the_market')}
-							</span>
-						</Button>
+						{attached ? (
+							<Button
+								className="w-full"
+								color="danger"
+								size="sm"
+								variant="flat"
+								onPress={detachRecipeToMarket}
+								isLoading={isDetaching}
+							>
+								<span className="block max-w-[140px] truncate">
+									{tRecipes('buttons.delete_from_the_market')}
+								</span>
+							</Button>
+						) : (
+							<Button
+								className="w-full"
+								color="success"
+								size="sm"
+								variant="flat"
+								onPress={attachRecipeToMarket}
+								isLoading={isAttaching}
+							>
+								<span className="block max-w-[140px] truncate">
+									{tRecipes('buttons.put_on_the_market')}
+								</span>
+							</Button>
+						)}
 						<DeleteButton
 							ariaLabel={tCommon('delete')}
 							label={tCommon('delete')}

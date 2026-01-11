@@ -165,7 +165,6 @@ export const MarketRecipeCard: FC<MarketProductsCardProps> = ({ product }) => {
 					className="w-full font-semibold shadow-md hover:shadow-lg transition-all duration-200"
 					onPress={() => {
 						// TODO: Реализовать логику приобретения рецепта
-						console.debug('Purchase recipe:', product.id);
 					}}
 				>
 					{`${tMarkets('card.purchase')} (${currencyFormatter.format(

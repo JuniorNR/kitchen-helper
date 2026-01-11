@@ -16,7 +16,7 @@ export default function MarketPage() {
 
 	const tabStyles = 'w-[75%] flex items-center justify-center';
 
-	const { deleteMyMarketData } = useMarket({});
+	const { deleteMyMarketData } = useMarket({ skip: true });
 
 	return (
 		<div className="flex flex-col items-center justify-center">

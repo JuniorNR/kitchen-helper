@@ -1,17 +1,13 @@
+import type { Recipe, RecipeDTO } from '@/entities/recipe/model/recipe.type';
+
 export interface UseMarket {
 	page?: number;
+	skip?: boolean;
 }
 
 export interface Market {
 	id: number;
 	title: string;
-	images:
-		| {
-				is_main: boolean;
-				path: string;
-				position: number;
-		  }[]
-		| null;
 	averagePrice: string;
 	rating: string;
 	countOfRecipes: number;
@@ -19,7 +15,9 @@ export interface Market {
 	story: string;
 	createdAt: string;
 	updatedAt: string;
+	images: Image[] | null;
 	seller: Seller;
+	products: Recipe[];
 	themesOfMarket: ThemesOfMarket[];
 	buyMostOften: BuyMostOften[];
 	factsAboutSeller: FactsAboutSeller[];
@@ -28,6 +26,12 @@ export interface Market {
 export interface Seller {
 	id: number;
 	name: string;
+}
+
+interface Image {
+	isMain: boolean;
+	path: string;
+	position: number;
 }
 
 export interface BuyMostOften {
@@ -57,7 +61,7 @@ export interface ThemesOfMarket {
 export interface MarketDTO {
 	id: number;
 	title: string;
-	images: string[] | null;
+	images: ImageDTO[] | null;
 	average_price: string;
 	rating: string;
 	count_of_recipes: number;
@@ -66,9 +70,16 @@ export interface MarketDTO {
 	created_at: string;
 	updated_at: string;
 	seller: SellerDTO;
+	products: RecipeDTO[];
 	themes_of_market: ThemesOfMarketDTO[];
 	buy_most_often: BuyMostOftenDTO[];
 	facts_about_seller: FactsAboutSellerDTO[];
+}
+
+interface ImageDTO {
+	is_main: boolean;
+	path: string;
+	position: number;
 }
 
 interface SellerDTO {

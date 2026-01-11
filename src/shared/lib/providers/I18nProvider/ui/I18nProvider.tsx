@@ -8,6 +8,7 @@ import alertsEn from '@/shared/locales/en/alerts.json';
 import chatsEn from '@/shared/locales/en/chats.json';
 import commonEn from '@/shared/locales/en/common.json';
 import fieldsEn from '@/shared/locales/en/fields.json';
+import homeEn from '@/shared/locales/en/home.json';
 import ingredientsEn from '@/shared/locales/en/ingredients.json';
 import marketsEn from '@/shared/locales/en/markets.json';
 import recipesEn from '@/shared/locales/en/recipes.json';
@@ -17,6 +18,7 @@ import alertsRu from '@/shared/locales/ru/alerts.json';
 import chatsRu from '@/shared/locales/ru/chats.json';
 import commonRu from '@/shared/locales/ru/common.json';
 import fieldsRu from '@/shared/locales/ru/fields.json';
+import homeRu from '@/shared/locales/ru/home.json';
 import ingredientsRu from '@/shared/locales/ru/ingredients.json';
 import marketsRu from '@/shared/locales/ru/markets.json';
 import recipesRu from '@/shared/locales/ru/recipes.json';
@@ -27,6 +29,7 @@ const resources = {
 	en: {
 		common: commonEn,
 		fields: fieldsEn,
+		home: homeEn,
 		ingredients: ingredientsEn,
 		validation: validationEn,
 		units: unitsEn,
@@ -38,6 +41,7 @@ const resources = {
 	ru: {
 		common: commonRu,
 		fields: fieldsRu,
+		home: homeRu,
 		ingredients: ingredientsRu,
 		validation: validationRu,
 		units: unitsRu,
@@ -64,6 +68,7 @@ export const I18nProvider = ({ children }: { children: React.ReactNode }) => {
 				ns: [
 					'common',
 					'fields',
+					'home',
 					'validation',
 					'units',
 					'ingredients',

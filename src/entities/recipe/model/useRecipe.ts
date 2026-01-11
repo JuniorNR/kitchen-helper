@@ -2,25 +2,36 @@ import type { RecipeCreateFormInputType } from '@/features/RecipeCreate/model/re
 import { dto, serializeDate } from '@/shared/lib/helpers';
 import type { ApiError, ApiErrorDTO } from '@/shared/lib/types';
 import {
+	useAttachRecipeToMarketMutation,
 	useCreateRecipeMutation,
 	useDeleteRecipeMutation,
+	useDetachRecipeToMarketMutation,
 	useGetRecipesQuery,
 } from './recipe.api';
 import type { UseRecipe } from './recipe.type';
 
-export const useRecipe = ({ page, filters }: UseRecipe) => {
-	const { data, isLoading, error, refetch } = useGetRecipesQuery({
-		page,
-		filters: filters
-			? {
-					createdFrom: serializeDate(filters?.createdFrom),
-					createdTo: serializeDate(filters?.createdTo),
-					...filters,
-				}
-			: undefined,
-	});
+export const useRecipe = ({ page, filters, skip }: UseRecipe) => {
+	const { data, isLoading, error, refetch } = useGetRecipesQuery(
+		{
+			page,
+			filters: filters
+				? {
+						createdFrom: serializeDate(filters?.createdFrom),
+						createdTo: serializeDate(filters?.createdTo),
+						...filters,
+					}
+				: undefined,
+		},
+		{
+			skip,
+		},
+	);
 	const [createRecipe, { isLoading: isCreating }] = useCreateRecipeMutation();
 	const [deleteRecipe, { isLoading: isDeleting }] = useDeleteRecipeMutation();
+	const [attachRecipeToMarket, { isLoading: isAttaching }] =
+		useAttachRecipeToMarketMutation();
+	const [detachRecipeToMarket, { isLoading: isDetaching }] =
+		useDetachRecipeToMarketMutation();
 
 	const createRecipeData = async (data: RecipeCreateFormInputType) => {
 		try {
@@ -40,6 +51,42 @@ export const useRecipe = ({ page, filters }: UseRecipe) => {
 		}
 	};
 
+	const attachRecipeToMarketData = async ({
+		marketId,
+		recipeIds,
+	}: {
+		marketId: number;
+		recipeIds: number[];
+	}) => {
+		try {
+			const result = await attachRecipeToMarket({
+				marketId,
+				recipeIds,
+			}).unwrap();
+			return result || null;
+		} catch {
+			return null;
+		}
+	};
+
+	const detachRecipeToMarketData = async ({
+		marketId,
+		recipeIds,
+	}: {
+		marketId: number;
+		recipeIds: number[];
+	}) => {
+		try {
+			const result = await detachRecipeToMarket({
+				marketId,
+				recipeIds,
+			}).unwrap();
+			return result || null;
+		} catch {
+			return null;
+		}
+	};
+
 	return {
 		recipes: data?.data,
 		pagination: data?.pagination,
@@ -50,7 +97,11 @@ export const useRecipe = ({ page, filters }: UseRecipe) => {
 		refetch,
 		createRecipeData,
 		deleteRecipeData,
+		attachRecipeToMarketData,
+		detachRecipeToMarketData,
 		isCreating,
 		isDeleting,
+		isAttaching,
+		isDetaching,
 	};
 };

@@ -1,0 +1,145 @@
+{
+	"hero": {
+		"subtitle": "Create your culinary library, manage ingredients, discover new recipes, and share your culinary discoveries with the community. Everything you need to organize your kitchen in one place."
+	},
+	"quick_access": {
+		"recipes": {
+			"button": "Go to recipes",
+			"additional_info": "Create, save, and share your culinary creations. Add step-by-step instructions, photos, and detailed descriptions of each dish."
+		},
+		"ingredients": {
+			"button": "Manage ingredients",
+			"additional_info": "Keep track of all products in your kitchen: monitor expiration dates, prices, and quantities. Automatically generate shopping lists for new recipes."
+		},
+		"market": {
+			"button": "Open market",
+			"additional_info": "Discover unique recipes from home cooks. Buy proven recipes with detailed instructions or sell your own creations."
+		},
+		"settings": {
+			"button": "Open settings",
+			"additional_info": "Customize the app to your preferences: choose a theme, interface language, configure notifications, and manage your profile."
+		}
+	},
+	"features": {
+		"title": "Why Kitchen Helper?",
+		"recipe_organization": {
+			"title": "Recipe Organization",
+			"description": "Store all your favorite recipes in one place with convenient search and filtering. Create collections, add tags and categories for quick access to the dishes you need.",
+			"details": [
+				"Step-by-step instructions with photos",
+				"Convenient search and filtering",
+				"Categories and tags",
+				"Shopping list creation"
+			]
+		},
+		"ingredient_management": {
+			"title": "Ingredient Management",
+			"description": "Track product availability in your kitchen and plan purchases in advance. Keep records of expiration dates, prices, and quantities for optimal purchase planning.",
+			"details": [
+				"Product availability tracking",
+				"Expiration date monitoring",
+				"Cost control",
+				"Automatic shopping lists"
+			]
+		},
+		"community": {
+			"title": "Chef Community",
+			"description": "Buy and sell recipes in the marketplace of home authors. Share experiences, find inspiration, and monetize your culinary talents.",
+			"details": [
+				"Recipe marketplace",
+				"Communication with authors",
+				"Buying and selling",
+				"Reviews and ratings"
+			]
+		}
+	},
+	"statistics": {
+		"title": "Kitchen Helper in Numbers",
+		"recipes": "Recipes",
+		"users": "Users",
+		"ingredients": "Ingredients",
+		"markets": "Markets"
+	},
+	"how_it_works": {
+		"title": "How It Works",
+		"subtitle": "Choose your path: sell recipes or buy and cook",
+		"selling": {
+			"title": "Selling Path",
+			"description": "Create ingredients, develop recipes, and sell them through your own store",
+			"steps": {
+				"create_ingredients": {
+					"title": "Create Ingredients",
+					"description": "Add all necessary products to your ingredient catalog. Specify prices, units of measurement, and categories for easy organization."
+				},
+				"create_recipes": {
+					"title": "Create Recipes",
+					"description": "Using your ingredients, create detailed recipes with step-by-step instructions, photos, and detailed descriptions of each cooking stage."
+				},
+				"publish_recipes": {
+					"title": "Publish Recipes for Sale",
+					"description": "Select recipes you want to sell, set prices, and publish them in your catalog. Add attractive descriptions and photos."
+				},
+				"create_market": {
+					"title": "Create a Store",
+					"description": "Set up your store on the Kitchen Helper marketplace. Add information about yourself, specify your store's theme, and start selling your culinary creations."
+				}
+			}
+		},
+		"buying": {
+			"title": "Buying Path",
+			"description": "Find unique recipes, cook with them, and share experiences with the community",
+			"steps": {
+				"buy_recipes": {
+					"title": "Buy Recipes",
+					"description": "Browse the recipe catalog on the marketplace, read descriptions and reviews from other users. Choose proven recipes from experienced chefs and purchase the ones you like."
+				},
+				"cook_recipe": {
+					"title": "Cook the Recipe",
+					"description": "Follow the detailed step-by-step instructions from the purchased recipe. Use photos as visual guides and create your culinary masterpieces."
+				},
+				"communicate": {
+					"title": "Communicate and Share Experience",
+					"description": "Chat with recipe authors, ask questions in chat, share your impressions and photos of finished dishes. Build a culinary community."
+				},
+				"create_collections": {
+					"title": "Create Collections",
+					"description": "Save your favorite recipes to your collections, organize them by categories and themes. Build your personal culinary library from the best recipes."
+				}
+			}
+		}
+	},
+	"use_cases": {
+		"title": "Who is Kitchen Helper For?",
+		"subtitle": "Our app is suitable for different types of users",
+		"beginners": {
+			"title": "For Beginners",
+			"description": "Learn new recipes, learn to cook with step-by-step instructions and photos. Keep your culinary diary."
+		},
+		"experienced": {
+			"title": "For Experienced Chefs",
+			"description": "Organize your recipe collection, share experiences with the community, and monetize your culinary skills."
+		},
+		"vegans": {
+			"title": "For Vegans",
+			"description": "Find special recipes, manage plant-based ingredients, and share your discoveries."
+		},
+		"families": {
+			"title": "For Families",
+			"description": "Plan family meals, track products, and create favorite recipes that can be passed down to children."
+		},
+		"business": {
+			"title": "For Business",
+			"description": "Restaurateurs and cafes can use the app to manage recipes, ingredients, and purchases."
+		},
+		"students": {
+			"title": "For Students",
+			"description": "A simple way to track products, save on food, and cook delicious meals on a limited budget."
+		}
+	},
+	"cta": {
+		"title": "Ready to Start?",
+		"description": "Join the Kitchen Helper community and discover a new level of kitchen organization",
+		"recipes_button": "Go to recipes",
+		"market_button": "Open market"
+	}
+}

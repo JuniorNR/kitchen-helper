@@ -11,7 +11,7 @@ export {
 	useAuth,
 } from './Auth';
 export { Chat } from './Chat';
-export * from './Counter';
+export { Home } from './Home';
 export { ImageSRC } from './ImageSRC';
 export { IngredientsList } from './IngredientsList';
 export { IngredientCreate } from './ingredientCreate';

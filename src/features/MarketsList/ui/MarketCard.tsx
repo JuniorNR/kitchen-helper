@@ -239,7 +239,6 @@ export const MarketCard: FC<MarketProps> = ({ market }) => {
 					className="flex-1 font-semibold"
 					onPress={() => {
 						// TODO: Реализовать открытие чата с продавцом
-						console.debug('Contact seller:', market.id);
 					}}
 				>
 					{tMarkets('card.contact_seller')}

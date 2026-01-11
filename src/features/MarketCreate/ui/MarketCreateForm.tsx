@@ -34,7 +34,7 @@ export const MarketCreateForm: FC<MarketCreateFormProps> = ({
 		},
 	});
 
-	const { createMarketData, isCreating } = useMarket({});
+	const { createMarketData, isCreating } = useMarket({ skip: true });
 
 	const { replace } = useFieldArray<MarketCreateSchemaType>({
 		control,

@@ -1,4 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
+import type { Market, MarketDTO } from '@/entities/market';
+import { marketApi } from '@/entities/market/model/market.api';
 import { addAlert } from '@/features/Alert';
 import type { RecipeCreateFormInputType } from '@/features/RecipeCreate/model/recipeCreate.schema';
 import type {
@@ -144,6 +146,120 @@ export const recipeApi = createApi({
 				}
 			},
 		}),
+		attachRecipeToMarket: builder.mutation<
+			{ data: Market; code: string },
+			{ marketId: number; recipeIds: number[] }
+		>({
+			invalidatesTags: ['Recipe'],
+			query: ({ marketId, recipeIds }) => {
+				return {
+					url: `/markets/${marketId}/recipes/attach`,
+					method: 'POST',
+					body: {
+						recipe_ids: recipeIds,
+					},
+				};
+			},
+			transformResponse: (response: ApiResponse<MarketDTO>) => {
+				return {
+					data: dto<MarketDTO, Market>('toClient', response.data),
+					code: response.code,
+				};
+			},
+			onQueryStarted: async ({ marketId }, { dispatch, queryFulfilled }) => {
+				try {
+					const result = await queryFulfilled;
+					dispatch(
+						addAlert({
+							id: crypto.randomUUID(),
+							status: 'success',
+							title: 'Success',
+							description: result.data.code || 'SUCCESS',
+						}),
+					);
+					dispatch(
+						marketApi.util.invalidateTags([
+							{ type: 'Market', id: marketId },
+							'Market',
+						]),
+					);
+				} catch (error) {
+					const apiError = dto<ApiErrorDTO, ApiError>(
+						'toClient',
+						(error as unknown as { error: ApiErrorDTO }).error as ApiError,
+					);
+					if (apiError.status === 401 || apiError.status === 403) {
+						return;
+					}
+					const code = apiError.data?.code;
+					dispatch(
+						addAlert({
+							id: crypto.randomUUID(),
+							status: 'danger',
+							title: 'Error',
+							description: code || 'UNKNOWN_ERROR',
+						}),
+					);
+				}
+			},
+		}),
+		detachRecipeToMarket: builder.mutation<
+			{ data: Market; code: string },
+			{ marketId: number; recipeIds: number[] }
+		>({
+			invalidatesTags: ['Recipe'],
+			query: ({ marketId, recipeIds }) => {
+				return {
+					url: `/markets/${marketId}/recipes/detach`,
+					method: 'POST',
+					body: {
+						recipe_ids: recipeIds,
+					},
+				};
+			},
+			transformResponse: (response: ApiResponse<MarketDTO>) => {
+				return {
+					data: dto<MarketDTO, Market>('toClient', response.data),
+					code: response.code,
+				};
+			},
+			onQueryStarted: async ({ marketId }, { dispatch, queryFulfilled }) => {
+				try {
+					const result = await queryFulfilled;
+					dispatch(
+						addAlert({
+							id: crypto.randomUUID(),
+							status: 'success',
+							title: 'Success',
+							description: result.data.code || 'SUCCESS',
+						}),
+					);
+					dispatch(
+						marketApi.util.invalidateTags([
+							{ type: 'Market', id: marketId },
+							'Market',
+						]),
+					);
+				} catch (error) {
+					const apiError = dto<ApiErrorDTO, ApiError>(
+						'toClient',
+						(error as unknown as { error: ApiErrorDTO }).error as ApiError,
+					);
+					if (apiError.status === 401 || apiError.status === 403) {
+						return;
+					}
+					const code = apiError.data?.code;
+					dispatch(
+						addAlert({
+							id: crypto.randomUUID(),
+							status: 'danger',
+							title: 'Error',
+							description: code || 'UNKNOWN_ERROR',
+						}),
+					);
+				}
+			},
+		}),
 	}),
 });
 
@@ -151,4 +267,6 @@ export const {
 	useGetRecipesQuery,
 	useCreateRecipeMutation,
 	useDeleteRecipeMutation,
+	useAttachRecipeToMarketMutation,
+	useDetachRecipeToMarketMutation,
 } = recipeApi;

@@ -23,6 +23,8 @@
 		"INFO": "Info",
 		"MARKET_CREATED": "Market created",
 		"MARKET_UPDATED": "Market updated",
-		"MARKET_DELETED": "Market deleted"
+		"MARKET_DELETED": "Market deleted",
+		"PRODUCT_ATTACH_TO_MARKET": "The product is for sale",
+		"PRODUCT_DETACH_FROM_MARKET": "The product has been removed from sales"
 	}
 }

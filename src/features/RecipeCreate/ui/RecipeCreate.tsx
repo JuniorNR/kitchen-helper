@@ -32,7 +32,9 @@ import { RecipeCreateStepCard } from './RecipeCreateStepCard';
 import styles from './recipeCreate.module.scss';
 
 export const RecipeCreate: FC<RecipeCreateProps> = ({ setCreated }) => {
-	const { createRecipeData, isCreating, error, isLoading } = useRecipe({});
+	const { createRecipeData, isCreating, error, isLoading } = useRecipe({
+		skip: true,
+	});
 	const { t: tValidation } = useTranslation('validation');
 	const { t: tCommon } = useTranslation('common');
 	const { t: tFields } = useTranslation('fields');

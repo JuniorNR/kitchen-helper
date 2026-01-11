@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import type { FC } from 'react';
 import { type Key, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useMarketById, useRecipe } from '@/entities';
+import { useMarketById } from '@/entities';
 import { Typography } from '@/shared/ui';
 import { EmptyListIcon } from '@/shared/ui/icons/emptyListIcon';
 
@@ -21,10 +21,6 @@ export const Market: FC<MarketProps> = ({ marketId }) => {
 	const { market, isLoading } = useMarketById(marketId);
 	const { t: tMarkets } = useTranslation('markets');
 	const [selectedKey, setSelectedKey] = useState<Key>('about');
-
-	const { recipes } = useRecipe({
-		page: 1,
-	});
 
 	if (isLoading) {
 		return <MarketSkeleton />;
@@ -59,7 +55,7 @@ export const Market: FC<MarketProps> = ({ marketId }) => {
 			</div>
 		);
 	}
-	console.debug(market);
+
 	return (
 		<div className="container mx-auto px-4 py-8 max-w-7xl">
 			<div className="mb-6">
@@ -122,7 +118,7 @@ export const Market: FC<MarketProps> = ({ marketId }) => {
 					>
 						<div className="mt-6">
 							<MarketRecipesTab
-								products={recipes || []}
+								products={market.products || []}
 								marketSellerId={market.seller.id}
 							/>
 						</div>

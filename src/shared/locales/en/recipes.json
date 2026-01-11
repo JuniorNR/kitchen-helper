@@ -109,6 +109,7 @@
 	"buttons": {
 		"view_steps": "View steps",
 		"put_on_the_market": "Put on the market",
+		"delete_from_the_market": "Delete from the market",
 		"add_image": "Add image",
 		"select_images": "Select images"
 	},

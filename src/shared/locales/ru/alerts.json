@@ -22,7 +22,9 @@
 		"WARNING": "Предупреждение",
 		"INFO": "Информация",
 		"MARKET_CREATED": "Магазин создан",
-		"MARKET_UPDATED": "Market updated",
-		"MARKET_DELETED": "Market deleted"
+		"MARKET_UPDATED": "Магазин обновлен",
+		"MARKET_DELETED": "Магазин удален",
+		"PRODUCT_ATTACH_TO_MARKET": "Продукт выставлен на продажу",
+		"PRODUCT_DETACH_FROM_MARKET": "Продукт убран с продаж"
 	}
 }

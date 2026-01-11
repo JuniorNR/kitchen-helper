@@ -9,11 +9,9 @@ import {
 import { authApi } from '@/features';
 import alertReducer from '@/features/Alert/model/alert.slice';
 import { authReducer } from '@/features/Auth/model/auth.slice';
-import counterReducer from '@/features/Counter/model/counter.slice';
 
 export const store = configureStore({
 	reducer: {
-		counter: counterReducer,
 		auth: authReducer,
 		alert: alertReducer,
 		[authApi.reducerPath]: authApi.reducer,

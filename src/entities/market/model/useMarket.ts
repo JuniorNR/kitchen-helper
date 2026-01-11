@@ -9,8 +9,8 @@ import {
 } from './market.api';
 import type { UseMarket } from './market.types';
 
-export const useMarket = ({ page }: UseMarket) => {
-	const { data, isLoading, error } = useGetMarketsQuery({ page });
+export const useMarket = ({ page, skip }: UseMarket) => {
+	const { data, isLoading, error } = useGetMarketsQuery({ page }, { skip });
 	const [createMarket, { isLoading: isCreating }] = useCreateMarketMutation();
 	const [deleteMyMarket, { isLoading: isDeleting }] =
 		useDeleteMyMarketMutation();
@@ -22,7 +22,7 @@ export const useMarket = ({ page }: UseMarket) => {
 				return data;
 			}
 		} catch (error) {
-			console.debug(error);
+			console.log(error);
 		}
 	};
 
@@ -33,7 +33,7 @@ export const useMarket = ({ page }: UseMarket) => {
 				return data;
 			}
 		} catch (error) {
-			console.debug(error);
+			console.log(error);
 		}
 	};
 

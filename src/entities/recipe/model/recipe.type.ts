@@ -5,6 +5,7 @@ import type { RecipeListFilter } from '@/features/RecipesList/model/recipeList.t
 export interface UseRecipe {
 	page?: number;
 	filters?: Partial<RecipeListFilter>;
+	skip?: boolean;
 }
 
 export interface RecipeImage {
