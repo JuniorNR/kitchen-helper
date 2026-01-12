@@ -112,13 +112,13 @@ export const IngredientsList = () => {
 							<IngredientCard
 								ingredient={ingredient}
 								isDeleting={isDeleteLoadingIngredient === ingredient.id}
-								onDelete={(id) =>
-									handleDeleteIngredient(
+								onDelete={(id) => {
+									void handleDeleteIngredient(
 										id,
 										setIsDeleteLoadingIngredient,
 										deleteIngredientData,
-									)
-								}
+									);
+								}}
 							/>
 						</motion.div>
 					))}

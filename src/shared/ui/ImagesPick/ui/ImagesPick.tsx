@@ -14,7 +14,6 @@ import styles from './imagesPick.module.scss';
 export const ImagesPick: FC<ImagesPickProps> = ({
 	maxImages = 5,
 	onFilesChange,
-	variant = 'none',
 }) => {
 	const inputSelectRef = useRef<HTMLInputElement | null>(null);
 	const { t: tValidation } = useTranslation('validation');

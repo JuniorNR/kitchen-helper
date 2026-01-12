@@ -28,15 +28,15 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+	args: {
+		page: 1,
+		currentPage: 1,
+		totalItems: 50,
+		onPageChange: () => {},
+	},
 	render: (args) => {
 		const [page, setPage] = useState(args.page);
-		return (
-			<PaginationBar
-				{...args}
-				page={page}
-				onPageChange={setPage}
-			/>
-		);
+		return <PaginationBar {...args} page={page} onPageChange={setPage} />;
 	},
 };
 
@@ -45,16 +45,11 @@ export const ManyPages: Story = {
 		currentPage: 1,
 		page: 1,
 		totalItems: 200,
+		onPageChange: () => {},
 	},
 	render: (args) => {
 		const [page, setPage] = useState(args.page);
-		return (
-			<PaginationBar
-				{...args}
-				page={page}
-				onPageChange={setPage}
-			/>
-		);
+		return <PaginationBar {...args} page={page} onPageChange={setPage} />;
 	},
 };
 
@@ -63,16 +58,11 @@ export const FewItems: Story = {
 		currentPage: 1,
 		page: 1,
 		totalItems: 12,
+		onPageChange: () => {},
 	},
 	render: (args) => {
 		const [page, setPage] = useState(args.page);
-		return (
-			<PaginationBar
-				{...args}
-				page={page}
-				onPageChange={setPage}
-			/>
-		);
+		return <PaginationBar {...args} page={page} onPageChange={setPage} />;
 	},
 };
 
@@ -81,16 +71,10 @@ export const SinglePage: Story = {
 		currentPage: 1,
 		page: 1,
 		totalItems: 5,
+		onPageChange: () => {},
 	},
 	render: (args) => {
 		const [page, setPage] = useState(args.page);
-		return (
-			<PaginationBar
-				{...args}
-				page={page}
-				onPageChange={setPage}
-			/>
-		);
+		return <PaginationBar {...args} page={page} onPageChange={setPage} />;
 	},
 };
-

@@ -6,11 +6,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { Typography } from '@/shared/ui';
-import {
-	containerVariants,
-	itemVariants,
-	quickAccessItems,
-} from '../model';
+import { containerVariants, itemVariants, quickAccessItems } from '../model';
 
 export const HomeQuickAccess = () => {
 	const { t: tCommon } = useTranslation('common');

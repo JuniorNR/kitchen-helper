@@ -1,21 +1,23 @@
 'use client';
 
 import { ThemeProvider } from 'next-themes';
+import { useRef } from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
-import { store } from '@/shared/lib/store/store';
+import { type AppStore, makeStore } from '@/shared/lib/store/store';
 import { AlertProvider } from '../../AlertProvider';
 import { EchoProvider } from '../../EchoProvider';
 import { HeroUIProvider } from '../../HeroUIProvider';
 import { I18nProvider } from '../../I18nProvider';
+import type { AppProvidersProps } from '../model/appProviders.types';
 
-type Props = {
-	children: React.ReactNode;
-	forcedTheme?: 'light' | 'dark' | 'system';
-};
+export const AppProviders = ({ children, forcedTheme }: AppProvidersProps) => {
+	const storeRef = useRef<AppStore | undefined>(undefined);
+	if (!storeRef.current) {
+		storeRef.current = makeStore();
+	}
 
-export const AppProviders = ({ children, forcedTheme }: Props) => {
 	return (
-		<ReduxProvider store={store}>
+		<ReduxProvider store={storeRef.current}>
 			<I18nProvider>
 				<HeroUIProvider>
 					<ThemeProvider

@@ -160,9 +160,15 @@ export const OverlappingKeys: Story = {
 							{JSON.stringify(result, null, 2)}
 						</pre>
 						<div className="mt-2 text-xs text-gray-600 dark:text-gray-400">
-							Примечание: значения <code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">age</code> и{' '}
-							<code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">city</code> из второго объекта
-							перезаписали значения из первого
+							Примечание: значения{' '}
+							<code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">
+								age
+							</code>{' '}
+							и{' '}
+							<code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">
+								city
+							</code>{' '}
+							из второго объекта перезаписали значения из первого
 						</div>
 					</div>
 				</div>
@@ -252,8 +258,15 @@ export const WithUndefined: Story = {
 							{JSON.stringify(result, null, 2)}
 						</pre>
 						<div className="mt-2 text-xs text-gray-600 dark:text-gray-400">
-							Примечание: поля <code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">email</code> и{' '}
-							<code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">phone</code> с undefined значениями были удалены
+							Примечание: поля{' '}
+							<code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">
+								email
+							</code>{' '}
+							и{' '}
+							<code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">
+								phone
+							</code>{' '}
+							с undefined значениями были удалены
 						</div>
 					</div>
 				</div>
@@ -333,7 +346,11 @@ export const WithNestedObjects: Story = {
 							{JSON.stringify(result, null, 2)}
 						</pre>
 						<div className="mt-2 text-xs text-gray-600 dark:text-gray-400">
-							Примечание: вложенный объект <code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">address</code> из второго объекта полностью заменил объект из первого
+							Примечание: вложенный объект{' '}
+							<code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">
+								address
+							</code>{' '}
+							из второго объекта полностью заменил объект из первого
 						</div>
 					</div>
 				</div>
@@ -341,4 +358,3 @@ export const WithNestedObjects: Story = {
 		);
 	},
 };
-

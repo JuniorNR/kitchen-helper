@@ -79,7 +79,10 @@ serializeDate(date)`}
 									>
 										{input.toLocaleString('ru')} → {output}
 									</div>
-									<div className="text-xs mt-1 italic" style={{ color: '#000000' }}>
+									<div
+										className="text-xs mt-1 italic"
+										style={{ color: '#000000' }}
+									>
 										{description}
 									</div>
 								</div>
@@ -93,8 +96,11 @@ serializeDate(date)`}
 						Примечание:
 					</div>
 					<p className="text-sm text-gray-800 dark:text-gray-200">
-						Date объекты преобразуются в ISO строку через <code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">toISOString()</code>, что
-						включает время и часовой пояс (UTC).
+						Date объекты преобразуются в ISO строку через{' '}
+						<code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">
+							toISOString()
+						</code>
+						, что включает время и часовой пояс (UTC).
 					</p>
 				</div>
 			</div>
@@ -162,7 +168,10 @@ export const FromString: Story = {
 									>
 										{input} → {output}
 									</div>
-									<div className="text-xs mt-1 italic" style={{ color: '#000000' }}>
+									<div
+										className="text-xs mt-1 italic"
+										style={{ color: '#000000' }}
+									>
 										{description}
 									</div>
 								</div>
@@ -235,7 +244,10 @@ export const WithUndefined: Story = {
 									>
 										{input} → {output === undefined ? 'undefined' : output}
 									</div>
-									<div className="text-xs mt-1 italic" style={{ color: '#000000' }}>
+									<div
+										className="text-xs mt-1 italic"
+										style={{ color: '#000000' }}
+									>
 										{description}
 									</div>
 								</div>
@@ -249,8 +261,12 @@ export const WithUndefined: Story = {
 						Примечание:
 					</div>
 					<p className="text-sm text-gray-800 dark:text-gray-200">
-						Возврат <code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">undefined</code> позволяет
-						серверу определить, что поле не было заполнено, в отличие от пустой строки.
+						Возврат{' '}
+						<code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">
+							undefined
+						</code>{' '}
+						позволяет серверу определить, что поле не было заполнено, в отличие
+						от пустой строки.
 					</p>
 				</div>
 			</div>
@@ -314,14 +330,16 @@ fetch('/api/recipes', {
 						<li>
 							Автоматическое преобразование Date объектов в ISO строку для JSON
 						</li>
+						<li>Строки остаются без изменений, если уже в нужном формате</li>
 						<li>
-							Строки остаются без изменений, если уже в нужном формате
+							<code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">
+								undefined
+							</code>{' '}
+							значения не включаются в JSON (если используется JSON.stringify)
 						</li>
 						<li>
-							<code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">undefined</code> значения не включаются в JSON (если используется JSON.stringify)
-						</li>
-						<li>
-							Удобно для работы с формами, где даты могут быть Date объектами или строками
+							Удобно для работы с формами, где даты могут быть Date объектами
+							или строками
 						</li>
 					</ul>
 				</div>
@@ -400,7 +418,10 @@ if (date) {
 								key={step}
 								className="p-2 bg-white dark:bg-gray-700/50 rounded border border-gray-200 dark:border-gray-600"
 							>
-								<div className="text-xs font-semibold" style={{ color: '#000000' }}>
+								<div
+									className="text-xs font-semibold"
+									style={{ color: '#000000' }}
+								>
 									{step}:
 								</div>
 								<div
@@ -409,7 +430,10 @@ if (date) {
 								>
 									{value}
 								</div>
-								<div className="text-xs mt-1 italic" style={{ color: '#000000' }}>
+								<div
+									className="text-xs mt-1 italic"
+									style={{ color: '#000000' }}
+								>
 									{description}
 								</div>
 							</div>
@@ -420,4 +444,3 @@ if (date) {
 		);
 	},
 };
-

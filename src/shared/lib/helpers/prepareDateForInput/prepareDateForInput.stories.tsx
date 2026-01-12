@@ -79,7 +79,10 @@ prepareDateForInput(date)`}
 									>
 										{input.toLocaleDateString('ru')} → {output}
 									</div>
-									<div className="text-xs mt-1 italic" style={{ color: '#000000' }}>
+									<div
+										className="text-xs mt-1 italic"
+										style={{ color: '#000000' }}
+									>
 										{description}
 									</div>
 								</div>
@@ -151,8 +154,8 @@ export const FromYYYYMMDD: Story = {
 						Примечание:
 					</div>
 					<p className="text-sm text-gray-800 dark:text-gray-200">
-						Строки в формате YYYY-MM-DD возвращаются без изменений, так как это уже
-						правильный формат для HTML input[type="date"].
+						Строки в формате YYYY-MM-DD возвращаются без изменений, так как это
+						уже правильный формат для HTML input[type="date"].
 					</p>
 				</div>
 			</div>
@@ -272,13 +275,13 @@ export const EdgeCases: Story = {
 								key={input}
 								className="p-2 bg-white dark:bg-gray-700/50 rounded border border-gray-200 dark:border-gray-600"
 							>
-								<div
-									className="text-xs font-mono"
-									style={{ color: '#000000' }}
-								>
+								<div className="text-xs font-mono" style={{ color: '#000000' }}>
 									{input} → {output || '(пустая строка)'}
 								</div>
-								<div className="text-xs mt-1 italic" style={{ color: '#000000' }}>
+								<div
+									className="text-xs mt-1 italic"
+									style={{ color: '#000000' }}
+								>
 									{description}
 								</div>
 							</div>
@@ -292,8 +295,11 @@ export const EdgeCases: Story = {
 					</div>
 					<p className="text-sm text-gray-800 dark:text-gray-200">
 						Все невалидные значения, пустые строки и undefined возвращают пустую
-						строку <code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">""</code>, что
-						корректно для HTML input[type="date"].
+						строку{' '}
+						<code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">
+							""
+						</code>
+						, что корректно для HTML input[type="date"].
 					</p>
 				</div>
 			</div>
@@ -347,16 +353,21 @@ function DateInput() {
 					</div>
 					<ul className="text-sm text-gray-800 dark:text-gray-200 space-y-1 list-disc list-inside">
 						<li>
-							<code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">prepareDateForInput</code> преобразует Date объект или строку в формат YYYY-MM-DD
+							<code className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">
+								prepareDateForInput
+							</code>{' '}
+							преобразует Date объект или строку в формат YYYY-MM-DD
 						</li>
 						<li>
 							HTML input[type="date"] требует формат YYYY-MM-DD для значения
 						</li>
 						<li>
-							При изменении значения input, создается новый Date объект из строки
+							При изменении значения input, создается новый Date объект из
+							строки
 						</li>
 						<li>
-							Если date undefined, функция вернет пустую строку, и input будет пустым
+							Если date undefined, функция вернет пустую строку, и input будет
+							пустым
 						</li>
 					</ul>
 				</div>
@@ -364,4 +375,3 @@ function DateInput() {
 		);
 	},
 };
-

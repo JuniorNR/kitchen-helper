@@ -35,6 +35,8 @@ export interface RecipeListFilter {
 	type: string[];
 	createdFrom: string;
 	createdTo: string;
+
+	[key: string]: string | number | string[] | Date | number[];
 }
 
 export interface RecipeListFilterDTO {

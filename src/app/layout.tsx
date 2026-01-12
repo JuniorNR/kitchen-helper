@@ -43,7 +43,7 @@ export default async function RootLayout({
 						<Header height={layoutConfig.headerHeight} />
 						<main
 							className={classNames(
-								`flex flex-col flex-grow-1 justify-between items-center w-full p-5 h-[${layoutConfig.mainHeight} min-h-[${layoutConfig.mainHeight}]`,
+								`flex flex-col flex-grow-1 justify-between items-center w-full p-5 h-[${layoutConfig.mainHeight}] min-h-[${layoutConfig.mainHeight}]`,
 							)}
 						>
 							<AuthBoundary>{children}</AuthBoundary>

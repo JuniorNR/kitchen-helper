@@ -136,7 +136,6 @@ export const MarketCreateForm: FC<MarketCreateFormProps> = ({
 									return (
 										<ImagesPick
 											maxImages={5}
-											variant="bordered"
 											onFilesChange={handleFilesChange}
 										/>
 									);

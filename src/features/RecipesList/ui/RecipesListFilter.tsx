@@ -261,8 +261,8 @@ export const RecipesListFilter: FC<RecipesListFilterProps> = ({
 	return (
 		<Filter
 			key={formKey}
-			badges={badges}
-			filterFromLocalStorage={filterFromLocalStorage}
+			badges={badges as Record<string, string | number | string[] | Date | number[]>}
+			filterFromLocalStorage={filterFromLocalStorage as Record<string, string | number | string[] | Date | number[]>}
 			onSubmit={onHandleSubmit}
 			onSave={onHandleSaveToLocalStorage}
 			onReset={onHandleHardReset}

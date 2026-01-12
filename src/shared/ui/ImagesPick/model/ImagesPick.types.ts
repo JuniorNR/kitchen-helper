@@ -1,7 +1,6 @@
 export interface ImagesPickProps {
 	maxImages?: number;
 	onFilesChange?: (files: File[]) => void;
-	variant?: 'bordered' | 'none';
 }
 
 export interface ImagesPickMiddlewareProps {

@@ -27,7 +27,6 @@ const meta = {
 	},
 	argTypes: {
 		maxImages: { control: 'number' },
-		errorMessage: { control: 'text' },
 	},
 } satisfies Meta<typeof ImagesPick>;
 
@@ -43,6 +42,5 @@ export const Default: Story = {
 export const WithError: Story = {
 	args: {
 		maxImages: 5,
-		errorMessage: 'Ошибка загрузки изображения',
 	},
 };

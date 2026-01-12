@@ -24,5 +24,5 @@ export {
 	useMarket,
 	useMarketById,
 } from './market';
-export { recipeApi, useRecipe } from './recipe';
+export { type Recipe, type RecipeDTO, recipeApi, useRecipe } from './recipe';
 export { type User, type UserDTO, userApi, useUser } from './user';

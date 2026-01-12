@@ -65,7 +65,7 @@ export const marketApi = createApi({
 			},
 		}),
 		getMarketById: builder.query<ApiResponse<Market>, number>({
-			providesTags: (result, error, id) => [{ type: 'Market', id }],
+			providesTags: (_, __, id) => [{ type: 'Market', id }],
 			query: (id) => ({
 				url: `/markets/${id}`,
 			}),

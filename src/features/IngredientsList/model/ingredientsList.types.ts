@@ -7,6 +7,8 @@ export interface IngredientListFilter {
 	createdTo: string;
 	categories: string[];
 	units: string[];
+
+	[key: string]: string | number | string[] | Date | number[];
 }
 
 export interface IngredientsListFilterProps {

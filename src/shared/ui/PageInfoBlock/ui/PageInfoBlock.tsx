@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { Typography } from '../../Typography';
-import type { PageInfoBlockProps } from '../pageInfoBlock.types';
+import type { PageInfoBlockProps } from '../model/pageInfoBlock.types';
 
 export const PageInfoBlock: FC<PageInfoBlockProps> = ({
 	version,

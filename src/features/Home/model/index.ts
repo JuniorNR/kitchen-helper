@@ -1,11 +1,3 @@
-export type {
-	FeatureItem,
-	HowItWorksPath,
-	HowItWorksStep,
-	QuickAccessItem,
-	StatisticItem,
-	UseCaseItem,
-} from './home.types';
 export {
 	containerVariants,
 	featureItems,
@@ -16,3 +8,11 @@ export {
 	statisticsItems,
 	useCaseItems,
 } from './home.constants';
+export type {
+	FeatureItem,
+	HowItWorksPath,
+	HowItWorksStep,
+	QuickAccessItem,
+	StatisticItem,
+	UseCaseItem,
+} from './home.types';

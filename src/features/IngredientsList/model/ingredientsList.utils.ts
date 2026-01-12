@@ -16,13 +16,13 @@ export const prepareIngredientsList = (ingredients?: Ingredient[]) => {
 export const handleDeleteIngredient = async (
 	id: string,
 	setIsDeleteLoadingIngredient: (id: string | null) => void,
-	deleteIngredientData: (id: string) => Promise<void>,
+	deleteIngredientData: (id: string) => Promise<void | null>,
 ) => {
 	try {
 		setIsDeleteLoadingIngredient(id);
 		await deleteIngredientData(id);
 	} catch (_) {
-		return null;
+		// Игнорируем ошибки
 	} finally {
 		setIsDeleteLoadingIngredient(null);
 	}

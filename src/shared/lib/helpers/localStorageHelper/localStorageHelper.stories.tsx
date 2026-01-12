@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { localStorageHelper } from './localStorageHelper';
 
 const meta = {
 	title: 'Shared/Lib/Helpers/localStorageHelper',
@@ -37,9 +36,6 @@ export const WithObject: Story = {
 			age: 30,
 			email: 'john@example.com',
 		};
-
-		const { item, storageSetItem, storageRemoveItem } =
-			localStorageHelper<typeof userData>('user');
 
 		const codeExample = `const { item, storageSetItem, storageRemoveItem } = 
   localStorageHelper<typeof userData>('user');
@@ -231,7 +227,10 @@ helper.storageClear();`;
 						</div>
 						<div className="space-y-3 text-sm text-gray-800 dark:text-gray-200">
 							{Object.entries(methodsDescription).map(([key, value]) => (
-								<div key={key} className="border-b border-gray-300 dark:border-gray-600 pb-2 last:border-0">
+								<div
+									key={key}
+									className="border-b border-gray-300 dark:border-gray-600 pb-2 last:border-0"
+								>
 									<div className="font-semibold text-blue-600 dark:text-blue-400">
 										{key}
 									</div>
@@ -251,4 +250,3 @@ helper.storageClear();`;
 		);
 	},
 };
-
