@@ -6,7 +6,9 @@ import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useUser } from '@/entities';
 import { customizeString } from '@/shared/lib/helpers';
+import { useAppSelector } from '@/shared/lib/hooks';
 import { Alert, Typography } from '@/shared/ui';
+import { SettingsIcon } from '@/shared/ui/icons/settingsIcon';
 import type { ChatListAsideProps } from '../model/chat.types';
 import styles from './chat.module.scss';
 
@@ -14,12 +16,16 @@ export const ChatListAside: FC<ChatListAsideProps> = ({
 	chats,
 	activeChatId,
 	onChatClick,
+	setIsSettingsOpen,
 }) => {
+	const { asideColorBg } = useAppSelector((state) => state.chat.settings.theme);
 	const { t: tChats, i18n } = useTranslation('chats');
 	const { user } = useUser();
 	const hasChats = Boolean(chats?.length);
 	return (
-		<aside className="flex flex-shrink-0 overflow-y-auto w-1/4 max-w-1/4 min-w-[220px] flex-col rounded-2xl border border-slate-200 bg-gradient-to-b from-slate-50 via-white to-slate-100 ring-1 ring-white/60 shadow-[0_12px_35px_rgba(148,163,184,0.25)] dark:bg-none dark:border-slate-800 dark:bg-slate-900/60 dark:ring-0 dark:shadow-none">
+		<aside
+			className={`flex flex-shrink-0 overflow-y-auto w-1/4 max-w-1/4 min-w-[220px] flex-col rounded-2xl border ${asideColorBg.classes}`}
+		>
 			<div className="px-5 py-2">
 				<Typography
 					component="h2"
@@ -29,7 +35,6 @@ export const ChatListAside: FC<ChatListAsideProps> = ({
 				</Typography>
 			</div>
 			<Divider />
-
 			{hasChats ? (
 				<motion.ul
 					layout="position"
@@ -189,6 +194,17 @@ export const ChatListAside: FC<ChatListAsideProps> = ({
 					className="mt-10"
 				/>
 			)}
+			<Divider />
+			<div className="h-[40px] w-full">
+				<Button
+					className="h-[40px] w-[40px] rounded-none"
+					isIconOnly
+					color="secondary"
+					onPress={() => setIsSettingsOpen((prev) => !prev)}
+				>
+					<SettingsIcon />
+				</Button>
+			</div>
 		</aside>
 	);
 };

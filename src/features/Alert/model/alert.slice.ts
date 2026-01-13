@@ -24,4 +24,4 @@ export const alertSlice = createSlice({
 });
 
 export const { addAlert, removeAlert } = alertSlice.actions;
-export default alertSlice.reducer;
+export const alertReducer = alertSlice.reducer;

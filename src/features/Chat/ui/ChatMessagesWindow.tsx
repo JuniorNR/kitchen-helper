@@ -6,6 +6,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { useUser } from '@/entities';
 import type { ChatMessage } from '@/entities/chat/model/chat.types';
 import { customizeString } from '@/shared/lib/helpers';
+import { useAppSelector } from '@/shared/lib/hooks';
 import { Alert, Typography } from '@/shared/ui';
 import type { ChatMessagesWindowProps } from '../model/chat.types';
 import { ChatSendControlPanel } from './ChatSendControlPanel';
@@ -22,6 +23,7 @@ export const ChatMessagesWindow = ({
 	sendMessageData,
 	loadOldestMessages,
 }: ChatMessagesWindowProps) => {
+	const { chatColorBg } = useAppSelector((state) => state.chat.settings.theme);
 	const scrollableId = safeId(`chat-scroll-${useId()}`);
 	const messagesContainerRef = useRef<HTMLDivElement>(null);
 	const hasMessages = localMessages?.length > 0;
@@ -56,7 +58,9 @@ export const ChatMessagesWindow = ({
 	}, [activeChatId, localMessages?.length]);
 
 	return (
-		<div className="flex flex-shrink-1 flex-grow-1 overflow-hidden min-w-[400px] max-w-3/4 pt-5 flex-col rounded-2xl border border-slate-200 bg-gradient-to-br from-white via-slate-50 to-slate-100 shadow-[0_20px_60px_rgba(148,163,184,0.25)] dark:bg-none dark:border-slate-800 dark:bg-slate-950 dark:shadow-[inset_0_1px_0_rgba(15,23,42,0.4)]">
+		<div
+			className={`flex flex-shrink-1 flex-grow-1 overflow-hidden min-w-[400px] max-w-3/4 pt-5 flex-col rounded-2xl border ${chatColorBg.classes}`}
+		>
 			{activeChatId && (
 				<header className="flex items-start justify-between border-b border-slate-200 px-4 pb-4 dark:border-slate-800">
 					<div>

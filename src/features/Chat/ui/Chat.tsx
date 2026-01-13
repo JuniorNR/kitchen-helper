@@ -1,5 +1,6 @@
 'use client';
 import { useEcho } from '@laravel/echo-react';
+import { AnimatePresence } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
 import { layoutConfig } from '@/configs';
 import type {
@@ -11,21 +12,29 @@ import type {
 import { useChat, useUser } from '@/entities';
 import { chatApi } from '@/entities/chat/model/chat.api';
 import { dto, localStorageHelper } from '@/shared/lib/helpers';
-import { useAppDispatch } from '@/shared/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks';
 import { LIMITS_MESSAGES } from '../model/chat.utils';
 import { ChatListAside } from './ChatListAside';
 import { ChatListAsideSkeleton } from './ChatListAside.skeleton';
 import { ChatMessagesWindow } from './ChatMessagesWindow';
 import { ChatMessagesWindowSkeleton } from './ChatMessagesWindow.skeleton';
+import { ChatSettings } from './ChatSettings';
 
 export const Chat = () => {
 	const dispatch = useAppDispatch();
 	const { item: localStorageChatId, storageSetItem } =
 		localStorageHelper('active_chat_id');
+	const windowColorBg = useAppSelector(
+		(state) => state.chat.settings.theme.windowColorBg,
+	);
+
 	const [activeChatId, setActiveChatId] = useState<number | null>(
 		Number(localStorageChatId) || null,
 	);
 	const [isBlockFetch, setIsBlockFetch] = useState<boolean>(false);
+
+	const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(true);
+
 	const {
 		chats,
 		messages,
@@ -123,13 +132,19 @@ export const Chat = () => {
 
 	return (
 		<section
-			className={`flex w-full h-[${layoutConfig.chatHeight}] max-h-[650px] min-h-[650px] gap-6 rounded-3xl border border-slate-200/90 bg-linear-to-br from-white via-slate-50 to-slate-100 p-6 shadow-[0_25px_70px_rgba(15,23,42,0.08)] backdrop-blur-sm dark:bg-none dark:border-slate-800 dark:bg-slate-900/80 dark:shadow-slate-900/40`}
+			className={`flex w-full h-[${layoutConfig.chatHeight}] max-h-[650px] min-h-[650px] gap-6 rounded-3xl border ${windowColorBg.classes}`}
 		>
+			<AnimatePresence>
+				{isSettingsOpen && (
+					<ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
+				)}
+			</AnimatePresence>
 			{!isChatsLoading ? (
 				<ChatListAside
 					chats={localChats || []}
 					activeChatId={activeChatId}
 					onChatClick={handleSetActiveChatId}
+					setIsSettingsOpen={setIsSettingsOpen}
 				/>
 			) : (
 				<ChatListAsideSkeleton />

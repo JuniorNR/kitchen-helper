@@ -7,14 +7,16 @@ import {
 	userApi,
 } from '@/entities';
 import { authApi } from '@/features';
-import alertReducer from '@/features/Alert/model/alert.slice';
+import { alertReducer } from '@/features/Alert/model/alert.slice';
 import { authReducer } from '@/features/Auth/model/auth.slice';
+import { chatReducer } from '@/features/Chat';
 
 export const makeStore = () => {
 	return configureStore({
 		reducer: {
 			auth: authReducer,
 			alert: alertReducer,
+			chat: chatReducer,
 			[authApi.reducerPath]: authApi.reducer,
 			[userApi.reducerPath]: userApi.reducer,
 			[ingredientApi.reducerPath]: ingredientApi.reducer,
