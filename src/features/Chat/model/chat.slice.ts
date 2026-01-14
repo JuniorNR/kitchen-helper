@@ -15,9 +15,37 @@ const chatSlice = createSlice({
 		changeAsideColorBg: (state, action: PayloadAction<ChatThemeColor>) => {
 			state.settings.theme.asideColorBg = action.payload;
 		},
+		changeChatCardColorBg: (state, action: PayloadAction<ChatThemeColor>) => {
+			state.settings.theme.chatCardColorBg = action.payload;
+		},
+		changeChatCardActiveColorBg: (
+			state,
+			action: PayloadAction<ChatThemeColor>,
+		) => {
+			state.settings.theme.chatCardActiveColorBg = action.payload;
+		},
+		changeChatCardOwnMessageColorBg: (
+			state,
+			action: PayloadAction<ChatThemeColor>,
+		) => {
+			state.settings.theme.chatCardOwnMessageColorBg = action.payload;
+		},
+		changeChatCardMessageColorBg: (
+			state,
+			action: PayloadAction<ChatThemeColor>,
+		) => {
+			state.settings.theme.chatCardMessageColorBg = action.payload;
+		},
 	},
 });
 
-export const { changeWindowColorBg, changeChatColorBg, changeAsideColorBg } =
-	chatSlice.actions;
+export const {
+	changeWindowColorBg,
+	changeChatColorBg,
+	changeAsideColorBg,
+	changeChatCardColorBg,
+	changeChatCardActiveColorBg,
+	changeChatCardOwnMessageColorBg,
+	changeChatCardMessageColorBg,
+} = chatSlice.actions;
 export const chatReducer = chatSlice.reducer;

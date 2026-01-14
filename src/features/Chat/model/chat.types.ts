@@ -43,6 +43,10 @@ export interface ChatTheme {
 	windowColorBg: ChatThemeColor;
 	asideColorBg: ChatThemeColor;
 	chatColorBg: ChatThemeColor;
+	chatCardColorBg: ChatThemeColor;
+	chatCardActiveColorBg: ChatThemeColor;
+	chatCardOwnMessageColorBg: ChatThemeColor;
+	chatCardMessageColorBg: ChatThemeColor;
 }
 
 export interface ChatThemeColor {
@@ -57,6 +61,7 @@ export interface ChatSettingsColorsVariantsProps {
 	handleColorThemeChange: (data: ChatThemeColor) => void;
 	themeField: keyof ChatTheme;
 	className?: string;
+	minimize?: boolean;
 }
 
 export type SettingsSection = 'colors' | 'notifications' | 'general';
@@ -66,4 +71,12 @@ export interface ChatListAsideButtonProps {
 	activeChatId: number | null;
 	onChatClick: (id: number) => void;
 	currentUserId: number | undefined;
+	className?: string;
+	isUnread?: boolean;
+}
+
+export interface ChatSettingsPreviewComponentProps {
+	children: React.ReactNode;
+	title: string;
+	className?: string;
 }

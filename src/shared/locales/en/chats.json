@@ -23,7 +23,8 @@
 			"title": "Color Theme",
 			"description": "Choose a color scheme for the chat window",
 			"tabs": {
-				"background": "Background"
+				"background": "Background",
+				"chat_card": "Chat Card"
 			},
 			"aria_label": "Color settings",
 			"backgrounds": {
@@ -38,7 +39,19 @@
 				"emerald": "Emerald",
 				"cyan": "Cyan",
 				"darkblue": "Dark Blue",
-				"rose": "Rose"
+				"rose": "Rose",
+				"purple": "Purple",
+				"amber": "Amber",
+				"teal": "Teal",
+				"fuchsia": "Fuchsia",
+				"violet": "Violet",
+				"sky": "Sky",
+				"orange": "Orange",
+				"pink": "Pink",
+				"zinc": "Zinc",
+				"stone": "Stone",
+				"neutral": "Neutral",
+				"gray": "Gray"
 			}
 		},
 		"notifications": {

@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Typography } from '@/shared/ui';
 import type { ChatSettingsProps, SettingsSection } from '../model/chat.types';
-import { ChatSettingsColorsTab } from './ChatSettingsColorsTab';
+import { ChatSettingsColorsTabs } from './ChatSettingsColorsTabs';
 import styles from './chat.module.scss';
 
 export const ChatSettings: FC<ChatSettingsProps> = ({ setIsSettingsOpen }) => {
@@ -79,7 +79,7 @@ export const ChatSettings: FC<ChatSettingsProps> = ({ setIsSettingsOpen }) => {
 									{tChats('settings.colors.description')}
 								</Typography>
 							</div>
-							<ChatSettingsColorsTab />
+							<ChatSettingsColorsTabs />
 						</div>
 					)}
 

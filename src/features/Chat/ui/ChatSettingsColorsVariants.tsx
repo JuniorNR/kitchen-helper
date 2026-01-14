@@ -15,6 +15,7 @@ export const ChatSettingsColorsVariants: FC<
 	colorVariants,
 	className,
 	themeField,
+	minimize = false,
 }) => {
 	const { t: tChats } = useTranslation('chats');
 	const currentThemeColor = chatThemeState[themeField];
@@ -28,13 +29,19 @@ export const ChatSettingsColorsVariants: FC<
 				>
 					{title}
 				</Typography>
-				<div className="grid grid-cols-3 gap-4">
+				<div
+					className={`grid ${
+						minimize
+							? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3'
+							: 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'
+					}`}
+				>
 					{Object.entries(colorVariants).map((variant) => {
 						const isActive = currentThemeColor?.classes === variant[1];
 						return (
 							<Button
 								key={variant[0] + title}
-								className={`relative h-36 flex flex-col items-center justify-center gap-3 border-2 transition-all rounded-2xl ${
+								className={`relative ${minimize ? 'pt-2 pb-2 h-full gap-1' : 'h-36 gap-3'} flex flex-col items-center justify-center border-2 transition-all rounded-2xl ${
 									isActive
 										? 'border-primary bg-primary/5 shadow-lg scale-105'
 										: 'border-default-200 hover:border-default-300 hover:shadow-md'
@@ -47,28 +54,30 @@ export const ChatSettingsColorsVariants: FC<
 									})
 								}
 							>
-								<div className="flex gap-1.5 w-full h-20">
+								<div
+									className={`flex gap-1.5 w-full ${minimize ? 'h-12' : 'h-20'}`}
+								>
 									<div
-										className={`flex-1 rounded-xl shadow-sm border-1 border-white/90 dark:border-white/10 ${variant[1]}`}
+										className={`flex-1 rounded-xl ${minimize ? 'h-12' : 'h-20'} shadow-sm border-1 border-white/90 dark:border-white/10 ${variant[1]}`}
 									/>
 								</div>
 
 								<Typography
 									component="span"
-									classNameComponent={`text-sm font-semibold ${
+									classNameComponent={`font-semibold ${
 										isActive ? 'text-primary' : 'text-foreground'
 									}`}
 								>
-									{tChats(`settings.colors.color_names.${variant[0]}` as any) ||
+									{tChats(`settings.colors.color_names.${variant[0]}`) ||
 										variant[0]}
 								</Typography>
 								{isActive && (
 									<motion.div
 										initial={{ scale: 0 }}
 										animate={{ scale: 1 }}
-										className="absolute top-3 right-3 w-6 h-6 rounded-full bg-primary flex items-center justify-center shadow-lg"
+										className="absolute top-1 right-3 w-4 h-4 rounded-full bg-primary flex items-center justify-center shadow-lg"
 									>
-										<CheckIcon className="w-4 h-4 text-white" />
+										<CheckIcon className="w-3 h-3 text-white" />
 									</motion.div>
 								)}
 							</Button>
