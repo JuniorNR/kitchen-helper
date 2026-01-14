@@ -1,5 +1,6 @@
 .scrollbar {
   overflow-y: auto;
+  scrollbar-gutter: stable; /* резервирует место для scrollbar, предотвращая прыжки верстки */
 
   &::-webkit-scrollbar {
     width: 10px; /* ширина scrollbar */

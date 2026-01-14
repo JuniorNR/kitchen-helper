@@ -4,55 +4,21 @@ import { Button } from '@heroui/button';
 import { motion } from 'framer-motion';
 import type { FC } from 'react';
 import { useState } from 'react';
-import { localStorageHelper } from '@/shared/lib/helpers';
-import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks';
+import { useTranslation } from 'react-i18next';
 import { Typography } from '@/shared/ui';
-import {
-	changeAsideColorBg,
-	changeChatColorBg,
-	changeWindowColorBg,
-} from '../model/chat.slice';
-import type {
-	ChatSettingsProps,
-	ChatTheme,
-	ChatThemeColor,
-} from '../model/chat.types';
-import {
-	chatAsideColorBgVariants,
-	chatColorBgVariants,
-	chatWindowColorBgVariants,
-} from '../model/chat.utils';
-import { ChatSettingsColorsVariants } from './ChatSettingsColorsVariants';
+import type { ChatSettingsProps, SettingsSection } from '../model/chat.types';
+import { ChatSettingsColorsTab } from './ChatSettingsColorsTab';
 import styles from './chat.module.scss';
 
-type SettingsSection = 'colors' | 'notifications' | 'general';
-
-const settingsMenuItems: { key: SettingsSection; label: string }[] = [
-	{ key: 'colors', label: 'Цвета' },
-	{ key: 'notifications', label: 'Уведомления' },
-	{ key: 'general', label: 'Общие' },
-];
-
 export const ChatSettings: FC<ChatSettingsProps> = ({ setIsSettingsOpen }) => {
-	const { storageSetItem } = localStorageHelper<ChatTheme>('chat-theme');
-	const dispatch = useAppDispatch();
-	const settings = useAppSelector((state) => state.chat.settings);
+	const { t: tChats } = useTranslation('chats');
 	const [activeSection, setActiveSection] = useState<SettingsSection>('colors');
 
-	const handleChangeWindowColor = (data: ChatThemeColor) => {
-		dispatch(changeWindowColorBg(data));
-		storageSetItem({ ...settings.theme, windowColorBg: data });
-	};
-
-	const handleChangeChatColor = (data: ChatThemeColor) => {
-		dispatch(changeChatColorBg(data));
-		storageSetItem({ ...settings.theme, chatColorBg: data });
-	};
-
-	const handleChangeAsideChatColor = (data: ChatThemeColor) => {
-		dispatch(changeAsideColorBg(data));
-		storageSetItem({ ...settings.theme, asideColorBg: data });
-	};
+	const settingsMenuItems: { key: SettingsSection; label: string }[] = [
+		{ key: 'colors', label: tChats('settings.sections.colors') },
+		{ key: 'notifications', label: tChats('settings.sections.notifications') },
+		{ key: 'general', label: tChats('settings.sections.general') },
+	];
 
 	return (
 		<motion.div
@@ -69,7 +35,7 @@ export const ChatSettings: FC<ChatSettingsProps> = ({ setIsSettingsOpen }) => {
 							component="h2"
 							classNameComponent="text-lg font-semibold"
 						>
-							Настройки
+							{tChats('settings.title')}
 						</Typography>
 					</div>
 					<nav className="flex flex-col gap-2 p-4">
@@ -95,7 +61,7 @@ export const ChatSettings: FC<ChatSettingsProps> = ({ setIsSettingsOpen }) => {
 						color="danger"
 						onPress={() => setIsSettingsOpen(false)}
 					>
-						Закрыть
+						{tChats('settings.close')}
 					</Button>
 				</div>
 
@@ -107,35 +73,13 @@ export const ChatSettings: FC<ChatSettingsProps> = ({ setIsSettingsOpen }) => {
 									component="h3"
 									classNameComponent="text-xl font-semibold mb-2"
 								>
-									Цветовая тема
+									{tChats('settings.colors.title')}
 								</Typography>
 								<Typography className="text-sm text-default-500">
-									Выберите цветовую схему для окна чата
+									{tChats('settings.colors.description')}
 								</Typography>
 							</div>
-							<ChatSettingsColorsVariants
-								className="mb-6"
-								title="Фон интерфейса чата"
-								chatThemeState={settings.theme}
-								colorVariants={chatWindowColorBgVariants}
-								handleColorThemeChange={handleChangeWindowColor}
-								themeField="windowColorBg"
-							/>
-							<ChatSettingsColorsVariants
-								className="mb-6"
-								title="Фон окна сообщений"
-								chatThemeState={settings.theme}
-								colorVariants={chatColorBgVariants}
-								handleColorThemeChange={handleChangeChatColor}
-								themeField="chatColorBg"
-							/>
-							<ChatSettingsColorsVariants
-								title="Фон списка чатов"
-								chatThemeState={settings.theme}
-								colorVariants={chatAsideColorBgVariants}
-								handleColorThemeChange={handleChangeAsideChatColor}
-								themeField="asideColorBg"
-							/>
+							<ChatSettingsColorsTab />
 						</div>
 					)}
 
@@ -145,7 +89,7 @@ export const ChatSettings: FC<ChatSettingsProps> = ({ setIsSettingsOpen }) => {
 								component="h3"
 								classNameComponent="text-xl font-semibold mb-4"
 							>
-								Уведомления
+								{tChats('settings.notifications.title')}
 							</Typography>
 							<Typography className="text-sm text-default-500">
 								Настройки уведомлений будут добавлены позже
@@ -158,7 +102,7 @@ export const ChatSettings: FC<ChatSettingsProps> = ({ setIsSettingsOpen }) => {
 								component="h3"
 								classNameComponent="text-xl font-semibold mb-4"
 							>
-								Общие настройки
+								{tChats('settings.general.title')}
 							</Typography>
 							<Typography className="text-sm text-default-500">
 								Общие настройки будут добавлены позже

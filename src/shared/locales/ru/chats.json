@@ -10,5 +10,42 @@
 			"no_messages": "Напишите первое сообщение, чтобы запустить диалог.",
 			"select_chat": "Чтобы начать переписку, выберите чат из списка слева."
 		}
+	},
+	"settings": {
+		"title": "Настройки",
+		"sections": {
+			"colors": "Цвета",
+			"notifications": "Уведомления",
+			"general": "Общие"
+		},
+		"close": "Закрыть",
+		"colors": {
+			"title": "Цветовая тема",
+			"description": "Выберите цветовую схему для окна чата",
+			"tabs": {
+				"background": "Фон"
+			},
+			"aria_label": "Настройки цветов",
+			"backgrounds": {
+				"chat_interface": "Фон интерфейса чата",
+				"messages_window": "Фон окна сообщений",
+				"chats_list": "Фон списка чатов"
+			},
+			"color_names": {
+				"slate": "Серо-синий",
+				"lightblue": "Светло-синий",
+				"indigo": "Индиго",
+				"emerald": "Изумрудный",
+				"cyan": "Бирюзовый",
+				"darkblue": "Темно-синий",
+				"rose": "Розовый"
+			}
+		},
+		"notifications": {
+			"title": "Уведомления"
+		},
+		"general": {
+			"title": "Общие настройки"
+		}
 	}
 }

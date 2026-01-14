@@ -1,6 +1,7 @@
 import { Button } from '@heroui/button';
 import { motion } from 'motion/react';
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Typography } from '@/shared/ui';
 import { CheckIcon } from '@/shared/ui/icons/checkIcon';
 import type { ChatSettingsColorsVariantsProps } from '../model/chat.types';
@@ -15,7 +16,7 @@ export const ChatSettingsColorsVariants: FC<
 	className,
 	themeField,
 }) => {
-	// Определяем, какое поле темы нужно проверять на основе переданного themeField
+	const { t: tChats } = useTranslation('chats');
 	const currentThemeColor = chatThemeState[themeField];
 
 	return (
@@ -58,7 +59,8 @@ export const ChatSettingsColorsVariants: FC<
 										isActive ? 'text-primary' : 'text-foreground'
 									}`}
 								>
-									{variant[0]}
+									{tChats(`settings.colors.color_names.${variant[0]}` as any) ||
+										variant[0]}
 								</Typography>
 								{isActive && (
 									<motion.div

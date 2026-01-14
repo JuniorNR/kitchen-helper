@@ -1,5 +1,5 @@
 import { localStorageHelper } from '@/shared/lib/helpers';
-import type { ChatState, ChatTheme } from './chat.types';
+import type { ChatState, ChatTheme, SettingsSection } from './chat.types';
 
 export const LIMITS_MESSAGES = 25;
 

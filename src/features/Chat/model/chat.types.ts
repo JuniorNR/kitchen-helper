@@ -58,3 +58,12 @@ export interface ChatSettingsColorsVariantsProps {
 	themeField: keyof ChatTheme;
 	className?: string;
 }
+
+export type SettingsSection = 'colors' | 'notifications' | 'general';
+
+export interface ChatListAsideButtonProps {
+	chat: Chat;
+	activeChatId: number | null;
+	onChatClick: (id: number) => void;
+	currentUserId: number | undefined;
+}

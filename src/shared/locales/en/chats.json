@@ -10,5 +10,42 @@
 			"no_messages": "Write the first message to start the dialog.",
 			"select_chat": "To start a conversation, select a chat from the list on the left."
 		}
+	},
+	"settings": {
+		"title": "Settings",
+		"sections": {
+			"colors": "Colors",
+			"notifications": "Notifications",
+			"general": "General"
+		},
+		"close": "Close",
+		"colors": {
+			"title": "Color Theme",
+			"description": "Choose a color scheme for the chat window",
+			"tabs": {
+				"background": "Background"
+			},
+			"aria_label": "Color settings",
+			"backgrounds": {
+				"chat_interface": "Chat interface background",
+				"messages_window": "Messages window background",
+				"chats_list": "Chats list background"
+			},
+			"color_names": {
+				"slate": "Slate",
+				"lightblue": "Light Blue",
+				"indigo": "Indigo",
+				"emerald": "Emerald",
+				"cyan": "Cyan",
+				"darkblue": "Dark Blue",
+				"rose": "Rose"
+			}
+		},
+		"notifications": {
+			"title": "Notifications"
+		},
+		"general": {
+			"title": "General Settings"
+		}
 	}
 }
