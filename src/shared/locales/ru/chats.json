@@ -24,9 +24,27 @@
 			"description": "Выберите цветовую схему для окна чата",
 			"tabs": {
 				"background": "Фон",
-				"chat_card": "Карточка чата"
+				"chat_card": "Карточка чата",
+				"message_card": "Карточка сообщения"
 			},
 			"aria_label": "Настройки цветов",
+			"preview": {
+				"component_title": "Предпросмотр компонента"
+			},
+			"switches": {
+				"active_chat": "Активный чат",
+				"active_chat_description": "Показать состояние активного чата",
+				"unread_chat": "Непрочитанный чат",
+				"unread_chat_description": "Показать непрочитанные сообщения",
+				"message_from_me": "Сообщение от меня",
+				"message_from_me_description": "Показать сообщение от меня или от собеседника"
+			},
+			"titles": {
+				"card_background": "Фон карточки",
+				"active_card_border": "Рамка активной карточки",
+				"your_message_background": "Фон вашего сообщения",
+				"other_message_background": "Фон сообщения собеседника"
+			},
 			"backgrounds": {
 				"chat_interface": "Фон интерфейса чата",
 				"messages_window": "Фон окна сообщений",
@@ -34,6 +52,7 @@
 			},
 			"color_names": {
 				"slate": "Серо-синий",
+				"blue": "Синий",
 				"lightblue": "Светло-синий",
 				"indigo": "Индиго",
 				"emerald": "Изумрудный",
@@ -48,17 +67,24 @@
 				"sky": "Небесно-голубой",
 				"orange": "Оранжевый",
 				"pink": "Розовый",
-				"zinc": "Цинковый",
-				"stone": "Каменный",
-				"neutral": "Нейтральный",
-				"gray": "Серый"
+				"zinc": "Цинковый"
 			}
 		},
 		"notifications": {
-			"title": "Уведомления"
+			"title": "Уведомления",
+			"coming_soon": "Настройки уведомлений будут добавлены позже"
 		},
 		"general": {
-			"title": "Общие настройки"
+			"title": "Общие настройки",
+			"coming_soon": "Общие настройки будут добавлены позже"
+		},
+		"common": {
+			"you": "Вы",
+			"no_author": "Без автора",
+			"mock_messages": {
+				"first_message": "Привет, это первое сообщение",
+				"preview_message": "Привет, это пример сообщения для предпросмотра"
+			}
 		}
 	}
 }

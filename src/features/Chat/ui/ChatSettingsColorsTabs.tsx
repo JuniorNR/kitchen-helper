@@ -6,10 +6,11 @@ import { type Key, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ChatSettingsColorsBackgroundTab } from './ChatSettingsColorsBackgroundTab';
 import { ChatSettingsColorsChatCardTab } from './ChatSettingsColorsChatCardTab';
+import { ChatSettingsColorsMessageCardTab } from './ChatSettingsColorsMessageCardTab';
 
 export const ChatSettingsColorsTabs: FC = () => {
 	const { t: tChats } = useTranslation('chats');
-	const [activeTab, setActiveTab] = useState<Key>('chat-card');
+	const [activeTab, setActiveTab] = useState<Key>('message-card');
 
 	return (
 		<Tabs
@@ -30,6 +31,12 @@ export const ChatSettingsColorsTabs: FC = () => {
 			</Tab>
 			<Tab key="chat-card" title={tChats('settings.colors.tabs.chat_card')}>
 				<ChatSettingsColorsChatCardTab />
+			</Tab>
+			<Tab
+				key="message-card"
+				title={tChats('settings.colors.tabs.message_card')}
+			>
+				<ChatSettingsColorsMessageCardTab />
 			</Tab>
 		</Tabs>
 	);

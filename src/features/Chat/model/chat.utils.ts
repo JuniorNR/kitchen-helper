@@ -77,11 +77,29 @@ export const chatCardMessageColorBgVariants = {
 	slate:
 		'border-slate-200 bg-white/95 text-slate-800 shadow-[0_15px_35px_rgba(15,23,42,0.12)] dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-100',
 	zinc: 'border-zinc-200 bg-white/95 text-zinc-800 shadow-[0_15px_35px_rgba(39,39,42,0.12)] dark:border-zinc-800 dark:bg-zinc-900/60 dark:text-zinc-100',
-	stone:
-		'border-stone-200 bg-white/95 text-stone-800 shadow-[0_15px_35px_rgba(41,37,36,0.12)] dark:border-stone-800 dark:bg-stone-900/60 dark:text-stone-100',
-	neutral:
-		'border-neutral-200 bg-white/95 text-neutral-800 shadow-[0_15px_35px_rgba(38,38,38,0.12)] dark:border-neutral-800 dark:bg-neutral-900/60 dark:text-neutral-100',
-	gray: 'border-gray-200 bg-white/95 text-gray-800 shadow-[0_15px_35px_rgba(55,65,81,0.12)] dark:border-gray-800 dark:bg-gray-900/60 dark:text-gray-100',
+	blue: 'border-blue-200 bg-blue-50/80 text-blue-900 shadow-[0_15px_35px_rgba(37,99,235,0.12)] dark:border-blue-800 dark:bg-blue-950/40 dark:text-blue-100',
+	violet:
+		'border-violet-200 bg-violet-50/80 text-violet-900 shadow-[0_15px_35px_rgba(124,58,237,0.12)] dark:border-violet-800 dark:bg-violet-950/40 dark:text-violet-100',
+	rose: 'border-rose-200 bg-rose-50/80 text-rose-900 shadow-[0_15px_35px_rgba(225,29,72,0.12)] dark:border-rose-800 dark:bg-rose-950/40 dark:text-rose-100',
+} as const;
+
+export const chatMessageOwnComponentColorBgVariants = {
+	emerald:
+		'border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-emerald-100 text-emerald-900 shadow-[0_10px_25px_rgba(16,185,129,0.18)] transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.005] hover:border-emerald-300 hover:shadow-[0_20px_45px_rgba(16,185,129,0.25)] dark:bg-none dark:border-emerald-400/30 dark:bg-emerald-500/20 dark:text-emerald-100 dark:hover:border-emerald-400/60 dark:hover:shadow-[0_20px_45px_rgba(16,185,129,0.35)]',
+	violet:
+		'border-violet-200 bg-gradient-to-br from-violet-50 via-white to-violet-100 text-violet-900 shadow-[0_10px_25px_rgba(139,92,246,0.18)] transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.005] hover:border-violet-300 hover:shadow-[0_20px_45px_rgba(139,92,246,0.25)] dark:bg-none dark:border-violet-400/30 dark:bg-violet-500/20 dark:text-violet-100 dark:hover:border-violet-400/60 dark:hover:shadow-[0_20px_45px_rgba(139,92,246,0.35)]',
+	sky: 'border-sky-200 bg-gradient-to-br from-sky-50 via-white to-sky-100 text-sky-900 shadow-[0_10px_25px_rgba(14,165,233,0.18)] transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.005] hover:border-sky-300 hover:shadow-[0_20px_45px_rgba(14,165,233,0.25)] dark:bg-none dark:border-sky-400/30 dark:bg-sky-500/20 dark:text-sky-100 dark:hover:border-sky-400/60 dark:hover:shadow-[0_20px_45px_rgba(14,165,233,0.35)]',
+	orange:
+		'border-orange-200 bg-gradient-to-br from-orange-50 via-white to-orange-100 text-orange-900 shadow-[0_10px_25px_rgba(249,115,22,0.18)] transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.005] hover:border-orange-300 hover:shadow-[0_20px_45px_rgba(249,115,22,0.25)] dark:bg-none dark:border-orange-400/30 dark:bg-orange-500/20 dark:text-orange-100 dark:hover:border-orange-400/60 dark:hover:shadow-[0_20px_45px_rgba(249,115,22,0.35)]',
+} as const;
+
+export const chatMessageComponentColorBgVariants = {
+	slate:
+		'border-slate-200 bg-white/95 text-slate-800 shadow-[0_15px_35px_rgba(15,23,42,0.12)] transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.005] hover:border-slate-300 hover:shadow-[0_22px_55px_rgba(15,23,42,0.2)] dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:border-slate-700 dark:hover:shadow-[0_22px_55px_rgba(15,23,42,0.45)]',
+	blue: 'border-blue-200 bg-blue-50/80 text-blue-900 shadow-[0_15px_35px_rgba(37,99,235,0.12)] transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.005] hover:border-blue-300 hover:shadow-[0_22px_55px_rgba(37,99,235,0.2)] dark:border-blue-800 dark:bg-blue-950/40 dark:text-blue-100 dark:hover:border-blue-700 dark:hover:shadow-[0_22px_55px_rgba(37,99,235,0.35)]',
+	indigo:
+		'border-indigo-200 bg-indigo-50/80 text-indigo-900 shadow-[0_15px_35px_rgba(79,70,229,0.12)] transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.005] hover:border-indigo-300 hover:shadow-[0_22px_55px_rgba(79,70,229,0.2)] dark:border-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-100 dark:hover:border-indigo-700 dark:hover:shadow-[0_22px_55px_rgba(79,70,229,0.35)]',
+	teal: 'border-teal-200 bg-teal-50/80 text-teal-900 shadow-[0_15px_35px_rgba(19,78,74,0.12)] transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.005] hover:border-teal-300 hover:shadow-[0_22px_55px_rgba(19,78,74,0.2)] dark:border-teal-800 dark:bg-teal-950/40 dark:text-teal-100 dark:hover:border-teal-700 dark:hover:shadow-[0_22px_55px_rgba(19,78,74,0.35)]',
 } as const;
 
 const getChatTheme = (): ChatTheme => {
@@ -117,6 +135,16 @@ const getChatTheme = (): ChatTheme => {
 			colorName: 'slate',
 			classes: chatCardMessageColorBgVariants.slate,
 		},
+		chatMessageOwnComponentColorBg:
+			localStorageTheme.chatMessageOwnComponentColorBg ?? {
+				colorName: 'emerald',
+				classes: chatMessageOwnComponentColorBgVariants.emerald,
+			},
+		chatMessageComponentColorBg:
+			localStorageTheme.chatMessageComponentColorBg ?? {
+				colorName: 'slate',
+				classes: chatMessageComponentColorBgVariants.slate,
+			},
 	};
 };
 

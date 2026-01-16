@@ -26,33 +26,6 @@ import { ChatSettingsPreviewComponent } from './ChatSettingsPreviewComponent';
 
 const now = new Date().toISOString();
 
-const mockChat: Chat = {
-	id: 1,
-	name: 'Slate',
-	createdAt: now,
-	updatedAt: now,
-	lastMessageCreatedAt: now,
-	usersCount: 3,
-	users: [],
-	lastMessage: {
-		id: 1,
-		chatId: 1,
-		content: 'Привет, это первое сообщение',
-		createdAt: now,
-		updatedAt: now,
-		user: {
-			id: 1,
-			name: 'John',
-			role: 'user',
-		},
-	},
-	creator: {
-		id: 1,
-		name: 'Elisa',
-		role: 'admin',
-	},
-};
-
 export const ChatSettingsColorsChatCardTab: FC = () => {
 	const { t: tChats } = useTranslation('chats');
 	const dispatch = useAppDispatch();
@@ -61,6 +34,33 @@ export const ChatSettingsColorsChatCardTab: FC = () => {
 	const [isActiveChat, setIsActiveChat] = useState(false);
 	const [isUnreadChat, setIsUnreadChat] = useState(false);
 	const [isMyMessage, setIsMyMessage] = useState(false);
+
+	const mockChat: Chat = {
+		id: 1,
+		name: 'Slate',
+		createdAt: now,
+		updatedAt: now,
+		lastMessageCreatedAt: now,
+		usersCount: 3,
+		users: [],
+		lastMessage: {
+			id: 1,
+			chatId: 1,
+			content: tChats('settings.common.mock_messages.first_message'),
+			createdAt: now,
+			updatedAt: now,
+			user: {
+				id: 1,
+				name: 'John',
+				role: 'user',
+			},
+		},
+		creator: {
+			id: 1,
+			name: 'Elisa',
+			role: 'admin',
+		},
+	};
 
 	const handleChangeChatCardColorBg = (data: ChatThemeColor) => {
 		dispatch(changeChatCardColorBg(data));
@@ -86,95 +86,97 @@ export const ChatSettingsColorsChatCardTab: FC = () => {
 
 	return (
 		<div className="mt-3">
-			<div>
-				<div className="mb-6">
-					<ChatSettingsPreviewComponent title="Предпросмотр компонента">
-						<div className="flex flex-row gap-3 mb-4">
-							<div className="flex items-center justify-between gap-4 p-4 rounded-lg bg-default-50 border border-default-200 hover:bg-default-100 transition-colors flex-1">
-								<div className="flex flex-col gap-1">
-									<Typography className="text-sm font-semibold text-foreground">
-										Активный чат
-									</Typography>
-									<Typography className="text-xs text-default-500">
-										Показать состояние активного чата
-									</Typography>
-								</div>
-								<Switch
-									isSelected={isActiveChat}
-									onValueChange={setIsActiveChat}
-									color="primary"
-									size="md"
-									classNames={{
-										wrapper: 'group-data-[selected=true]:bg-primary',
-									}}
-								/>
+			<div className="mb-6">
+				<ChatSettingsPreviewComponent
+					title={tChats('settings.colors.preview.component_title')}
+				>
+					<div className="flex flex-row gap-3 mb-4">
+						<div className="flex items-center justify-between gap-4 p-4 rounded-lg bg-default-50 border border-default-200 hover:bg-default-100 transition-colors flex-1">
+							<div className="flex flex-col gap-1">
+								<Typography className="text-sm font-semibold text-foreground">
+									{tChats('settings.colors.switches.active_chat')}
+								</Typography>
+								<Typography className="text-xs text-default-500">
+									{tChats('settings.colors.switches.active_chat_description')}
+								</Typography>
 							</div>
-							<div className="flex items-center justify-between gap-4 p-4 rounded-lg bg-default-50 border border-default-200 hover:bg-default-100 transition-colors flex-1">
-								<div className="flex flex-col gap-1">
-									<Typography className="text-sm font-semibold text-foreground">
-										Непрочитанный чат
-									</Typography>
-									<Typography className="text-xs text-default-500">
-										Показать непрочитанные сообщения
-									</Typography>
-								</div>
-								<Switch
-									isSelected={isUnreadChat}
-									onValueChange={setIsUnreadChat}
-									color="primary"
-									size="md"
-									classNames={{
-										wrapper: 'group-data-[selected=true]:bg-primary',
-									}}
-								/>
-							</div>
-							<div className="flex items-center justify-between gap-4 p-4 rounded-lg bg-default-50 border border-default-200 hover:bg-default-100 transition-colors flex-1">
-								<div className="flex flex-col gap-1">
-									<Typography className="text-sm font-semibold text-foreground">
-										Сообщение от меня
-									</Typography>
-									<Typography className="text-xs text-default-500">
-										Показать сообщение от меня или от собеседника
-									</Typography>
-								</div>
-								<Switch
-									isSelected={isMyMessage}
-									onValueChange={setIsMyMessage}
-									color="primary"
-									size="md"
-									classNames={{
-										wrapper: 'group-data-[selected=true]:bg-primary',
-									}}
-								/>
-							</div>
-						</div>
-						<ul className="flex justify-center">
-							<ChatListAsideButton
-								chat={{
-									...mockChat,
-									lastMessage: {
-										...mockChat.lastMessage,
-										user: {
-											...mockChat.lastMessage.user,
-											id: isMyMessage ? 1 : 2,
-											name: isMyMessage ? 'Вы' : 'John',
-										},
-									},
+							<Switch
+								isSelected={isActiveChat}
+								onValueChange={setIsActiveChat}
+								color="primary"
+								size="md"
+								classNames={{
+									wrapper: 'group-data-[selected=true]:bg-primary',
 								}}
-								activeChatId={isActiveChat ? mockChat.id : null}
-								onChatClick={() => {}}
-								currentUserId={1}
-								className="w-full"
-								isUnread={isUnreadChat}
 							/>
-						</ul>
-					</ChatSettingsPreviewComponent>
-				</div>
+						</div>
+						<div className="flex items-center justify-between gap-4 p-4 rounded-lg bg-default-50 border border-default-200 hover:bg-default-100 transition-colors flex-1">
+							<div className="flex flex-col gap-1">
+								<Typography className="text-sm font-semibold text-foreground">
+									{tChats('settings.colors.switches.unread_chat')}
+								</Typography>
+								<Typography className="text-xs text-default-500">
+									{tChats('settings.colors.switches.unread_chat_description')}
+								</Typography>
+							</div>
+							<Switch
+								isSelected={isUnreadChat}
+								onValueChange={setIsUnreadChat}
+								color="primary"
+								size="md"
+								classNames={{
+									wrapper: 'group-data-[selected=true]:bg-primary',
+								}}
+							/>
+						</div>
+						<div className="flex items-center justify-between gap-4 p-4 rounded-lg bg-default-50 border border-default-200 hover:bg-default-100 transition-colors flex-1">
+							<div className="flex flex-col gap-1">
+								<Typography className="text-sm font-semibold text-foreground">
+									{tChats('settings.colors.switches.message_from_me')}
+								</Typography>
+								<Typography className="text-xs text-default-500">
+									{tChats(
+										'settings.colors.switches.message_from_me_description',
+									)}
+								</Typography>
+							</div>
+							<Switch
+								isSelected={isMyMessage}
+								onValueChange={setIsMyMessage}
+								color="primary"
+								size="md"
+								classNames={{
+									wrapper: 'group-data-[selected=true]:bg-primary',
+								}}
+							/>
+						</div>
+					</div>
+					<ul className="flex justify-center">
+						<ChatListAsideButton
+							chat={{
+								...mockChat,
+								lastMessage: {
+									...mockChat.lastMessage,
+									user: {
+										...mockChat.lastMessage.user,
+										id: isMyMessage ? 1 : 2,
+										name: isMyMessage ? tChats('settings.common.you') : 'John',
+									},
+								},
+							}}
+							activeChatId={isActiveChat ? mockChat.id : null}
+							onChatClick={() => {}}
+							currentUserId={1}
+							className="w-full"
+							isUnread={isUnreadChat}
+						/>
+					</ul>
+				</ChatSettingsPreviewComponent>
 			</div>
 			<ChatSettingsColorsVariants
 				className="mb-6"
 				minimize
-				title={'Фон карточки'}
+				title={tChats('settings.colors.titles.card_background')}
 				chatThemeState={settings.theme}
 				colorVariants={chatCardColorBgVariants}
 				handleColorThemeChange={handleChangeChatCardColorBg}
@@ -183,7 +185,7 @@ export const ChatSettingsColorsChatCardTab: FC = () => {
 			<ChatSettingsColorsVariants
 				className="mb-6"
 				minimize
-				title={'Рамка активной карточки'}
+				title={tChats('settings.colors.titles.active_card_border')}
 				chatThemeState={settings.theme}
 				colorVariants={chatCardActiveColorBgVariants}
 				handleColorThemeChange={handleChangeChatCardActiveColorBg}
@@ -192,7 +194,7 @@ export const ChatSettingsColorsChatCardTab: FC = () => {
 			<ChatSettingsColorsVariants
 				className="mb-6"
 				minimize
-				title={'Фон вашего сообщения'}
+				title={tChats('settings.colors.titles.your_message_background')}
 				chatThemeState={settings.theme}
 				colorVariants={chatCardOwnMessageColorBgVariant}
 				handleColorThemeChange={handleChangeChatCardOwnMessageColorBgVariant}
@@ -201,7 +203,7 @@ export const ChatSettingsColorsChatCardTab: FC = () => {
 			<ChatSettingsColorsVariants
 				className="mb-6"
 				minimize
-				title={'Фон сообщения собеседника'}
+				title={tChats('settings.colors.titles.other_message_background')}
 				chatThemeState={settings.theme}
 				colorVariants={chatCardMessageColorBgVariants}
 				handleColorThemeChange={handleChangeChatCardMessageColorBgVariant}

@@ -24,9 +24,27 @@
 			"description": "Choose a color scheme for the chat window",
 			"tabs": {
 				"background": "Background",
-				"chat_card": "Chat Card"
+				"chat_card": "Chat card",
+				"message_card": "Message card"
 			},
 			"aria_label": "Color settings",
+			"preview": {
+				"component_title": "Component preview"
+			},
+			"switches": {
+				"active_chat": "Active chat",
+				"active_chat_description": "Show active chat state",
+				"unread_chat": "Unread chat",
+				"unread_chat_description": "Show unread messages",
+				"message_from_me": "Message from me",
+				"message_from_me_description": "Show message from me or from other user"
+			},
+			"titles": {
+				"card_background": "Card background",
+				"active_card_border": "Active card border",
+				"your_message_background": "Your message background",
+				"other_message_background": "Other message background"
+			},
 			"backgrounds": {
 				"chat_interface": "Chat interface background",
 				"messages_window": "Messages window background",
@@ -34,6 +52,7 @@
 			},
 			"color_names": {
 				"slate": "Slate",
+				"blue": "Blue",
 				"lightblue": "Light Blue",
 				"indigo": "Indigo",
 				"emerald": "Emerald",
@@ -48,17 +67,24 @@
 				"sky": "Sky",
 				"orange": "Orange",
 				"pink": "Pink",
-				"zinc": "Zinc",
-				"stone": "Stone",
-				"neutral": "Neutral",
-				"gray": "Gray"
+				"zinc": "Zinc"
 			}
 		},
 		"notifications": {
-			"title": "Notifications"
+			"title": "Notifications",
+			"coming_soon": "Notification settings will be added later"
 		},
 		"general": {
-			"title": "General Settings"
+			"title": "General Settings",
+			"coming_soon": "General settings will be added later"
+		},
+		"common": {
+			"you": "You",
+			"no_author": "No author",
+			"mock_messages": {
+				"first_message": "Hello, this is the first message",
+				"preview_message": "Hello, this is a preview message example"
+			}
 		}
 	}
 }

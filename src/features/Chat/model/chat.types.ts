@@ -47,6 +47,8 @@ export interface ChatTheme {
 	chatCardActiveColorBg: ChatThemeColor;
 	chatCardOwnMessageColorBg: ChatThemeColor;
 	chatCardMessageColorBg: ChatThemeColor;
+	chatMessageOwnComponentColorBg: ChatThemeColor;
+	chatMessageComponentColorBg: ChatThemeColor;
 }
 
 export interface ChatThemeColor {

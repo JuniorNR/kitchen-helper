@@ -92,7 +92,7 @@ export const ChatSettings: FC<ChatSettingsProps> = ({ setIsSettingsOpen }) => {
 								{tChats('settings.notifications.title')}
 							</Typography>
 							<Typography className="text-sm text-default-500">
-								Настройки уведомлений будут добавлены позже
+								{tChats('settings.notifications.coming_soon')}
 							</Typography>
 						</div>
 					)}
@@ -105,7 +105,7 @@ export const ChatSettings: FC<ChatSettingsProps> = ({ setIsSettingsOpen }) => {
 								{tChats('settings.general.title')}
 							</Typography>
 							<Typography className="text-sm text-default-500">
-								Общие настройки будут добавлены позже
+								{tChats('settings.general.coming_soon')}
 							</Typography>
 						</div>
 					)}

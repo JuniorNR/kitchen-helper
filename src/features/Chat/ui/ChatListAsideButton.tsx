@@ -29,8 +29,10 @@ export const ChatListAsideButton: FC<ChatListAsideButtonProps> = ({
 	const lastMessageTimestamp = lastMessageMoment
 		? lastMessageMoment.format('DD.MM.YYYY HH:mm')
 		: '——— ——';
-	const lastMessageAuthor = lastMessage?.user.name || 'Без автора';
-	const lastMessageContent = lastMessage?.content || 'Сообщений пока нет';
+	const lastMessageAuthor =
+		lastMessage?.user.name || tChats('settings.common.no_author');
+	const lastMessageContent =
+		lastMessage?.content || tChats('alerts.titles.no_messages');
 	const isOwnMessage = lastMessage?.user.id === currentUserId;
 
 	const messageTextClass =

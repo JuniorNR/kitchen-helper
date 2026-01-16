@@ -1,4 +1,3 @@
-import moment from 'moment';
 import * as motion from 'motion/react-client';
 import { useId, useLayoutEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +8,7 @@ import { customizeString } from '@/shared/lib/helpers';
 import { useAppSelector } from '@/shared/lib/hooks';
 import { Alert, Typography } from '@/shared/ui';
 import type { ChatMessagesWindowProps } from '../model/chat.types';
+import { ChatMessageComponent } from './ChatMessageComponent';
 import { ChatSendControlPanel } from './ChatSendControlPanel';
 import styles from './chat.module.scss';
 
@@ -127,37 +127,10 @@ export const ChatMessagesWindow = ({
 											}}
 											className={`flex ${message.user.id === user?.id ? 'justify-end' : 'justify-start'}`}
 										>
-											<div
-												className={`max-w-[100%] rounded-2xl border px-4 py-3 text-sm leading-relaxed ${
-													message.user.id === user?.id
-														? 'border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-emerald-100 text-emerald-900 shadow-[0_10px_25px_rgba(16,185,129,0.18)] transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.005] hover:border-emerald-300 hover:shadow-[0_20px_45px_rgba(16,185,129,0.25)] dark:bg-none dark:border-emerald-400/30 dark:bg-emerald-500/20 dark:text-emerald-100 dark:hover:border-emerald-400/60 dark:hover:shadow-[0_20px_45px_rgba(16,185,129,0.35)]'
-														: 'border-slate-200 bg-white/95 text-slate-800 shadow-[0_15px_35px_rgba(15,23,42,0.12)] transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.005] hover:border-slate-300 hover:shadow-[0_22px_55px_rgba(15,23,42,0.2)] dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:border-slate-700 dark:hover:shadow-[0_22px_55px_rgba(15,23,42,0.45)]'
-												}`}
-											>
-												<div className="flex items-center justify-between text-[11px] font-semibold uppercase tracking-wide">
-													<Typography
-														component="span"
-														className={
-															message.user.id === user?.id
-																? 'text-emerald-500 dark:text-emerald-300'
-																: 'text-slate-600 dark:text-slate-400'
-														}
-													>
-														{message.user.name}
-													</Typography>
-													<Typography
-														component="span"
-														className="ml-5 text-slate-500 dark:text-slate-500"
-													>
-														{moment(message.createdAt).format(
-															'DD.MM.YYYY HH:mm',
-														)}
-													</Typography>
-												</div>
-												<Typography className="mt-2 overflow-hidden">
-													{message.content}
-												</Typography>
-											</div>
+											<ChatMessageComponent
+												message={message}
+												isOwnMessage={message.user.id === user?.id}
+											/>
 										</motion.li>
 									))}
 								</ul>
