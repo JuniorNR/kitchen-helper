@@ -5,7 +5,7 @@ import {
 	useLazyGetChatMessagesQuery,
 	useSendMessageMutation,
 } from './chat.api';
-import type { ChatMessageQuery } from './chat.types';
+import type { ChatMessage, ChatMessageQuery } from './chat.types';
 
 export const useChat = ({
 	chatId,
@@ -32,9 +32,16 @@ export const useChat = ({
 	const [sendMessage, { isLoading: isSending }] = useSendMessageMutation();
 	const [deleteMessage, { isLoading: isDeleting }] = useDeleteMessageMutation();
 
-	const sendMessageData = async (content: string) => {
+	const sendMessageData = async (
+		content: string,
+		replyMessage?: ChatMessage,
+	) => {
 		try {
-			const data = await sendMessage({ chatId, content }).unwrap();
+			const data = await sendMessage({
+				chatId,
+				content,
+				replyMessage,
+			}).unwrap();
 			return data;
 		} catch (error) {
 			console.error(error);

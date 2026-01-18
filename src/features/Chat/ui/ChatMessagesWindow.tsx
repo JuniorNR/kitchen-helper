@@ -37,6 +37,8 @@ export const ChatMessagesWindow = ({
 	const { user } = useUser();
 	const [message, setMessage] = useState<string>('');
 	const [replyMessage, setReplyMessage] = useState<ChatMessage>();
+	const lastMessagesLengthRef = useRef<number>(0);
+	const lastMessageIdRef = useRef<number | null>(null);
 
 	useLayoutEffect(() => {
 		const container = messagesContainerRef.current;
@@ -48,17 +50,30 @@ export const ChatMessagesWindow = ({
 
 		if (activeChatId === null) {
 			lastScrolledChatIdRef.current = null;
+			lastMessagesLengthRef.current = 0;
+			lastMessageIdRef.current = null;
 			return;
 		}
 
 		const chatChanged = lastScrolledChatIdRef.current !== activeChatId;
-		if (!chatChanged) {
-			return;
-		}
+		// Получаем ID последнего сообщения (новые сообщения добавляются в конец массива)
+		const lastMessageId = localMessages[localMessages.length - 1]?.id;
+		// Скроллим только если добавилось новое сообщение (последний ID изменился), а не старые
+		const newMessageAdded =
+			lastMessageIdRef.current !== null &&
+			lastMessageId !== lastMessageIdRef.current;
 
-		container.scrollTop = container.scrollHeight;
-		lastScrolledChatIdRef.current = activeChatId;
-	}, [activeChatId, localMessages?.length]);
+		if (chatChanged || newMessageAdded) {
+			container.scrollTop = 0;
+			lastScrolledChatIdRef.current = activeChatId;
+			lastMessagesLengthRef.current = localMessages.length;
+			lastMessageIdRef.current = lastMessageId;
+		} else if (lastMessageIdRef.current === null && localMessages.length > 0) {
+			// Инициализация при первой загрузке
+			lastMessageIdRef.current = lastMessageId;
+			lastMessagesLengthRef.current = localMessages.length;
+		}
+	}, [activeChatId, localMessages]);
 
 	const handleCancelReplyMessage = () => {
 		setReplyMessage(undefined);

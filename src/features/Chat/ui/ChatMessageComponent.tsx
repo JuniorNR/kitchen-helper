@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '@/shared/lib/hooks';
 import { ContextMenu, Typography } from '@/shared/ui';
 import type { ContextMenuItem } from '@/shared/ui/ContextMenu/model/contextMenu.types';
+import { ReplyIcon } from '@/shared/ui/icons/replyIcon';
 import type { ChatMessageComponentProps } from '../model/chat.types';
 
 export const ChatMessageComponent: FC<ChatMessageComponentProps> = ({
@@ -55,6 +56,17 @@ export const ChatMessageComponent: FC<ChatMessageComponentProps> = ({
 		});
 	}
 
+	const MAX_REPLY_PREVIEW_LENGTH = 50;
+
+	const getTruncatedContent = (content: string): string => {
+		if (content.length <= MAX_REPLY_PREVIEW_LENGTH) {
+			return content;
+		}
+		return `${content.slice(0, MAX_REPLY_PREVIEW_LENGTH)}...`;
+	};
+
+	const isReplyMessageOwn = message.reply?.user.id === message.user.id;
+
 	// Синхронизируем refs с актуальными значениями
 	useEffect(() => {
 		isHoveredRef.current = isHovered;
@@ -67,37 +79,23 @@ export const ChatMessageComponent: FC<ChatMessageComponentProps> = ({
 	// Создаем обработчик один раз и используем refs для актуальных значений
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
-			// Проверяем актуальное значение через ref, а не через замыкание
+			// Проверяем актуальное значение через ref
 			if (
 				isHoveredRef.current &&
 				(event.ctrlKey || event.metaKey) &&
 				!event.shiftKey &&
 				!event.altKey
 			) {
-				// Проверяем, не находится ли фокус на поле ввода
-				const activeElement = document.activeElement;
-				const isInputFocused =
-					activeElement?.tagName === 'INPUT' ||
-					activeElement?.tagName === 'TEXTAREA' ||
-					(activeElement instanceof HTMLElement &&
-						activeElement.isContentEditable);
-
-				// Для Ctrl+C пропускаем, если фокус на input (чтобы не мешать стандартному копированию текста)
-				if (isInputFocused && event.key === 'c') {
-					return;
-				}
 				event.preventDefault();
-
 				const currentMessage = messageRef.current;
 				const currentIsOwnMessage = isOwnMessageRef.current;
-
-				if (event.key === 'c') {
+				if (event.code === 'KeyC') {
 					navigator.clipboard.writeText(currentMessage.content);
 				}
-				if (event.key === 'r') {
+				if (event.code === 'KeyR') {
 					setReplyMessageRef.current(currentMessage);
 				}
-				if (event.key === 'd') {
+				if (event.code === 'KeyD') {
 					if (currentIsOwnMessage) {
 						deleteMessageDataRef.current({ messageId: currentMessage.id });
 					}
@@ -105,8 +103,6 @@ export const ChatMessageComponent: FC<ChatMessageComponentProps> = ({
 			}
 		};
 
-		// Всегда добавляем слушатель, проверка isHovered происходит через ref внутри обработчика
-		// Используем capture phase для более раннего перехвата события
 		document.addEventListener('keydown', handleKeyDown, true);
 
 		return () => {
@@ -125,6 +121,29 @@ export const ChatMessageComponent: FC<ChatMessageComponentProps> = ({
 						: theme.chatMessageComponentColorBg.classes
 				} ${className}`}
 			>
+				{message.reply && (
+					<div className="mb-3 pb-3 border-b border-slate-200 dark:border-slate-700">
+						<div className="flex items-center gap-1.5 mb-1">
+							<ReplyIcon className="text-slate-400 dark:text-slate-500 w-3 h-3" />
+							<Typography
+								component="span"
+								className={`text-[10px] font-semibold uppercase tracking-wide ${
+									isReplyMessageOwn
+										? 'text-emerald-500 dark:text-emerald-300'
+										: 'text-slate-600 dark:text-slate-400'
+								}`}
+							>
+								{message.reply.user.name}
+							</Typography>
+						</div>
+						<Typography
+							component="p"
+							className="text-xs text-slate-600 dark:text-slate-400 line-clamp-1 break-words"
+						>
+							{getTruncatedContent(message.reply.content)}
+						</Typography>
+					</div>
+				)}
 				<div className="flex items-center justify-between text-[11px] font-semibold uppercase tracking-wide">
 					<Typography
 						component="span"

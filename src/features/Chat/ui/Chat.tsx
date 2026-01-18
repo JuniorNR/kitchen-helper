@@ -71,6 +71,43 @@ export const Chat = () => {
 		setLocalChats(chats || []);
 	}, [chats]); // set chats
 
+	const handleSetActiveChatId = useCallback(
+		(id: number) => {
+			setActiveChatId(id);
+			storageSetItem(String(id));
+		},
+		[storageSetItem],
+	);
+
+	useEffect(() => {
+		const handleShiftlNum = (event: KeyboardEvent) => {
+			if (
+				event.shiftKey &&
+				(!event.altKey || !event.metaKey) &&
+				!event.altKey
+			) {
+				event.preventDefault();
+				if (event.code === 'Digit1') {
+					handleSetActiveChatId(localChats[0]?.id);
+				}
+
+				if (event.code === 'Digit2') {
+					handleSetActiveChatId(localChats[1]?.id);
+				}
+
+				if (event.code === 'Digit3') {
+					handleSetActiveChatId(localChats[2]?.id);
+				}
+			}
+		};
+
+		document.addEventListener('keydown', handleShiftlNum);
+
+		return () => {
+			document.removeEventListener('keydown', handleShiftlNum);
+		};
+	}, [localChats, handleSetActiveChatId]);
+
 	useEcho(
 		`user.${user?.id}`,
 		'.MessageSent',
@@ -138,11 +175,6 @@ export const Chat = () => {
 			return reorderedChats;
 		});
 	});
-
-	const handleSetActiveChatId = (id: number) => {
-		setActiveChatId(id);
-		storageSetItem(String(id));
-	};
 
 	const handleRefetchOldestMessagesByScroll = useCallback(async () => {
 		const beforeMessageId = localMessages[0].id;

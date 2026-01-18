@@ -16,7 +16,7 @@ export const prepareIngredientsList = (ingredients?: Ingredient[]) => {
 export const handleDeleteIngredient = async (
 	id: string,
 	setIsDeleteLoadingIngredient: (id: string | null) => void,
-	deleteIngredientData: (id: string) => Promise<void | null>,
+	deleteIngredientData: (id: string) => Promise<null>,
 ) => {
 	try {
 		setIsDeleteLoadingIngredient(id);

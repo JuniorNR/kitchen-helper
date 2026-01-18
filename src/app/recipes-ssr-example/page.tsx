@@ -1,11 +1,11 @@
-import { RecipesListSSR } from '@/features/RecipesList/ui/RecipesListSSR';
-import { getRecipesSSR } from '@/features/RecipesList/model/recipesListSSR.server';
-import { PageInfoBlock } from '@/shared/ui';
 import type { Metadata } from 'next';
+import { getRecipesSSR } from '@/features/RecipesList/model/recipesListSSR.server';
+import { RecipesListSSR } from '@/features/RecipesList/ui/RecipesListSSR';
+import { PageInfoBlock } from '@/shared/ui';
 
 /**
  * Пример страницы с полным использованием SSR
- * 
+ *
  * Особенности:
  * 1. async функция - выполняется на сервере
  * 2. Получает данные на сервере через getRecipesSSR

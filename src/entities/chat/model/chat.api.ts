@@ -37,10 +37,15 @@ export const chatApi = createApi({
 			},
 		}),
 		sendMessage: builder.mutation<ChatMessage, SendMessageQuery>({
-			query: ({ chatId, content }) => ({
+			query: ({ chatId, content, replyMessage }) => ({
 				url: `/chats/${chatId}/messages`,
 				method: 'POST',
-				body: { content },
+				body: {
+					content,
+					reply: replyMessage
+						? dto<ChatMessage, ChatMessageDTO>('toServer', replyMessage)
+						: undefined,
+				},
 				refetchOnMountOrArgChange: true,
 				keepUnusedDataFor: 0,
 				transformResponse: (response: ChatMessageDTO) => {

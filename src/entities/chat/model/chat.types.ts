@@ -52,6 +52,7 @@ export interface ChatMessage {
 	createdAt: string;
 	updatedAt: string;
 	user: ChatUser;
+	reply?: ChatMessage;
 }
 
 export interface ChatMessageQuery {
@@ -64,6 +65,7 @@ export interface ChatMessageQuery {
 export interface SendMessageQuery {
 	chatId: ChatIdType;
 	content: string;
+	replyMessage?: ChatMessage;
 }
 
 export interface DeleteMessageQuery {

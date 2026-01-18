@@ -5,6 +5,7 @@ export { CustomInput } from './CustomInput';
 export { DeleteButton } from './DeleteButton';
 export { Filter, FilterGroup } from './Filter';
 export { ImagesPick } from './ImagesPick';
+export { Kbd } from './Kbd';
 export { Modal } from './Modal';
 export { NumberInput } from './NumberInput';
 export { PageInfoBlock } from './PageInfoBlock';

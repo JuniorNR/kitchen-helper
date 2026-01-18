@@ -2,11 +2,9 @@
 
 import { Button } from '@heroui/button';
 import { AnimatePresence, motion } from 'framer-motion';
-import { type FC, type JSX, useEffect, useRef, useState } from 'react';
-import type {
-	ContextMenuItem,
-	ContextMenuProps,
-} from '../model/contextMenu.types';
+import { type FC, useEffect, useRef, useState } from 'react';
+import { Kbd } from '@/shared/ui';
+import type { ContextMenuProps } from '../model/contextMenu.types';
 
 export const ContextMenu: FC<ContextMenuProps> = ({
 	children,
@@ -60,38 +58,6 @@ export const ContextMenu: FC<ContextMenuProps> = ({
 		};
 	}, [isOpen]);
 
-	const renderItemShortCut = (
-		item: ContextMenuItem,
-	): JSX.Element | undefined => {
-		if (item.shortcut) {
-			if (Array.isArray(item.shortcut)) {
-				return (
-					<div className="flex opacity-0 group-hover:opacity-100 transition-opacity">
-						{item.shortcut.map((shortcut, index) => {
-							const itemsLength = item?.shortcut?.length || 0;
-							return (
-								<div key={shortcut}>
-									<kbd className="px-1.5 py-0.5 bg-default-100 dark:bg-default-50 rounded text-xs">
-										{shortcut}
-									</kbd>
-									{index !== itemsLength - 1 ? '+' : ''}
-								</div>
-							);
-						})}
-					</div>
-				);
-			}
-
-			return (
-				<div>
-					<kbd className="px-1.5 py-0.5 bg-default-100 dark:bg-default-50 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity">
-						{item.shortcut}
-					</kbd>
-				</div>
-			);
-		}
-	};
-
 	return (
 		<>
 			{/* biome-ignore lint/a11y/noStaticElementInteractions: Контекстное меню требует обработки события на контейнере */}
@@ -134,7 +100,7 @@ export const ContextMenu: FC<ContextMenuProps> = ({
 											<span>{item.label}</span>
 										</div>
 
-										{renderItemShortCut(item)}
+										{item.shortcut && <Kbd shortcut={item.shortcut} />}
 									</div>
 								</Button>
 							))}

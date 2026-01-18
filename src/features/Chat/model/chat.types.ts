@@ -13,7 +13,10 @@ export interface ChatSendControlPanelProps {
 	replyMessage?: ChatMessage;
 	setMessage: Dispatch<SetStateAction<string>>;
 	cancelReplyMessage: () => void;
-	sendMessage: (content: string) => Promise<ChatMessage | null>;
+	sendMessage: (
+		content: string,
+		replyMessage?: ChatMessage,
+	) => Promise<ChatMessage | null>;
 	currentUserId?: number;
 }
 
@@ -31,7 +34,10 @@ export interface ChatMessagesWindowProps {
 	isSending: boolean;
 	isDeleting: boolean;
 	isBlockFetch: boolean;
-	sendMessageData: (content: string) => Promise<ChatMessage | null>;
+	sendMessageData: (
+		content: string,
+		replyMessage?: ChatMessage,
+	) => Promise<ChatMessage | null>;
 	deleteMessageData: DeleteMessageData;
 	loadOldestMessages?: () => void;
 }
@@ -89,6 +95,7 @@ export interface ChatListAsideButtonProps {
 	activeChatId: number | null;
 	onChatClick: (id: number) => void;
 	currentUserId: number | undefined;
+	index: number;
 	className?: string;
 	isUnread?: boolean;
 }

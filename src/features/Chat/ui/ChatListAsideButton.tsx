@@ -7,7 +7,7 @@ import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { customizeString } from '@/shared/lib/helpers';
 import { useAppSelector } from '@/shared/lib/hooks';
-import { Typography } from '@/shared/ui';
+import { Kbd, Typography } from '@/shared/ui';
 import type { ChatListAsideButtonProps } from '../model/chat.types';
 
 export const ChatListAsideButton: FC<ChatListAsideButtonProps> = ({
@@ -15,6 +15,7 @@ export const ChatListAsideButton: FC<ChatListAsideButtonProps> = ({
 	activeChatId,
 	onChatClick,
 	currentUserId,
+	index,
 	className = '',
 	isUnread: isUnreadProp,
 }) => {
@@ -59,9 +60,13 @@ export const ChatListAsideButton: FC<ChatListAsideButtonProps> = ({
 				}`}
 				onPress={() => onChatClick(chat.id)}
 			>
-				{isUnread && (
-					<div className="absolute top-2 right-2 z-10 h-3 w-3 rounded-full bg-primary shadow-lg" />
+				{index <= 2 && (
+					<Kbd
+						className="absolute top-3 right-3"
+						shortcut={`Shift+${index + 1}`}
+					/>
 				)}
+
 				<div
 					aria-hidden="true"
 					className={`pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition duration-300 group-hover:opacity-100 ${
@@ -118,8 +123,11 @@ export const ChatListAsideButton: FC<ChatListAsideButtonProps> = ({
 					</div>
 
 					<div
-						className={`rounded-2xl px-2 py-2 border ${isOwnMessage ? theme.chatCardOwnMessageColorBg.classes : theme.chatCardMessageColorBg.classes}`}
+						className={`relative rounded-2xl px-2 py-2 border ${isOwnMessage ? theme.chatCardOwnMessageColorBg.classes : theme.chatCardMessageColorBg.classes}`}
 					>
+						{isUnread && (
+							<div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-primary shadow-lg" />
+						)}
 						<Typography
 							component="span"
 							className={`inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide shadow-sm ${isOwnMessage ? 'bg-white text-emerald-600  dark:bg-emerald-500/20 dark:text-emerald-100' : 'bg-white text-slate-600  dark:bg-slate-500/20 dark:text-slate-100'}`}

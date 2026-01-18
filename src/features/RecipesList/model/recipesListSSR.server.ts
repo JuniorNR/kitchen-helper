@@ -1,11 +1,11 @@
 import { apiConfig } from '@/configs';
+import type { Recipe, RecipeDTO } from '@/entities/recipe';
 import { dto } from '@/shared/lib/helpers';
 import type { ApiResponse, ApiResponsePaginationDTO } from '@/shared/lib/types';
-import type { Recipe, RecipeDTO } from '@/entities/recipe';
 
 /**
  * Серверная функция для получения рецептов
- * 
+ *
  * Используется только на сервере (в Server Components)
  * Не требует авторизации для публичных рецептов
  */

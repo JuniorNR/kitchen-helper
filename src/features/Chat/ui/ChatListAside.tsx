@@ -39,9 +39,10 @@ export const ChatListAside: FC<ChatListAsideProps> = ({
 					layout="position"
 					className={`p-5 flex-1 space-y-2 overflow-y-auto ${styles.scrollbar}`}
 				>
-					{chats?.map((chat) => (
+					{chats?.map((chat, index) => (
 						<ChatListAsideButton
 							key={chat.id}
+							index={index}
 							chat={chat}
 							activeChatId={activeChatId}
 							onChatClick={onChatClick}

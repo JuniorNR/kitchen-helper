@@ -1,6 +1,6 @@
 import { Button } from '@heroui/button';
 import moment from 'moment';
-import { type FC, useEffect } from 'react';
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Typography } from '@/shared/ui';
 import { ReplyIcon } from '@/shared/ui/icons/replyIcon';
