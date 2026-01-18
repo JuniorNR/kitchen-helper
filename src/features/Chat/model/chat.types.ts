@@ -1,9 +1,5 @@
 import type { Dispatch, SetStateAction } from 'react';
 import type { Chat, ChatMessage } from '@/entities/chat/model/chat.types';
-import type {
-	chatColorBgVariants,
-	chatWindowColorBgVariants,
-} from './chat.utils';
 
 export type DeleteMessageData = ({
 	messageId,
@@ -13,9 +9,12 @@ export type DeleteMessageData = ({
 
 export interface ChatSendControlPanelProps {
 	message: string;
-	setMessage: Dispatch<SetStateAction<string>>;
-	sendMessage: (content: string) => Promise<ChatMessage | null>;
 	isSending: boolean;
+	replyMessage?: ChatMessage;
+	setMessage: Dispatch<SetStateAction<string>>;
+	cancelReplyMessage: () => void;
+	sendMessage: (content: string) => Promise<ChatMessage | null>;
+	currentUserId?: number;
 }
 
 export interface ChatListAsideProps {
@@ -42,6 +41,7 @@ export interface ChatMessageComponentProps {
 	isOwnMessage: boolean;
 	isDeleting: boolean;
 	deleteMessageData: DeleteMessageData;
+	setReplyMessage: Dispatch<SetStateAction<ChatMessage | undefined>>;
 	className?: string;
 }
 
@@ -97,4 +97,10 @@ export interface ChatSettingsPreviewComponentProps {
 	children: React.ReactNode;
 	title: string;
 	className?: string;
+}
+
+export interface ChatSendControlPanelReplyProps {
+	replyMessage: ChatMessage;
+	onCancel: () => void;
+	isOwnMessage?: boolean;
 }

@@ -6,7 +6,7 @@ import { useUser } from '@/entities';
 import type { ChatMessage } from '@/entities/chat/model/chat.types';
 import { customizeString } from '@/shared/lib/helpers';
 import { useAppSelector } from '@/shared/lib/hooks';
-import { Alert, ContextMenu, Typography } from '@/shared/ui';
+import { Alert, Typography } from '@/shared/ui';
 import type { ChatMessagesWindowProps } from '../model/chat.types';
 import { ChatMessageComponent } from './ChatMessageComponent';
 import { ChatSendControlPanel } from './ChatSendControlPanel';
@@ -36,6 +36,7 @@ export const ChatMessagesWindow = ({
 
 	const { user } = useUser();
 	const [message, setMessage] = useState<string>('');
+	const [replyMessage, setReplyMessage] = useState<ChatMessage>();
 
 	useLayoutEffect(() => {
 		const container = messagesContainerRef.current;
@@ -58,6 +59,10 @@ export const ChatMessagesWindow = ({
 		container.scrollTop = container.scrollHeight;
 		lastScrolledChatIdRef.current = activeChatId;
 	}, [activeChatId, localMessages?.length]);
+
+	const handleCancelReplyMessage = () => {
+		setReplyMessage(undefined);
+	};
 
 	return (
 		<div
@@ -131,6 +136,7 @@ export const ChatMessagesWindow = ({
 										>
 											<ChatMessageComponent
 												message={message}
+												setReplyMessage={setReplyMessage}
 												isDeleting={isDeleting}
 												deleteMessageData={deleteMessageData}
 												isOwnMessage={message.user.id === user?.id}
@@ -153,9 +159,12 @@ export const ChatMessagesWindow = ({
 
 					<ChatSendControlPanel
 						message={message}
+						replyMessage={replyMessage}
+						cancelReplyMessage={handleCancelReplyMessage}
 						setMessage={setMessage}
 						sendMessage={sendMessageData}
 						isSending={isSending}
+						currentUserId={user?.id}
 					/>
 				</>
 			) : (

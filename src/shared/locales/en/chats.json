@@ -11,6 +11,15 @@
 			"select_chat": "To start a conversation, select a chat from the list on the left."
 		}
 	},
+	"reply": {
+		"reply": "Reply",
+		"cancel": "Cancel reply"
+	},
+	"context_menu": {
+		"copy": "Copy",
+		"reply": "Reply",
+		"delete": "Delete"
+	},
 	"settings": {
 		"title": "Settings",
 		"sections": {
