@@ -10,7 +10,7 @@ import { ChatSettingsColorsMessageCardTab } from './ChatSettingsColorsMessageCar
 
 export const ChatSettingsColorsTabs: FC = () => {
 	const { t: tChats } = useTranslation('chats');
-	const [activeTab, setActiveTab] = useState<Key>('message-card');
+	const [activeTab, setActiveTab] = useState<Key>('background');
 
 	return (
 		<Tabs

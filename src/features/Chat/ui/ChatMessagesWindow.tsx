@@ -6,7 +6,7 @@ import { useUser } from '@/entities';
 import type { ChatMessage } from '@/entities/chat/model/chat.types';
 import { customizeString } from '@/shared/lib/helpers';
 import { useAppSelector } from '@/shared/lib/hooks';
-import { Alert, Typography } from '@/shared/ui';
+import { Alert, ContextMenu, Typography } from '@/shared/ui';
 import type { ChatMessagesWindowProps } from '../model/chat.types';
 import { ChatMessageComponent } from './ChatMessageComponent';
 import { ChatSendControlPanel } from './ChatSendControlPanel';
@@ -19,8 +19,10 @@ export const ChatMessagesWindow = ({
 	activeChatId,
 	localMessages,
 	isSending,
+	isDeleting,
 	isBlockFetch,
 	sendMessageData,
+	deleteMessageData,
 	loadOldestMessages,
 }: ChatMessagesWindowProps) => {
 	const { chatColorBg } = useAppSelector((state) => state.chat.settings.theme);
@@ -129,6 +131,8 @@ export const ChatMessagesWindow = ({
 										>
 											<ChatMessageComponent
 												message={message}
+												isDeleting={isDeleting}
+												deleteMessageData={deleteMessageData}
 												isOwnMessage={message.user.id === user?.id}
 											/>
 										</motion.li>

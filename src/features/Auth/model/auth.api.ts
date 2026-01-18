@@ -1,6 +1,8 @@
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { createApi } from '@reduxjs/toolkit/query/react';
+import { chatApi } from '@/entities/chat/model/chat.api';
 import { ingredientApi } from '@/entities/ingredient/model/ingredient.api';
+import { marketApi } from '@/entities/market/model/market.api';
 import { recipeApi } from '@/entities/recipe/model/recipe.api';
 import { userApi } from '@/entities/user/model/user.api';
 import { addAlert } from '@/features/Alert';
@@ -146,7 +148,13 @@ export const authApi = createApi({
 					}
 					dispatch(setIsAuthenticated(false));
 					dispatch(setAuthToken(null));
-					dispatch(userApi.util.invalidateTags(['User']));
+					// Очистка всех кэшей запросов при логауте
+					dispatch(authApi.util.resetApiState());
+					dispatch(userApi.util.resetApiState());
+					dispatch(ingredientApi.util.resetApiState());
+					dispatch(recipeApi.util.resetApiState());
+					dispatch(marketApi.util.resetApiState());
+					dispatch(chatApi.util.resetApiState());
 					dispatch(
 						addAlert({
 							id: crypto.randomUUID(),

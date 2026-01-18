@@ -65,3 +65,8 @@ export interface SendMessageQuery {
 	chatId: ChatIdType;
 	content: string;
 }
+
+export interface DeleteMessageQuery {
+	chatId: ChatIdType;
+	messageId: number;
+}

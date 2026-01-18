@@ -33,15 +33,17 @@ export const Chat = () => {
 	);
 	const [isBlockFetch, setIsBlockFetch] = useState<boolean>(false);
 
-	const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(true);
+	const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
 
 	const {
 		chats,
 		messages,
 		isSending,
+		isDeleting,
 		isChatsLoading,
 		isMessagesLoading,
 		sendMessageData,
+		deleteMessageData,
 		refetchMessages,
 		getChatMessages,
 	} = useChat({ chatId: activeChatId, limit: LIMITS_MESSAGES });
@@ -89,6 +91,35 @@ export const Chat = () => {
 						},
 						(draft) => {
 							draft.push(dto<ChatMessageDTO, ChatMessage>('toClient', message));
+						},
+					),
+				);
+			}
+		},
+		[activeChatId],
+	);
+
+	useEcho(
+		`user.${user?.id}`,
+		'.MessageDeleted',
+		(event: { id: number; chat_id: number }) => {
+			if (event.chat_id === activeChatId) {
+				setLocalMessages((prev) => prev.filter((msg) => msg.id !== event.id));
+
+				dispatch(
+					chatApi.util.updateQueryData(
+						'getChatMessages',
+						{
+							chatId: activeChatId,
+							limit: LIMITS_MESSAGES,
+							after_id: undefined,
+							before_id: undefined,
+						},
+						(draft) => {
+							const index = draft.findIndex((msg) => msg.id === event.id);
+							if (index !== -1) {
+								draft.splice(index, 1);
+							}
 						},
 					),
 				);
@@ -154,8 +185,10 @@ export const Chat = () => {
 					loadOldestMessages={handleRefetchOldestMessagesByScroll}
 					chats={localChats || []}
 					activeChatId={activeChatId}
+					isDeleting={isDeleting}
 					localMessages={localMessages}
 					sendMessageData={sendMessageData}
+					deleteMessageData={deleteMessageData}
 					isBlockFetch={isBlockFetch}
 					isSending={isSending}
 				/>

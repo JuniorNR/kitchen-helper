@@ -1,15 +1,11 @@
 'use client';
 
-import { Switch } from '@heroui/switch';
-import { type FC, useState } from 'react';
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ChatMessage } from '@/entities/chat/model/chat.types';
 import { localStorageHelper } from '@/shared/lib/helpers';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks';
-import { Typography } from '@/shared/ui';
 import {
-	changeChatCardMessageColorBg,
-	changeChatCardOwnMessageColorBg,
 	changeChatMessageComponentColorBg,
 	changeChatMessageOwnComponentColorBg,
 } from '../model/chat.slice';

@@ -1,4 +1,5 @@
 import {
+	useDeleteMessageMutation,
 	useGetChatMessagesQuery,
 	useGetChatsQuery,
 	useLazyGetChatMessagesQuery,
@@ -29,6 +30,7 @@ export const useChat = ({
 	const [getChatMessages, { isLoading: isMessagesOldestLoading }] =
 		useLazyGetChatMessagesQuery();
 	const [sendMessage, { isLoading: isSending }] = useSendMessageMutation();
+	const [deleteMessage, { isLoading: isDeleting }] = useDeleteMessageMutation();
 
 	const sendMessageData = async (content: string) => {
 		try {
@@ -40,15 +42,27 @@ export const useChat = ({
 		}
 	};
 
+	const deleteMessageData = async ({ messageId }: { messageId: number }) => {
+		try {
+			const data = await deleteMessage({ chatId, messageId }).unwrap();
+			return data;
+		} catch (error) {
+			console.error(error);
+			return null;
+		}
+	};
+
 	return {
 		chats,
 		isChatsLoading,
 		isSending,
+		isDeleting,
 		messages,
 		isMessagesLoading,
 		isMessagesOldestLoading,
 		refetchMessages,
 		sendMessageData,
+		deleteMessageData,
 		getChatMessages,
 	};
 };

@@ -1,5 +1,6 @@
 export { Alert } from './Alert';
 export { Alerts } from './Alerts';
+export { ContextMenu } from './ContextMenu';
 export { CustomInput } from './CustomInput';
 export { DeleteButton } from './DeleteButton';
 export { Filter, FilterGroup } from './Filter';

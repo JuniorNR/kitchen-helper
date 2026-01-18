@@ -5,6 +5,12 @@ import type {
 	chatWindowColorBgVariants,
 } from './chat.utils';
 
+export type DeleteMessageData = ({
+	messageId,
+}: {
+	messageId: number;
+}) => Promise<ChatMessage | null>;
+
 export interface ChatSendControlPanelProps {
 	message: string;
 	setMessage: Dispatch<SetStateAction<string>>;
@@ -24,9 +30,19 @@ export interface ChatMessagesWindowProps {
 	activeChatId: number | null;
 	localMessages: ChatMessage[];
 	isSending: boolean;
+	isDeleting: boolean;
 	isBlockFetch: boolean;
 	sendMessageData: (content: string) => Promise<ChatMessage | null>;
+	deleteMessageData: DeleteMessageData;
 	loadOldestMessages?: () => void;
+}
+
+export interface ChatMessageComponentProps {
+	message: ChatMessage;
+	isOwnMessage: boolean;
+	isDeleting: boolean;
+	deleteMessageData: DeleteMessageData;
+	className?: string;
 }
 
 export interface ChatSettingsProps {

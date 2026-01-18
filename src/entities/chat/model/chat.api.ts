@@ -7,6 +7,7 @@ import type {
 	ChatMessage,
 	ChatMessageDTO,
 	ChatMessageQuery,
+	DeleteMessageQuery,
 	SendMessageQuery,
 } from './chat.types';
 
@@ -47,6 +48,12 @@ export const chatApi = createApi({
 				},
 			}),
 		}),
+		deleteMessage: builder.mutation<ChatMessage, DeleteMessageQuery>({
+			query: ({ chatId, messageId }) => ({
+				url: `/chats/${chatId}/messages/${messageId}`,
+				method: 'DELETE',
+			}),
+		}),
 	}),
 });
 
@@ -54,5 +61,6 @@ export const {
 	useGetChatsQuery,
 	useGetChatMessagesQuery,
 	useSendMessageMutation,
+	useDeleteMessageMutation,
 	useLazyGetChatMessagesQuery,
 } = chatApi;
