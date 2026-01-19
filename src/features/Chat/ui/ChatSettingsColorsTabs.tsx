@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { ChatSettingsColorsBackgroundTab } from './ChatSettingsColorsBackgroundTab';
 import { ChatSettingsColorsChatCardTab } from './ChatSettingsColorsChatCardTab';
 import { ChatSettingsColorsMessageCardTab } from './ChatSettingsColorsMessageCardTab';
+import { ChatSettingsColorsAccentColorsTab } from './ChatSettingsColorsAccentColorsTab';
 
 export const ChatSettingsColorsTabs: FC = () => {
 	const { t: tChats } = useTranslation('chats');
@@ -37,6 +38,12 @@ export const ChatSettingsColorsTabs: FC = () => {
 				title={tChats('settings.colors.tabs.message_card')}
 			>
 				<ChatSettingsColorsMessageCardTab />
+			</Tab>
+			<Tab
+				key="accent-colors"
+				title={tChats('settings.colors.tabs.accent_colors')}
+			>
+				<ChatSettingsColorsAccentColorsTab />
 			</Tab>
 		</Tabs>
 	);

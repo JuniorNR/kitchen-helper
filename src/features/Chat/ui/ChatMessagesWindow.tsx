@@ -10,7 +10,6 @@ import { Alert, Typography } from '@/shared/ui';
 import type { ChatMessagesWindowProps } from '../model/chat.types';
 import { ChatMessageComponent } from './ChatMessageComponent';
 import { ChatSendControlPanel } from './ChatSendControlPanel';
-import styles from './chat.module.scss';
 
 const safeId = (rawId: string) => rawId.replace(/[^a-zA-Z0-9_-]/g, '');
 
@@ -25,7 +24,9 @@ export const ChatMessagesWindow = ({
 	deleteMessageData,
 	loadOldestMessages,
 }: ChatMessagesWindowProps) => {
-	const { chatColorBg } = useAppSelector((state) => state.chat.settings.theme);
+	const { chatColorBg, accentColor } = useAppSelector(
+		(state) => state.chat.settings.theme,
+	);
 	const scrollableId = safeId(`chat-scroll-${useId()}`);
 	const messagesContainerRef = useRef<HTMLDivElement>(null);
 	const hasMessages = localMessages?.length > 0;
@@ -116,7 +117,7 @@ export const ChatMessagesWindow = ({
 					<div
 						ref={messagesContainerRef}
 						id={scrollableId}
-						className={`flex flex-col-reverse flex-grow-1 flex-shrink-1 overflow-y-auto h-auto ${styles.scrollbar}`}
+						className={`flex flex-col-reverse flex-grow-1 flex-shrink-1 overflow-y-auto h-auto scrollbar-${accentColor.colorName}`}
 					>
 						{hasMessages ? (
 							<InfiniteScroll

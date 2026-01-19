@@ -10,5 +10,6 @@ export interface ContextMenuItem {
 export interface ContextMenuProps {
 	children: React.ReactNode;
 	items: ContextMenuItem[];
+	disabled?: boolean;
 	className?: string;
 }

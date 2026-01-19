@@ -46,8 +46,8 @@ export interface ChatMessageComponentProps {
 	message: ChatMessage;
 	isOwnMessage: boolean;
 	isDeleting: boolean;
-	deleteMessageData: DeleteMessageData;
-	setReplyMessage: Dispatch<SetStateAction<ChatMessage | undefined>>;
+	deleteMessageData?: DeleteMessageData;
+	setReplyMessage?: Dispatch<SetStateAction<ChatMessage | undefined>>;
 	className?: string;
 }
 
@@ -71,6 +71,7 @@ export interface ChatTheme {
 	chatCardMessageColorBg: ChatThemeColor;
 	chatMessageOwnComponentColorBg: ChatThemeColor;
 	chatMessageComponentColorBg: ChatThemeColor;
+	accentColor: ChatThemeColor;
 }
 
 export interface ChatThemeColor {

@@ -93,6 +93,16 @@ export const chatMessageOwnComponentColorBgVariants = {
 		'border-orange-200 bg-gradient-to-br from-orange-50 via-white to-orange-100 text-orange-900 shadow-[0_10px_25px_rgba(249,115,22,0.18)] transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.005] hover:border-orange-300 hover:shadow-[0_20px_45px_rgba(249,115,22,0.25)] dark:bg-none dark:border-orange-400/30 dark:bg-orange-500/20 dark:text-orange-100 dark:hover:border-orange-400/60 dark:hover:shadow-[0_20px_45px_rgba(249,115,22,0.35)]',
 } as const;
 
+export const accentColorsVariants = {
+	emerald:
+		'bg-emerald-500 text-white border-emerald-600 dark:bg-emerald-600 dark:border-emerald-700',
+	violet:
+		'bg-violet-500 text-white border-violet-600 dark:bg-violet-600 dark:border-violet-700',
+	indigo:
+		'bg-indigo-500 text-white border-indigo-600 dark:bg-indigo-600 dark:border-indigo-700',
+	blue: 'bg-blue-500 text-white border-blue-600 dark:bg-blue-600 dark:border-blue-700',
+} as const;
+
 export const chatMessageComponentColorBgVariants = {
 	slate:
 		'border-slate-200 bg-white/95 text-slate-800 shadow-[0_15px_35px_rgba(15,23,42,0.12)] transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.005] hover:border-slate-300 hover:shadow-[0_22px_55px_rgba(15,23,42,0.2)] dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:border-slate-700 dark:hover:shadow-[0_22px_55px_rgba(15,23,42,0.45)]',
@@ -145,6 +155,10 @@ const getChatTheme = (): ChatTheme => {
 				colorName: 'slate',
 				classes: chatMessageComponentColorBgVariants.slate,
 			},
+		accentColor: localStorageTheme.accentColor ?? {
+			colorName: 'blue',
+			classes: accentColorsVariants.blue,
+		},
 	};
 };
 

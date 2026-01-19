@@ -3,7 +3,11 @@
 		"success": "Success",
 		"error": "Error",
 		"warning": "Warning",
-		"info": "Info"
+		"info": "Info",
+		"no_chats": "No chats yet"
+	},
+	"descriptions": {
+		"no_chats": "Create a new dialog to start a conversation."
 	},
 	"codes": {
 		"INVALID_CREDENTIALS": "Invalid credentials",

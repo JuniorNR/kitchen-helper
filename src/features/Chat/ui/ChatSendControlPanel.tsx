@@ -1,8 +1,9 @@
 import { Button } from '@heroui/button';
 import { Input } from '@heroui/input';
-import { Tooltip } from '@heroui/tooltip';
+import { AnimatePresence, motion } from 'framer-motion';
 import { type FC, useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAppSelector } from '@/shared/lib/hooks';
 import { Kbd } from '@/shared/ui';
 import { SendMessageIcon } from '@/shared/ui/icons/sendMessageIcon';
 import type { ChatSendControlPanelProps } from '../model/chat.types';
@@ -17,6 +18,7 @@ export const ChatSendControlPanel: FC<ChatSendControlPanelProps> = ({
 	sendMessage,
 	currentUserId,
 }) => {
+	const { accentColor } = useAppSelector((state) => state.chat.settings.theme);
 	const { t: tFields } = useTranslation('fields');
 
 	const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -93,16 +95,8 @@ export const ChatSendControlPanel: FC<ChatSendControlPanelProps> = ({
 	useEffect(() => {
 		const handleEscape = (event: KeyboardEvent) => {
 			if (event.code === 'Escape' && replyMessage) {
-				// Проверяем, не находится ли фокус на поле ввода
-				const activeElement = document.activeElement;
-				const inputElement = inputContainerRef.current?.querySelector('input');
-				const isInputFocused = activeElement === inputElement;
-
-				// Если фокус не на input, отменяем ответ
-				if (!isInputFocused) {
-					event.preventDefault();
-					cancelReplyMessage();
-				}
+				event.preventDefault();
+				cancelReplyMessage();
 			}
 		};
 
@@ -115,13 +109,24 @@ export const ChatSendControlPanel: FC<ChatSendControlPanelProps> = ({
 
 	return (
 		<div className="relative flex flex-col w-full">
-			{replyMessage && (
-				<ChatSendControlPanelReply
-					replyMessage={replyMessage}
-					isOwnMessage={replyMessage.user.id === currentUserId}
-					onCancel={cancelReplyMessage}
-				/>
-			)}
+			<AnimatePresence mode="wait">
+				{replyMessage && (
+					<motion.div
+						key={`reply-panel-${replyMessage.id}`}
+						initial={{ opacity: 0, y: 100 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: 100 }}
+						transition={{ duration: 0.1, ease: [0.4, 0, 0.2, 1] }}
+						className="relative"
+					>
+						<ChatSendControlPanelReply
+							replyMessage={replyMessage}
+							isOwnMessage={replyMessage.user.id === currentUserId}
+							onCancel={cancelReplyMessage}
+						/>
+					</motion.div>
+				)}
+			</AnimatePresence>
 			<div className="relative flex items-center group" ref={inputContainerRef}>
 				<Kbd
 					className="absolute left-[10px] top-[-100%] translate-y-1/2 text-amber-50 z-999"
@@ -134,7 +139,7 @@ export const ChatSendControlPanel: FC<ChatSendControlPanelProps> = ({
 				<Input
 					ref={inputRef}
 					size="md"
-					color="primary"
+					className={accentColor.classes}
 					radius="none"
 					placeholder={`${tFields('write_message')}...`}
 					disabled={isSending}
@@ -146,7 +151,7 @@ export const ChatSendControlPanel: FC<ChatSendControlPanelProps> = ({
 				<Button
 					size="md"
 					radius="none"
-					color="primary"
+					className={accentColor.classes}
 					onPress={handleSendMessage}
 					disabled={isSending}
 					isLoading={isSending}

@@ -48,6 +48,9 @@ const chatSlice = createSlice({
 		) => {
 			state.settings.theme.chatMessageComponentColorBg = action.payload;
 		},
+		changeAccentColor: (state, action: PayloadAction<ChatThemeColor>) => {
+			state.settings.theme.accentColor = action.payload;
+		},
 	},
 });
 
@@ -61,5 +64,6 @@ export const {
 	changeChatCardMessageColorBg,
 	changeChatMessageOwnComponentColorBg,
 	changeChatMessageComponentColorBg,
+	changeAccentColor,
 } = chatSlice.actions;
 export const chatReducer = chatSlice.reducer;

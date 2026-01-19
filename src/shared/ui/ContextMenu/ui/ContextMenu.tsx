@@ -9,6 +9,7 @@ import type { ContextMenuProps } from '../model/contextMenu.types';
 export const ContextMenu: FC<ContextMenuProps> = ({
 	children,
 	items,
+	disabled = false,
 	className = '',
 }) => {
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -18,6 +19,9 @@ export const ContextMenu: FC<ContextMenuProps> = ({
 	const handleOpenContextMenu = (event: React.MouseEvent) => {
 		event.preventDefault();
 		event.stopPropagation();
+
+		if (disabled) return;
+
 		const firstChild = containerRef.current?.childNodes[0];
 
 		const mouseEnterEvent = new MouseEvent('mouseenter', {

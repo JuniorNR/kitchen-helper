@@ -17,12 +17,11 @@ export const ChatListAsideButton: FC<ChatListAsideButtonProps> = ({
 	currentUserId,
 	index,
 	className = '',
-	isUnread: isUnreadProp,
+	isUnread,
 }) => {
 	const { t: tChats, i18n } = useTranslation('chats');
 	const { theme } = useAppSelector((state) => state.chat.settings);
 
-	const isUnread = isUnreadProp ?? chat.id === 1;
 	const lastMessage = chat.lastMessage;
 	const lastMessageMoment = lastMessage?.createdAt
 		? moment(lastMessage.createdAt)

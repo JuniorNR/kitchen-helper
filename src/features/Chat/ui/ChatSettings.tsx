@@ -8,7 +8,6 @@ import { useTranslation } from 'react-i18next';
 import { Typography } from '@/shared/ui';
 import type { ChatSettingsProps, SettingsSection } from '../model/chat.types';
 import { ChatSettingsColorsTabs } from './ChatSettingsColorsTabs';
-import styles from './chat.module.scss';
 
 export const ChatSettings: FC<ChatSettingsProps> = ({ setIsSettingsOpen }) => {
 	const { t: tChats } = useTranslation('chats');
@@ -65,7 +64,7 @@ export const ChatSettings: FC<ChatSettingsProps> = ({ setIsSettingsOpen }) => {
 					</Button>
 				</div>
 
-				<div className={`flex-1 overflow-y-auto p-6 ${styles.scrollbar}`}>
+				<div className="flex-1 overflow-y-auto p-6 scrollbar-blue">
 					{activeSection === 'colors' && (
 						<div>
 							<div className="mb-6">

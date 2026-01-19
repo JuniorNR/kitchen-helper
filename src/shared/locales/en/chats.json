@@ -18,7 +18,8 @@
 	"context_menu": {
 		"copy": "Copy",
 		"reply": "Reply",
-		"delete": "Delete"
+		"delete": "Delete",
+		"deleting": "Deleting..."
 	},
 	"settings": {
 		"title": "Settings",
@@ -34,7 +35,8 @@
 			"tabs": {
 				"background": "Background",
 				"chat_card": "Chat card",
-				"message_card": "Message card"
+				"message_card": "Message card",
+				"accent_colors": "Accent colors"
 			},
 			"aria_label": "Color settings",
 			"preview": {
@@ -52,7 +54,8 @@
 				"card_background": "Card background",
 				"active_card_border": "Active card border",
 				"your_message_background": "Your message background",
-				"other_message_background": "Other message background"
+				"other_message_background": "Other message background",
+				"accent_color_window": "Accent color of the entire window"
 			},
 			"backgrounds": {
 				"chat_interface": "Chat interface background",

@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '@/shared/lib/hooks';
 import { ContextMenu, Typography } from '@/shared/ui';
 import type { ContextMenuItem } from '@/shared/ui/ContextMenu/model/contextMenu.types';
+import { DeleteIcon } from '@/shared/ui/icons/deleteIcon';
 import { ReplyIcon } from '@/shared/ui/icons/replyIcon';
 import type { ChatMessageComponentProps } from '../model/chat.types';
 
@@ -22,6 +23,8 @@ export const ChatMessageComponent: FC<ChatMessageComponentProps> = ({
 	const { t: tChats } = useTranslation('chats');
 
 	const [isHovered, setIsHovered] = useState<boolean>(false);
+	const [isDeletingMessage, setIsDeletingMessage] = useState<boolean>(false);
+
 	const isHoveredRef = useRef<boolean>(false);
 	const messageRef = useRef(message);
 	const isOwnMessageRef = useRef(isOwnMessage);
@@ -39,7 +42,7 @@ export const ChatMessageComponent: FC<ChatMessageComponentProps> = ({
 		{
 			label: tChats('context_menu.reply'),
 			action: () => {
-				setReplyMessage(message);
+				setReplyMessage?.(message);
 			},
 			shortcut: ['Hover', 'Ctrl+R'],
 		},
@@ -50,7 +53,7 @@ export const ChatMessageComponent: FC<ChatMessageComponentProps> = ({
 			label: tChats('context_menu.delete'),
 			isActionLoading: isDeleting,
 			action: () => {
-				deleteMessageData({ messageId: message.id });
+				deleteMessageData?.({ messageId: message.id });
 			},
 			shortcut: ['Hover', 'Ctrl+D'],
 		});
@@ -93,11 +96,19 @@ export const ChatMessageComponent: FC<ChatMessageComponentProps> = ({
 					navigator.clipboard.writeText(currentMessage.content);
 				}
 				if (event.code === 'KeyR') {
-					setReplyMessageRef.current(currentMessage);
+					setReplyMessageRef.current?.(currentMessage);
 				}
 				if (event.code === 'KeyD') {
 					if (currentIsOwnMessage) {
-						deleteMessageDataRef.current({ messageId: currentMessage.id });
+						setIsDeletingMessage(true);
+
+						if (!isDeletingMessage) {
+							deleteMessageDataRef
+								.current?.({ messageId: currentMessage.id })
+								.then(() => {
+									setIsDeletingMessage(false);
+								});
+						}
 					}
 				}
 			}
@@ -108,19 +119,37 @@ export const ChatMessageComponent: FC<ChatMessageComponentProps> = ({
 		return () => {
 			document.removeEventListener('keydown', handleKeyDown, true);
 		};
-	}, []);
+	}, [isDeletingMessage]);
 
 	return (
-		<ContextMenu items={menuItems}>
+		<ContextMenu items={menuItems} disabled={isDeletingMessage}>
 			<div
 				onMouseEnter={() => setIsHovered(true)}
 				onMouseLeave={() => setIsHovered(false)}
-				className={`max-w-[100%] rounded-2xl border px-4 py-3 text-sm leading-relaxed ${
+				className={`relative max-w-[100%] rounded-2xl border px-4 py-3 text-sm leading-relaxed ${
 					isOwnMessage
 						? theme.chatMessageOwnComponentColorBg.classes
 						: theme.chatMessageComponentColorBg.classes
 				} ${className}`}
 			>
+				{isDeletingMessage && (
+					<div className="absolute inset-0 z-20 flex items-center justify-center rounded-2xl bg-slate-900/70 backdrop-blur-sm transition-all duration-300 dark:bg-slate-950/80 px-2 py-1">
+						<div className="flex flex-col items-center gap-1.5">
+							<div className="relative">
+								<div className="absolute inset-0 animate-ping rounded-full bg-red-500/30 scale-75"></div>
+								<div className="relative flex items-center justify-center rounded-full bg-red-500/20 p-1.5 dark:bg-red-600/20">
+									<DeleteIcon className="h-4 w-4 animate-pulse text-red-500 dark:text-red-400" />
+								</div>
+							</div>
+							<Typography
+								component="span"
+								className="text-xs font-semibold text-red-500 dark:text-red-400 leading-tight"
+							>
+								{tChats('context_menu.deleting')}
+							</Typography>
+						</div>
+					</div>
+				)}
 				{message.reply && (
 					<div className="mb-3 pb-3 border-b border-slate-200 dark:border-slate-700">
 						<div className="flex items-center gap-1.5 mb-1">

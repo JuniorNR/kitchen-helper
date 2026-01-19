@@ -9,7 +9,6 @@ import { Alert, Typography } from '@/shared/ui';
 import { SettingsIcon } from '@/shared/ui/icons/settingsIcon';
 import type { ChatListAsideProps } from '../model/chat.types';
 import { ChatListAsideButton } from './ChatListAsideButton';
-import styles from './chat.module.scss';
 
 export const ChatListAside: FC<ChatListAsideProps> = ({
 	chats,
@@ -17,13 +16,17 @@ export const ChatListAside: FC<ChatListAsideProps> = ({
 	onChatClick,
 	setIsSettingsOpen,
 }) => {
-	const { asideColorBg } = useAppSelector((state) => state.chat.settings.theme);
+	const { asideColorBg, accentColor } = useAppSelector(
+		(state) => state.chat.settings.theme,
+	);
 	const { t: tChats } = useTranslation('chats');
+	const { t: tAlerts } = useTranslation('alerts');
 	const { user } = useUser();
 	const hasChats = Boolean(chats?.length);
+
 	return (
 		<aside
-			className={`flex flex-shrink-0 overflow-y-auto w-1/4 max-w-1/4 min-w-[220px] flex-col rounded-2xl border ${asideColorBg.classes}`}
+			className={`flex flex-shrink-0 w-1/4 max-w-1/4 min-w-[220px] flex-col rounded-2xl border ${asideColorBg.classes}`}
 		>
 			<div className="px-5 py-2">
 				<Typography
@@ -37,7 +40,7 @@ export const ChatListAside: FC<ChatListAsideProps> = ({
 			{hasChats ? (
 				<motion.ul
 					layout="position"
-					className={`p-5 flex-1 space-y-2 overflow-y-auto ${styles.scrollbar}`}
+					className={`p-5 flex-1 space-y-2 overflow-y-auto scrollbar-${accentColor.colorName}`}
 				>
 					{chats?.map((chat, index) => (
 						<ChatListAsideButton
@@ -53,17 +56,16 @@ export const ChatListAside: FC<ChatListAsideProps> = ({
 			) : (
 				<Alert
 					status="info"
-					title="Чатов пока нет"
-					description="Создайте новый диалог, чтобы начать переписку."
+					title={tAlerts('titles.no_chats')}
+					description={tAlerts('descriptions.no_chats')}
 					className="mt-10"
 				/>
 			)}
 			<Divider />
 			<div className="h-[40px] w-full">
 				<Button
-					className="h-[40px] w-[40px] rounded-none"
+					className={`h-[40px] w-[40px] rounded-none rounded-bl-xl ${accentColor.classes}`}
 					isIconOnly
-					color="secondary"
 					onPress={() => setIsSettingsOpen((prev) => !prev)}
 				>
 					<SettingsIcon />

@@ -67,6 +67,7 @@ export const ChatSettingsColorsMessageCardTab: FC = () => {
 									},
 								}}
 								isOwnMessage={true}
+								isDeleting={false}
 							/>
 						</div>
 						<div className="flex justify-start">
@@ -80,6 +81,7 @@ export const ChatSettingsColorsMessageCardTab: FC = () => {
 									},
 								}}
 								isOwnMessage={false}
+								isDeleting={false}
 							/>
 						</div>
 					</div>

@@ -18,7 +18,8 @@
 	"context_menu": {
 		"copy": "Копировать",
 		"reply": "Ответить",
-		"delete": "Удалить"
+		"delete": "Удалить",
+		"deleting": "Удаляется..."
 	},
 	"settings": {
 		"title": "Настройки",
@@ -34,7 +35,8 @@
 			"tabs": {
 				"background": "Фон",
 				"chat_card": "Карточка чата",
-				"message_card": "Карточка сообщения"
+				"message_card": "Карточка сообщения",
+				"accent_colors": "Акцентные цвета"
 			},
 			"aria_label": "Настройки цветов",
 			"preview": {
@@ -52,7 +54,8 @@
 				"card_background": "Фон карточки",
 				"active_card_border": "Рамка активной карточки",
 				"your_message_background": "Фон вашего сообщения",
-				"other_message_background": "Фон сообщения собеседника"
+				"other_message_background": "Фон сообщения собеседника",
+				"accent_color_window": "Акцентный цвет всего окна"
 			},
 			"backgrounds": {
 				"chat_interface": "Фон интерфейса чата",
