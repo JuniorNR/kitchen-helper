@@ -81,11 +81,7 @@ export const Chat = () => {
 
 	useEffect(() => {
 		const handleShiftlNum = (event: KeyboardEvent) => {
-			if (
-				event.shiftKey &&
-				(!event.altKey || !event.metaKey) &&
-				!event.altKey
-			) {
+			if (event.altKey && (!event.shiftKey || !event.metaKey)) {
 				event.preventDefault();
 				if (event.code === 'Digit1') {
 					handleSetActiveChatId(localChats[0]?.id);

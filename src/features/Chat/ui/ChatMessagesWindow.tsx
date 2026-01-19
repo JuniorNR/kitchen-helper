@@ -56,9 +56,7 @@ export const ChatMessagesWindow = ({
 		}
 
 		const chatChanged = lastScrolledChatIdRef.current !== activeChatId;
-		// Получаем ID последнего сообщения (новые сообщения добавляются в конец массива)
 		const lastMessageId = localMessages[localMessages.length - 1]?.id;
-		// Скроллим только если добавилось новое сообщение (последний ID изменился), а не старые
 		const newMessageAdded =
 			lastMessageIdRef.current !== null &&
 			lastMessageId !== lastMessageIdRef.current;

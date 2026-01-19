@@ -2,7 +2,7 @@ import { Button } from '@heroui/button';
 import moment from 'moment';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Typography } from '@/shared/ui';
+import { Kbd, Typography } from '@/shared/ui';
 import { ReplyIcon } from '@/shared/ui/icons/replyIcon';
 import type { ChatSendControlPanelReplyProps } from '../model/chat.types';
 
@@ -22,7 +22,11 @@ export const ChatSendControlPanelReply: FC<ChatSendControlPanelReplyProps> = ({
 	};
 
 	return (
-		<div className="absolute top-0 right-0 -translate-y-full w-full flex items-start justify-between gap-3 px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border-l-4 border-primary-500">
+		<div className="absolute group top-0 right-0 -translate-y-full w-full flex items-start justify-between gap-3 px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border-l-4 border-primary-500">
+			<Kbd
+				className="absolute right-[50px] top-0 translate-y-1/2 text-amber-50 z-999"
+				shortcut={'Esc'}
+			/>
 			<div className="flex flex-col flex-1 min-w-0 gap-1">
 				<div className="flex items-center gap-1.5">
 					<ReplyIcon className="text-slate-500 dark:text-slate-400" />

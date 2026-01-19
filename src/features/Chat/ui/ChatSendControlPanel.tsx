@@ -1,7 +1,9 @@
 import { Button } from '@heroui/button';
 import { Input } from '@heroui/input';
+import { Tooltip } from '@heroui/tooltip';
 import { type FC, useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Kbd } from '@/shared/ui';
 import { SendMessageIcon } from '@/shared/ui/icons/sendMessageIcon';
 import type { ChatSendControlPanelProps } from '../model/chat.types';
 import { ChatSendControlPanelReply } from './ChatSendControlPanelReply';
@@ -120,7 +122,15 @@ export const ChatSendControlPanel: FC<ChatSendControlPanelProps> = ({
 					onCancel={cancelReplyMessage}
 				/>
 			)}
-			<div className="flex items-center" ref={inputContainerRef}>
+			<div className="relative flex items-center group" ref={inputContainerRef}>
+				<Kbd
+					className="absolute left-[10px] top-[-100%] translate-y-1/2 text-amber-50 z-999"
+					shortcut={'Ctrl+Space'}
+				/>
+				<Kbd
+					className="absolute right-0 top-[-100%] translate-y-1/2 text-amber-50 z-999"
+					shortcut={'Enter'}
+				/>
 				<Input
 					ref={inputRef}
 					size="md"

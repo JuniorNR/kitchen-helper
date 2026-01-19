@@ -63,7 +63,7 @@ export const ChatListAsideButton: FC<ChatListAsideButtonProps> = ({
 				{index <= 2 && (
 					<Kbd
 						className="absolute top-3 right-3"
-						shortcut={`Shift+${index + 1}`}
+						shortcut={`Alt+${index + 1}`}
 					/>
 				)}
 
