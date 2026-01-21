@@ -80,7 +80,7 @@ export const ChatMessagesWindow = ({
 
 	return (
 		<div
-			className={`flex flex-shrink-1 flex-grow-1 overflow-hidden min-w-[400px] max-w-3/4 pt-5 flex-col rounded-2xl border ${chatColorBg.classes}`}
+			className={`flex flex-shrink-1 flex-grow-1 min-h-0 overflow-hidden min-w-[400px] max-w-3/4 pt-5 flex-col rounded-2xl border ${chatColorBg.classes}`}
 		>
 			{activeChatId && (
 				<header className="flex items-start justify-between border-b border-slate-200 px-4 pb-4 dark:border-slate-800">

@@ -41,11 +41,11 @@ export default async function RootLayout({
 				<AppProviders>
 					<div className="flex flex-col justify-between min-h-screen">
 						<Header height={layoutConfig.headerHeight} />
-						<main
-							className={classNames(
-								`flex flex-col flex-grow-1 justify-between items-center w-full p-5 h-[${layoutConfig.mainHeight}] min-h-[${layoutConfig.mainHeight}]`,
-							)}
-						>
+					<main
+						className={classNames(
+							`flex flex-col flex-grow-1 justify-start items-center w-full p-5 h-[${layoutConfig.mainHeight}] min-h-[${layoutConfig.mainHeight}]`,
+						)}
+					>
 							<AuthBoundary>{children}</AuthBoundary>
 						</main>
 						<Footer heightElement={layoutConfig.footerHeight} />

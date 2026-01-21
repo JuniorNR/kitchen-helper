@@ -4,6 +4,7 @@ import { Button } from '@heroui/button';
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@heroui/navbar';
 import { Tooltip } from '@heroui/tooltip';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import type { FC } from 'react';
 import { useState } from 'react';
@@ -26,6 +27,7 @@ import type { HeaderProps } from '../model/types';
 import { HeaderNavItems } from './HeaderNavItems';
 
 export const Header: FC<HeaderProps> = ({ height }) => {
+	const pathname = usePathname();
 	const { t: tCommon } = useTranslation('common');
 	const { logoutData, isLogoutLoading } = useAuth();
 	const isAuthenticated = useSelector(
@@ -33,15 +35,20 @@ export const Header: FC<HeaderProps> = ({ height }) => {
 	);
 	const { isUserLoading } = useUser();
 	const { theme } = useTheme();
+	const scrollY = useScroll('y');
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+	if (pathname.includes('project')) {
+		return;
+	}
+
 	const season = detectSeason(new Date());
 	const gradient = buildHeaderGradient(
 		season,
 		(theme as 'light' | 'dark') ?? 'light',
 	);
 
-	const scrollY = useScroll('y');
 	const isScrolled = scrollY > 4;
-	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	const handleLogout = async () => {
 		await logoutData();

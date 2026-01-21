@@ -35,8 +35,30 @@ export const ChatListAsideButton: FC<ChatListAsideButtonProps> = ({
 		lastMessage?.content || tChats('alerts.titles.no_messages');
 	const isOwnMessage = lastMessage?.user.id === currentUserId;
 
-	const messageTextClass =
-		'mt-2 line-clamp-2 text-sm font-semibold text-slate-800 dark:text-white';
+	const interlocutorOrCount = (): string => {
+		if (chat.usersCount === 2) {
+			return chat.users.find((user) => user.id !== currentUserId)?.name || '0';
+		}
+		return `${chat.usersCount || 0} ${customizeString(tChats('member'), {
+			language: i18n.language,
+			cut: {
+				english: 4,
+				russian: 2,
+			},
+			ended: {
+				countTrigger: chat.usersCount || 0,
+				russian: {
+					zero: 'ов',
+					fromTwoToFour: 'а',
+					fromFiveToTen: 'ов',
+					fromElevenToNineteen: 'ов',
+				},
+				english: {
+					moreThatOne: 's',
+				},
+			},
+		}).toLowerCase()}`;
+	};
 
 	return (
 		<motion.li
@@ -87,28 +109,11 @@ export const ChatListAsideButton: FC<ChatListAsideButtonProps> = ({
 					<div className="flex flex-wrap items-between justify-between gap-2 text-xs text-slate-400 dark:text-slate-500">
 						<Typography
 							component="span"
+							maxLength={12}
+							tooltip
 							className="flex items-center gap-1 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-200"
 						>
-							{String(chat.usersCount || 0)}{' '}
-							{customizeString(tChats('member'), {
-								language: i18n.language,
-								cut: {
-									english: 4,
-									russian: 2,
-								},
-								ended: {
-									countTrigger: chat.usersCount || 0,
-									russian: {
-										zero: 'ов',
-										fromTwoToFour: 'а',
-										fromFiveToTen: 'ов',
-										fromElevenToNineteen: 'ов',
-									},
-									english: {
-										moreThatOne: 's',
-									},
-								},
-							}).toLowerCase()}
+							{interlocutorOrCount()}
 						</Typography>
 						<div
 							className={`flex flex-col items-center justify-center rounded-full border px-2 py-1 text-xs font-semibold uppercase tracking-wide ${
@@ -133,7 +138,7 @@ export const ChatListAsideButton: FC<ChatListAsideButtonProps> = ({
 						>
 							{lastMessageAuthor}
 						</Typography>
-						<Typography className={`${messageTextClass}`}>
+						<Typography className="mt-2 line-clamp-2 text-sm font-semibold text-slate-800 dark:text-white">
 							{lastMessageContent}
 						</Typography>
 					</div>

@@ -191,7 +191,10 @@ export const Chat = () => {
 
 	return (
 		<section
-			className={`flex w-full h-[${layoutConfig.chatHeight}] max-h-[650px] min-h-[650px] gap-6 rounded-3xl border ${windowColorBg.classes}`}
+			className={`flex w-full flex-1 h-full min-h-[400px] overflow-hidden gap-6 rounded-3xl border ${windowColorBg.classes}`}
+			style={{
+				height: 'calc(100vh - 300px)',
+			}}
 		>
 			<AnimatePresence>
 				{isSettingsOpen && (

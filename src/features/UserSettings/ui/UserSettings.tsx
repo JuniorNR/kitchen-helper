@@ -63,7 +63,7 @@ export const UserSettings = () => {
 	return (
 		<Form
 			onSubmit={handleSubmit(onSubmit)}
-			className="w-full max-w-5xl mx-auto min-h-[600px]"
+			className="w-full max-w-5xl mx-auto"
 		>
 			<div className="mb-2">
 				<Typography component="h1">

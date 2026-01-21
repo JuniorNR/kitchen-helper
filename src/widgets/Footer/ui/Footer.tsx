@@ -1,4 +1,5 @@
 'use client';
+import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,8 +9,14 @@ import type { FooterProps } from '../model/footer.types';
 import { buildFooterGradient, detectSeason } from '../model/footer.utils';
 
 export const Footer: FC<FooterProps> = ({ heightElement }) => {
+	const pathname = usePathname();
 	const { t: tCommon } = useTranslation('common');
 	const { theme } = useTheme();
+
+	if (pathname.includes('project')) {
+		return;
+	}
+
 	const season = detectSeason(new Date());
 	const gradient = buildFooterGradient(
 		season,

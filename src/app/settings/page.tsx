@@ -16,12 +16,16 @@ export default function SettingsPage() {
 			aria-label="Options"
 			selectedKey={String(selectedKey)}
 			onSelectionChange={(key) => setSelectedKey(key)}
+			classNames={{
+				base: 'h-full',
+				panel: 'pt-10',
+			}}
 		>
 			<Tab key="user" title={tCommon('page_titles.user_settings')}>
 				<UserSettings />
 			</Tab>
 			<Tab
-				className="flex max-w-screen-xl flex-grow-1 w-full"
+				className="flex max-w-screen-xl flex-grow-1 w-full overflow-hidden"
 				key="chat"
 				title={tCommon('page_titles.user_chats')}
 			>
