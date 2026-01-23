@@ -17,6 +17,7 @@ export interface Market {
 	updatedAt: string;
 	images: Image[] | null;
 	seller: Seller;
+	sellerId: number;
 	products: Recipe[];
 	themesOfMarket: ThemesOfMarket[];
 	buyMostOften: BuyMostOften[];

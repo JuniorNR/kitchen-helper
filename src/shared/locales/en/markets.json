@@ -35,6 +35,12 @@
 		"about_seller": "About seller",
 		"view_products": "View products",
 		"about_market": "About market",
-		"products": "Products"
-	}
+		"products": "Products",
+		"chat": {
+			"title": "Chat with {{sellerName}}",
+			"warning_message": "If you haven't had any communication yet, the chat will be created with the name «{{chatName}}»",
+			"go_to_chat": "Go to chat"
+		}
+	},
+	"back": "Back"
 }

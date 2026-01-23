@@ -1,19 +1,32 @@
+import { dto } from '@/shared/lib/helpers';
 import {
+	useCreateChatMutation,
 	useDeleteMessageMutation,
 	useGetChatMessagesQuery,
 	useGetChatsQuery,
 	useLazyGetChatMessagesQuery,
 	useSendMessageMutation,
 } from './chat.api';
-import type { ChatMessage, ChatMessageQuery } from './chat.types';
+import type {
+	ChatMessage,
+	ChatMessageQuery,
+	CreateChatQuery,
+	CreateChatQueryDTO,
+} from './chat.types';
 
 export const useChat = ({
 	chatId,
 	limit,
 	after_id,
 	before_id,
+	skip = false,
 }: ChatMessageQuery) => {
-	const { data: chats, isLoading: isChatsLoading } = useGetChatsQuery();
+	const { data: chats, isLoading: isChatsLoading } = useGetChatsQuery(
+		undefined,
+		{
+			skip: !chatId || skip,
+		},
+	);
 	const {
 		data: messages,
 		isLoading: isMessagesLoading,
@@ -21,7 +34,7 @@ export const useChat = ({
 	} = useGetChatMessagesQuery(
 		{ chatId, limit, after_id, before_id },
 		{
-			skip: !chatId,
+			skip: !chatId || skip,
 			refetchOnMountOrArgChange: true,
 			refetchOnFocus: true,
 			refetchOnReconnect: true,
@@ -29,6 +42,7 @@ export const useChat = ({
 	);
 	const [getChatMessages, { isLoading: isMessagesOldestLoading }] =
 		useLazyGetChatMessagesQuery();
+	const [createChat, { isLoading: isCreatingChat }] = useCreateChatMutation();
 	const [sendMessage, { isLoading: isSending }] = useSendMessageMutation();
 	const [deleteMessage, { isLoading: isDeleting }] = useDeleteMessageMutation();
 
@@ -38,7 +52,7 @@ export const useChat = ({
 	) => {
 		try {
 			const data = await sendMessage({
-				chatId,
+				chatId: chatId || 0, //TODO: Переделать
 				content,
 				replyMessage,
 			}).unwrap();
@@ -49,10 +63,28 @@ export const useChat = ({
 		}
 	};
 
+	const createChatData = async (data: CreateChatQuery) => {
+		try {
+			const dataDTO = dto<CreateChatQuery, CreateChatQueryDTO>(
+				'toServer',
+				data,
+			);
+
+			const result = await createChat(dataDTO).unwrap();
+			return result;
+		} catch (error) {
+			console.error(error);
+			return null;
+		}
+	};
+
 	const deleteMessageData = async ({ messageId }: { messageId: number }) => {
 		try {
-			const data = await deleteMessage({ chatId, messageId }).unwrap();
-			return data;
+			const result = await deleteMessage({
+				chatId: chatId || 0, //TODO: Переделать
+				messageId,
+			}).unwrap();
+			return result;
 		} catch (error) {
 			console.error(error);
 			return null;
@@ -62,6 +94,7 @@ export const useChat = ({
 	return {
 		chats,
 		isChatsLoading,
+		isCreatingChat,
 		isSending,
 		isDeleting,
 		messages,
@@ -69,6 +102,7 @@ export const useChat = ({
 		isMessagesOldestLoading,
 		refetchMessages,
 		sendMessageData,
+		createChatData,
 		deleteMessageData,
 		getChatMessages,
 	};

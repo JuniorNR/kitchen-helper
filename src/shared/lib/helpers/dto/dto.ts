@@ -67,6 +67,9 @@ export const dto = <T extends object | object[], U extends object>(
 
 	if (isArray) {
 		return data.map((item) => {
+			if (typeof item !== 'object') {
+				return item;
+			}
 			return dto<T, U>(type, item);
 		}) as U;
 	}

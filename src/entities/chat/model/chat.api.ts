@@ -7,6 +7,7 @@ import type {
 	ChatMessage,
 	ChatMessageDTO,
 	ChatMessageQuery,
+	CreateChatQueryDTO,
 	DeleteMessageQuery,
 	SendMessageQuery,
 } from './chat.types';
@@ -14,10 +15,11 @@ import type {
 export const chatApi = createApi({
 	reducerPath: 'chatApi',
 	baseQuery: baseQuery,
-	tagTypes: ['ChatMessages'],
+	tagTypes: ['ChatMessages', 'Chats'],
 	endpoints: (builder) => ({
 		getChats: builder.query<Chat[], void>({
 			query: () => '/chats',
+			providesTags: ['Chats'],
 			transformResponse: (response: ChatDTO[]) => {
 				return dto<ChatDTO[], Chat[]>('toClient', response);
 			},
@@ -36,6 +38,20 @@ export const chatApi = createApi({
 				return dto<ChatMessageDTO[], ChatMessage[]>('toClient', response);
 			},
 		}),
+		createChat: builder.mutation<Chat, CreateChatQueryDTO>({
+			invalidatesTags: ['Chats'],
+			query: ({ name, user_ids }) => ({
+				url: `/chats/create`,
+				method: 'POST',
+				body: {
+					name,
+					user_ids,
+				},
+			}),
+			transformResponse: (response: ChatDTO) => {
+				return dto<ChatDTO, Chat>('toClient', response);
+			},
+		}),
 		sendMessage: builder.mutation<ChatMessage, SendMessageQuery>({
 			query: ({ chatId, content, replyMessage }) => ({
 				url: `/chats/${chatId}/messages`,
@@ -46,12 +62,10 @@ export const chatApi = createApi({
 						? dto<ChatMessage, ChatMessageDTO>('toServer', replyMessage)
 						: undefined,
 				},
-				refetchOnMountOrArgChange: true,
-				keepUnusedDataFor: 0,
-				transformResponse: (response: ChatMessageDTO) => {
-					return dto<ChatMessageDTO, ChatMessage>('toClient', response);
-				},
 			}),
+			transformResponse: (response: ChatMessageDTO) => {
+				return dto<ChatMessageDTO, ChatMessage>('toClient', response);
+			},
 		}),
 		deleteMessage: builder.mutation<ChatMessage, DeleteMessageQuery>({
 			query: ({ chatId, messageId }) => ({
@@ -65,6 +79,7 @@ export const chatApi = createApi({
 export const {
 	useGetChatsQuery,
 	useGetChatMessagesQuery,
+	useCreateChatMutation,
 	useSendMessageMutation,
 	useDeleteMessageMutation,
 	useLazyGetChatMessagesQuery,

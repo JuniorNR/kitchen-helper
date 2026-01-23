@@ -91,8 +91,8 @@ export const ChatMessagesWindow = ({
 						>
 							{chats?.find((chat) => chat.id === activeChatId)?.name || ''}
 						</Typography>
-						<p className="text-sm text-slate-500 dark:text-slate-400">
-							{usersCount}
+						<Typography classNameComponent="text-sm text-slate-500 dark:text-slate-400">
+							{`${usersCount} `}
 							{customizeString(tChats('member'), {
 								language: i18n.language,
 								ended: {
@@ -108,7 +108,7 @@ export const ChatMessagesWindow = ({
 									},
 								},
 							}).toLowerCase()}
-						</p>
+						</Typography>
 					</div>
 				</header>
 			)}

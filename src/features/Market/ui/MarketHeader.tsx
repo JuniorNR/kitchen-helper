@@ -1,16 +1,30 @@
-import type { FC } from 'react';
+import { Button } from '@heroui/button';
+import { useRouter } from 'next/navigation';
+import { type FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SwiperSlide } from 'swiper/react';
+import { useChat, useUser } from '@/entities';
 import { ImageSRC } from '@/features';
-import { Slider, Typography } from '@/shared/ui';
+import { localStorageHelper } from '@/shared/lib/helpers';
+import { CustomInput, Modal, Slider, Typography } from '@/shared/ui';
+import { SendMessageIcon } from '@/shared/ui/icons/sendMessageIcon';
 import fallbackImg from '@/shared/ui/images/default.jpg';
 import type { MarketHeaderProps } from '../model/market.types';
 
 export const MarketHeader: FC<MarketHeaderProps> = ({ market }) => {
+	const { storageSetItem } = localStorageHelper('active_chat_id');
 	const DETAIL_IMAGE_SIZES =
 		'(min-width: 1200px) 50vw, (min-width: 768px) 60vw, 100vw';
 
+	const router = useRouter();
+	const { user } = useUser();
+	const { createChatData, isCreatingChat } = useChat({ skip: true });
+
 	const { t: tMarkets } = useTranslation('markets');
+
+	const [chatName, setChatName] = useState<string>(market.title);
+
+	const isOwnMarket = user?.id === market.sellerId;
 
 	const renderImages = () => {
 		if (market?.images?.length) {
@@ -42,6 +56,17 @@ export const MarketHeader: FC<MarketHeaderProps> = ({ market }) => {
 				</div>
 			</SwiperSlide>
 		);
+	};
+
+	const handleCreateAndRedirectChat = async () => {
+		const result = await createChatData({
+			name: chatName.length > 0 ? chatName : market.title,
+			userIds: [market.sellerId],
+		});
+		if (result) {
+			storageSetItem(String(result.id));
+			router.push(`/settings`);
+		}
 	};
 
 	return (
@@ -119,24 +144,60 @@ export const MarketHeader: FC<MarketHeaderProps> = ({ market }) => {
 						)}
 					</div>
 
-					<div className="flex items-center gap-3 p-4 rounded-xl border border-primary-200/30 bg-primary-50/50 dark:border-primary-500/20 dark:bg-primary-900/20 mt-auto">
-						<div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 text-white font-bold text-lg shadow-lg">
-							{market.seller.name.charAt(0).toUpperCase()}
+					<div className="flex items-center justify-between gap-3 p-4 rounded-xl border border-primary-200/30 bg-primary-50/50 dark:border-primary-500/20 dark:bg-primary-900/20 mt-auto">
+						<div className="flex">
+							<div className="flex items-center justify-center mr-4 w-12 h-12 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 text-white font-bold text-lg shadow-lg">
+								{market.seller.name.charAt(0).toUpperCase()}
+							</div>
+							<div className="flex flex-col">
+								<Typography
+									component="span"
+									classNameComponent="text-xs uppercase tracking-wide text-foreground-500"
+								>
+									{tMarkets('card.seller')}
+								</Typography>
+
+								<Typography
+									component="h3"
+									classNameComponent="text-lg font-semibold text-foreground"
+								>
+									{market.seller.name}
+								</Typography>
+							</div>
 						</div>
-						<div className="flex flex-col">
-							<Typography
-								component="span"
-								classNameComponent="text-xs uppercase tracking-wide text-foreground-500"
-							>
-								{tMarkets('card.seller')}
-							</Typography>
-							<Typography
-								component="h3"
-								classNameComponent="text-lg font-semibold text-foreground"
-							>
-								{market.seller.name}
-							</Typography>
-						</div>
+						<Modal
+							title={tMarkets('card.chat.title', {
+								sellerName: market.seller.name,
+							})}
+							warningFields={[
+								tMarkets('card.chat.warning_message', {
+									chatName,
+								}),
+							]}
+							confirmButtonText={tMarkets('card.chat.go_to_chat')}
+							confirmButtonColor="success"
+							accentItemTitle={tMarkets('card.chat.go_to_chat')}
+							disabled={isOwnMarket}
+							isLoading={isCreatingChat}
+							TriggerComponent={({ onPress }) => {
+								return (
+									<Button
+										isDisabled={isOwnMarket}
+										onPress={onPress}
+										className="p-6"
+										color="primary"
+									>
+										<SendMessageIcon />
+									</Button>
+								);
+							}}
+							onConfirm={handleCreateAndRedirectChat}
+						>
+							<CustomInput
+								value={chatName}
+								onChange={(event) => setChatName(event.target.value)}
+							/>
+						</Modal>
 					</div>
 				</div>
 			</div>

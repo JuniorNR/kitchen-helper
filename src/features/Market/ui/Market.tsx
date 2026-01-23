@@ -8,6 +8,7 @@ import { type Key, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMarketById } from '@/entities';
 import { Typography } from '@/shared/ui';
+import { BackIcon } from '@/shared/ui/icons/backIcon';
 import { EmptyListIcon } from '@/shared/ui/icons/emptyListIcon';
 
 import type { MarketProps } from '../model/market.types';
@@ -32,12 +33,12 @@ export const Market: FC<MarketProps> = ({ marketId }) => {
 				<div className="mb-6">
 					<Button
 						variant="light"
-						color="default"
+						color="danger"
 						onPress={() => router.back()}
 						className="gap-2"
 					>
-						<span className="text-lg">←</span>
-						Назад
+						<BackIcon />
+						{tMarkets('back')}
 					</Button>
 				</div>
 				<div className="flex flex-col items-center justify-center gap-4 text-center">
@@ -65,8 +66,8 @@ export const Market: FC<MarketProps> = ({ marketId }) => {
 					onPress={() => router.back()}
 					className="gap-2"
 				>
-					<span className="text-lg">←</span>
-					Назад
+					<BackIcon />
+					{tMarkets('back')}
 				</Button>
 			</div>
 

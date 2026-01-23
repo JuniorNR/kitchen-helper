@@ -1,11 +1,12 @@
 export interface ModalProps {
 	title: string;
-	description: string;
+	description?: string;
+	children?: React.ReactElement;
 	subtitle?: string;
 	accentItemTitle?: string;
 	warningFields?: string[];
-	onConfirm: () => void;
 	isLoading?: boolean;
+	disabled?: boolean;
 	TriggerComponent?:
 		| React.ComponentType<{ onPress: () => void }>
 		| ((props: { onPress: () => void }) => React.ReactElement);
@@ -18,4 +19,5 @@ export interface ModalProps {
 		| 'success';
 	confirmButtonVariant?: 'solid' | 'outline' | 'ghost' | 'link' | 'shadow';
 	confirmButtonStartContent?: React.ReactNode;
+	onConfirm: () => void;
 }

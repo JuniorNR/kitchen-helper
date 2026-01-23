@@ -16,16 +16,18 @@ import type { ModalProps } from '../model/modal.types';
 export const Modal: FC<ModalProps> = ({
 	title,
 	subtitle,
+	children,
 	accentItemTitle,
 	warningFields = [],
 	description,
-	onConfirm,
 	TriggerComponent,
 	isLoading,
+	disabled,
 	confirmButtonText,
 	confirmButtonColor,
 	confirmButtonVariant,
 	confirmButtonStartContent,
+	onConfirm,
 }) => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	const { t: tCommon } = useTranslation('common');
@@ -34,7 +36,9 @@ export const Modal: FC<ModalProps> = ({
 			{TriggerComponent ? (
 				<TriggerComponent onPress={onOpen} />
 			) : (
-				<Button onPress={onOpen}>{tCommon('open')}</Button>
+				<Button onPress={onOpen} isDisabled={disabled}>
+					{tCommon('open')}
+				</Button>
 			)}
 			<ModalComponent isOpen={isOpen} onOpenChange={onOpenChange}>
 				<ModalContent>
@@ -82,7 +86,12 @@ export const Modal: FC<ModalProps> = ({
 							))}
 					</ModalHeader>
 					<ModalBody>
-						<Typography className="text-default-600">{description}</Typography>
+						{description && (
+							<Typography className="text-default-600">
+								{description}
+							</Typography>
+						)}
+						{children}
 					</ModalBody>
 					<ModalFooter>
 						<Button onPress={onOpenChange} variant="light">

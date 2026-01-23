@@ -2,7 +2,6 @@
 import { useEcho } from '@laravel/echo-react';
 import { AnimatePresence } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
-import { layoutConfig } from '@/configs';
 import type {
 	ChatDTO as ChatDTOType,
 	ChatMessage,
@@ -168,6 +167,14 @@ export const Chat = () => {
 				updatedChat,
 				...prev.filter((current) => current.id !== updatedChat.id),
 			];
+			return reorderedChats;
+		});
+	});
+
+	useEcho(`user.${user?.id}`, '.ChatCreated', (chat: ChatDTOType) => {
+		setLocalChats((prev) => {
+			const createdChat = dto<ChatDTOType, ChatType>('toClient', chat);
+			const reorderedChats = [...prev, createdChat];
 			return reorderedChats;
 		});
 	});

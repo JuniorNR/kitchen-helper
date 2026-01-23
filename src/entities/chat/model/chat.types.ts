@@ -56,10 +56,21 @@ export interface ChatMessage {
 }
 
 export interface ChatMessageQuery {
-	chatId: ChatIdType;
+	chatId?: ChatIdType;
 	limit?: number;
 	after_id?: number;
 	before_id?: number;
+	skip?: boolean;
+}
+
+export interface CreateChatQueryDTO {
+	name: string;
+	user_ids: number[];
+}
+
+export interface CreateChatQuery {
+	name: string;
+	userIds: number[];
 }
 
 export interface SendMessageQuery {

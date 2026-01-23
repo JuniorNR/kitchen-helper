@@ -54,12 +54,14 @@ export const ChatListAside: FC<ChatListAsideProps> = ({
 					))}
 				</motion.ul>
 			) : (
-				<Alert
-					status="info"
-					title={tAlerts('titles.no_chats')}
-					description={tAlerts('descriptions.no_chats')}
-					className="mt-10"
-				/>
+				<div className="h-full px-5">
+					<Alert
+						status="info"
+						title={tAlerts('titles.no_chats')}
+						description={tAlerts('descriptions.no_chats')}
+						className="mt-10"
+					/>
+				</div>
 			)}
 			<Divider />
 			<div className="h-[40px] w-full">
