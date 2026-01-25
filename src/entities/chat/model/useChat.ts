@@ -1,6 +1,7 @@
 import { dto } from '@/shared/lib/helpers';
 import {
 	useCreateChatMutation,
+	useDeleteChatMutation,
 	useDeleteMessageMutation,
 	useGetChatMessagesQuery,
 	useGetChatsQuery,
@@ -23,9 +24,7 @@ export const useChat = ({
 }: ChatMessageQuery) => {
 	const { data: chats, isLoading: isChatsLoading } = useGetChatsQuery(
 		undefined,
-		{
-			skip: !chatId || skip,
-		},
+		{ skip },
 	);
 	const {
 		data: messages,
@@ -43,8 +42,10 @@ export const useChat = ({
 	const [getChatMessages, { isLoading: isMessagesOldestLoading }] =
 		useLazyGetChatMessagesQuery();
 	const [createChat, { isLoading: isCreatingChat }] = useCreateChatMutation();
+	const [deleteChat, { isLoading: isDeletingChat }] = useDeleteChatMutation();
 	const [sendMessage, { isLoading: isSending }] = useSendMessageMutation();
-	const [deleteMessage, { isLoading: isDeleting }] = useDeleteMessageMutation();
+	const [deleteMessage, { isLoading: isDeletingMessage }] =
+		useDeleteMessageMutation();
 
 	const sendMessageData = async (
 		content: string,
@@ -78,6 +79,16 @@ export const useChat = ({
 		}
 	};
 
+	const deleteChatData = async ({ chatId }: { chatId: string }) => {
+		try {
+			const result = await deleteChat({ chatId }).unwrap();
+			return result;
+		} catch (error) {
+			console.error(error);
+			return null;
+		}
+	};
+
 	const deleteMessageData = async ({ messageId }: { messageId: number }) => {
 		try {
 			const result = await deleteMessage({
@@ -95,14 +106,16 @@ export const useChat = ({
 		chats,
 		isChatsLoading,
 		isCreatingChat,
+		isDeletingChat,
 		isSending,
-		isDeleting,
+		isDeletingMessage,
 		messages,
 		isMessagesLoading,
 		isMessagesOldestLoading,
 		refetchMessages,
 		sendMessageData,
 		createChatData,
+		deleteChatData,
 		deleteMessageData,
 		getChatMessages,
 	};

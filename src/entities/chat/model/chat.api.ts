@@ -52,6 +52,16 @@ export const chatApi = createApi({
 				return dto<ChatDTO, Chat>('toClient', response);
 			},
 		}),
+		deleteChat: builder.mutation<Chat[], { chatId: string }>({
+			invalidatesTags: ['Chats'],
+			query: ({ chatId }) => ({
+				url: `/chats/delete/${chatId}`,
+				method: 'DELETE',
+			}),
+			transformResponse: (response: ChatDTO[]) => {
+				return dto<ChatDTO[], Chat[]>('toClient', response);
+			},
+		}),
 		sendMessage: builder.mutation<ChatMessage, SendMessageQuery>({
 			query: ({ chatId, content, replyMessage }) => ({
 				url: `/chats/${chatId}/messages`,
@@ -80,6 +90,7 @@ export const {
 	useGetChatsQuery,
 	useGetChatMessagesQuery,
 	useCreateChatMutation,
+	useDeleteChatMutation,
 	useSendMessageMutation,
 	useDeleteMessageMutation,
 	useLazyGetChatMessagesQuery,

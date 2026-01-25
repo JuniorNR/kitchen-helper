@@ -70,7 +70,7 @@ export const MarketHeader: FC<MarketHeaderProps> = ({ market }) => {
 	};
 
 	return (
-		<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 items-stretch">
+		<div className="grid w-full grid-cols-1 lg:grid-cols-2 gap-8 mb-8 items-stretch">
 			<div className="relative w-full">
 				<div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-content1/40 to-content2/40 shadow-xl">
 					<Slider className="h-full">{renderImages()}</Slider>
@@ -128,7 +128,7 @@ export const MarketHeader: FC<MarketHeaderProps> = ({ market }) => {
 						</Typography>
 					</div>
 				</div>
-				<div className="flex flex-col gap-4 p-6 rounded-2xl border border-white/10 bg-gradient-to-br from-content1/60 to-content2/40 shadow-lg h-full flex-1 justify-between">
+				<div className="flex flex-col gap-4 p-6 rounded-2xl border border-white/10 bg-gradient-to-br from-content1/60 to-content2/40 shadow-lg w-full h-full flex-1 justify-between">
 					<div className="flex flex-col gap-4">
 						<Typography
 							component="h1"

@@ -21,8 +21,11 @@ import { ChatSettings } from './ChatSettings';
 
 export const Chat = () => {
 	const dispatch = useAppDispatch();
-	const { item: localStorageChatId, storageSetItem } =
-		localStorageHelper('active_chat_id');
+	const {
+		item: localStorageChatId,
+		storageSetItem,
+		storageRemoveItem,
+	} = localStorageHelper('active_chat_id');
 	const windowColorBg = useAppSelector(
 		(state) => state.chat.settings.theme.windowColorBg,
 	);
@@ -38,7 +41,7 @@ export const Chat = () => {
 		chats,
 		messages,
 		isSending,
-		isDeleting,
+		isDeletingMessage,
 		isChatsLoading,
 		isMessagesLoading,
 		sendMessageData,
@@ -179,6 +182,19 @@ export const Chat = () => {
 		});
 	});
 
+	useEcho(
+		`user.${user?.id}`,
+		'.ChatDeleted',
+		({ id }: { id: number }) => {
+			setLocalChats((prev) => prev.filter((chat) => chat.id !== id));
+			if (activeChatId === id) {
+				storageRemoveItem();
+				setActiveChatId(null);
+			}
+		},
+		[activeChatId, storageRemoveItem],
+	);
+
 	const handleRefetchOldestMessagesByScroll = useCallback(async () => {
 		const beforeMessageId = localMessages[0].id;
 		try {
@@ -223,7 +239,7 @@ export const Chat = () => {
 					loadOldestMessages={handleRefetchOldestMessagesByScroll}
 					chats={localChats || []}
 					activeChatId={activeChatId}
-					isDeleting={isDeleting}
+					isDeleting={isDeletingMessage}
 					localMessages={localMessages}
 					sendMessageData={sendMessageData}
 					deleteMessageData={deleteMessageData}

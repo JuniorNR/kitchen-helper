@@ -3,11 +3,14 @@
 import { Button } from '@heroui/button';
 import { motion } from 'framer-motion';
 import moment from 'moment';
-import type { FC } from 'react';
+import { type FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useChat } from '@/entities';
 import { customizeString } from '@/shared/lib/helpers';
 import { useAppSelector } from '@/shared/lib/hooks';
-import { Kbd, Typography } from '@/shared/ui';
+import { ContextMenu, Kbd, Typography } from '@/shared/ui';
+import type { ContextMenuItem } from '@/shared/ui/ContextMenu/model/contextMenu.types';
+import { DeleteIcon } from '@/shared/ui/icons/deleteIcon';
 import type { ChatListAsideButtonProps } from '../model/chat.types';
 
 export const ChatListAsideButton: FC<ChatListAsideButtonProps> = ({
@@ -21,6 +24,8 @@ export const ChatListAsideButton: FC<ChatListAsideButtonProps> = ({
 }) => {
 	const { t: tChats, i18n } = useTranslation('chats');
 	const { theme } = useAppSelector((state) => state.chat.settings);
+	const { deleteChatData } = useChat({ skip: true });
+	const [isDeletingThisChat, setIsDeletingThisChat] = useState(false);
 
 	const lastMessage = chat.lastMessage;
 	const lastMessageMoment = lastMessage?.createdAt
@@ -60,6 +65,20 @@ export const ChatListAsideButton: FC<ChatListAsideButtonProps> = ({
 		}).toLowerCase()}`;
 	};
 
+	const contextMenuItems: ContextMenuItem[] = [
+		{
+			label: tChats('context_menu.delete'),
+			isActionLoading: isDeletingThisChat,
+			action: () => {
+				setIsDeletingThisChat(true);
+				deleteChatData({ chatId: String(chat.id) })?.then(() => {
+					setIsDeletingThisChat(false);
+				});
+			},
+			shortcut: ['Hover', 'Ctrl+D'],
+		},
+	];
+
 	return (
 		<motion.li
 			key={chat.id}
@@ -72,78 +91,99 @@ export const ChatListAsideButton: FC<ChatListAsideButtonProps> = ({
 				},
 			}}
 		>
-			<Button
-				type="button"
-				className={`group h-fit relative flex w-full flex-col gap-3 overflow-hidden rounded-2xl border px-2 py-2 text-left transition duration-300 ${
-					chat.id === activeChatId
-						? theme.chatCardActiveColorBg.classes
-						: theme.chatCardColorBg.classes
-				}`}
-				onPress={() => onChatClick(chat.id)}
-			>
-				{index <= 2 && (
-					<Kbd
-						className="absolute top-3 right-3"
-						shortcut={`Alt+${index + 1}`}
-					/>
-				)}
-
-				<div
-					aria-hidden="true"
-					className={`pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition duration-300 group-hover:opacity-100 ${
+			<ContextMenu items={contextMenuItems} disabled={isDeletingThisChat}>
+				<Button
+					type="button"
+					isDisabled={isDeletingThisChat}
+					className={`group h-fit relative flex w-full flex-col gap-3 overflow-hidden rounded-2xl border px-2 py-2 text-left transition duration-300 ${
 						chat.id === activeChatId
-							? 'bg-gradient-to-r from-emerald-100/60 via-transparent to-transparent dark:from-emerald-500/10'
-							: 'bg-gradient-to-r from-white/0 via-white/40 to-white/0 dark:from-slate-900/0 dark:via-slate-900/40'
+							? theme.chatCardActiveColorBg.classes
+							: theme.chatCardColorBg.classes
 					}`}
-				/>
-				<div className={`flex flex-1 flex-col gap-2 w-full`}>
-					<div className="flex items-center justify-between gap-2">
-						<Typography
-							component="h3"
-							className={`text-sm font-semibold text-slate-800 dark:text-slate-100`}
-						>
-							{chat.name}
-						</Typography>
-					</div>
-
-					<div className="flex flex-wrap items-between justify-between gap-2 text-xs text-slate-400 dark:text-slate-500">
-						<Typography
-							component="span"
-							maxLength={12}
-							tooltip
-							className="flex items-center gap-1 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-200"
-						>
-							{interlocutorOrCount()}
-						</Typography>
-						<div
-							className={`flex flex-col items-center justify-center rounded-full border px-2 py-1 text-xs font-semibold uppercase tracking-wide ${
-								chat.id === activeChatId
-									? 'border-emerald-200 bg-emerald-50 text-emerald-600 dark:border-emerald-500/40 dark:bg-emerald-400/10 dark:text-emerald-100'
-									: 'border-slate-200 bg-slate-50 text-slate-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300'
-							}`}
-						>
-							<Typography component="span">{lastMessageTimestamp}</Typography>
+					onPress={() => onChatClick(chat.id)}
+				>
+					{isDeletingThisChat && (
+						<div className="absolute inset-0 z-20 flex items-center justify-center rounded-2xl bg-slate-900/70 px-2 py-1 backdrop-blur-sm transition-all duration-300 dark:bg-slate-950/80">
+							<div className="flex flex-col items-center gap-1.5">
+								<div className="relative">
+									<div className="absolute inset-0 scale-75 animate-ping rounded-full bg-red-500/30" />
+									<div className="relative flex items-center justify-center rounded-full bg-red-500/20 p-1.5 dark:bg-red-600/20">
+										<DeleteIcon className="h-4 w-4 animate-pulse text-red-500 dark:text-red-400" />
+									</div>
+								</div>
+								<Typography
+									component="span"
+									className="text-xs font-semibold leading-tight text-red-500 dark:text-red-400"
+								>
+									{tChats('context_menu.deleting')}
+								</Typography>
+							</div>
 						</div>
-					</div>
+					)}
+					{index <= 2 && (
+						<Kbd
+							className="absolute top-3 right-3"
+							shortcut={`Alt+${index + 1}`}
+						/>
+					)}
 
 					<div
-						className={`relative rounded-2xl px-2 py-2 border ${isOwnMessage ? theme.chatCardOwnMessageColorBg.classes : theme.chatCardMessageColorBg.classes}`}
-					>
-						{isUnread && (
-							<div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-primary shadow-lg" />
-						)}
-						<Typography
-							component="span"
-							className={`inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide shadow-sm ${isOwnMessage ? 'bg-white text-emerald-600  dark:bg-emerald-500/20 dark:text-emerald-100' : 'bg-white text-slate-600  dark:bg-slate-500/20 dark:text-slate-100'}`}
+						aria-hidden="true"
+						className={`pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition duration-300 group-hover:opacity-100 ${
+							chat.id === activeChatId
+								? 'bg-gradient-to-r from-emerald-100/60 via-transparent to-transparent dark:from-emerald-500/10'
+								: 'bg-gradient-to-r from-white/0 via-white/40 to-white/0 dark:from-slate-900/0 dark:via-slate-900/40'
+						}`}
+					/>
+					<div className={`flex flex-1 flex-col gap-2 w-full`}>
+						<div className="flex items-center justify-between gap-2">
+							<Typography
+								component="h3"
+								className={`text-sm font-semibold text-slate-800 dark:text-slate-100`}
+							>
+								{chat.name}
+							</Typography>
+						</div>
+
+						<div className="flex flex-wrap items-between justify-between gap-2 text-xs text-slate-400 dark:text-slate-500">
+							<Typography
+								component="span"
+								maxLength={12}
+								tooltip
+								className="flex items-center gap-1 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-200"
+							>
+								{interlocutorOrCount()}
+							</Typography>
+							<div
+								className={`flex flex-col items-center justify-center rounded-full border px-2 py-1 text-xs font-semibold uppercase tracking-wide ${
+									chat.id === activeChatId
+										? 'border-emerald-200 bg-emerald-50 text-emerald-600 dark:border-emerald-500/40 dark:bg-emerald-400/10 dark:text-emerald-100'
+										: 'border-slate-200 bg-slate-50 text-slate-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300'
+								}`}
+							>
+								<Typography component="span">{lastMessageTimestamp}</Typography>
+							</div>
+						</div>
+
+						<div
+							className={`relative rounded-2xl px-2 py-2 border ${isOwnMessage ? theme.chatCardOwnMessageColorBg.classes : theme.chatCardMessageColorBg.classes}`}
 						>
-							{lastMessageAuthor}
-						</Typography>
-						<Typography className="mt-2 line-clamp-2 text-sm font-semibold text-slate-800 dark:text-white">
-							{lastMessageContent}
-						</Typography>
+							{isUnread && (
+								<div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-primary shadow-lg" />
+							)}
+							<Typography
+								component="span"
+								className={`inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide shadow-sm ${isOwnMessage ? 'bg-white text-emerald-600  dark:bg-emerald-500/20 dark:text-emerald-100' : 'bg-white text-slate-600  dark:bg-slate-500/20 dark:text-slate-100'}`}
+							>
+								{lastMessageAuthor}
+							</Typography>
+							<Typography className="mt-2 line-clamp-2 text-sm font-semibold text-slate-800 dark:text-white">
+								{lastMessageContent}
+							</Typography>
+						</div>
 					</div>
-				</div>
-			</Button>
+				</Button>
+			</ContextMenu>
 		</motion.li>
 	);
 };

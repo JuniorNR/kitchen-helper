@@ -9,7 +9,7 @@ export default function MarketDetailPage() {
 	useMarketById(Number(params?.id));
 
 	return (
-		<div className="flex flex-col items-center justify-center">
+		<div className="flex w-full flex-col items-center justify-center">
 			<Market marketId={Number(params?.id)} />
 		</div>
 	);
