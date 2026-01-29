@@ -3,7 +3,7 @@
 import { Button } from '@heroui/button';
 import { motion } from 'framer-motion';
 import moment from 'moment';
-import { type FC, useState } from 'react';
+import { type FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useChat } from '@/entities';
 import { customizeString } from '@/shared/lib/helpers';
@@ -24,8 +24,9 @@ export const ChatListAsideButton: FC<ChatListAsideButtonProps> = ({
 }) => {
 	const { t: tChats, i18n } = useTranslation('chats');
 	const { theme } = useAppSelector((state) => state.chat.settings);
-	const { deleteChatData } = useChat({ skip: true });
-	const [isDeletingThisChat, setIsDeletingThisChat] = useState(false);
+	const { deleteChatData, isDeletingChat } = useChat({ skip: true });
+
+	const [isHover, setIsHover] = useState<boolean>(false);
 
 	const lastMessage = chat.lastMessage;
 	const lastMessageMoment = lastMessage?.createdAt
@@ -39,6 +40,22 @@ export const ChatListAsideButton: FC<ChatListAsideButtonProps> = ({
 	const lastMessageContent =
 		lastMessage?.content || tChats('alerts.titles.no_messages');
 	const isOwnMessage = lastMessage?.user.id === currentUserId;
+
+	useEffect(() => {
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (isHover && event.ctrlKey && event.code === 'KeyD') {
+				event.preventDefault();
+				event.stopPropagation();
+				deleteChatData({ chatId: String(chat.id) });
+			}
+		};
+
+		document.addEventListener('keydown', handleKeyDown);
+
+		return () => {
+			document.removeEventListener('keydown', handleKeyDown);
+		};
+	});
 
 	const interlocutorOrCount = (): string => {
 		if (chat.usersCount === 2) {
@@ -68,12 +85,9 @@ export const ChatListAsideButton: FC<ChatListAsideButtonProps> = ({
 	const contextMenuItems: ContextMenuItem[] = [
 		{
 			label: tChats('context_menu.delete'),
-			isActionLoading: isDeletingThisChat,
+			isActionLoading: isDeletingChat,
 			action: () => {
-				setIsDeletingThisChat(true);
-				deleteChatData({ chatId: String(chat.id) })?.then(() => {
-					setIsDeletingThisChat(false);
-				});
+				deleteChatData({ chatId: String(chat.id) });
 			},
 			shortcut: ['Hover', 'Ctrl+D'],
 		},
@@ -91,18 +105,20 @@ export const ChatListAsideButton: FC<ChatListAsideButtonProps> = ({
 				},
 			}}
 		>
-			<ContextMenu items={contextMenuItems} disabled={isDeletingThisChat}>
+			<ContextMenu items={contextMenuItems} disabled={isDeletingChat}>
 				<Button
 					type="button"
-					isDisabled={isDeletingThisChat}
+					isDisabled={isDeletingChat}
 					className={`group h-fit relative flex w-full flex-col gap-3 overflow-hidden rounded-2xl border px-2 py-2 text-left transition duration-300 ${
 						chat.id === activeChatId
 							? theme.chatCardActiveColorBg.classes
 							: theme.chatCardColorBg.classes
 					}`}
 					onPress={() => onChatClick(chat.id)}
+					onMouseEnter={() => setIsHover(true)}
+					onMouseLeave={() => setIsHover(false)}
 				>
-					{isDeletingThisChat && (
+					{isDeletingChat && (
 						<div className="absolute inset-0 z-20 flex items-center justify-center rounded-2xl bg-slate-900/70 px-2 py-1 backdrop-blur-sm transition-all duration-300 dark:bg-slate-950/80">
 							<div className="flex flex-col items-center gap-1.5">
 								<div className="relative">

@@ -1,22 +1,17 @@
 'use client';
 
-import { Button } from '@heroui/button';
 import { Tab, Tabs } from '@heroui/tabs';
 import { type Key, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useMarket, useUser } from '@/entities';
-import { MarketCreate, MarketsList } from '@/features';
+import { MarketsList, MyMarketTab } from '@/features';
 import { PageInfoBlock } from '@/shared/ui';
 
 export default function MarketPage() {
 	const { t: tCommon } = useTranslation('common');
-	const { user } = useUser();
 	const [selectedKey, setSelectedKey] = useState<Key>('/markets');
 	const [isCreated, setIsCreated] = useState<boolean>(false);
 
 	const tabStyles = 'w-[75%] flex items-center justify-center';
-
-	const { deleteMyMarketData } = useMarket({ skip: true });
 
 	return (
 		<div className="flex flex-col items-center justify-center">
@@ -45,11 +40,11 @@ export default function MarketPage() {
 					title={tCommon('page_titles.my_market')}
 					className={tabStyles}
 				>
-					{user?.markets.length !== 0 || isCreated ? (
-						<Button onPress={() => deleteMyMarketData('18')}>My market</Button>
-					) : (
-						<MarketCreate setIsCreated={setIsCreated} />
-					)}
+					<MyMarketTab
+						isCreated={isCreated}
+						setIsCreated={setIsCreated}
+						setSelectedKey={setSelectedKey}
+					/>
 				</Tab>
 			</Tabs>
 		</div>

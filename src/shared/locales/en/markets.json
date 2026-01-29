@@ -14,7 +14,11 @@
 			"themes_description": "Topics, key tags, and ideas"
 		},
 		"publish_store": "Publish a store",
-		"save_draft": "Save the draft"
+		"save_draft": "Save the draft",
+		"success_created": "Store created! It will appear in the catalog soon.",
+		"go_to_catalog": "Go to catalog",
+		"your_store": "Your store",
+		"recipes_short": "rec."
 	},
 	"card": {
 		"themes": "Store themes",

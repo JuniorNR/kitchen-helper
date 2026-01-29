@@ -16,7 +16,7 @@ export { ImageSRC } from './ImageSRC';
 export { IngredientsList } from './IngredientsList';
 export { IngredientCreate } from './ingredientCreate';
 export * from './LanguageSwitcher';
-export { Market } from './Market';
+export { Market, MyMarketTab } from './Market';
 export { MarketCreate } from './MarketCreate';
 export { MarketsList } from './MarketsList';
 export { RecipeCreate } from './RecipeCreate';

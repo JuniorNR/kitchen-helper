@@ -52,8 +52,10 @@ export const ChatMessageComponent: FC<ChatMessageComponentProps> = ({
 		menuItems.push({
 			label: tChats('context_menu.delete'),
 			isActionLoading: isDeleting,
-			action: () => {
-				deleteMessageData?.({ messageId: message.id });
+			action: async () => {
+				setIsDeletingMessage(true);
+				await deleteMessageData?.({ messageId: message.id });
+				setIsDeletingMessage(false);
 			},
 			shortcut: ['Hover', 'Ctrl+D'],
 		});
