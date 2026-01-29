@@ -153,6 +153,7 @@ export const ChatSettingsColorsChatCardTab: FC = () => {
 					</div>
 					<ul className="flex justify-center">
 						<ChatListAsideButton
+							index={0}
 							chat={{
 								...mockChat,
 								lastMessage: {

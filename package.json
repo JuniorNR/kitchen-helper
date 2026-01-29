@@ -95,7 +95,9 @@
   "packageManager": "pnpm@9.0.0",
   "eslintConfig": {
     "extends": [
+      "next/core-web-vitals",
       "plugin:storybook/recommended"
-    ]
+    ],
+    "ignorePatterns": ["**/*.stories.tsx", "**/*.stories.ts"]
   }
 }

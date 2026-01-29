@@ -7,7 +7,7 @@ import { IngredientsList } from '@/features/IngredientsList';
 import { IngredientCreate } from '@/features/ingredientCreate';
 import { PageInfoBlock } from '@/shared/ui';
 
-export default function ingredientsPage() {
+export default function IngredientsPage() {
 	const { t: tCommon } = useTranslation('common');
 	const [selectedKey, setSelectedKey] = useState<Key>('/ingredient-list');
 	const [created, setCreated] = useState<boolean>(false);

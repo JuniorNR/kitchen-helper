@@ -1,0 +1,25 @@
+# Зависимости и сборки
+node_modules
+.next
+out
+
+# Git и IDE
+.git
+.gitignore
+.vscode
+.idea
+
+# Тесты и документация
+coverage
+*.md
+docs
+
+# Локальные и секреты
+.env
+.env.local
+.env.*.local
+
+# Прочее
+Dockerfile
+.dockerignore
+*.log
